@@ -33,4 +33,5 @@ said that, here are the planned features and their status:
 - [ ] Personal Messaging
 - [ ] Tags
 - [ ] Search
+- [ ] Slack Integration
 - [ ] Plugin System
