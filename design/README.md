@@ -5,7 +5,7 @@ extensive document detailing all of our design decisions and guidance.
 
 ## Style Guide
 
-We will have an official style guide linked here, eventually
+We will have an official style guide linked here, eventually.
 
 ## Resources
 

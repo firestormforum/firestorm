@@ -8,7 +8,8 @@ reading.
 
 ## Patrons
 
-This project was funded by [a Kickstarter](https://www.kickstarter.com/projects/1003377429/firestorm-an-open-source-forum-in-phoenix-from-eli).
+This project was funded by [a
+Kickstarter](https://www.kickstarter.com/projects/1003377429/firestorm-an-open-source-forum-in-phoenix-from-eli).
 
 All of the patrons that made it possible are listed in [the PATRONS
 file](PATRONS.md).
