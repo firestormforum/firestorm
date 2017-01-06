@@ -13,3 +13,7 @@ Kickstarter](https://www.kickstarter.com/projects/1003377429/firestorm-an-open-s
 
 All of the patrons that made it possible are listed in [the PATRONS
 file](PATRONS.md).
+
+## Features
+
+At present, we're still in [the initial design phase](design/README.md).

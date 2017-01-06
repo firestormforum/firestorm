@@ -3,9 +3,15 @@
 This is the design document for Firestorm.  It will grow over time to become an
 extensive document detailing all of our design decisions and guidance.
 
-## Style Guide
+## Planning
 
-We will have an official style guide linked here, eventually.
+Since we're in the initial design phase, the majority of the work at present
+should happen in the following documents:
+
+- [UX](./UX.md)
+- [Data Model](./DATA_MODEL.md)
+- [OTP](./OTP.md)
+- [Phoenix](./PHOENIX.md)
 
 ## Resources
 
