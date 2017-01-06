@@ -16,4 +16,20 @@ file](PATRONS.md).
 
 ## Features
 
-At present, we're still in [the initial design phase](design/README.md).
+At present, we're still in [the initial design phase](design/README.md). Having
+said that, here are the planned features and their status:
+
+- [ ] Continuous Integration
+- [ ] Continuous Deployment
+  - with releases, via [distillery](https://github.com/bitwalker/distillery)
+- [ ] OAuth
+- [ ] Email (first class!)
+  - The goal here is to be a fantastic replacement for Google Groups
+- [ ] Forums
+- [ ] Topics
+  - [ ] Stickies
+- [ ] Posts
+- [ ] Personal Messaging
+- [ ] Tags
+- [ ] Search
+- [ ] Plugin System

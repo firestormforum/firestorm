@@ -6,7 +6,8 @@ Super duper basic, but...
   - Topic
     - Thread
       - Post
-        - Comment
+        - (nested)
+- Tag
 
 
 ## Prior Art  /Inspiration
