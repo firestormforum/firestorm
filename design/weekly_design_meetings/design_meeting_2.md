@@ -1,6 +1,7 @@
 # Design Meeting 2
 
-TODO: Links to video and meeting notes, once this meeting occurs.
+- [Video](https://www.bigmarker.com/remote-meetup/Firestorm-Weekly-Design-Meeting-2)
+- [Meeting Notes](https://docs.google.com/document/d/1LgThifB1DdYMYfWFAQfIfiPpp-q-7mqHICd9kCCDnD8/edit?disco=AAAAA5iMAjI)
 
 ## Agenda
 
