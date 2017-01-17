@@ -2,12 +2,15 @@ defmodule DataModelPlayground.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :data_model_playground,
-     version: "0.1.0",
-     elixir: "~> 1.3",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      app: :data_model_playground,
+      version: "0.1.0",
+      elixir: "~> 1.3",
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      aliases: aliases(),
+      deps: deps(),
+    ]
   end
 
   # Configuration for the OTP application
@@ -18,7 +21,8 @@ defmodule DataModelPlayground.Mixfile do
       applications: [
         :logger,
         :ecto,
-        :postgrex
+        :postgrex,
+        :arbor,
       ],
       mod: {DataModelPlayground, []}
     ]
@@ -37,6 +41,13 @@ defmodule DataModelPlayground.Mixfile do
     [
       {:ecto, "~> 2.1.2"},
       {:postgrex, ">= 0.0.0"},
+      {:arbor, "~> 1.0.3"},
+    ]
+  end
+
+  defp aliases do
+    [
+      "test": ["ecto.drop --quiet", "ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end
 end
