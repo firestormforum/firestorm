@@ -13,7 +13,7 @@ import Material.Scheme as Scheme
 view : Model -> Html Msg
 view model =
     div []
-        [ Scheme.topWithScheme Color.Teal Color.Red <|
+        [ Scheme.topWithScheme Color.Amber Color.Red <|
             Layout.render Mdl
                 model.mdl
                 [ Layout.fixedHeader
@@ -75,7 +75,25 @@ viewDrawer model =
 
 viewBody : Model -> Html Msg
 viewBody model =
-    text "body"
+    div []
+        [ breadcrumbs model
+        ]
+
+
+breadcrumbs : Model -> Html Msg
+breadcrumbs model =
+    nav [ class "breadcrumbs-list" ]
+        [ a [ href "#" ]
+            [ text "Home" ]
+        , breadcrumbSeparator
+        , text "Categories"
+        ]
+
+
+breadcrumbSeparator : Html Msg
+breadcrumbSeparator =
+    span [ class "separator" ]
+        []
 
 
 styles : String
@@ -100,5 +118,12 @@ styles =
       margin-left: 0;
       margin-right: 240px;
       width: calc(100% - 240px);
+    }
+
+    @media screen and (max-width: 1024px) {
+        .mdl-layout__header-row {
+          height: 56px;
+          padding: 0 72px 0 16px;
+        }
     }
     """

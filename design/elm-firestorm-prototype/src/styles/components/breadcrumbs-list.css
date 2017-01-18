@@ -1,0 +1,12 @@
+.breadcrumbs-list {
+  padding: 1rem;
+  color: #bbb;
+}
+
+.breadcrumbs-list > .separator::before {
+  content: "▶";
+  font-size: 0.5rem;
+  color: #bbb;
+  margin: 0 .5rem;
+  vertical-align: middle;
+}
