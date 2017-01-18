@@ -109,7 +109,7 @@ styles =
       transform:translateX(250px);
     }
 
-    .mdl-layout--fixed-drawer > .mdl-layout__content {
+    .mdl-layout--fixed-drawer.is-upgraded:not(.is-small-screen) > .mdl-layout__content {
       margin-right: 240px;
       margin-left: 0;
     }
@@ -121,9 +121,9 @@ styles =
     }
 
     @media screen and (max-width: 1024px) {
-        .mdl-layout__header-row {
-          height: 56px;
-          padding: 0 72px 0 16px;
-        }
+      .mdl-layout__header-row {
+        height: 56px;
+        padding: 0 72px 0 16px;
+      }
     }
     """
