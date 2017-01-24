@@ -1,17 +1,18 @@
 defmodule DataModelPlayground.Post do
   use Ecto.Schema
   import Ecto.Changeset
-  alias DataModelPlayground.{Repo, Category, Thread}
+  alias DataModelPlayground.{Repo, Category, Thread, User}
 
   schema "posts" do
     belongs_to :thread, Thread
     has_one :category, through: [:thread, :category]
+    belongs_to :user, User
     field :body, :string
 
     timestamps
   end
 
-  @required_fields ~w(thread_id body)a
+  @required_fields ~w(thread_id body user_id)a
   @optional_fields ~w()a
 
   def changeset(record, params \\ :empty) do
