@@ -41,13 +41,11 @@ defmodule DataModelPlayground.Schema.CategoryTest do
 
   defp make_elixir_otp_tree() do
     {:ok, elixir} =
-      %Category{}
-        |> Category.changeset(%{title: "Elixir"})
+      %Category{title: "Elixir"}
         |> Repo.insert
 
     {:ok, otp} =
-      %Category{}
-        |> Category.changeset(%{title: "OTP", parent_id: elixir.id})
+      %Category{title: "OTP", parent_id: elixir.id}
         |> Repo.insert
 
     {elixir, otp}
