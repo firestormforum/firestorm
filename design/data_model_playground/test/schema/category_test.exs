@@ -30,13 +30,15 @@ defmodule DataModelPlayground.Schema.CategoryTest do
   end
 
   test "tree structure" do
-    {elixir, otp} = make_elixir_otp_tree()
+    elixir = make_elixir_otp_tree()
+
     children =
       elixir
         |> Category.children
         |> Repo.all
 
-    assert children == [otp]
+    assert length(children) == 1
+    assert hd(children).title == "OTP"
   end
 
   defp make_elixir_otp_tree() do
@@ -48,6 +50,6 @@ defmodule DataModelPlayground.Schema.CategoryTest do
       %Category{title: "OTP", parent_id: elixir.id}
         |> Repo.insert
 
-    {elixir, otp}
+    elixir
   end
 end

@@ -16,10 +16,23 @@ defmodule DataModelPlayground.Schema.ThreadTest do
     assert changeset.errors[:category_id] == {"can't be blank", [validation: :required]}
   end
 
+  test "it requires a title" do
+    changeset =
+      %Thread{}
+        |> Thread.changeset(%{})
+
+    refute changeset.valid?
+    assert changeset.errors[:title] == {"can't be blank", [validation: :required]}
+  end
+
   test "it belongs to a category" do
-    elixir = %Category{} |> Category.changeset(%{title: "Elixir"}) |> Repo.insert!
+    elixir =
+      %Category{title: "Elixir"}
+      |> Repo.insert!
+
     attributes = %{
-      category_id: elixir.id
+      category_id: elixir.id,
+      title: "ITT: Tests"
     }
 
     changeset =

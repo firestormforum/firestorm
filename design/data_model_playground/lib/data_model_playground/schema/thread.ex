@@ -5,11 +5,12 @@ defmodule DataModelPlayground.Thread do
 
   schema "threads" do
     belongs_to :category, Category
+    field :title, :string
 
     timestamps
   end
 
-  @required_fields ~w(category_id)a
+  @required_fields ~w(category_id title)a
   @optional_fields ~w()a
 
   def changeset(record, params \\ :empty) do
