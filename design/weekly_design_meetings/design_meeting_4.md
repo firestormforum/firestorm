@@ -1,7 +1,7 @@
 # Design Meeting 4
 
 - [Video](https://www.bigmarker.com/remote-meetup/Firestorm-Weekly-Design-Meeting-4)
-- [Meeting Notes](https://docs.google.com/document/d/1LgThifB1DdYMYfWFAQfIfiPpp-q-7mqHICd9kCCDnD8/edit?disco=AAAAA5iMAjI)
+- [Meeting Notes](https://docs.google.com/document/d/1AGCNjaf2gyLFzJduUIxILeQd5w8pH-vMKAPNnRArOEg/edit#)
 
 ## Agenda
 
