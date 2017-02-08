@@ -16,5 +16,6 @@ defmodule DataModelPlayground.User do
     record
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    |> unique_constraint(:username)
   end
 end
