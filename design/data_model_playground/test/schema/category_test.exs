@@ -19,6 +19,12 @@ defmodule DataModelPlayground.Schema.CategoryTest do
     assert changeset.errors[:title] == {"can't be blank", [validation: :required]}
   end
 
+  test "it generates a slug" do
+    Category.add("OTP")
+
+    assert Repo.one(Category).slug == "otp"
+  end
+
   test "adding and retrieving categories" do
     # NOTE: We will not be doing repo stuff in the modules but i'm in a hurry
     assert [] == Category.categories
