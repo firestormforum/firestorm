@@ -10,7 +10,7 @@
   </button>
   <button class="rounded-button">Create Account</button>
 
-  <a class ="sign-in-link" href="#">Sign In</a>
+  <a class ="sign-in-link" href="/home">Sign In</a>
 
   <p class="legal-disclaimer">
     By signing up, I agree to Firestorm's <a href="#">Terms and Privacy Policy</a>.
