@@ -1,0 +1,12 @@
+.category-list {
+  list-style: none;
+  > li .title {
+    font-size: 1.5rem;
+    line-height: 3rem;
+    margin: 0;
+  }
+  > li > ol {
+    margin-top: 0;
+    padding-top: 0;
+  }
+}

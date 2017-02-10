@@ -4,3 +4,35 @@
 a {
   color: $punch;
 }
+
+
+
+
+
+/* move the drawer to the right */
+.mdl-layout__drawer-button, .mdl-layout__drawer{
+  left: initial;
+  right: 0;
+}
+
+.mdl-layout__drawer{
+  transform:translateX(250px);
+}
+
+.mdl-layout--fixed-drawer.is-upgraded:not(.is-small-screen) > .mdl-layout__content {
+  margin-right: 240px;
+  margin-left: 0;
+}
+
+.mdl-layout--fixed-drawer.is-upgraded:not(.is-small-screen) > .mdl-layout__header {
+  margin-left: 0;
+  margin-right: 240px;
+  width: calc(100% - 240px);
+}
+
+@media screen and (max-width: 1024px) {
+  .mdl-layout__header-row {
+    height: 56px;
+    padding: 0 72px 0 16px;
+  }
+}
