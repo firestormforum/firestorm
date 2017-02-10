@@ -1,36 +1,18 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
+<section class="page-login">
+  <h1 class="splash-logo">
+    <img alt="Firestorm logo" src="/images/firestorm-logo.png" />
+    <span>Firestorm</span>
+  </h1>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
-  </div>
+  <button class="rounded-button">
+    <i class="fa fa-github"></i>
+    Log in with GitHub
+  </button>
+  <button class="rounded-button">Create Account</button>
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
-  </div>
-</div>
+  <a class ="sign-in-link" href="#">Sign In</a>
+
+  <p class="legal-disclaimer">
+    By signing up, I agree to Firestorm's <a href="#">Terms and Privacy Policy</a>.
+  </p>
+</section>

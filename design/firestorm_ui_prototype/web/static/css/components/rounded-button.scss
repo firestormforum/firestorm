@@ -1,0 +1,16 @@
+@import "../variables";
+
+.rounded-button {
+  border-radius: 4px;
+  border-color: $punch;
+  border-width: 1px;
+  border-style: solid;
+  background: transparent;
+  padding: 1rem;
+  color: $punch;
+  cursor: pointer;
+  &:hover {
+    background: $punch;
+    color: white;
+  }
+}
