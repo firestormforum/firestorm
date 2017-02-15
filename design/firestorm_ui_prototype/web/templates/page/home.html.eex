@@ -48,6 +48,20 @@
             </ol>
           </li>
         <% end %>
+        <%= for category <- [@elm] do %>
+          <li>
+            <img class="icon" src="/images/elm.png" />
+            <h2 class="title" style="color: #ff7b00;"><%= category.title %></h2>
+            <ol class="category-list -child">
+              <%= for subcat <- [@elm_mdl] do %>
+                <li>
+                  <h2 class="title" style="color: #ff7b00;"><%= subcat.title %></h2>
+                  <%= render "_threads.html", threads: @threads[:elm_mdl] %>
+                </li>
+              <% end %>
+            </ol>
+          </li>
+        <% end %>
       </ol>
     </div>
   </main>
