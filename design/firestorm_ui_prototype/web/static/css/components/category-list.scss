@@ -1,9 +1,26 @@
 .category-list {
   list-style: none;
+  margin-left: 0;
+  padding-left: 1rem;
+  > li > .category-list {
+    padding-left: 2rem;
+  }
   > li .title {
     font-size: 1.5rem;
     line-height: 3rem;
     margin: 0;
+  }
+  > li > .icon {
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
+  }
+  > li > h2 {
+    display: inline-block;
+    font-weight: 700;
+  }
+  &.-child > li > h2 {
+    font-weight: normal;
   }
   > li > ol {
     margin-top: 0;

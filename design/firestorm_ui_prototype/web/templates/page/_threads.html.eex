@@ -1,50 +1,20 @@
-<ol class="demo-list-two mdl-list">
-  <li class="mdl-list__item mdl-list__item--two-line">
-    <span class="mdl-list__item-primary-content">
-      <span>
-        How do I OTP?
-        <a class='user-name' href='#'>@adamdill</a>
+<ol class="thread-list mdl-list">
+  <%= for {thread, author} <- @threads do %>
+    <li class="mdl-list__item mdl-list__item--two-line thread-item">
+      <span class="mdl-list__item-primary-content">
+        <span>
+          <%= thread.title %>
+          <a class='user-name' href='#'>@<%= author.username %></a>
+        </span>
+        <span class="mdl-list__item-sub-title">
+          Jan 21 2017 @ 1:52PM
+        </span>
       </span>
-      <span class="mdl-list__item-sub-title">
-        Jan 21 2017 @ 1:52PM
+      <span class="mdl-list__item-secondary-content">
+        <span class="mdl-list__item-secondary-info">
+          <span class="mdl-badge" data-badge="<%= length(thread.posts) %>"></span>
+        </span>
       </span>
-    </span>
-    <span class="mdl-list__item-secondary-content">
-      <span class="mdl-list__item-secondary-info">
-        <span class="mdl-badge" data-badge="4"></span>
-      </span>
-    </span>
-  </li>
-  <li class="mdl-list__item mdl-list__item--two-line">
-    <span class="mdl-list__item-primary-content">
-      <span>
-        Do you even Process?
-        <a class='user-name' href='#'>@knewter</a>
-      </span>
-      <span class="mdl-list__item-sub-title">
-        Jan 21 2017 @ 1:52PM
-      </span>
-    </span>
-    <span class="mdl-list__item-secondary-content">
-      <span class="mdl-list__item-secondary-info">
-        <span class="mdl-badge" data-badge="6"></span>
-      </span>
-    </span>
-  </li>
-  <li class="mdl-list__item mdl-list__item--two-line">
-    <span class="mdl-list__item-primary-content">
-      <span>
-        DHTML!
-        <a class='user-name' href='#'>@franzejr</a>
-      </span>
-      <span class="mdl-list__item-sub-title">
-        Jan 21 2017 @ 1:52PM
-      </span>
-    </span>
-    <span class="mdl-list__item-secondary-content">
-      <span class="mdl-list__item-secondary-info">
-        <span class="mdl-badge" data-badge="19"></span>
-      </span>
-    </span>
-  </li>
+    </li>
+  <% end %>
 </ol>

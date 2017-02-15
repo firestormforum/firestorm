@@ -46,6 +46,8 @@ config :logger, :console, format: "[$level] $message\n"
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
 
+config :data_model_playground, ecto_repos: [DataModelPlayground.Repo]
+
 # Configure your database
 config :firestorm_ui_prototype, FirestormUiPrototype.Repo,
   adapter: Ecto.Adapters.Postgres,
@@ -54,3 +56,10 @@ config :firestorm_ui_prototype, FirestormUiPrototype.Repo,
   database: "firestorm_ui_prototype_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :data_model_playground, DataModelPlayground.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "firestorm_data_model_playground_dev",
+  username: "postgres",
+  hostname: "localhost",
+  port: "5432"

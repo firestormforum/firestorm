@@ -34,15 +34,20 @@
   <main class="mdl-layout__content">
     <div class="page-content">
       <ol class="category-list">
-        <li>
-          <h2 class="title">Elixir</h2>
-          <ol class="category-list">
-            <li>
-              <h2 class="title">OTP</h2>
-              <%= render "_threads.html" %>
-            </li>
-          </ol>
-        </li>
+        <%= for category <- [@elixir] do %>
+          <li>
+            <img class="icon" src="/images/elixir.png" />
+            <h2 class="title" style="color: #693db8;"><%= category.title %></h2>
+            <ol class="category-list -child">
+              <%= for subcat <- [@otp] do %>
+                <li>
+                  <h2 class="title" style="color: #693db8;"><%= subcat.title %></h2>
+                  <%= render "_threads.html", threads: @threads[:otp] %>
+                </li>
+              <% end %>
+            </ol>
+          </li>
+        <% end %>
       </ol>
     </div>
   </main>

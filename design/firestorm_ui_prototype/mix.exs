@@ -37,7 +37,9 @@ defmodule FirestormUiPrototype.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:data_model_playground, path: "../data_model_playground"}
+   ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
