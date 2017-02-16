@@ -3,4 +3,10 @@
 .thread-item {
   border-bottom: 1px solid $botticcelli;
   margin-right: 1rem;
+  > .mdl-list__item-primary-content > span {
+    > .title {
+      text-decoration: none;
+      color: $tundora;
+    }
+  }
 }

@@ -1,6 +1,7 @@
 @import "../variables";
 
 .rounded-button {
+  display: inline-block;
   border-radius: 4px;
   border-color: $punch;
   border-width: 1px;

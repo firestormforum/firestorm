@@ -4,11 +4,13 @@
     <span>Firestorm</span>
   </h1>
 
-  <button class="rounded-button">
+  <%= inspect @current_user %>
+
+  <a class="rounded-button github-link" href="/auth/github">
     <i class="fa fa-github"></i>
     Log in with GitHub
-  </button>
-  <button class="rounded-button">Create Account</button>
+  </a>
+  <a class="rounded-button">Create Account</a>
 
   <a class ="sign-in-link" href="/home">Sign In</a>
 

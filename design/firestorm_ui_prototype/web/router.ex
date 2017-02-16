@@ -18,10 +18,15 @@ defmodule FirestormUiPrototype.Router do
 
     get "/", PageController, :index
     get "/home", PageController, :home
+    get "/thread", PageController, :thread
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", FirestormUiPrototype do
-  #   pipe_through :api
-  # end
+  scope "/auth", FirestormUiPrototype do
+    pipe_through [:browser]
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    post "/:provider/callback", AuthController, :callback
+    delete "/logout", AuthController, :delete
+  end
 end

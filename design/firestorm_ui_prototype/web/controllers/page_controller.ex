@@ -3,7 +3,8 @@ defmodule FirestormUiPrototype.PageController do
   alias DataModelPlayground.{Category, Post, Thread, User}
 
   def index(conn, _params) do
-    render conn, "index.html"
+    current_user = Plug.Conn.get_session conn, "current_user"
+    render conn, "index.html", current_user: current_user
   end
 
   def home(conn, _params) do
@@ -14,6 +15,10 @@ defmodule FirestormUiPrototype.PageController do
     }
 
     render conn, "home.html", elixir: elixir, otp: otp, threads: threads, elm: elm, elm_mdl: elm_mdl
+  end
+
+  def thread(conn, _params) do
+    render conn, "thread.html"
   end
 
   def mock_categories() do
