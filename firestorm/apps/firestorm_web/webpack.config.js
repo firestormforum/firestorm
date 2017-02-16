@@ -9,10 +9,10 @@ const destDir = path.join(__dirname, 'priv/static')
 const publicPath = 'http://localhost:4000/'
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CopyWebpackPlugin = require("copy-webpack-plugin")
 
 module.exports = {
-  context: staticDir,
-  entry: ['./js/app.js', './css/app.scss'],
+  entry: ['./web/static/js/app.js', './web/static/css/app.scss'],
   output: {
     path: destDir,
     filename: 'js/app.js',
@@ -42,6 +42,7 @@ module.exports = {
     contentBase: staticDir,
   },
   plugins: [
-    new ExtractTextPlugin('css/app.css')
+    new ExtractTextPlugin('css/app.css'),
+    new CopyWebpackPlugin([{ from: './web/static/assets/images' }]),
   ],
 }

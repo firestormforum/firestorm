@@ -1,0 +1,18 @@
+<section class="page-login">
+  <h1 class="splash-logo">
+    <img alt="Firestorm logo" src="<%= image_path("firestorm-logo.png") %>" />
+    <span>Firestorm</span>
+  </h1>
+
+  <a class="rounded-button github-link" href="/auth/github">
+    <i class="fa fa-github"></i>
+    Log in with GitHub
+  </a>
+  <a class="rounded-button">Create Account</a>
+
+  <a class ="sign-in-link" href="/home">Sign In</a>
+
+  <p class="legal-disclaimer">
+    By signing up, I agree to Firestorm's <a href="#">Terms and Privacy Policy</a>.
+  </p>
+</section>

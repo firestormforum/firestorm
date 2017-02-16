@@ -20,4 +20,5 @@ erl_crash.dump
 
 /priv/static/js
 /priv/static/css
+/priv/static/images
 /yarn-error.log
