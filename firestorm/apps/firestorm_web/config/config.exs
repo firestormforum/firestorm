@@ -7,11 +7,29 @@ use Mix.Config
 
 # Configures the endpoint
 config :firestorm_web, FirestormWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [
+    host: "localhost"
+  ],
   secret_key_base: "+WIPnl6jAtKueGGXBI5TY+76Skp2AGuqMfvgW3Rg6oT4Txk+Xc8Qruz48mohK8ds",
-  render_errors: [view: FirestormWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: FirestormWeb.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  render_errors: [
+    view: FirestormWeb.ErrorView,
+    accepts: ~w(html json)
+  ],
+  pubsub: [
+    name: FirestormWeb.PubSub,
+    adapter: Phoenix.PubSub.PG2
+  ],
+  watchers: [
+    node: [
+      "node_modules/.bin/webpack-dev-server",
+      "--inline",
+      "--hot",
+      "--stdin",
+      "--host", "localhost",
+      "--port", "8080",
+      "--public", "localhost:8080"
+    ]
+  ]
 
 # Configures Elixir's Logger
 config :logger, :console,

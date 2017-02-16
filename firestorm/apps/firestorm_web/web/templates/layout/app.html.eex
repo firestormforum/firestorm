@@ -7,8 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello FirestormWeb!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <title>Firestorm</title>
+    <%= {:safe, css_link_tag()} %>
   </head>
 
   <body>
@@ -30,6 +30,6 @@
       </main>
 
     </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <%= {:safe, js_script_tag()} %>
   </body>
 </html>

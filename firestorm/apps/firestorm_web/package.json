@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "webpack": "^2.2.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "2"
   }
 }

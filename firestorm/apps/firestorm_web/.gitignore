@@ -14,3 +14,6 @@ erl_crash.dump
 # secrets files as long as you replace their contents by environment
 # variables.
 /config/*.secret.exs
+
+/node_modules
+/npm-debug.log
