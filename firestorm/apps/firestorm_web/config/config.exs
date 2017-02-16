@@ -18,17 +18,6 @@ config :firestorm_web, FirestormWeb.Endpoint,
   pubsub: [
     name: FirestormWeb.PubSub,
     adapter: Phoenix.PubSub.PG2
-  ],
-  watchers: [
-    node: [
-      "node_modules/.bin/webpack-dev-server",
-      "--inline",
-      "--hot",
-      "--stdin",
-      "--host", "localhost",
-      "--port", "8080",
-      "--public", "localhost:8080"
-    ]
   ]
 
 # Configures Elixir's Logger

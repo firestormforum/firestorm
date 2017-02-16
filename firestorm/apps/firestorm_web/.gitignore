@@ -17,3 +17,7 @@ erl_crash.dump
 
 /node_modules
 /npm-debug.log
+
+/priv/static/js
+/priv/static/css
+/yarn-error.log
