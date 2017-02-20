@@ -18,7 +18,8 @@ defmodule FirestormWeb.Router do
 
     get "/", PageController, :index
     get "/home", PageController, :home
-    get "/thread", PageController, :thread
+
+    resources "/threads", ThreadController
   end
 
   # OAuth routes (ueberauth)

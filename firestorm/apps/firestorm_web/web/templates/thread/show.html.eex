@@ -1,0 +1,6 @@
+<%= @thread.title %>
+<%= user(@thread).username %>
+
+<%= for post <- @thread.posts do %>
+  <%= render "_post.html", post: post, conn: @conn %>
+<% end %>
