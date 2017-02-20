@@ -4,6 +4,8 @@
     <span>Firestorm</span>
   </h1>
 
+  <%= inspect @current_user %>
+
   <a class="rounded-button github-link" href="/auth/github">
     <i class="fa fa-github"></i>
     Log in with GitHub

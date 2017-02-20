@@ -20,8 +20,19 @@ defmodule FirestormWeb.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {FirestormWeb, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext]]
+    [
+      mod: {FirestormWeb, []},
+      applications: [
+        :phoenix,
+        :phoenix_pubsub,
+        :phoenix_html,
+        :cowboy,
+        :logger,
+        :gettext,
+        :ueberauth,
+        :ueberauth_github,
+      ]
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,8 +50,10 @@ defmodule FirestormWeb.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
+      {:ueberauth, "~> 0.4"},
+      {:ueberauth_github, "~> 0.4"},
 
-      {:firestorm_data, in_umbrella: true}
+      {:firestorm_data, in_umbrella: true},
     ]
   end
 end

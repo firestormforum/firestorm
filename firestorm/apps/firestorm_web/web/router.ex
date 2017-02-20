@@ -21,6 +21,16 @@ defmodule FirestormWeb.Router do
     get "/thread", PageController, :thread
   end
 
+  # OAuth routes (ueberauth)
+  scope "/auth", FirestormWeb do
+    pipe_through [:browser]
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    post "/:provider/callback", AuthController, :callback
+    delete "/logout", AuthController, :delete
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", FirestormWeb do
   #   pipe_through :api
