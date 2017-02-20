@@ -28,6 +28,8 @@ defmodule FirestormWeb.Web do
 
       import FirestormWeb.Router.Helpers
       import FirestormWeb.Gettext
+      import Ecto.Query, only: [from: 2]
+      alias FirestormData.{Category, Post, Thread, User, Repo}
     end
   end
 

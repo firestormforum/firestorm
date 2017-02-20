@@ -16,7 +16,7 @@
           <%= for subcat <- children(category) do %>
             <li>
               <h2 class="title" style="color: #693db8;"><%= subcat.title %></h2>
-              <%= render "_threads.html", threads: threads(subcat), conn: @conn %>
+              <%= render "_threads.html", threads: subcat.threads, conn: @conn %>
             </li>
           <% end %>
         </ol>

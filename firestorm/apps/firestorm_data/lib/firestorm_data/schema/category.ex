@@ -5,13 +5,14 @@ defmodule FirestormData.Category do
 
   use Ecto.Schema
   import Ecto.Changeset
-  alias FirestormData.Repo
+  alias FirestormData.{Repo, Thread}
   use Arbor.Tree
 
   schema "categories" do
     field :title, :string
     field :slug, TitleSlug.Type
     belongs_to :parent, __MODULE__
+    has_many :threads, Thread
 
     timestamps()
   end

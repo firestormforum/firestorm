@@ -12,16 +12,11 @@ defmodule FirestormWeb.PageView do
   end
 
   def children(category) do
-    Category.children(category) |> Repo.all
-  end
-
-  def threads(category) do
-    query =
-      from t in Thread,
-      where: t.category_id == ^category.id,
-      preload: [:posts]
-
-    Repo.all(query) |> IO.inspect
+    Category.children(category)
+    |> Repo.all
+    |> Enum.map(fn c ->
+      Repo.preload(c, [threads: [:posts]])
+    end)
   end
 
   def user(thread) do

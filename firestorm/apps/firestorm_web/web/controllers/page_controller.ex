@@ -1,6 +1,5 @@
 defmodule FirestormWeb.PageController do
   use FirestormWeb.Web, :controller
-  alias FirestormData.{Category, Post, Thread, User}
   alias FirestormData.Commands.GetHomeCategories
 
   def index(conn, _params) do

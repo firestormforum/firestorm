@@ -5,7 +5,12 @@ defmodule FirestormData.Commands.GetCategory do
   defstruct [:finder]
 
   def run(%__MODULE__{finder: finder}) when is_integer(finder) do
-    case Repo.get(Category, finder) do
+    query =
+      from c in Category,
+      where: c.id == ^finder,
+      preload: [:threads]
+
+    case Repo.one(query) do
       nil -> {:error, :not_found}
       c -> {:ok, c}
     end
@@ -13,7 +18,8 @@ defmodule FirestormData.Commands.GetCategory do
   def run(%__MODULE__{finder: finder}) when is_binary(finder) do
     query =
       from c in Category,
-        where: c.slug == ^finder
+        where: c.slug == ^finder,
+        preload: [:threads]
 
     case Repo.one(query) do
       nil -> {:error, :not_found}

@@ -1,7 +1,5 @@
 defmodule FirestormWeb.ThreadController do
   use FirestormWeb.Web, :controller
-  alias FirestormData.{Category, Post, Thread, User, Repo}
-  import Ecto.Query, only: [from: 2]
 
   def show(conn, %{"id" => id}) do
     query =
