@@ -1,0 +1,10 @@
+<ol class="thread-list">
+  <%= for {thread, author} <- @threads do %>
+    <li class="thread-item">
+      <a class='title' href='/thread'><%= thread.title %></a>
+      <a class='user-name' href='#'>@<%= author.username %></a>
+      <span class='time'>Jan 21 2017 @ 1:52PM</span>
+      <span class='new-count'><%= length(thread.posts) %></span>
+    </li>
+  <% end %>
+</ol>
