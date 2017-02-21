@@ -3,7 +3,12 @@ defmodule FirestormWeb.PageController do
   alias FirestormData.Commands.GetHomeCategories
 
   def index(conn, _params) do
-    render conn, "index.html"
+    case logged_in?(conn) do
+      true ->
+        redirect conn, to: page_path(conn, :home)
+      false ->
+        render conn, "index.html"
+    end
   end
 
   def home(conn, _params) do
