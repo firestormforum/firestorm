@@ -1,11 +1,25 @@
 defmodule FirestormWeb.CategoryController do
   use FirestormWeb.Web, :controller
+  alias FirestormData.Commands.GetCategory
+
+  def show(conn, %{"id" => id_or_slug}) do
+    case GetCategory.run(%GetCategory{finder: id_or_slug}) do
+      {:ok, c} ->
+        conn
+        |> render "show.html", category: c
+      {:error, :not_found} ->
+        conn
+        |> put_flash(:error, "No such category!")
+        |> redirect to: page_path(conn, :home)
+    end
+  end
 
   def new(conn, _params) do
     changeset = Category.changeset(%Category{})
     render conn, "new.html", changeset: changeset
   end
 
+  # FIXME: Use commands, don't just CRUD it up
   def create(conn, %{"category" => category_params}=params) do
     changeset =
       %Category{}
