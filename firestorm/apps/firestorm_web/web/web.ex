@@ -30,6 +30,9 @@ defmodule FirestormWeb.Web do
       import FirestormWeb.Gettext
       import Ecto.Query, only: [from: 2]
       alias FirestormData.{Category, Post, Thread, User, Repo}
+
+      # Import session helpers
+      import FirestormWeb.Session, only: [current_user: 1, logged_in?: 1]
     end
   end
 
@@ -39,6 +42,9 @@ defmodule FirestormWeb.Web do
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, get_flash: 1, view_module: 1]
+
+      # Import session helpers
+      import FirestormWeb.Session, only: [current_user: 1, logged_in?: 1]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML

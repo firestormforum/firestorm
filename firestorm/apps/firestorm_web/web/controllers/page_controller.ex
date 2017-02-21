@@ -3,8 +3,7 @@ defmodule FirestormWeb.PageController do
   alias FirestormData.Commands.GetHomeCategories
 
   def index(conn, _params) do
-    current_user = Plug.Conn.get_session conn, "current_user"
-    render conn, "index.html", current_user: current_user
+    render conn, "index.html"
   end
 
   def home(conn, _params) do
