@@ -1,6 +1,5 @@
 defmodule FirestormData.Commands.GetHomeCategories do
-  alias FirestormData.{Category, Repo}
-  import Ecto.Query, only: [from: 2]
+  use FirestormData.Command
 
   defstruct [:user_id]
 

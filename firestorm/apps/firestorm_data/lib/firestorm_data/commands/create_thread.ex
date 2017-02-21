@@ -1,4 +1,4 @@
-defmodule FirestormData.Commands.CreateCategory do
+defmodule FirestormData.Commands.CreateThread do
   use FirestormData.Command
 
   defstruct [:title]

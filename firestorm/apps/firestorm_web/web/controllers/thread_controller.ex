@@ -7,10 +7,11 @@ defmodule FirestormWeb.ThreadController do
       {:ok, category} ->
         apply(__MODULE__, action_name(conn),
           [conn, conn.params, category])
+
       {:error, :not_found} ->
         conn
         |> put_flash(:error, "No such category")
-        |> redirect to: page_path(conn, :home)
+        |> redirect(to: page_path(conn, :home))
     end
   end
 
@@ -21,9 +22,12 @@ defmodule FirestormWeb.ThreadController do
              and t.category_id == ^category.id,
       preload: [:posts]
 
-    thread = query |> Repo.one
+    thread =
+      query
+      |> Repo.one
 
-    render conn, "show.html", thread: thread, category: category
+    conn
+    |> render("show.html", thread: thread, category: category)
   end
 
   def new(conn, _, category) do
@@ -32,7 +36,7 @@ defmodule FirestormWeb.ThreadController do
       |> Thread.changeset(%{"category_id" => category.id})
 
     conn
-    |> render "new.html", changeset: changeset, category: category
+    |> render("new.html", changeset: changeset, category: category)
   end
 
   # FIXME: Use commands, don't just CRUD it up
@@ -51,16 +55,16 @@ defmodule FirestormWeb.ThreadController do
           {:ok, thread} ->
             conn
             |> put_flash(:info, "Thread created successfully")
-            |> redirect to: category_thread_path(conn, :show, category.slug, thread.id)
+            |> redirect(to: category_thread_path(conn, :show, category.slug, thread.id))
+
           {:error, changeset} ->
             conn
-            |> render "new.html", changeset: changeset, category: category
+            |> render("new.html", changeset: changeset, category: category)
         end
-      false ->
-        IO.inspect changeset
 
+      false ->
         conn
-        |> render "new.html", changeset: changeset, category: category
+        |> render("new.html", changeset: changeset, category: category)
     end
   end
 end

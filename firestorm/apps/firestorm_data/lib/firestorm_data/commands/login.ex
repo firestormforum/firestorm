@@ -1,6 +1,5 @@
 defmodule FirestormData.Commands.Login do
-  alias FirestormData.{User, Repo}
-  import Ecto.Query, only: [from: 2]
+  use FirestormData.Command
 
   defstruct [:username, :password]
 

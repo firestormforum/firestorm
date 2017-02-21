@@ -1,5 +1,5 @@
 defmodule FirestormData.Commands.Register do
-  alias FirestormData.{User, Repo}
+  use FirestormData.Command
 
   defstruct [:username, :password]
 

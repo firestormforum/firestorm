@@ -5,19 +5,23 @@ defmodule FirestormWeb.PageController do
   def index(conn, _params) do
     case logged_in?(conn) do
       true ->
-        redirect conn, to: page_path(conn, :home)
+        conn
+        |> redirect(to: page_path(conn, :home))
       false ->
-        render conn, "index.html"
+        conn
+        |> render("index.html")
     end
   end
 
   def home(conn, _params) do
     {:ok, categories} = GetHomeCategories.run(%GetHomeCategories{ user_id: 1 })
 
-    render conn, "home.html", categories: categories
+    conn
+    |> render("home.html", categories: categories)
   end
 
   def thread(conn, _params) do
-    render conn, "thread.html"
+    conn
+    |> render("thread.html")
   end
 end

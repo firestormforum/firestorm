@@ -1,6 +1,5 @@
 defmodule FirestormData.Commands.GetCategory do
-  alias FirestormData.{Category, Repo}
-  import Ecto.Query, only: [from: 2]
+  use FirestormData.Command
 
   defstruct [:finder]
 

@@ -1,6 +1,5 @@
 defmodule FirestormData.Commands.LoginOrRegisterFromGitHub do
-  alias FirestormData.{User, Repo}
-  import Ecto.Query, only: [from: 2]
+  use FirestormData.Command
 
   def run(%{username: username}) do
     case find_user_by_username(username) do
