@@ -20,6 +20,7 @@ defmodule FirestormWeb.Router do
     get "/home", PageController, :home
 
     resources "/threads", ThreadController
+    resources "/categories", CategoryController, only: [:new, :create]
   end
 
   # OAuth routes (ueberauth)

@@ -8,6 +8,7 @@
 
 <div class="page-content">
   <ol class="category-list">
+    <%= link("New Category", to: category_path(@conn, :new)) %>
     <%= for category <- @categories do %>
       <li>
         <img class="icon" src="<%= image_path("elixir.png") %>" />

@@ -47,6 +47,12 @@ defmodule FirestormWeb.Mixfile do
       {:phoenix, "~> 1.2.0"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_html, "~> 2.6"},
+
+      # FIXME: I don't want to depend on ecto here. I'd rather define changesets
+      # for our comands and our own protocol implementation for
+      # Phoenix.HTML.FormData for those!
+      {:phoenix_ecto, "~> 3.2.2"},
+
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},

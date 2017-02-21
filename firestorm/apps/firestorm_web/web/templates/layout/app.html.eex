@@ -13,7 +13,7 @@
 
   <body>
     <%= for {key, val} <- get_flash(@conn) do %>
-      <p class="alert alert-#{key}" role="alert"><%= val %></p>
+      <p class="alert alert-<%= key %>" role="alert"><%= val %></p>
     <% end %>
 
     <%= render @view_module, @view_template, assigns %>
