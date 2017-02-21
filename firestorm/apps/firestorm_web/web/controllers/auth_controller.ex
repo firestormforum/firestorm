@@ -23,7 +23,7 @@ defmodule FirestormWeb.AuthController do
       :github ->
         %{ name: name, nickname: nickname, email: email } = auth.info
 
-        case LoginOrRegisterFromGitHub.run(%{email: email}) do
+        case LoginOrRegisterFromGitHub.run(%{username: nickname}) do
           {:ok, user} ->
             conn
             |> put_flash(:info, "Successfully authenticated.")
