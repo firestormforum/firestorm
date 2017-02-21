@@ -4,6 +4,9 @@ const path = require('path')
 const nodeEnv = process.env.NODE_ENV || 'development'
 const isProd = nodeEnv === 'production'
 
+// Change node process to the firestorm_web root
+process.chdir(__dirname)
+
 const staticDir = path.join(__dirname, 'web/static')
 const destDir = path.join(__dirname, 'priv/static')
 const publicPath = 'http://localhost:4000/'
@@ -12,7 +15,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 
 module.exports = {
-  entry: ['./web/static/js/app.js', './web/static/css/app.scss'],
+  entry: [staticDir + '/js/app.js', staticDir + '/css/app.scss'],
   output: {
     path: destDir,
     filename: 'js/app.js',

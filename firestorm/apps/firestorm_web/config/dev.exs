@@ -26,13 +26,14 @@ config :firestorm_web, FirestormWeb.Endpoint,
   check_origin: false,
   watchers: [
     node: [
-      "node_modules/.bin/webpack-dev-server",
+      Path.expand("../node_modules/.bin/webpack-dev-server", __DIR__),
       "--inline",
       "--hot",
       "--stdin",
       "--host", "localhost",
       "--port", "8080",
-      "--public", "localhost:8080"
+      "--public", "localhost:8080",
+      "--config", Path.expand("../webpack.config.js", __DIR__)
     ]
   ]
 
