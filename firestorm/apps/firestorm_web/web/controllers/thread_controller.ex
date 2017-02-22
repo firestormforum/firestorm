@@ -1,6 +1,6 @@
 defmodule FirestormWeb.ThreadController do
   use FirestormWeb.Web, :controller
-  alias FirestormData.Commands.GetCategory
+  alias FirestormData.Commands.{GetCategory, CreateThread}
 
   def action(conn, _) do
     case GetCategory.run(%GetCategory{finder: conn.params["category_id"]}) do
@@ -32,30 +32,30 @@ defmodule FirestormWeb.ThreadController do
 
   def new(conn, _, category) do
     changeset =
-      %Thread{}
-      |> Thread.changeset(%{"category_id" => category.id})
+      %CreateThread{}
+      |> CreateThread.changeset(%{})
 
     conn
     |> render("new.html", changeset: changeset, category: category)
   end
 
-  # FIXME: Use commands, don't just CRUD it up
-  def create(conn, %{"thread" => thread_params}, category) do
-    thread_params =
-      thread_params
+  def create(conn, %{"create_thread" => create_thread_params}, category) do
+    create_thread_params =
+      create_thread_params
       |> Map.put("category_id", category.id)
+      |> Map.put("user_id", current_user(conn).id)
 
     changeset =
-      %Thread{}
-      |> Thread.changeset(thread_params)
+      %CreateThread{}
+      |> CreateThread.changeset(create_thread_params)
 
     case changeset.valid? do
       true ->
-        case Repo.insert(changeset) do
-          {:ok, thread} ->
+        case CreateThread.run(changeset) do
+          {:ok, thread_id} ->
             conn
             |> put_flash(:info, "Thread created successfully")
-            |> redirect(to: category_thread_path(conn, :show, category.slug, thread.id))
+            |> redirect(to: category_thread_path(conn, :show, category.slug, thread_id))
 
           {:error, changeset} ->
             conn

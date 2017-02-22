@@ -5,5 +5,10 @@
     Title: <%= text_input f, :title %>
   </label>
 
+  <label>
+    Body<br />
+    <%= textarea f, :body %>
+  </label>
+
   <%= submit "Create Thread" %>
 <% end %>
