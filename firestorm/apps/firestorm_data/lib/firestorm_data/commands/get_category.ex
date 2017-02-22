@@ -1,24 +1,21 @@
 defmodule FirestormData.Commands.GetCategory do
   use FirestormData.Command
+  import Ecto.Query
 
   defstruct [:finder]
 
-  def run(%__MODULE__{finder: finder}) when is_integer(finder) do
-    query =
-      from c in Category,
-      where: c.id == ^finder,
-      preload: [:threads]
+  def run(%__MODULE__{finder: finder}) do
+    finder_key =
+      if is_binary(finder) do
+        :slug
+      else
+        :id
+      end
 
-    case Repo.one(query) do
-      nil -> {:error, :not_found}
-      c -> {:ok, c}
-    end
-  end
-  def run(%__MODULE__{finder: finder}) when is_binary(finder) do
     query =
-      from c in Category,
-        where: c.slug == ^finder,
-        preload: [:threads]
+      Category
+      |> where(^[{finder_key, finder}])
+      |> preload([:threads, :parent])
 
     case Repo.one(query) do
       nil -> {:error, :not_found}
