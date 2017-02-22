@@ -16,14 +16,10 @@ defmodule FirestormWeb.ThreadController do
   end
 
   def show(conn, %{"id" => id}, category) do
-    query =
-      from t in Thread,
-      where: t.id == ^id
-             and t.category_id == ^category.id,
-      preload: [:posts]
-
     thread =
-      query
+      Thread
+      |> where([id: ^id, category_id: ^category.id])
+      |> preload([:posts])
       |> Repo.one
 
     conn

@@ -14,8 +14,10 @@ defmodule FirestormWeb.CategoryController do
     end
   end
 
-  def new(conn, _params) do
-    changeset = Category.changeset(%Category{})
+  def new(conn, params) do
+    changeset =
+      %Category{}
+      |> Category.changeset(params)
 
     conn
     |> render("new.html", changeset: changeset)

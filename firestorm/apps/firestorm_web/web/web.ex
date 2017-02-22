@@ -28,7 +28,7 @@ defmodule FirestormWeb.Web do
 
       import FirestormWeb.Router.Helpers
       import FirestormWeb.Gettext
-      import Ecto.Query, only: [from: 2]
+      import Ecto.Query
       alias FirestormData.{Category, Post, Thread, User, Repo}
 
       # Import session helpers
@@ -53,7 +53,7 @@ defmodule FirestormWeb.Web do
       import FirestormWeb.ErrorHelpers
       import FirestormWeb.Gettext
       import FirestormWeb.ViewHelpers
-      alias FirestormWeb.{CategoryView}
+      alias FirestormWeb.{CategoryView, ThreadView}
     end
   end
 
