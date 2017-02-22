@@ -1,29 +1,3 @@
-<!-- Always shows a header, even in smaller screens. -->
-<h1 class="logo">
-  <a href="/">
-    <img alt="Firestorm logo" src="<%= image_path("firestorm-logo.png") %>" />
-  </a>
-  <span>Firestorm</span>
-</h1>
-
 <div class="page-content">
-  <ol class="category-list">
-    <%= link("New Category", to: category_path(@conn, :new)) %>
-    <%= for category <- @categories do %>
-      <li>
-        <img class="icon" src="<%= image_path("elixir.png") %>" />
-        <h2 class="title" style="color: #693db8;">
-          <%= link category.title, to: category_path(@conn, :show, category.slug) %>
-        </h2>
-        <ol class="category-list -child">
-          <%= for subcat <- children(category) do %>
-            <li>
-              <h2 class="title" style="color: #693db8;"><%= subcat.title %></h2>
-              <%= render "_threads.html", threads: subcat.threads, conn: @conn %>
-            </li>
-          <% end %>
-        </ol>
-      </li>
-    <% end %>
-  </main>
+  <%= CategoryView.render "_list.html", conn: @conn, categories: @categories %>
 </div>

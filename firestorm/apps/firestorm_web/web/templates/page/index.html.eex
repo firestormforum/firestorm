@@ -3,11 +3,6 @@
 <% end %>
 
 <section class="page-login">
-  <h1 class="splash-logo">
-    <img alt="Firestorm logo" src="<%= image_path("firestorm-logo.png") %>" />
-    <span>Firestorm</span>
-  </h1>
-
   <a class="rounded-button github-link" href="/auth/github">
     <i class="fa fa-github"></i>
     Log in with GitHub

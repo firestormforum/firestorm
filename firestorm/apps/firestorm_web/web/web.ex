@@ -52,6 +52,8 @@ defmodule FirestormWeb.Web do
       import FirestormWeb.Router.Helpers
       import FirestormWeb.ErrorHelpers
       import FirestormWeb.Gettext
+      import FirestormWeb.ViewHelpers
+      alias FirestormWeb.{CategoryView}
     end
   end
 

@@ -12,6 +12,9 @@
   </head>
 
   <body>
+    <%= render "_logo.html", conn: @conn %>
+    <%= render "_navigation.html", conn: @conn %>
+
     <%= for {key, val} <- get_flash(@conn) do %>
       <p class="alert alert-<%= key %>" role="alert"><%= val %></p>
     <% end %>

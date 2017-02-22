@@ -1,0 +1,18 @@
+<ol class="category-list">
+  <%= link("New Category", to: category_path(@conn, :new)) %>
+  <%= for category <- @categories do %>
+    <li>
+      <h2 class="title" style="color: #693db8;">
+        <%= link category.title, to: category_path(@conn, :show, category.slug) %>
+      </h2>
+      <ol class="category-list -child">
+        <%= for subcat <- children(category) do %>
+          <li>
+            <h2 class="title" style="color: #693db8;"><%= subcat.title %></h2>
+            <%= render "_threads.html", threads: subcat.threads, conn: @conn %>
+          </li>
+        <% end %>
+      </ol>
+    </li>
+  <% end %>
+</ol>
