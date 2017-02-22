@@ -1,6 +1,9 @@
-<%= @thread.title %>
-<%= user(@thread).username %>
+<h2><%= @thread.title %></h2>
+<h3><%= user(@thread).username %></h3>
 
-<%= for post <- @thread.posts do %>
-  <%= render "_post.html", post: post, conn: @conn %>
-<% end %>
+<ol>
+  <%= for post <- @thread.posts do %>
+    <li><%= render "_post.html", post: post, conn: @conn %></li>
+  <% end %>
+</ol>
+<%= link "Reply", to: category_thread_post_path(@conn, :new, @category.slug, @thread.id) %>

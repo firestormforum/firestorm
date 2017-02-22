@@ -20,7 +20,9 @@ defmodule FirestormWeb.Router do
     get "/home", PageController, :home
 
     resources "/categories", CategoryController do
-      resources "/threads", ThreadController
+      resources "/threads", ThreadController do
+        resources "/posts", PostController
+      end
     end
   end
 
