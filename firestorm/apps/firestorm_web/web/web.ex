@@ -46,8 +46,14 @@ defmodule FirestormWeb.Web do
       # Import session helpers
       import FirestormWeb.Session, only: [current_user: 1, logged_in?: 1]
 
-      # Use all HTML functionality (forms, tags, etc)
-      use Phoenix.HTML
+      import Phoenix.HTML
+      import Phoenix.HTML.Form, except: [submit: 2, submit: 1]
+      import Phoenix.HTML.Link
+      import Phoenix.HTML.Tag
+      import Phoenix.HTML.Format
+
+      # Our custom Form helpers
+      import FirestormWeb.FormHelpers
 
       import FirestormWeb.Router.Helpers
       import FirestormWeb.ErrorHelpers
