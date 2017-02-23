@@ -1,0 +1,6 @@
+%h2 New Post
+
+- form_for @changeset, category_thread_post_path(@conn, :create, @category.slug, @thread.id), fn f ->
+  %label
+    Body: #{textarea f, :body}
+  = submit "Create Post"

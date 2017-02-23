@@ -1,0 +1,13 @@
+- if logged_in?(@conn) do
+  Logged in as #{current_user(@conn).username}
+
+%section.page-login
+  %a.rounded-button.github-link{href: "/auth/github"}
+    %i.fa.fa-github
+    Log in with GitHub
+  %a.rounded-button Create Account
+  %a.sign-in-link{href: page_path(@conn, :home)} Sign In
+  %p.legal-disclaimer
+    By signing up, I agree to Firestorm's
+    = succeed "." do
+      %a{href: "#"} Terms and Privacy Policy

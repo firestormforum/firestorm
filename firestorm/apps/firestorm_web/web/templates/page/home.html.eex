@@ -1,3 +1,0 @@
-<div class="page-content">
-  <%= CategoryView.render "_list.html", conn: @conn, categories: @categories %>
-</div>

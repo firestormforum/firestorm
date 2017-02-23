@@ -47,6 +47,7 @@ defmodule FirestormWeb.Mixfile do
       {:phoenix, "~> 1.2.0"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_html, "~> 2.6"},
+      {:phoenix_haml, "~> 0.2.1"},
 
       # FIXME: I don't want to depend on ecto here. I'd rather define changesets
       # for our comands and our own protocol implementation for

@@ -1,0 +1,10 @@
+%ol.category-list
+  - for category <- @categories do
+    %li
+      %h2.title{style: "color: #693db8;"}
+        = link category.title, to: category_path(@conn, :show, category.slug)
+
+      - if category.children do
+        = render "_list.html", conn: @conn, categories: category.children
+
+      = ThreadView.render "_list.html", threads: category.threads, conn: @conn

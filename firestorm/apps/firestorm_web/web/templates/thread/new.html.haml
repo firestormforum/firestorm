@@ -1,0 +1,12 @@
+%h2 New Thread
+
+- form_for @changeset, category_thread_path(@conn, :create, @category.slug), fn f ->
+  %label
+    Title: #{text_input f, :title}
+
+  %label
+    Body
+    %br/
+    = textarea f, :body
+
+  = submit "Create Thread"

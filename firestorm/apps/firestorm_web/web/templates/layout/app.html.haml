@@ -1,0 +1,20 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %title Firestorm
+    = {:safe, css_link_tag()}
+  %body
+    = render "_logo.html", conn: @conn
+    = render "_navigation.html", conn: @conn
+
+    - for {key, val} <- get_flash(@conn) do
+      %p{:class => "alert alert-#{key}", :role => "alert"}= val
+
+    = render @view_module, @view_template, assigns
+    = {:safe, js_script_tag()}

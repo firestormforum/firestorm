@@ -5,6 +5,9 @@
 # is restricted to this project.
 use Mix.Config
 
+config :phoenix, :template_engines,
+  haml: PhoenixHaml.Engine
+
 # Configures the endpoint
 config :firestorm_web, FirestormWeb.Endpoint,
   url: [

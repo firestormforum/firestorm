@@ -1,5 +1,0 @@
-<%= if @parent do %>
-  <div class="link-back">
-    <%= link @parent.title, to: category_path(@conn, :show, @parent.id) %>
-  </div>
-<% end %>

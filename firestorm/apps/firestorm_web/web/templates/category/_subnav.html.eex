@@ -1,6 +1,0 @@
-<div class="category-subnav">
-  <ul>
-    <li><%= link "New Category", to: category_path(@conn, :new, parent_id: @category.id) %></li>
-    <li><%= link "New Thread", to: category_thread_path(@conn, :new, @category.slug) %></li>
-  </ul>
-</div>

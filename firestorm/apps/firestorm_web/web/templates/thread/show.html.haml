@@ -1,0 +1,8 @@
+%h2= @thread.title
+%h3= user(@thread).username
+
+%ol
+  - for post <- @thread.posts do
+    %li= render "_post.html", post: post, conn: @conn
+
+= link "Reply", to: category_thread_post_path(@conn, :new, @category.slug, @thread.id)
