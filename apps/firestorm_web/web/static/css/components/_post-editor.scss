@@ -1,4 +1,14 @@
 .post-editor {
   display: flex;
   flex-direction: column;
+  > .actions {
+    display: flex;
+    flex-direction: row-reverse;
+    > .spacer {
+      flex-grow: 1;
+    }
+    > .attachment {
+      align-self: flex-end;
+    }
+  }
 }
