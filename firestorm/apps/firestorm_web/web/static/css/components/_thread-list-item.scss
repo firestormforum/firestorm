@@ -2,6 +2,7 @@
   padding: 1rem;
   display: flex;
   flex-direction: row;
+  border-bottom: 1px solid $botticcelli;
   > .details {
     flex-grow: 1;
     > .summary {

@@ -1,6 +1,10 @@
 .badge-block {
   border-radius: $border-radius;
-  background-color: $punch;
-  color: $white;
   padding: $padding-small $padding-medium;
+  background-color: $botticcelli;
+  color: $tundora;
+  &.-highlight {
+    background-color: $punch;
+    color: $white;
+  }
 }
