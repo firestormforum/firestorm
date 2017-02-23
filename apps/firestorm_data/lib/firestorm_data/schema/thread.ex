@@ -1,7 +1,7 @@
 defmodule FirestormData.Thread do
   use Ecto.Schema
   import Ecto.Changeset
-  alias FirestormData.{Repo, Category, Post, User}
+  alias FirestormData.{Repo, Category, Post}
 
   schema "threads" do
     belongs_to :category, Category
@@ -30,7 +30,7 @@ defmodule FirestormData.Thread do
       [first_post|_] -> {:ok, first_post.user}
     end
   end
-  def user(_) do
+  def user(nil) do
     {:error, "No first post!"}
   end
 end

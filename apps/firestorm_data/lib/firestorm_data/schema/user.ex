@@ -1,7 +1,6 @@
 defmodule FirestormData.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias FirestormData.{Repo}
 
   schema "users" do
     field :username, :string

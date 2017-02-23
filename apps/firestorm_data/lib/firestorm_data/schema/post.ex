@@ -1,7 +1,7 @@
 defmodule FirestormData.Post do
   use Ecto.Schema
   import Ecto.Changeset
-  alias FirestormData.{Repo, Category, Thread, User}
+  alias FirestormData.{Thread, User}
 
   schema "posts" do
     belongs_to :thread, Thread

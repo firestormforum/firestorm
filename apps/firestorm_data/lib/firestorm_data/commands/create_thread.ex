@@ -39,7 +39,7 @@ defmodule FirestormData.Commands.CreateThread do
     end
   end
 
-  def handle_result({:ok, %{thread: thread, post: post}}, changeset) do
+  def handle_result({:ok, %{thread: thread, post: _post}}, _changeset) do
     {:ok, thread.id}
   end
   def handle_result({:error, errored_key, changes}, changeset) do

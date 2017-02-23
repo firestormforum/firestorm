@@ -2,7 +2,6 @@ defmodule FirestormWeb.AuthController do
   use FirestormWeb.Web, :controller
   plug Ueberauth
 
-  alias Ueberauth.Strategy.Helpers
   alias FirestormData.Commands.LoginOrRegisterFromGitHub
 
   def delete(conn, _params) do
@@ -21,7 +20,7 @@ defmodule FirestormWeb.AuthController do
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     case auth.provider do
       :github ->
-        %{ name: name, nickname: nickname, email: email } = auth.info
+        %{ name: _name, nickname: nickname, email: _email } = auth.info
 
         case LoginOrRegisterFromGitHub.run(%{username: nickname}) do
           {:ok, user} ->

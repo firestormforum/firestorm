@@ -6,6 +6,7 @@ defmodule FirestormData.Command do
       alias Ecto.Multi
       use Ecto.Schema
       import Ecto.Changeset
+      alias Ecto.Changeset
     end
   end
 end
