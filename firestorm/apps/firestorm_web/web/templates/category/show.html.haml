@@ -3,7 +3,4 @@
 = render "_subnav.html", conn: @conn, category: @category
 
 %h3 Threads
-%ul
-  - for thread <- @category.threads do
-    %li
-      = link thread.title, to: category_thread_path(@conn, :show, @category.slug, thread.id)
+= ThreadView.render "_list.html", threads: @category.threads, conn: @conn
