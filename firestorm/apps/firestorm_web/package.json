@@ -9,9 +9,14 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "2.0.0-rc.3",
+    "file-loader": "^0.10.0",
+    "import-glob-loader": "^1.1.0",
     "node-sass": "^4.5.0",
+    "normalize-scss": "^6.0.0",
+    "purecss": "^0.6.2",
     "sass-loader": "^6.0.0",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "webpack-dev-server": "2",
     "write-file-webpack-plugin": "^3.4.2"
   }

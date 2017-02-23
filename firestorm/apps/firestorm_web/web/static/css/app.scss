@@ -1,3 +1,33 @@
-body {
-  color: green;
-}
+// This should only have imports :)
+//
+// Inverted triangle for the import order
+//
+// Here's what Inverted Triangle CSS is:
+// - https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
+
+@import "settings.colors";
+@import "settings.metrics";
+@import "settings.global";
+
+@import "tools.mixins";
+
+@import "~normalize-scss";
+
+// Pure.css - https://purecss.io/
+@import "~purecss";
+
+@import "typography";
+
+// @import "elements.headings";
+//
+// @import "objects.animations";
+//
+// @import "components.404";
+@import "components/*";
+//
+// @import "vendor.prism";
+//
+// @import "trumps.clearfix";
+// @import "trumps.utilities";
+//
+// @import "healthcheck";

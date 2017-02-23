@@ -1,0 +1,8 @@
+.navigation-menu {
+  padding: 0.5rem;
+  background: $white;
+  box-shadow: 0 1.5px 4px rgba($black, .24);
+  > ul {
+    float: right;
+  }
+}

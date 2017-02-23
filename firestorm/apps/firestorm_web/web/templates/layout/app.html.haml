@@ -10,7 +10,6 @@
     %title Firestorm
     = {:safe, css_link_tag()}
   %body
-    = render "_logo.html", conn: @conn
     = render "_navigation.html", conn: @conn
 
     - for {key, val} <- get_flash(@conn) do

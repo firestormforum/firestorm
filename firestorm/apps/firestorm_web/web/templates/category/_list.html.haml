@@ -1,10 +1,11 @@
 %ol.category-list
   - for category <- @categories do
     %li
-      %h2.title{style: "color: #693db8;"}
+      %h2.title
         = link category.title, to: category_path(@conn, :show, category.slug)
 
-      - if category.children do
+      - if category.children && !Enum.empty?(category.children) do
         = render "_list.html", conn: @conn, categories: category.children
 
-      = ThreadView.render "_list.html", threads: category.threads, conn: @conn
+      - unless Enum.empty?(category.threads) do
+        = ThreadView.render "_list.html", threads: category.threads, conn: @conn

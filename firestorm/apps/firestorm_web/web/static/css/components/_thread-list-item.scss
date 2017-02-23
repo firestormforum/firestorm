@@ -1,0 +1,10 @@
+.thread-list-item {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  > .details {
+    flex-grow: 1;
+  }
+  > .supplemental {
+  }
+}

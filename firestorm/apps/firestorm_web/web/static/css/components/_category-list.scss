@@ -1,0 +1,28 @@
+.category-list {
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  > li {
+    list-style-type: none;
+  }
+
+  > li > h2 > a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  > li > h2 {
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+  }
+
+  > li > .category-list {
+    > li > h2 {
+      // Children of the top-level category list need a smaller h2 that isn't
+      // bold
+      font-size: $font-size-medium;
+      font-weight: $font-weight-normal;
+    }
+  }
+}

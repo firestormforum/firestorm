@@ -35,9 +35,13 @@ module.exports = {
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
-          use: "css-loader!sass-loader",
+          use: "css-loader!sass-loader!import-glob-loader",
           fallback: "style-loader",
         }),
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        loader: 'file-loader?name=assets/fonts/[name].[ext]'
       },
     ],
   },

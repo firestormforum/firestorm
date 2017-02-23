@@ -1,8 +1,12 @@
 %ol.thread-list
   - for thread <- @threads do
-    %li.thread-item
-      %a.title{href: "#{category_thread_path(@conn, :show, thread.category_id, thread.id)}"}= thread.title
-      %a.user-name{href: "#"}
-        @#{user(thread).username}
-      %span.time Jan 21 2017 @ 1:52PM
-      %span.new-count= length(thread.posts)
+    %li.thread-list-item
+      .details
+        .summary
+          %a.title{href: "#{category_thread_path(@conn, :show, thread.category_id, thread.id)}"}= thread.title
+          %a.user-name{href: "#"}
+            @#{user(thread).username}
+        .metadata
+          %span.time Jan 21 2017 @ 1:52PM
+      .supplemental
+        .badge-block= length(thread.posts)

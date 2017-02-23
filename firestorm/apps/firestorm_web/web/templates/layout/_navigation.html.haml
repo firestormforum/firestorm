@@ -1,3 +1,6 @@
-%nav
-  %ul
-    %li= link 'Home', to: page_path(@conn, :home)
+.pure-menu.pure-menu-horizontal.navigation-menu
+  %a.pure-menu-heading.pure-menu-link{href: "#{page_path(@conn, :home)}"}
+    = render "_logo.html", conn: @conn
+
+  %ul.pure-menu-list
+    %li= link 'Home', to: page_path(@conn, :home), class: "pure-menu-link"
