@@ -1,8 +1,12 @@
-%h2= @thread.title
-%h3= user(@thread).username
+.thread-header
+  %h2= @thread.title
+  .item-metadata
+    = link "@#{user(@thread).username}", to: "#", class: "username"
+    .date= @thread.inserted_at
 
-%ol
-  - for post <- @thread.posts do
+%ol.post-list
+  %li= render "_first_post.html", post: @first_post, conn: @conn
+  - for post <- @posts do
     %li= render "_post.html", post: post, conn: @conn
 
 = link "Reply", to: category_thread_post_path(@conn, :new, @category.slug, @thread.id)

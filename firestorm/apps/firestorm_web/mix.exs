@@ -59,6 +59,7 @@ defmodule FirestormWeb.Mixfile do
       {:cowboy, "~> 1.0"},
       {:ueberauth, "~> 0.4"},
       {:ueberauth_github, "~> 0.4"},
+      {:earmark, "~> 1.1.1"},
 
       {:firestorm_data, in_umbrella: true},
     ]

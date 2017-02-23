@@ -1,1 +1,8 @@
-= @post.body
+.post-item
+  .item-metadata
+    = link "@#{@post.user.username}", to: "#", class: "username"
+    .date= @post.inserted_at
+
+  .body
+    = markdown(@post.body)
+

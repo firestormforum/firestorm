@@ -19,11 +19,19 @@ defmodule FirestormWeb.ThreadController do
     thread =
       Thread
       |> where([id: ^id, category_id: ^category.id])
-      |> preload([:posts])
+      |> preload([posts: [:user]])
       |> Repo.one
 
+    [first_post | posts] = thread.posts
+
     conn
-    |> render("show.html", thread: thread, category: category)
+    |> render(
+         "show.html",
+         thread: thread,
+         category: category,
+         first_post:
+         first_post, posts: posts
+       )
   end
 
   def new(conn, _, category) do

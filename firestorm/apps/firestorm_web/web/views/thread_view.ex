@@ -6,4 +6,10 @@ defmodule FirestormWeb.ThreadView do
     {:ok, user} = Thread.user(thread)
     user
   end
+
+  def markdown(body) do
+    body
+    |> Earmark.to_html
+    |> raw
+  end
 end
