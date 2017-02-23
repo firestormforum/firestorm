@@ -2,4 +2,7 @@
 
 - form_for @changeset, category_thread_post_path(@conn, :create, @category.slug, @thread.id), [class: "post-editor"], fn f ->
   = textarea f, :body
-  = submit "Create Post", class: "button-primary"
+  = submit class: "button-primary" do
+    %i{class: "fa fa-mail-reply"}
+    Reply
+  - end

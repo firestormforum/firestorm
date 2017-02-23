@@ -5,6 +5,6 @@
     .date= @thread.inserted_at
 
 %ol.post-list
-  %li= render "_first_post.html", post: @first_post, conn: @conn
+  %li= render "_first_post.html", post: @first_post, conn: @conn, category: @category, thread: @thread
   - for post <- @posts do
     %li= render "_post.html", post: post, category: @category, thread: @thread, conn: @conn

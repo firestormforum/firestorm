@@ -2,3 +2,5 @@
   .body
     = markdown(@post.body)
 
+  %ul.actions
+    %li= link "Reply", to: category_thread_post_path(@conn, :new, @category.slug, @thread.id)
