@@ -1,5 +1,7 @@
 # Firestorm
 ## An open-source forum engine, with an Elixir+Phoenix backend and an Elm frontend.
+[![Build Status](https://semaphoreci.com/api/v1/dailydrip/firestorm/branches/master/badge.svg)](https://semaphoreci.com/dailydrip/firestorm)
+
 > A project from [DailyDrip](https://www.dailydrip.com).
 
 This is the Firestorm Forum project.  It's wrapping up the initial design phase
