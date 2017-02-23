@@ -7,6 +7,4 @@
 %ol.post-list
   %li= render "_first_post.html", post: @first_post, conn: @conn
   - for post <- @posts do
-    %li= render "_post.html", post: post, conn: @conn
-
-= link "Reply", to: category_thread_post_path(@conn, :new, @category.slug, @thread.id)
+    %li= render "_post.html", post: post, category: @category, thread: @thread, conn: @conn
