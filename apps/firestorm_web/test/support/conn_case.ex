@@ -21,6 +21,8 @@ defmodule FirestormWeb.ConnCase do
       use Phoenix.ConnTest
 
       import FirestormWeb.Router.Helpers
+      alias FirestormData.Commands.CreateCategory
+      alias FirestormData.{Category, User, Thread, Post, Repo}
 
       # The default endpoint for testing
       @endpoint FirestormWeb.Endpoint

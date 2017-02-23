@@ -32,6 +32,8 @@ defmodule FirestormData.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:arbor, "~> 1.0.3"},
       {:ecto_autoslug_field, "~> 0.2"},
+
+      {:credo, "~> 0.5", only: [:dev, :test]},
     ]
   end
 

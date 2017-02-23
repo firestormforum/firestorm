@@ -3,7 +3,7 @@
     %li.thread-list-item
       .details
         .summary
-          = link thread.title, to: category_thread_path(@conn, :show, thread.category_id, thread.id), class: "title"
+          = link thread.title, to: category_thread_path(@conn, :show, thread.category.slug, thread.id), class: "title"
           %a.user-name{href: "#"}
             @#{user(thread).username}
         .metadata

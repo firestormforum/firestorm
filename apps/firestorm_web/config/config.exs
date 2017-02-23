@@ -8,6 +8,8 @@ use Mix.Config
 config :phoenix, :template_engines,
   haml: PhoenixHaml.Engine
 
+config :firestorm_web, ecto_repos: []
+
 # Configures the endpoint
 config :firestorm_web, FirestormWeb.Endpoint,
   url: [

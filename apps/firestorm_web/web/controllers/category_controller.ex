@@ -31,7 +31,7 @@ defmodule FirestormWeb.CategoryController do
   end
 
   # FIXME: Use commands, don't just CRUD it up
-  def create(conn, %{"category" => category_params}=params) do
+  def create(conn, %{"category" => category_params}) do
     changeset =
       %Category{}
       |> Category.changeset(category_params)
@@ -39,10 +39,10 @@ defmodule FirestormWeb.CategoryController do
     case changeset.valid? do
       true ->
         case Repo.insert(changeset) do
-          {:ok, category} ->
+          {:ok, category_id} ->
             conn
             |> put_flash(:info, "Category created successfully")
-            |> redirect(to: page_path(conn, :home))
+            |> redirect(to: category_path(conn, :show, category_id))
           {:error, changeset} ->
             conn
             |> render("new.html", changeset: changeset)

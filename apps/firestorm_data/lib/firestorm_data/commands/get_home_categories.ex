@@ -6,7 +6,7 @@ defmodule FirestormData.Commands.GetHomeCategories do
   def run(%__MODULE__{user_id: _user_id}) do
     categories =
       Category.roots
-      |> preload([threads: [:posts], parent: []])
+      |> preload([threads: [:posts, :category], parent: []])
       |> Repo.all
       |> Enum.map(&add_children/1)
 
@@ -18,7 +18,7 @@ defmodule FirestormData.Commands.GetHomeCategories do
     children =
       category
       |> Category.children
-      |> preload([threads: [:posts], parent: []])
+      |> preload([threads: [:posts, :category], parent: []])
       |> Repo.all
 
     category

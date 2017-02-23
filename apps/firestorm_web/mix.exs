@@ -13,6 +13,7 @@ defmodule FirestormWeb.Mixfile do
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     aliases: aliases(),
      deps: deps()]
   end
 
@@ -31,6 +32,7 @@ defmodule FirestormWeb.Mixfile do
         :gettext,
         :ueberauth,
         :ueberauth_github,
+        :firestorm_data,
       ]
     ]
   end
@@ -62,6 +64,14 @@ defmodule FirestormWeb.Mixfile do
       {:earmark, "~> 1.1.1"},
 
       {:firestorm_data, in_umbrella: true},
+
+      {:credo, "~> 0.5", only: [:dev, :test]},
+    ]
+  end
+
+  defp aliases do
+    [
+      "test": ["ecto.drop --quiet", "ecto.create --quiet", "ecto.migrate", "test"],
     ]
   end
 end
