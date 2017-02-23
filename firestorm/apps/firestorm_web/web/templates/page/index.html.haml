@@ -6,8 +6,7 @@
     %i.fa.fa-github
     Log in with GitHub
   %a.rounded-button Create Account
-  %a.sign-in-link{href: page_path(@conn, :home)} Sign In
+  = link "Sign In", to: page_path(@conn, :home)
   %p.legal-disclaimer
     By signing up, I agree to Firestorm's
-    = succeed "." do
-      %a{href: "#"} Terms and Privacy Policy
+    %a{href: "#"} Terms and Privacy Policy
