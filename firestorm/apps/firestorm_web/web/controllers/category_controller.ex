@@ -3,7 +3,14 @@ defmodule FirestormWeb.CategoryController do
   alias FirestormData.Commands.GetCategory
 
   def show(conn, %{"id" => id_or_slug}) do
-    case GetCategory.run(%GetCategory{finder: id_or_slug}) do
+    finder =
+      case Integer.parse(id_or_slug) do
+        :error ->
+          id_or_slug
+        {id, _} -> id
+      end
+
+    case GetCategory.run(%GetCategory{finder: finder}) do
       {:ok, c} ->
         conn
         |> render("show.html", category: c)

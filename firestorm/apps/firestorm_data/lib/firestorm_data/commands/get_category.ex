@@ -4,15 +4,15 @@ defmodule FirestormData.Commands.GetCategory do
 
   defstruct [:finder]
 
-  def run(%__MODULE__{finder: finder}) do
-    finder_key =
-      case Integer.parse(finder) do
-        :error ->
-          :slug
-        _ ->
-          :id
-      end
+  def run(%__MODULE__{finder: finder}) when is_integer(finder) do
+    do_run({:id, finder})
+  end
 
+  def run(%__MODULE__{finder: finder}) when is_binary(finder) do
+    do_run({:slug, finder})
+  end
+
+  defp do_run({finder_key, finder}) do
     query =
       Category
       |> where(^[{finder_key, finder}])
