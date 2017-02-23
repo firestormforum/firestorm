@@ -2,6 +2,22 @@
 // =================
 // This holds mixins, functions, breakpoints, etc.
 
+// - #mixins
+// - #fonts
+
+// --------------
+// Mixins #mixins
+// --------------
+@mixin underline-on-hover() {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// ------------
+// Fonts #fonts
+// ------------
 // This CSS was generated via https://google-webfonts-helper.herokuapp.com/fonts/fira-sans?subsets=latin
 // Downloaded for "Modern Browsers", assuming PostCSS has our back here
 

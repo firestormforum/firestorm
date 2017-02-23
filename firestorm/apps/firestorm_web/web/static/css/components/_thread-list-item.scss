@@ -4,6 +4,18 @@
   flex-direction: row;
   > .details {
     flex-grow: 1;
+    > .summary {
+      > .title {
+        color: $tundora;
+        @include underline-on-hover;
+      }
+      > .user-name {
+        @include underline-on-hover;
+      }
+    }
+    > .metadata {
+      color: $tower-gray;
+    }
   }
   > .supplemental {
   }

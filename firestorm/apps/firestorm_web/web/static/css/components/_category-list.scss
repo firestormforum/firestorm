@@ -1,20 +1,18 @@
 .category-list {
-  padding-left: 1rem;
-  padding-bottom: 1rem;
+  padding: 0;
+  margin-left: 1rem;
   > li {
     list-style-type: none;
   }
 
   > li > h2 > a {
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
+    @include underline-on-hover;
   }
 
   > li > h2 {
     font-size: $font-size-large;
     font-weight: $font-weight-bold;
+    margin: 0;
   }
 
   > li > .category-list {
