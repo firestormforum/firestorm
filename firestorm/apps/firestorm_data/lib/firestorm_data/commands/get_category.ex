@@ -6,10 +6,11 @@ defmodule FirestormData.Commands.GetCategory do
 
   def run(%__MODULE__{finder: finder}) do
     finder_key =
-      if is_binary(finder) do
-        :slug
-      else
-        :id
+      case Integer.parse(finder) do
+        :error ->
+          :slug
+        _ ->
+          :id
       end
 
     query =

@@ -4,7 +4,11 @@
       <h2 class="title" style="color: #693db8;">
         <%= link category.title, to: category_path(@conn, :show, category.slug) %>
       </h2>
-      <%= render "_list.html", conn: @conn, categories: children(category) %>
+
+      <%= if category.children do %>
+        <%= render "_list.html", conn: @conn, categories: category.children %>
+      <% end %>
+
       <%= ThreadView.render "_list.html", threads: category.threads, conn: @conn %>
     </li>
   <% end %>

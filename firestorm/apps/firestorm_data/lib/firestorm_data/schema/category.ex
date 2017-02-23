@@ -11,6 +11,7 @@ defmodule FirestormData.Category do
   schema "categories" do
     field :title, :string
     field :slug, TitleSlug.Type
+    field :children, :any, virtual: true
     belongs_to :parent, __MODULE__
     has_many :threads, Thread
 
