@@ -1,2 +1,0 @@
-defmodule UeberauthGithub do
-end
