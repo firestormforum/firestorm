@@ -1,4 +1,5 @@
 require('../css/app.scss')
+import 'phoenix_html'
 let moment = require('moment')
 let $ = require('jquery')
 

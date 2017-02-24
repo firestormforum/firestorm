@@ -7,6 +7,8 @@
           %a.user-name{href: "#"}
             @#{user(thread).username}
         .metadata
-          %abbr.time= Timex.format!(thread.inserted_at, "{RFC822z}")
+          - time_string = Timex.format!(thread.inserted_at, "{RFC822z}")
+          %abbr.time{title: "#{time_string}" }
+            = time_string
       .supplemental
         .badge-block.-highlight= length(thread.posts)
