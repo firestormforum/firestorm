@@ -1,0 +1,29 @@
+{
+  "name": "micro-es7-shim",
+  "version": "0.1.0",
+  "description": "No-bullshit super-simple es7 collections shim for Array#includes, Object.values, Object.entries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulmillr/micro-es7-shim.git"
+  },
+  "keywords": [
+    "es7",
+    "shim",
+    "polyfill",
+    "array",
+    "includes",
+    "object",
+    "values",
+    "entries"
+  ],
+  "author": "Alexey Shvaika, Paul Miller (http://paulmillr.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/paulmillr/micro-es7-shim/issues"
+  },
+  "homepage": "https://github.com/paulmillr/micro-es7-shim#readme"
+}

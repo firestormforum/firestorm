@@ -1,0 +1,33 @@
+{
+  "name": "normalize-git-url",
+  "version": "3.0.2",
+  "description": "Normalizes Git URLs. For npm, but you can use it too.",
+  "main": "normalize-git-url.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "tap": "^1.1.0"
+  },
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/npm/normalize-git-url.git"
+  },
+  "keywords": [
+    "git",
+    "github",
+    "url",
+    "normalize",
+    "npm"
+  ],
+  "author": "Forrest L Norvell <ogd@aoaioxxysz.net>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/npm/normalize-git-url/issues"
+  },
+  "homepage": "https://github.com/npm/normalize-git-url"
+}
