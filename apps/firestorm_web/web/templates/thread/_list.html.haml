@@ -7,6 +7,6 @@
           %a.user-name{href: "#"}
             @#{user(thread).username}
         .metadata
-          %span.time Jan 21 2017 @ 1:52PM
+          %abbr.time= Timex.format!(thread.inserted_at, "{ISO:Basic}")
       .supplemental
         .badge-block.-highlight= length(thread.posts)
