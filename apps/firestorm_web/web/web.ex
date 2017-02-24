@@ -60,6 +60,9 @@ defmodule FirestormWeb.Web do
       import FirestormWeb.Gettext
       import FirestormWeb.ViewHelpers
       alias FirestormWeb.{CategoryView, ThreadView, LayoutView}
+
+      # Our navigation view defaults
+      use FirestormWeb.Navigation.Defaults
     end
   end
 

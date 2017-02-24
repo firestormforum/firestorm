@@ -11,7 +11,7 @@
     = {:safe, css_link_tag()}
     %script{src: "https://use.fontawesome.com/b706cffc0a.js"}
   %body
-    = render "_navigation.html", conn: @conn
+    = render "_navigation.html", conn: @conn, view_module: @view_module, view_template: @view_template
 
     - for {key, val} <- get_flash(@conn) do
       %p{class: "alert-box -#{key}", role: "alert"}= val

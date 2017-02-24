@@ -9,7 +9,12 @@ defmodule FirestormWeb.ThreadView do
 
   def markdown(body) do
     body
-    |> Earmark.to_html
+    |> Earmark.as_html!
     |> raw
+  end
+
+  def back("show.html", conn) do
+    category = conn.assigns[:category]
+    category_path(conn, :show, category.slug)
   end
 end

@@ -1,5 +1,10 @@
 .pure-menu.pure-menu-horizontal.navigation-menu
-  %a.pure-menu-heading.pure-menu-link{href: "#{page_path(@conn, :home)}"}
+  - # Show back arrow if we should do that
+  - if link = @view_module.back(@view_template, @conn) do
+    %a.back-arrow.pure-menu-link{href: link}
+      %i.fa.fa-arrow-left
+
+  %a.pure-menu-heading.pure-menu-link.navigation-logo-link{href: "#{page_path(@conn, :home)}"}
     = render "_logo.html", conn: @conn
 
   %ul.pure-menu-list

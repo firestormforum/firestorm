@@ -2,7 +2,9 @@
   %h2= @thread.title
   .item-metadata
     = link "@#{user(@thread).username}", to: "#", class: "username"
-    .date= @thread.inserted_at
+    - time_string = Timex.format!(@thread.inserted_at, "{RFC822z}")
+    %abbr.time{title: "#{time_string}" }
+      = time_string
 
 %ol.post-list
   %li= render "_first_post.html", post: @first_post, conn: @conn, category: @category, thread: @thread
