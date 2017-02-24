@@ -6,11 +6,8 @@
   align-items: center;
   flex-direction: column;
   padding: 2rem;
-  > h1 {
+  > .logo
     margin-bottom: 4rem;
-    img {
-      width: 100%;
-    }
   }
   > button, > .github-link {
     margin-bottom: 1rem;

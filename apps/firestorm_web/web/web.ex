@@ -59,7 +59,7 @@ defmodule FirestormWeb.Web do
       import FirestormWeb.ErrorHelpers
       import FirestormWeb.Gettext
       import FirestormWeb.ViewHelpers
-      alias FirestormWeb.{CategoryView, ThreadView}
+      alias FirestormWeb.{CategoryView, ThreadView, LayoutView}
     end
   end
 

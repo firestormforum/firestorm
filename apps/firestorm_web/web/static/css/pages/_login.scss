@@ -4,6 +4,10 @@
   align-items: center;
   flex-direction: column;
   padding: 2rem;
+  .logo {
+    margin-bottom: 4rem;
+    margin-top: 4rem;
+  }
   > button, > .github-link, > .pure-button {
     margin-bottom: 1rem;
     width: 100%;

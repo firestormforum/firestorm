@@ -9,6 +9,7 @@ defmodule FirestormWeb.PageController do
         |> redirect(to: page_path(conn, :home))
       false ->
         conn
+        |> put_layout("login.html")
         |> render("index.html")
     end
   end

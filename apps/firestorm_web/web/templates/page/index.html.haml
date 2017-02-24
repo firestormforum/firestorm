@@ -1,7 +1,7 @@
-- if logged_in?(@conn) do
-  Logged in as #{current_user(@conn).username}
-
 %section.login-page
+  %a.logo{href: "#{page_path(@conn, :home)}"}
+    = render "_logo.html", conn: @conn
+
   %a.pure-button.button-primary.github-link{href: "/auth/github"}
     %i.fa.fa-github
     Log in with GitHub
