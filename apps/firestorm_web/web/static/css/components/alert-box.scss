@@ -1,0 +1,14 @@
+.alert-box {
+  margin: 1rem;
+  padding: 1rem;
+  color: white;
+  &.-success {
+    background-color: $forest-green;
+  }
+  &.-info {
+    background-color: $yellow-orange;
+  }
+  &.-error {
+    background-color: $punch;
+  }
+}
