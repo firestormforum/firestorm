@@ -33,6 +33,7 @@ defmodule FirestormWeb.Mixfile do
         :ueberauth,
         :ueberauth_github,
         :firestorm_data,
+        :timex,
       ]
     ]
   end
@@ -62,9 +63,12 @@ defmodule FirestormWeb.Mixfile do
       {:ueberauth, "~> 0.4"},
       {:ueberauth_github, "~> 0.4"},
       {:earmark, "~> 1.1.1"},
+      {:timex, "~> 3.0"},
 
+      # UMBRELLA
       {:firestorm_data, in_umbrella: true},
 
+      # DEV/TEST
       {:credo, "~> 0.5", only: [:dev, :test]},
     ]
   end
