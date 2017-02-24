@@ -1,12 +1,12 @@
 - if logged_in?(@conn) do
   Logged in as #{current_user(@conn).username}
 
-%section.page-login
-  %a.rounded-button.github-link{href: "/auth/github"}
+%section.login-page
+  %a.pure-button.button-primary.github-link{href: "/auth/github"}
     %i.fa.fa-github
     Log in with GitHub
-  %a.rounded-button Create Account
-  = link "Sign In", to: page_path(@conn, :home)
+  %a.pure-button Create Account
+  = link "Sign In", to: page_path(@conn, :home), class: "sign-in-link"
   %p.legal-disclaimer
     By signing up, I agree to Firestorm's
     %a{href: "#"} Terms and Privacy Policy
