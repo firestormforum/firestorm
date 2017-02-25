@@ -8,9 +8,9 @@ defmodule FirestormWeb.Navigation.Defaults do
 
   defmacro __using__(_) do
     quote do
-      def back(_other, conn), do: nil
+      def back(_template, conn), do: nil
 
-      def nav_items(_other, conn) do
+      def nav_items(_template, conn) do
         defaults =
           [
             %NavItem{text: "Home", path: page_path(conn, :home)}

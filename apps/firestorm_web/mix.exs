@@ -70,6 +70,7 @@ defmodule FirestormWeb.Mixfile do
 
       # DEV/TEST
       {:credo, "~> 0.5", only: [:dev, :test]},
+      {:phoenix_integration, "~> 0.2", only: :test},
     ]
   end
 

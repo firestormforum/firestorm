@@ -26,6 +26,16 @@ defmodule FirestormWeb.ConnCase do
 
       # The default endpoint for testing
       @endpoint FirestormWeb.Endpoint
+
+      def login_as(conn, user) do
+        conn
+        |> bypass_through(FirestormWeb.Router, [:browser])
+        |> get("/")
+        |> fetch_session
+        |> put_session(:current_user, user.id)
+        |> send_resp(200, "Flush the session")
+        |> recycle
+      end
     end
   end
 

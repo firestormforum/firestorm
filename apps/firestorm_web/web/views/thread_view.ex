@@ -17,4 +17,5 @@ defmodule FirestormWeb.ThreadView do
     category = conn.assigns[:category]
     category_path(conn, :show, category.slug)
   end
+  def back(_template, _conn), do: nil
 end

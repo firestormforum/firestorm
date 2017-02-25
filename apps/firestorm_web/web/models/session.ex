@@ -2,9 +2,11 @@ defmodule FirestormWeb.Session do
   alias FirestormData.{User, Repo}
 
   def current_user(conn) do
-    case Plug.Conn.get_session(conn, :current_user) do
+    case conn.assigns[:current_user] do
       nil ->
+        IO.puts "checking current user but was nil!"
         nil
+
       id ->
         Repo.get(User, id)
     end

@@ -46,36 +46,33 @@ defmodule FirestormWeb.Web do
       # Import session helpers
       import FirestormWeb.Session, only: [current_user: 1, logged_in?: 1]
 
-      import Phoenix.HTML
+      import Phoenix.{HTML}
       import Phoenix.HTML.Form, except: [submit: 2, submit: 1]
-      import Phoenix.HTML.Link
-      import Phoenix.HTML.Tag
-      import Phoenix.HTML.Format
+      import Phoenix.HTML.{Link, Tag, Format}
 
       # Our custom Form helpers
-      import FirestormWeb.FormHelpers
+      import FirestormWeb.{FormHelpers}
 
-      import FirestormWeb.Router.Helpers
-      import FirestormWeb.ErrorHelpers
-      import FirestormWeb.Gettext
-      import FirestormWeb.ViewHelpers
+      import FirestormWeb.Router.{Helpers}
+      import FirestormWeb.{ErrorHelpers, Gettext, ViewHelpers}
       alias FirestormWeb.{CategoryView, ThreadView, LayoutView}
+      alias FirestormData.{Category, Thread, User, Post, Repo}
 
       # Our navigation view defaults
-      use FirestormWeb.Navigation.Defaults
+      use FirestormWeb.Navigation.{Defaults}
     end
   end
 
   def router do
     quote do
-      use Phoenix.Router
+      use Phoenix.{Router}
     end
   end
 
   def channel do
     quote do
-      use Phoenix.Channel
-      import FirestormWeb.Gettext
+      use Phoenix.{Channel}
+      import FirestormWeb.{Gettext}
     end
   end
 
