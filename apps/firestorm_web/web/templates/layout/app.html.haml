@@ -10,7 +10,7 @@
     %title Firestorm
     = {:safe, css_link_tag()}
     %script{src: "https://use.fontawesome.com/b706cffc0a.js"}
-  %body
+  %body.layout-app
     .pure-container(data-effect: "pure-effect-slide")
       %input#pure-toggle-right.pure-toggle(data-toggle: "right", type: "checkbox")
       %label.pure-toggle-label(data-toggle-label: "right", for: "pure-toggle-right")
@@ -24,6 +24,7 @@
           - for {key, val} <- get_flash(@conn) do
             %p{class: "alert-box -#{key}", role: "alert"}= val
 
-          = render @view_module, @view_template, assigns
+          .layout-content
+            = render @view_module, @view_template, assigns
       %label.pure-overlay(data-overlay: "right", for: "pure-toggle-right")
     = {:safe, js_script_tag()}

@@ -1,4 +1,6 @@
-%h2= @category.title
+.category-header
+  %h2= @category.title
+
 = render "_back.html", conn: @conn, parent: @category.parent
 = render "_subnav.html", conn: @conn, category: @category
 

@@ -1,6 +1,9 @@
 .category-list {
   padding: 0;
-  margin-left: 1rem;
+  margin-top: 0;
+  .category-list {
+    margin-left: 1rem;
+  }
   > li {
     list-style-type: none;
   }
