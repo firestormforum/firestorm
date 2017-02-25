@@ -1,5 +1,4 @@
 .pure-menu.pure-menu-vertical
   %ul.pure-menu-list
-    %li.pure-menu-item= link 'Home', to: page_path(@conn, :home), class: "pure-menu-link"
-    - if logged_in?(@conn) do
-      %li.pure-menu-item= link 'Log Out', to: auth_path(@conn, :delete), class: "pure-menu-link", method: :delete
+    - for nav_item <- @view_module.nav_items(@view_template, @conn) do
+      %li.pure-menu-item= link nav_item.text, Keyword.merge([to: nav_item.path, class: "pure-menu-link"], nav_item.options)
