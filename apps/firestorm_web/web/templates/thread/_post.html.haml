@@ -2,7 +2,7 @@
   .item-metadata
     = link "@#{@post.user.username}", to: "#", class: "username"
 
-    - time_string = Timex.format!(@thread.inserted_at, "{RFC822z}")
+    - time_string = Timex.format!(@thread.inserted_at, "{ISO:Extended}")
     %abbr.time{title: "#{time_string}" }
       = time_string
 
