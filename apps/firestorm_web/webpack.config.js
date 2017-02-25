@@ -9,7 +9,7 @@ process.chdir(__dirname)
 
 const staticDir = path.join(__dirname, 'web/static')
 const destDir = path.join(__dirname, 'priv/static')
-const publicPath = 'http://localhost:4000/'
+const publicPath = '/'
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require("copy-webpack-plugin")

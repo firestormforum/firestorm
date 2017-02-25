@@ -4,5 +4,5 @@ let moment = require('moment')
 let $ = require('jquery')
 
 $('abbr.time').html((_, html) => {
-  return moment(html).fromNow()
+  return moment.parseZone(html).fromNow()
 })
