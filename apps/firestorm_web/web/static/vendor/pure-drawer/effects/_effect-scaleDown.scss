@@ -1,0 +1,77 @@
+/*********************************
+## Effect 5 - Scale Down Pusher ##
+*********************************/
+
+@mixin effect-scaleDown() {
+	
+	/* DRAWER */
+	[data-effect='pure-effect-scaleDown'] .pure-drawer {
+		transition-duration: $pure-drawer-animation-duration-scaleDown;
+	}
+
+	[data-effect='pure-effect-scaleDown'] .pure-drawer[data-position='left'] {
+		-webkit-transform: translate3d(-100%, 0, 0);
+		transform: translate3d(-100%, 0, 0);
+	}
+
+	[data-effect='pure-effect-scaleDown'] .pure-drawer[data-position='right'] {
+		-webkit-transform: translate3d(100%, 0, 0);
+		transform: translate3d(100%, 0, 0);
+	}
+
+	[data-effect='pure-effect-scaleDown'] .pure-drawer[data-position='top'] {
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	}
+
+	[data-effect='pure-effect-scaleDown'] .pure-toggle[data-toggle='left']:checked ~ .pure-drawer[data-position='left'],
+	[data-effect='pure-effect-scaleDown'] .pure-toggle[data-toggle='right']:checked ~ .pure-drawer[data-position='right'],
+	[data-effect='pure-effect-scaleDown'] .pure-toggle[data-toggle='top']:checked ~ .pure-drawer[data-position='top'] {
+		visibility: visible;
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+	}
+
+	/* PUSHER CONTAINER */
+
+	[data-effect='pure-effect-scaleDown'] .pure-pusher-container {
+		-webkit-perspective: 1500px;
+		perspective: 1500px;
+	}
+
+	/* PUSHER */
+
+	/* Needed for Firefox */
+	[data-effect='pure-effect-scaleDown'] .pure-pusher-container .pure-pusher {
+		z-index: 1;
+		transition-duration: $pure-drawer-animation-duration-scaleDown;
+	}
+
+	[data-effect='pure-effect-scaleDown'] .pure-toggle:checked ~ .pure-pusher-container .pure-pusher {
+		-webkit-transform: translate3d(0, 0, -300px);
+		transform: translate3d(0, 0, -300px);
+		@media #{$medium-up} {
+			-webkit-transform: translate3d(0, 0, -300px);
+			transform: translate3d(0, 0, -300px);
+		}
+		@media #{$large-up} {
+			-webkit-transform: translate3d(0, 0, -300px);
+			transform: translate3d(0, 0, -300px);
+		}
+	}
+
+	/* OVERLAY */
+
+	[data-effect='pure-effect-scaleDown'] .pure-overlay {
+		transition-duration: $pure-drawer-animation-duration-scaleDown;
+		transition-delay: $pure-drawer-animation-duration-scaleDown / 2;	
+	}
+}
+
+@if($show-drawer == 'all') {
+	@include effect-scaleDown;
+} @else {
+	@media #{$show-drawer} {
+		@include effect-scaleDown;
+	}	
+}

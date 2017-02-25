@@ -1,20 +1,29 @@
 !!!
 %html{lang: "en"}
   %head
-    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{charset: "utf-8"}/
-    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}/
-    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
-    %meta{content: "", name: "description"}/
-    %meta{content: "", name: "author"}/
+    %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}
+    %meta{charset: "utf-8"}
+    %meta{content: "IE=edge", "http-equiv": "X-UA-Compatible"}
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
+    %meta{content: "", name: "description"}
+    %meta{content: "", name: "author"}
     %title Firestorm
     = {:safe, css_link_tag()}
     %script{src: "https://use.fontawesome.com/b706cffc0a.js"}
   %body
-    = render "_navigation.html", conn: @conn, view_module: @view_module, view_template: @view_template
+    .pure-container(data-effect: "pure-effect-slide")
+      %input#pure-toggle-right.pure-toggle(data-toggle: "right", type: "checkbox")
+      %label.pure-toggle-label(data-toggle-label: "right", for: "pure-toggle-right")
+        %span.pure-toggle-icon
+      .pure-drawer(data-position: "right")
+        = render "_drawer.html", conn: @conn, view_module: @view_module, view_template: @view_template
+      .pure-pusher-container
+        .pure-pusher
+          = render "_navigation.html", conn: @conn, view_module: @view_module, view_template: @view_template
 
-    - for {key, val} <- get_flash(@conn) do
-      %p{class: "alert-box -#{key}", role: "alert"}= val
+          - for {key, val} <- get_flash(@conn) do
+            %p{class: "alert-box -#{key}", role: "alert"}= val
 
-    = render @view_module, @view_template, assigns
+          = render @view_module, @view_template, assigns
+      %label.pure-overlay(data-overlay: "right", for: "pure-toggle-right")
     = {:safe, js_script_tag()}

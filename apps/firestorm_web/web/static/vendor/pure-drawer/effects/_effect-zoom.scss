@@ -1,0 +1,47 @@
+/******************
+## Effect - Zoom ##
+******************/
+
+@mixin effect-zoom() {
+	
+    /* DRAWER */
+    
+	[data-effect="pure-effect-zoom"] .pure-drawer {
+	    z-index: 3;	
+        -webkit-animation-duration: $pure-drawer-animation-duration-zoom;
+        animation-duration: $pure-drawer-animation-duration-zoom;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both; 
+             
+	}
+
+    [data-effect="pure-effect-zoom"] .pure-toggle[data-toggle='left']:checked ~ .pure-drawer[data-position='left'],
+    [data-effect="pure-effect-zoom"] .pure-toggle[data-toggle='right']:checked ~ .pure-drawer[data-position='right'],
+    [data-effect="pure-effect-zoom"] .pure-toggle[data-toggle='top']:checked ~ .pure-drawer[data-position='top'] {
+        visibility: visible; 
+    }
+
+	[data-effect="pure-effect-zoom"] .pure-drawer[data-position='left'] { @extend .zoomOutLeft; }
+    [data-effect="pure-effect-zoom"] .pure-drawer[data-position='right'] { @extend .zoomOutRight; }
+    [data-effect="pure-effect-zoom"] .pure-drawer[data-position='top'] { @extend .zoomOutUp; }
+    
+	[data-effect="pure-effect-zoom"] .pure-toggle[data-toggle='left']:checked ~ .pure-drawer[data-position='left'] { @extend .zoomInLeft; }
+    [data-effect="pure-effect-zoom"] .pure-toggle[data-toggle='right']:checked ~ .pure-drawer[data-position='right'] { @extend .zoomInRight; }
+    [data-effect="pure-effect-zoom"] .pure-toggle[data-toggle='top']:checked ~ .pure-drawer[data-position='top'] { @extend .zoomInDown; }
+    
+    /* OVERLAY */
+
+    [data-effect="pure-effect-zoom"] .pure-overlay {
+        transition-duration: $pure-drawer-animation-duration-zoom;
+        transition-delay: $pure-drawer-animation-duration-zoom / 2; 
+    }
+}
+
+@if($show-drawer == 'all') {
+	@include effect-zoom;
+} @else {
+	@media #{$show-drawer} {
+		@include effect-zoom;
+	}	
+}
+

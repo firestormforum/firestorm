@@ -1,0 +1,73 @@
+/********************
+## Effect - Reveal ##
+********************/
+
+@mixin reveal() {
+
+	/* DRAWER */
+	[data-effect='pure-effect-reveal'] .pure-drawer {
+		visibility: visible;
+		transition-duration: $pure-drawer-animation-duration-reveal;
+	}
+
+	/* PUSHER */
+
+	[data-effect='pure-effect-reveal'] .pure-pusher-container .pure-pusher {
+		transition-duration: $pure-drawer-animation-duration-reveal;
+	}
+
+	[data-effect='pure-effect-reveal'] .pure-toggle[data-toggle='left']:checked ~ .pure-pusher-container .pure-pusher {
+		-webkit-transform: translate3d($drawer-width-small, 0, 0);
+		transform: translate3d($drawer-width-small, 0, 0);
+	    @media #{$medium-up} {
+			-webkit-transform: translate3d($drawer-width-medium, 0, 0);
+			transform: translate3d($drawer-width-medium, 0, 0);
+		}
+		@media #{$large-up} {
+			-webkit-transform: translate3d($drawer-width-large, 0, 0);
+			transform: translate3d($drawer-width-large, 0, 0);
+		}
+	}
+
+	[data-effect='pure-effect-reveal'] .pure-toggle[data-toggle='right']:checked ~ .pure-pusher-container .pure-pusher {
+		-webkit-transform: translate3d(-$drawer-width-small, 0, 0);
+		transform: translate3d(-$drawer-width-small, 0, 0);
+		@media #{$medium-up} {
+			-webkit-transform: translate3d(-$drawer-width-medium, 0, 0);
+			transform: translate3d(-$drawer-width-medium, 0, 0);
+		}
+		@media #{$large-up} {
+			-webkit-transform: translate3d(-$drawer-width-large, 0, 0);
+			transform: translate3d(-$drawer-width-large, 0, 0);
+		}
+	}
+
+	[data-effect='pure-effect-reveal'] .pure-toggle[data-toggle='top']:checked ~ .pure-pusher-container .pure-pusher {
+		-webkit-transform: translate3d(0, $drawer-height-small, 0);
+		transform: translate3d(0, $drawer-height-small, 0);
+	    @media #{$medium-up} {
+			-webkit-transform: translate3d(0, $drawer-height-medium, 0);
+			transform: translate3d(0, $drawer-height-medium, 0);
+		}
+		@media #{$large-up} {
+			-webkit-transform: translate3d(0, $drawer-height-large, 0);
+			transform: translate3d(0, $drawer-height-large, 0);
+		}
+	}
+
+	/* OVERLAY */
+
+	[data-effect='pure-effect-reveal'] .pure-overlay {
+		transition-duration: $pure-drawer-animation-duration-reveal;
+		transition-delay: $pure-drawer-animation-duration-reveal / 2;	
+	}
+}
+
+@if($show-drawer == 'all') {
+	@include reveal;
+} @else {
+	@media #{$show-drawer} {
+		@include reveal;
+	}	
+}
+

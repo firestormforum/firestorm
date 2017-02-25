@@ -1,0 +1,57 @@
+/*****************************
+## Effect 13 - 3D Rotate out ##
+*****************************/
+
+[data-effect='drawer-effect-13'] {
+	-webkit-perspective: 1500px;
+	perspective: 1500px;
+	-webkit-perspective-origin: 0% 50%;
+	perspective-origin: 0% 50%;
+}
+
+[data-effect='drawer-effect-13'] .nav-drawer {
+	-webkit-transform: translate3d(-100%, 0, 0) rotateY(90deg);
+	transform: translate3d(-100%, 0, 0) rotateY(90deg);
+	-webkit-transform-origin: 100% 50%;
+	transform-origin: 100% 50%;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+[data-position='right'][data-effect='drawer-effect-13'] .nav-drawer {
+	-webkit-transform: translate3d(100%, 0, 0) rotateY(-140deg);
+	transform: translate3d(100%, 0, 0) rotateY(-140deg);
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+[data-effect='drawer-effect-13'] .nav-drawer-toggle:checked  ~ .nav-drawer-pusher-container .nav-drawer-pusher .nav-drawer {
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s;
+	-webkit-transform: translate3d(-100%, 0, 0) rotateY(0deg);
+	transform: translate3d(-100%, 0, 0) rotateY(0deg);
+}
+
+[data-position='right'][data-effect='drawer-effect-13'] .nav-drawer-toggle:checked  ~ .nav-drawer-pusher-container .nav-drawer-pusher .nav-drawer {
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s;
+	-webkit-transform: translate3d(100%, 0, 0) rotateY(0deg);
+	transform: translate3d(100%, 0, 0) rotateY(0deg);
+}
+
+[data-effect='drawer-effect-13'] .nav-drawer-pusher {
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+[data-effect='drawer-effect-13'] .nav-drawer-toggle:checked ~ .nav-drawer-pusher-container .nav-drawer-pusher {
+	-webkit-transform: translate3d($drawer-width, 0, 0);
+	transform: translate3d($drawer-width, 0, 0);
+}
+
+[data-position='right'][data-effect='drawer-effect-13'] .nav-drawer-toggle:checked ~ .nav-drawer-pusher-container .nav-drawer-pusher {
+	-webkit-transform: translate3d(-$drawer-width, 0, 0);
+	transform: translate3d(-$drawer-width, 0, 0);
+}

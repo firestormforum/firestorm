@@ -1,0 +1,83 @@
+/*****************************
+## Effect 12 - 3D Rotate inn ##
+*****************************/
+
+[data-effect='drawer-effect-12'] {
+	-webkit-perspective: 1500px;
+	perspective: 1500px;
+	-webkit-perspective-origin: 0% 50%;
+	perspective-origin: 0% 50%;
+}
+
+[data-position='top'][data-effect='drawer-effect-12'] {
+	-webkit-perspective-origin: 50% 0%;
+	perspective-origin: 50% 0%;
+}
+
+[data-effect='drawer-effect-12'] .nav-drawer {
+	-webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg);
+	transform: translate3d(-100%, 0, 0) rotateY(-90deg);
+	-webkit-transform-origin: 100% 50%;
+	transform-origin: 100% 50%;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+[data-position='right'][data-effect='drawer-effect-12'] .nav-drawer {
+	-webkit-transform: translate3d(100%, 0, 0) rotateY(35deg);
+	transform: translate3d(100%, 0, 0) rotateY(35deg);
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+[data-position='top'][data-effect='drawer-effect-12'] .nav-drawer {
+	-webkit-transform: translate3d(0, -50%, 0) rotateX(45deg);
+	transform: translate3d(0, -50%, 0) rotateX(45deg);
+	-webkit-transform-origin: 0 100%;
+	transform-origin: 0 100%;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+[data-effect='drawer-effect-12'] .nav-drawer-toggle:checked  ~ .nav-drawer-pusher-container .nav-drawer-pusher .nav-drawer {
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s;
+	-webkit-transform: translate3d(-100%, 0, 0) rotateY(0deg);
+	transform: translate3d(-100%, 0, 0) rotateY(0deg);
+}
+
+[data-position='right'][data-effect='drawer-effect-12'] .nav-drawer-toggle:checked  ~ .nav-drawer-pusher-container .nav-drawer-pusher .nav-drawer {
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s;
+	-webkit-transform: translate3d(100%, 0, 0) rotateY(0deg);
+	transform: translate3d(100%, 0, 0) rotateY(0deg);
+}
+
+[data-position='top'][data-effect='drawer-effect-12'] .nav-drawer-toggle:checked  ~ .nav-drawer-pusher-container .nav-drawer-pusher .nav-drawer {
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s;
+	-webkit-transform: translate3d(0, -100%, 0) rotateY(0deg);
+	transform: translate3d(0, -100%, 0) rotateY(0deg);
+}
+
+[data-effect='drawer-effect-12'] .nav-drawer-pusher {
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+[data-effect='drawer-effect-12'] .nav-drawer-toggle:checked ~ .nav-drawer-pusher-container .nav-drawer-pusher {
+	-webkit-transform: translate3d($drawer-width, 0, 0);
+	transform: translate3d($drawer-width, 0, 0);
+}
+
+[data-position='right'][data-effect='drawer-effect-12'] .nav-drawer-toggle:checked ~ .nav-drawer-pusher-container .nav-drawer-pusher {
+	-webkit-transform: translate3d(-$drawer-width, 0, 0);
+	transform: translate3d(-$drawer-width, 0, 0);
+}
+
+[data-position='top'][data-effect='drawer-effect-12'] .nav-drawer-toggle:checked ~ .nav-drawer-pusher-container .nav-drawer-pusher {
+	-webkit-transform: translate3d(0, $drawer-height, 0);
+	transform: translate3d(0, $drawer-height, 0);
+}

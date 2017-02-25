@@ -1,0 +1,47 @@
+/********************
+## Effect - Bounce ##
+********************/
+
+@mixin effect-bounce() {
+    
+    /* DRAWER */
+    
+    [data-effect="pure-effect-bounce"] .pure-drawer {
+        z-index: 3; 
+        -webkit-animation-duration: $pure-drawer-animation-duration-bounce;
+        animation-duration: $pure-drawer-animation-duration-bounce;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both; 
+             
+    }
+
+    [data-effect="pure-effect-bounce"] .pure-toggle[data-toggle='left']:checked ~ .pure-drawer[data-position='left'],
+    [data-effect="pure-effect-bounce"] .pure-toggle[data-toggle='right']:checked ~ .pure-drawer[data-position='right'],
+    [data-effect="pure-effect-bounce"] .pure-toggle[data-toggle='top']:checked ~ .pure-drawer[data-position='top'] {
+        visibility: visible; 
+    }
+
+    [data-effect="pure-effect-bounce"] .pure-drawer[data-position='left'] { @extend .bounceOutLeft; }
+    [data-effect="pure-effect-bounce"] .pure-drawer[data-position='right'] { @extend .bounceOutRight; }
+    [data-effect="pure-effect-bounce"] .pure-drawer[data-position='top'] { @extend .bounceOutUp; }
+    
+    [data-effect="pure-effect-bounce"] .pure-toggle[data-toggle='left']:checked ~ .pure-drawer[data-position='left'] { @extend .bounceInLeft; }
+    [data-effect="pure-effect-bounce"] .pure-toggle[data-toggle='right']:checked ~ .pure-drawer[data-position='right'] { @extend .bounceInRight; }
+    [data-effect="pure-effect-bounce"] .pure-toggle[data-toggle='top']:checked ~ .pure-drawer[data-position='top'] { @extend .bounceInDown; }
+    
+    /* OVERLAY */
+
+    [data-effect="pure-effect-bounce"] .pure-overlay {
+        transition-duration: $pure-drawer-animation-duration-bounce;
+        transition-delay: $pure-drawer-animation-duration-bounce / 2; 
+    }
+}
+
+@if($show-drawer == 'all') {
+    @include effect-bounce;
+} @else {
+    @media #{$show-drawer} {
+        @include effect-bounce;
+    }   
+}
+

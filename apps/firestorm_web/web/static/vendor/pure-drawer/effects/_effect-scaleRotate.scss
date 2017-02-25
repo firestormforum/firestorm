@@ -1,0 +1,77 @@
+/****************************************
+## Effect - Scale and Rotate Pusher ##
+****************************************/
+
+@mixin effect-scaleRotate() {
+	
+	/* DRAWER */
+	[data-effect='pure-effect-scaleRotate'] .pure-drawer {
+		transition-duration: $pure-drawer-animation-duration-scaleRotate;
+	}
+
+	[data-effect='pure-effect-scaleRotate'] .pure-drawer[data-position='left'] {
+		-webkit-transform: translate3d(-100%, 0, 0);
+		transform: translate3d(-100%, 0, 0);
+	}
+
+	[data-effect='pure-effect-scaleRotate'] .pure-drawer[data-position='right'] {
+		-webkit-transform: translate3d(100%, 0, 0);
+		transform: translate3d(100%, 0, 0);
+	}
+
+	[data-effect='pure-effect-scaleRotate'] .pure-drawer[data-position='top'] {
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	}
+
+	[data-effect='pure-effect-scaleRotate'] .pure-toggle[data-toggle='left']:checked ~ .pure-drawer[data-position='left'],
+	[data-effect='pure-effect-scaleRotate'] .pure-toggle[data-toggle='right']:checked ~ .pure-drawer[data-position='right'],
+	[data-effect='pure-effect-scaleRotate'] .pure-toggle[data-toggle='top']:checked ~ .pure-drawer[data-position='top'] {
+		visibility: visible;
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+	}
+
+	/* PUSHER CONTAINER */
+
+	[data-effect='pure-effect-scaleRotate'] .pure-pusher-container {
+		-webkit-perspective: 1500px;
+		perspective: 1500px;
+	}
+
+	/* PUSHER */
+	
+	[data-effect='pure-effect-scaleRotate'] .pure-pusher-container .pure-pusher {
+		transition-duration: $pure-drawer-animation-duration-scaleRotate;
+	}
+
+	[data-effect='pure-effect-scaleRotate'] .pure-toggle[data-toggle='left']:checked ~ .pure-pusher-container .pure-pusher {
+		-webkit-transform: translate3d(100px, 0, -600px) rotateY(-20deg);
+		transform: translate3d(100px, 0, -600px) rotateY(-20deg);
+	}
+
+	[data-effect='pure-effect-scaleRotate'] .pure-toggle[data-toggle='right']:checked ~ .pure-pusher-container .pure-pusher {
+		-webkit-transform: translate3d(100px, 0, -600px) rotateY(20deg);
+		transform: translate3d(100px, 0, -600px) rotateY(20deg);
+	}
+
+	[data-effect='pure-effect-scaleRotate'] .pure-toggle[data-toggle='top']:checked ~ .pure-pusher-container .pure-pusher {
+		-webkit-transform: translate3d(0, 0, -100px) rotateX(20deg);
+		transform: translate3d(0, 0, -100px) rotateX(20deg);
+	}
+
+	/* OVERLAY */
+
+	[data-effect='pure-effect-scaleRotate'] .pure-overlay {
+		transition-duration: $pure-drawer-animation-duration-scaleRotate;
+		transition-delay: $pure-drawer-animation-duration-scaleRotate / 2;	
+	}
+}
+
+@if($show-drawer == 'all') {
+	@include effect-scaleRotate;
+} @else {
+	@media #{$show-drawer} {
+		@include effect-scaleRotate;
+	}	
+}
