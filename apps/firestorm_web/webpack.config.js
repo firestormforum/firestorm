@@ -58,6 +58,6 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('css/app.css'),
-    new CopyWebpackPlugin([{ from: './web/static/assets/images' }]),
+    new CopyWebpackPlugin([{ from: './web/static/assets/images', to: 'images' }]),
   ],
 }
