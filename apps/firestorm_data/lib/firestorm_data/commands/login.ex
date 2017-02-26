@@ -9,7 +9,7 @@ defmodule FirestormData.Commands.Login do
   defstruct [:username, :password]
 
   def run(%__MODULE__{username: username, password: password}) do
-    # FIXME: We aren't storing passwords yet lol
+    # We aren't storing passwords yet lol - this isn't used.
     case password do
       "secret" ->
         query =

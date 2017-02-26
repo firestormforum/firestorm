@@ -16,7 +16,6 @@ defmodule FirestormData.Commands.GetHomeCategories do
       |> Repo.all
       |> Enum.map(&add_children/1)
 
-    # FIXME: Don't fetch them all all the time!
     {:ok, categories}
   end
 

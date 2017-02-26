@@ -19,8 +19,7 @@ config :firestorm_web, FirestormWeb.Endpoint,
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 # Do not print debug messages in production
-# FIXME: Just for now
-config :logger, level: :debug
+config :logger, level: :info
 
 # ## SSL Support
 #
