@@ -1,16 +1,4 @@
 # Data Model
 
-Super duper basic, but...
-
-- Forum
-  - Topic
-    - Thread
-      - Post
-        - (nested)
-- Tag
-
-
-## Prior Art  /Inspiration
-
-- [Discourse](https://github.com/discourse/discourse)
-  - [Models](https://github.com/discourse/discourse/tree/master/app/models)
+See [firestorm_data](../apps/firestorm_data) for details on our data model and
+the OTP application for interacting with it.

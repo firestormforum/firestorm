@@ -12,6 +12,7 @@ should happen in the following documents:
 - [Data Model](./DATA_MODEL.md)
 - [OTP](./OTP.md)
 - [Phoenix](./PHOENIX.md)
+- [Design Meetings](./DESIGN_MEETINGS.md)
 
 ## Resources
 
