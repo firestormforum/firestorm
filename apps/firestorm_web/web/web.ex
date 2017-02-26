@@ -33,6 +33,9 @@ defmodule FirestormWeb.Web do
 
       # Import session helpers
       import FirestormWeb.Session, only: [current_user: 1, logged_in?: 1]
+
+      # Import slug helpers
+      import FirestormWeb.ControllerHelpers.Slugs
     end
   end
 

@@ -1,6 +1,10 @@
 defmodule FirestormWeb.ThreadController do
   use FirestormWeb.Web, :controller
-  alias FirestormData.Commands.{GetCategory, CreateThread}
+  alias FirestormData.Commands.{
+    GetCategory,
+    CreateThread,
+    GetThread
+  }
 
   def action(conn, _) do
     case GetCategory.run(%GetCategory{finder: conn.params["category_id"]}) do
@@ -15,23 +19,27 @@ defmodule FirestormWeb.ThreadController do
     end
   end
 
-  def show(conn, %{"id" => id}, category) do
-    thread =
-      Thread
-      |> where([id: ^id, category_id: ^category.id])
-      |> preload([posts: [:user], category: []])
-      |> Repo.one
+  def show(conn, %{"id" => id_or_slug}, category) do
+    finder = get_finder(id_or_slug)
 
-    [first_post | posts] = thread.posts
+    case GetThread.run(%GetThread{finder: finder, category: category}) do
+      {:ok, thread} ->
+        [first_post | posts] = thread.posts
 
-    conn
-    |> render(
-         "show.html",
-         thread: thread,
-         category: category,
-         first_post:
-         first_post, posts: posts
-       )
+        conn
+        |> render(
+             "show.html",
+             thread: thread,
+             category: category,
+             first_post:
+             first_post, posts: posts
+           )
+
+      {:error, :not_found} ->
+        conn
+        |> put_flash(:error, "No such thread")
+        |> redirect(to: category_path(conn, :show, category.slug))
+    end
   end
 
   def new(conn, _, category) do
