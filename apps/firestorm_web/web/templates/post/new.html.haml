@@ -7,7 +7,7 @@
     %button.pure-button.button-primary.reply
       %i.fa.fa-mail-reply
       Reply
-    %button.pure-button.button-primary.-muted.cancel
+    %a.pure-button.button-primary.-muted.cancel{href: "#{category_thread_path(@conn, :show, @category.slug, @thread.id)}"}
       Cancel
     .spacer
     %button.pure-button.button-primary.-inverted.attachment{type: "submit"}

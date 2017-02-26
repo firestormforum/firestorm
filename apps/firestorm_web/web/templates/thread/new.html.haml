@@ -8,7 +8,7 @@
     %button.pure-button.button-primary.reply
       %i.fa.fa-plus
       Create Thread
-    %button.pure-button.button-primary.-muted.cancel
+    %a.pure-button.button-primary.-muted.cancel{href: "#{category_path(@conn, :show, @category.slug)}"}
       Cancel
     .spacer
     %button.pure-button.button-primary.-inverted.attachment{type: "submit"}
