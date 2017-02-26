@@ -1,4 +1,8 @@
 defmodule FirestormData.Commands.CreateCategory do
+  @moduledoc """
+  A `Command` for creating a `Category`
+  """
+
   use FirestormData.Command
 
   defstruct [:title]

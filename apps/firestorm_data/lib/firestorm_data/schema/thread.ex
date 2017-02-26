@@ -1,4 +1,9 @@
 defmodule FirestormData.Thread do
+  @moduledoc """
+  A `Thread` is a series of related messages in response to the post that
+  created the thread.
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
   alias FirestormData.{Repo, Category, Post}

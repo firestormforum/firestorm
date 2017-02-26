@@ -1,4 +1,8 @@
 defmodule FirestormData.Post do
+  @moduledoc """
+  A `Post` is a single piece of communication within a `Thread`
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
   alias FirestormData.{Thread, User}

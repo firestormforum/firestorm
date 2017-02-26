@@ -12,7 +12,9 @@ defmodule Firestorm.Mixfile do
   end
 
   defp deps do
-    []
+    [
+      {:credo, "~> 0.6.1", only: [:dev, :test]},
+    ]
   end
 
   defp aliases do

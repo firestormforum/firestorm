@@ -1,4 +1,9 @@
 defmodule FirestormData.Commands.Login do
+  @moduledoc """
+  A `Command` to log a user in. This is not in use at present, and is totally a
+  made up thing :)
+  """
+
   use FirestormData.Command
 
   defstruct [:username, :password]

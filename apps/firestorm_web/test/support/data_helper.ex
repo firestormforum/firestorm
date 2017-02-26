@@ -1,4 +1,6 @@
 defmodule FirestormWeb.DataHelper do
+  @moduledoc false
+
   alias FirestormData.Commands.{
     CreateCategory,
     CreateThread,

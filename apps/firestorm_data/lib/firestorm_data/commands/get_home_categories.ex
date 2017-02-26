@@ -1,4 +1,10 @@
 defmodule FirestormData.Commands.GetHomeCategories do
+  @moduledoc """
+  A `Command` to get the categories to be shown on the home screen. It accepts a
+  user_id, as we need to know the user that is requesting the list in order to
+  specify how many new posts have occurred since that user last saw the thread.
+  """
+
   use FirestormData.Command
 
   defstruct [:user_id]

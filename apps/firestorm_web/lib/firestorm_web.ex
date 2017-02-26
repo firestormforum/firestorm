@@ -1,4 +1,8 @@
 defmodule FirestormWeb do
+  @moduledoc """
+  The FirestormWeb Application module
+  """
+
   use Application
 
   def start(_type, _args) do

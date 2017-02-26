@@ -1,4 +1,8 @@
 defmodule FirestormWeb.FormHelpers do
+  @moduledoc """
+  View helpers for forms
+  """
+
   # Add on a "pure-button" class any time we use a submit
   def submit([do: _] = block_option) do
     submit([class: "pure-button"], block_option)

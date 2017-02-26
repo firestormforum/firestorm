@@ -1,4 +1,8 @@
 defmodule FirestormWeb.Plugs.CurrentUser do
+  @moduledoc """
+  A `Plug` to move the current user's id from the session to the conn's assigns.
+  """
+
   import Plug.Conn
 
   def init(options), do: options

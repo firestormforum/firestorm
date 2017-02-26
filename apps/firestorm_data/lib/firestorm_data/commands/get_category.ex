@@ -1,4 +1,8 @@
 defmodule FirestormData.Commands.GetCategory do
+  @moduledoc """
+  A `Command` to get a category by either id or slug.
+  """
+
   use FirestormData.Command
   import Ecto.Query
 

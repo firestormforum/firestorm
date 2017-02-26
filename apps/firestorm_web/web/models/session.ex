@@ -1,10 +1,13 @@
 defmodule FirestormWeb.Session do
+  @moduledoc """
+  Some helpers for session-related things
+  """
+
   alias FirestormData.{User, Repo}
 
   def current_user(conn) do
     case conn.assigns[:current_user] do
       nil ->
-        IO.puts "checking current user but was nil!"
         nil
 
       id ->

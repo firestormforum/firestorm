@@ -1,4 +1,9 @@
 defmodule FirestormData.Commands.LoginOrRegisterFromGitHub do
+  @moduledoc """
+  A `Command` that takes data regarding a GitHub user and either logs them in or
+  creates their user and logs them in.
+  """
+
   use FirestormData.Command
 
   def run(%{username: username}) do

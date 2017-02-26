@@ -1,4 +1,8 @@
 defmodule FirestormData.Commands.GetThread do
+  @moduledoc """
+  A `Command` to get a thread and preload the appropriate information
+  """
+
   use FirestormData.Command
   import Ecto.Query
 

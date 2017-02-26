@@ -69,7 +69,7 @@ defmodule FirestormWeb.Mixfile do
       {:firestorm_data, in_umbrella: true},
 
       # DEV/TEST
-      {:credo, "~> 0.5", only: [:dev, :test]},
+      {:credo, "~> 0.6.1", only: [:dev, :test]},
       {:phoenix_integration, "~> 0.2", only: :test},
     ]
   end

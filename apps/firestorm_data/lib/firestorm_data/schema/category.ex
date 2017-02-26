@@ -1,5 +1,14 @@
 defmodule FirestormData.Category do
+  @moduledoc """
+  A `Category` is a grouping of related `Thread`s. Categories are modeled as a
+  Forest of Trees.
+  """
+
   defmodule TitleSlug do
+    @moduledoc """
+    A configuration for turning category titles into slugs.
+    """
+
     use EctoAutoslugField.Slug, from: :title, to: :slug
   end
 

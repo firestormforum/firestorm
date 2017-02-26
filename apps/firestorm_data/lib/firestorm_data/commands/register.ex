@@ -1,4 +1,5 @@
 defmodule FirestormData.Commands.Register do
+  @moduledoc false
   use FirestormData.Command
 
   defstruct [:username, :password]

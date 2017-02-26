@@ -1,4 +1,8 @@
 defmodule FirestormData.User do
+  @moduledoc """
+  A user in our system
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

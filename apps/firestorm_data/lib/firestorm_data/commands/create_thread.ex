@@ -1,4 +1,9 @@
 defmodule FirestormData.Commands.CreateThread do
+  @moduledoc """
+  A command to create a thread. This will create both the thread and its first
+  post, as we should never have a thread without a first post.
+  """
+
   use FirestormData.Command
 
   embedded_schema do

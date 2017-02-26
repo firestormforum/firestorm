@@ -1,4 +1,8 @@
 defmodule FirestormWeb.ViewHelpers do
+  @moduledoc """
+  View helpers for grab-bag functions we find useful.
+  """
+
   import Phoenix.HTML.Tag
 
   def image_path(path) do

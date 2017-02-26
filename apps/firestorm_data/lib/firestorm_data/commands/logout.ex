@@ -1,4 +1,5 @@
 defmodule FirestormData.Commands.Logout do
+  @moduledoc false
   use FirestormData.Command
 
   defstruct [:user_id]
