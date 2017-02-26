@@ -21,7 +21,6 @@ defmodule FirestormWeb.CategoryControllerTest do
         conn
         |> get(category_path(conn, :show, category.id))
 
-      IO.inspect conn
       assert html_response(conn, 200) =~ category.title
     end
   end
