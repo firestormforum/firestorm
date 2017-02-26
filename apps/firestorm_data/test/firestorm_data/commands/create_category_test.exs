@@ -20,12 +20,11 @@ defmodule FirestormData.Commands.CreateCategoryTest do
   end
 
   def create_category(_) do
-    options =
-      %CreateCategory{
-        title: "some title"
-      }
+    changeset =
+      %CreateCategory{}
+      |> CreateCategory.changeset(%{title: "some title"})
 
-    result = CreateCategory.run(options)
+    result = CreateCategory.run(changeset)
     {:ok, %{result: result}}
   end
 end

@@ -27,9 +27,8 @@ defmodule FirestormWeb.CategoryControllerTest do
 
   defp create_category(_) do
     options =
-      %CreateCategory{
-        title: "some title"
-      }
+      %CreateCategory{}
+      |> CreateCategory.changeset(%{title: "some title"})
 
     {:ok, category_id} = CreateCategory.run(options)
     category = Repo.get(Category, category_id)

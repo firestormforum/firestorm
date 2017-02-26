@@ -1,6 +1,6 @@
 defmodule FirestormWeb.CategoryController do
   use FirestormWeb.Web, :controller
-  alias FirestormData.Commands.GetCategory
+  alias FirestormData.Commands.{GetCategory, CreateCategory}
 
   def show(conn, %{"id" => id_or_slug}) do
     finder = get_finder(id_or_slug)
@@ -18,22 +18,21 @@ defmodule FirestormWeb.CategoryController do
 
   def new(conn, params) do
     changeset =
-      %Category{}
-      |> Category.changeset(params)
+      %CreateCategory{}
+      |> CreateCategory.changeset(params)
 
     conn
     |> render("new.html", changeset: changeset)
   end
 
-  # FIXME: Use commands, don't just CRUD it up
-  def create(conn, %{"category" => category_params}) do
+  def create(conn, %{"create_category" => create_category_params}) do
     changeset =
-      %Category{}
-      |> Category.changeset(category_params)
+      %CreateCategory{}
+      |> CreateCategory.changeset(create_category_params)
 
     case changeset.valid? do
       true ->
-        case Repo.insert(changeset) do
+        case CreateCategory.run(changeset) do
           {:ok, category_id} ->
             conn
             |> put_flash(:info, "Category created successfully")

@@ -17,11 +17,13 @@ defmodule FirestormWeb.DataHelper do
 
   def create_categories_and_threads(%{users: %{knewter: knewter}}) do
     {:ok, elixir_id} =
-      %CreateCategory{title: "Elixir"}
+      %CreateCategory{}
+      |> CreateCategory.changeset(%{title: "Elixir"})
       |> CreateCategory.run()
 
     {:ok, elm_id} =
-      %CreateCategory{title: "Elm"}
+      %CreateCategory{}
+      |> CreateCategory.changeset(%{title: "Elm"})
       |> CreateCategory.run()
 
     {:ok, elixir_thread_id} =

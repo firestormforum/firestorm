@@ -39,12 +39,11 @@ defmodule FirestormData.Commands.GetCategoryTest do
   end
 
   def create_category(_) do
-    options =
-      %CreateCategory{
-        title: "OTP",
-      }
+    changeset =
+      %CreateCategory{}
+      |> CreateCategory.changeset(%{title: "OTP"})
 
-    {:ok, id} = CreateCategory.run(options)
+    {:ok, id} = CreateCategory.run(changeset)
     {:ok, %{category_id: id}}
   end
 end

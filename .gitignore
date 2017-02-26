@@ -21,4 +21,5 @@ erl_crash.dump
 
 /apps/firestorm_web/node_modules/*
 /**/node_modules/*
-node_modules
+node_modules/*
+design/**/_build/*

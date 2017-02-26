@@ -26,12 +26,11 @@ defmodule FirestormData.Commands.CreateThreadTest do
   end
 
   def create_category(_) do
-    options =
-      %CreateCategory{
-        title: "some title"
-      }
+    changeset =
+      %CreateCategory{}
+      |> CreateCategory.changeset(%{title: "some title"})
 
-    {:ok, category_id} = CreateCategory.run(options)
+    {:ok, category_id} = CreateCategory.run(changeset)
     {:ok, %{category_id: category_id}}
   end
 

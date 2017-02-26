@@ -1,6 +1,6 @@
 %h2 New Category
 
-- form_for @changeset, category_path(@conn, :create), fn f ->
+- form_for @changeset, category_path(@conn, :create), [class: 'new-category'], fn f ->
   %label
     Title: #{text_input f, :title}
 

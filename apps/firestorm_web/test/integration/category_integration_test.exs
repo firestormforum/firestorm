@@ -6,6 +6,23 @@ defmodule FirestormWeb.CategoryIntegrationTest do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(FirestormData.Repo)
   end
 
+  test "creating a category", %{conn: conn} do
+    conn
+    |> get(category_path(conn, :new))
+    |> follow_form(
+      %{
+        create_category: %{
+          title: "My new category"
+        }
+      },
+      %{identifier: category_path(conn, :create)}
+    )
+    |> assert_response(
+      status: 200,
+      html: "My new category"
+    )
+  end
+
   describe "With some sample data" do
     setup [:create_users, :create_categories_and_threads]
 

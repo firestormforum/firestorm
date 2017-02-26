@@ -27,30 +27,33 @@ defmodule FirestormData.Commands.GetHomeCategoriesTest do
   end
 
   def create_categories(_) do
-    options_foo =
-      %CreateCategory{
-        title: "foo",
-      }
-    options_bar =
-      %CreateCategory{
-        title: "bar",
-      }
+    changeset_foo =
+      %CreateCategory{}
+      |> CreateCategory.changeset(%{title: "foo"})
+    changeset_bar =
+      %CreateCategory{}
+      |> CreateCategory.changeset(%{title: "bar"})
 
-    {:ok, foo_id} = CreateCategory.run(options_foo)
-    {:ok, bar_id} = CreateCategory.run(options_bar)
-    options_baz =
-      %CreateCategory{
-        title: "bar",
+    {:ok, foo_id} = CreateCategory.run(changeset_foo)
+    {:ok, bar_id} = CreateCategory.run(changeset_bar)
+
+    changeset_baz =
+      %CreateCategory{}
+      |> CreateCategory.changeset(%{
+        title: "baz",
         parent_id: bar_id
-      }
+      })
+
+    {:ok, _} = CreateCategory.run(changeset_baz)
+
     {:ok, %{category_ids: [foo_id, bar_id]}}
   end
 
   def get_home_categories(_) do
-    options =
+    changeset =
       %GetHomeCategories{user_id: 0}
 
-    result = GetHomeCategories.run(options)
+    result = GetHomeCategories.run(changeset)
     {:ok, result: result}
   end
 end
