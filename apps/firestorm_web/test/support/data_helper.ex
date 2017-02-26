@@ -10,7 +10,7 @@ defmodule FirestormWeb.DataHelper do
     {:ok, knewter} =
       LoginOrRegisterFromGitHub.run(%{username: "knewter"})
 
-    {:ok, %{users: %{ knewter: knewter}}}
+    {:ok, %{users: %{knewter: knewter}}}
   end
 
   def create_categories_and_threads(%{users: %{knewter: knewter}}) do
@@ -43,11 +43,11 @@ defmodule FirestormWeb.DataHelper do
       |> CreateThread.run
 
     {:ok, elixir} =
-      %GetCategory{ finder: elixir_id }
+      %GetCategory{finder: elixir_id}
       |> GetCategory.run
 
     {:ok, elm} =
-      %GetCategory{ finder: elm_id }
+      %GetCategory{finder: elm_id}
       |> GetCategory.run
 
     {:ok, %{categories: %{elixir: elixir, elm: elm}}}

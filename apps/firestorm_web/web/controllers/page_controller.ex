@@ -15,7 +15,7 @@ defmodule FirestormWeb.PageController do
   end
 
   def home(conn, _params) do
-    {:ok, categories} = GetHomeCategories.run(%GetHomeCategories{ user_id: 1 })
+    {:ok, categories} = GetHomeCategories.run(%GetHomeCategories{user_id: 1})
 
     conn
     |> render("home.html", categories: categories)

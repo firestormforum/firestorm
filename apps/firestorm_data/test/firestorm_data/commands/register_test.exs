@@ -35,6 +35,6 @@ defmodule FirestormData.Commands.RegisterTest do
       }
 
     result = Register.run(options)
-    {:ok, %{ result: result }}
+    {:ok, %{result: result}}
   end
 end

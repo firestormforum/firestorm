@@ -33,7 +33,7 @@ config :logger, :console,
 # Configures Ueberauth for OAuth stuff
 config :ueberauth, Ueberauth,
   providers: [
-    github: { Ueberauth.Strategy.Github, [ ] }
+    github: {Ueberauth.Strategy.Github, []}
   ]
 
 config :ueberauth, Ueberauth.Strategy.Github.OAuth,

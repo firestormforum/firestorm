@@ -1,7 +1,6 @@
 defmodule FirestormData.Schema.CategoryTest do
-  alias FirestormData.Category
+  alias FirestormData.{Category, Repo}
   use ExUnit.Case
-  alias FirestormData.Repo
   @valid_attributes %{
     title: "Something"
   }

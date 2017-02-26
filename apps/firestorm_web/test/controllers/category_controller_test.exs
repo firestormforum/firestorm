@@ -33,6 +33,6 @@ defmodule FirestormWeb.CategoryControllerTest do
 
     {:ok, category_id} = CreateCategory.run(options)
     category = Repo.get(Category, category_id)
-    {:ok, %{ category: category }}
+    {:ok, %{category: category}}
   end
 end

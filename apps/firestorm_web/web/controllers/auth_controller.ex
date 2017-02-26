@@ -20,7 +20,7 @@ defmodule FirestormWeb.AuthController do
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     case auth.provider do
       :github ->
-        %{ name: _name, nickname: nickname, email: _email } = auth.info
+        %{name: _name, nickname: nickname, email: _email} = auth.info
 
         case LoginOrRegisterFromGitHub.run(%{username: nickname}) do
           {:ok, user} ->

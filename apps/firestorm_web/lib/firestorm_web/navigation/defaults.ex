@@ -19,7 +19,7 @@ defmodule FirestormWeb.Navigation.Defaults do
         if logged_in?(conn) do
           defaults ++
             [
-              %NavItem{text: "Log Out", path: auth_path(conn, :delete), options: [ method: :delete ]}
+              %NavItem{text: "Log Out", path: auth_path(conn, :delete), options: [method: :delete]}
             ]
         else
           defaults

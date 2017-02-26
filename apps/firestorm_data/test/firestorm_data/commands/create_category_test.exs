@@ -26,6 +26,6 @@ defmodule FirestormData.Commands.CreateCategoryTest do
       }
 
     result = CreateCategory.run(options)
-    {:ok, %{ result: result }}
+    {:ok, %{result: result}}
   end
 end
