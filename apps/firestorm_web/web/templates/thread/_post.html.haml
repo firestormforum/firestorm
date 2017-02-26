@@ -9,5 +9,19 @@
   .body
     = markdown(@post.body)
 
-  %ul.actions
-    %li= link "Reply", to: category_thread_post_path(@conn, :new, @category.slug, @thread.id)
+  .post-item-actions
+    .reply-count #{length(@thread.posts) - 1} replies
+    .spacer
+    %ul.actions
+      %li
+        %a{href: "#"}
+          %i.emoticon-faces
+      %li
+        %a{href: "#"}
+          %i.fa.fa-eye
+      %li
+        %a{href: "#"}
+          %i.fa.fa-quote-right
+      %li
+        %a{href: "#{category_thread_post_path(@conn, :new, @category.slug, @thread.id)}"}
+          %i.fa.fa-reply

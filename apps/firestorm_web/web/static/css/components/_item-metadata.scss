@@ -8,5 +8,8 @@
   > .username {
     @include underline-on-hover;
   }
+  > abbr {
+    border-bottom: none;
+  }
 }
 
