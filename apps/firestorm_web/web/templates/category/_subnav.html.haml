@@ -1,4 +1,3 @@
 .category-subnav
   %ul
     %li= link "New Category", to: category_path(@conn, :new, parent_id: @category.id)
-    %li= link "New Thread", to: category_thread_path(@conn, :new, @category.slug)

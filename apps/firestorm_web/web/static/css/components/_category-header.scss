@@ -1,6 +1,16 @@
 .category-header {
+  display: flex;
+  flex-direction: row;
   > h2 {
     margin-bottom: 0;
     margin-top: 0;
+  }
+  .spacer {
+    flex-grow: 1;
+  }
+  .actions {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
   }
 }
