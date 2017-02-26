@@ -3,16 +3,25 @@
 This is the design document for Firestorm.  It will grow over time to become an
 extensive document detailing all of our design decisions and guidance.
 
+## Mockups
+
+We have some mockups available:
+
+- [Mobile](https://marvelapp.com/9j51ifg)
+- [Tablet](https://marvelapp.com/30jjg05)
+
 ## Planning
 
-Since we're in the initial design phase, the majority of the work at present
-should happen in the following documents:
+To see the planning work that happened, see the following documents. Focus
+primarily on the design meetings, as that's where we go into more detail. The
+documents themselves that are linked from each meeting are valuable, and we go
+through them and have discussions in the associated videos.
 
+- [Design Meetings](./DESIGN_MEETINGS.md)
 - [UX](./UX.md)
 - [Data Model](./DATA_MODEL.md)
 - [OTP](./OTP.md)
 - [Phoenix](./PHOENIX.md)
-- [Design Meetings](./DESIGN_MEETINGS.md)
 
 ## Resources
 
@@ -43,3 +52,7 @@ to our forum software:
   - My extensive experience with both JavaScript and
     [Elm](http://www.elm-lang.org) leads me to 100% certainty that the rich
     client should be written using Elm.
+  - However we'll also implement a pretty solid jquery'd up basic interface so
+    that people that do not wish to go for a Single-Page-App style client still
+    have a solid foundation and can use the app in full. This will be done
+    before building an Elm client.

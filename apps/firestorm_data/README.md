@@ -1,19 +1,13 @@
-# FirestormData
+![Firestorm](../firestorm_web/web/static/assets/images/firestorm-logo.png)
+## FirestormData
 
-**TODO: Add description**
+This is the data layer for the [Firestorm Forum](../../README.md). It contains:
 
-## Installation
+- Ecto schemas
+- Commands for interacting with the data layer
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `firestorm_data` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [{:firestorm_data, "~> 0.1.0"}]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/firestorm_data](https://hexdocs.pm/firestorm_data).
-
+In general, the idea is that any interactions with the data layer should happen
+via commands, and the `Repo` itself should not be interacted with from outside of
+this app. In practice, [`firestorm_web`](../firestorm_web) is still doing a few
+things with the `Repo` because the commands layer is not completely built out
+yet.
