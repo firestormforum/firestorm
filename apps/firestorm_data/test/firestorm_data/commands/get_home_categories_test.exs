@@ -10,8 +10,7 @@ defmodule FirestormData.Commands.GetHomeCategoriesTest do
   describe "fetching categories for the home screen" do
     setup [:create_categories, :get_home_categories]
 
-    # FIXME: Don't return all!
-    test "returns all categories",
+    test "returns root categories",
       %{
         category_ids: category_ids,
         result: result
@@ -39,6 +38,11 @@ defmodule FirestormData.Commands.GetHomeCategoriesTest do
 
     {:ok, foo_id} = CreateCategory.run(options_foo)
     {:ok, bar_id} = CreateCategory.run(options_bar)
+    options_baz =
+      %CreateCategory{
+        title: "bar",
+        parent_id: bar_id
+      }
     {:ok, %{category_ids: [foo_id, bar_id]}}
   end
 

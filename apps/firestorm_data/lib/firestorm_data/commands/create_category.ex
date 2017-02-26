@@ -5,12 +5,12 @@ defmodule FirestormData.Commands.CreateCategory do
 
   use FirestormData.Command
 
-  defstruct [:title]
+  defstruct [:title, :parent_id]
 
-  def run(%__MODULE__{title: title}) do
+  def run(%__MODULE__{title: title, parent_id: parent_id}) do
     changeset =
       %Category{}
-      |> Category.changeset(%{title: title})
+      |> Category.changeset(%{title: title, parent_id: parent_id})
 
     case Repo.insert(changeset) do
       {:ok, category} ->
