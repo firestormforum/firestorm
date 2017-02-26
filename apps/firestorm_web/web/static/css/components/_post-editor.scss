@@ -1,7 +1,13 @@
 .post-editor {
   display: flex;
   flex-direction: column;
+  > textarea {
+    border-width: 0 0 1px 0;
+    border-color: $sky-blue;
+    resize: vertical;
+  }
   > .actions {
+    margin-top: 1rem;
     display: flex;
     flex-direction: row-reverse;
     > .spacer {

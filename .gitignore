@@ -20,3 +20,5 @@ erl_crash.dump
 *.ez
 
 /apps/firestorm_web/node_modules/*
+/**/node_modules/*
+node_modules

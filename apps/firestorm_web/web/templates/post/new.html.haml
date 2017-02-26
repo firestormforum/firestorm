@@ -1,7 +1,7 @@
 %h2 New Post
 
 - form_for @changeset, category_thread_post_path(@conn, :create, @category.slug, @thread.id), [class: "post-editor"], fn f ->
-  = textarea f, :body
+  = textarea f, :body, class: "autoexpand", "data-min-rows": 4, rows: 4
 
   .actions
     %button.pure-button.button-primary.reply
