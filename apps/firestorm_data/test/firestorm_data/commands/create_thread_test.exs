@@ -16,7 +16,8 @@ defmodule FirestormData.Commands.CreateThreadTest do
 
     test "creates a thread in the database", %{result: {:ok, thread_id}} do
       thread =
-        Repo.get(Thread, thread_id)
+        Thread
+        |> Repo.get(thread_id)
         |> Repo.preload([:posts])
 
       assert thread

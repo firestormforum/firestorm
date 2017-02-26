@@ -34,7 +34,8 @@ defmodule FirestormData.Category do
   end
 
   def add(title) do
-    changeset(%__MODULE__{}, %{title: title})
+    %__MODULE__{}
+    |> changeset(%{title: title})
     |> Repo.insert
   end
 end
