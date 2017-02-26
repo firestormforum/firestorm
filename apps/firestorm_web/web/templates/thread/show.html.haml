@@ -5,6 +5,9 @@
     - time_string = Timex.format!(@thread.inserted_at, "{ISO:Extended}")
     %abbr.time{title: "#{time_string}" }
       = time_string
+  .item-metadata
+    %ul.category-pill
+      %li.category= link @thread.category.title, to: category_path(@conn, :show, @thread.category.slug)
 
 %ol.post-list
   %li= render "_first_post.html", post: @first_post, conn: @conn, category: @category, thread: @thread

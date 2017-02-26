@@ -19,7 +19,7 @@ defmodule FirestormWeb.ThreadController do
     thread =
       Thread
       |> where([id: ^id, category_id: ^category.id])
-      |> preload([posts: [:user]])
+      |> preload([posts: [:user], category: []])
       |> Repo.one
 
     [first_post | posts] = thread.posts

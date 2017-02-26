@@ -1,0 +1,24 @@
+$purple: #673AB7;
+
+.category-pill {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-size: .75rem;
+  > .category {
+    list-style-type: none;
+    > a {
+      color: $white;
+      text-decoration: none;
+      display: inline-block;
+      padding: $padding-small $padding-medium;
+      // TODO: Don't put backround here, put it inline and put an attribute on
+      // categories to give them a color
+      background: $purple;
+      border-radius: $border-radius;
+      &:hover {
+        background: lighten($purple, 10%);
+      }
+    }
+  }
+}
