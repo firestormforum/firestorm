@@ -1,12 +1,15 @@
-%h2 New Thread
+%h2 Start a new thread
 
 - form_for @changeset, category_thread_path(@conn, :create, @category.slug), [ class: 'new-thread' ], fn f ->
-  %label
-    Title: #{text_input f, :title}
+  = text_input f, :title, placeholder: "Type a title"
+  = textarea f, :body, placeholder: "Type thread content here. Use markdown syntax.", class: "autoexpand", rows: 4, "data-min-rows": 4
 
-  %label
-    Body
-    %br/
-    = textarea f, :body
-
-  = submit "Create Thread"
+  .actions
+    %button.pure-button.button-primary.reply
+      %i.fa.fa-plus
+      Create Thread
+    %button.pure-button.button-primary.-muted.cancel
+      Cancel
+    .spacer
+    %button.pure-button.button-primary.-inverted.attachment{type: "submit"}
+      %i.fa.fa-paperclip
