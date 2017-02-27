@@ -25,14 +25,17 @@ defmodule FirestormWeb.ThreadController do
     case GetThread.run(%GetThread{finder: finder, category: category}) do
       {:ok, thread} ->
         [first_post | posts] = thread.posts
+        category_breadcrumbs =
+          [ thread.category | Repo.all Category.ancestors(thread.category) ]
 
         conn
         |> render(
              "show.html",
              thread: thread,
              category: category,
-             first_post:
-             first_post, posts: posts
+             first_post: first_post,
+             posts: posts,
+             category_breadcrumbs: category_breadcrumbs
            )
 
       {:error, :not_found} ->

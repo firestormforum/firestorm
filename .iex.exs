@@ -1,0 +1,1 @@
+alias FirestormData.{Repo, Category}

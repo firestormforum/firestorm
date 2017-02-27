@@ -47,4 +47,19 @@ defmodule FirestormData.Category do
     |> changeset(%{title: title})
     |> Repo.insert
   end
+
+  def color(category) do
+    category
+    |> hash_number
+  end
+
+  def hash(category) do
+    :crypto.hash(:sha, category.slug)
+  end
+
+  def hash_number(category) do
+    (for <<num <- hash(category)>>, do: num)
+    |> Enum.sum
+    |> rem(360)
+  end
 end

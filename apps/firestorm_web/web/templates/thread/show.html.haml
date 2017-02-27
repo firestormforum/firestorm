@@ -7,7 +7,8 @@
       = time_string
   .item-metadata
     %ul.category-pill
-      %li.category= link @thread.category.title, to: category_path(@conn, :show, @thread.category.slug)
+      - for category <- @category_breadcrumbs do
+        %li.category{class: "-color-#{Category.color(category)}"}= link category.title, to: category_path(@conn, :show, category.slug)
 
 %ol.post-list
   %li= render "_first_post.html", post: @first_post, conn: @conn, category: @category, thread: @thread

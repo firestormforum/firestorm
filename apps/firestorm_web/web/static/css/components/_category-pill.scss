@@ -1,7 +1,8 @@
 $purple: #673AB7;
 
 .category-pill {
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
   margin: 0;
   padding: 0;
   font-size: .75rem;
@@ -12,12 +13,29 @@ $purple: #673AB7;
       text-decoration: none;
       display: inline-block;
       padding: $padding-small $padding-medium;
-      // TODO: Don't put backround here, put it inline and put an attribute on
-      // categories to give them a color
-      background: $purple;
-      border-radius: $border-radius;
+      border-right: 1px solid white;
       &:hover {
         background: lighten($purple, 10%);
+      }
+    }
+    @for $n from 0 through 359 {
+      &.-color-#{$n} {
+        a {
+          background-color: hsla($n, 100%, 50%, 1);
+        }
+      }
+    }
+    &:first-child {
+      a {
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+      }
+    }
+    &:last-child {
+      a {
+        border-top-right-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+        border-right: 0;
       }
     }
   }
