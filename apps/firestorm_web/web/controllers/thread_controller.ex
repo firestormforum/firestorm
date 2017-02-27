@@ -27,6 +27,7 @@ defmodule FirestormWeb.ThreadController do
         [first_post | posts] = thread.posts
         category_breadcrumbs =
           [ thread.category | Repo.all Category.ancestors(thread.category) ]
+          |> Enum.reverse
 
         conn
         |> render(
