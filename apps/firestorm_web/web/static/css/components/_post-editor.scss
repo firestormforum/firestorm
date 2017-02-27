@@ -2,9 +2,8 @@
   display: flex;
   flex-direction: column;
   > textarea {
-    border-width: 0 0 1px 0;
-    border-color: $sky-blue;
-    resize: vertical;
+    @include text-field();
+    overflow: auto;
   }
   > .actions {
     margin-top: 1rem;
