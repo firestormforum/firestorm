@@ -3,12 +3,13 @@
 - form_for @changeset, category_thread_post_path(@conn, :create, @category.slug, @thread.id), [class: "post-editor"], fn f ->
   = textarea f, :body, class: "autoexpand", "data-min-rows": 4, rows: 4
 
-  .actions
-    %button.pure-button.button-primary.reply
-      %i.fa.fa-mail-reply
-      Reply
-    %a.pure-button.button-primary.-muted.cancel{href: "#{category_thread_path(@conn, :show, @category.slug, @thread.id)}"}
-      Cancel
-    .spacer
-    %button.pure-button.button-primary.-inverted.attachment{type: "submit"}
-      %i.fa.fa-paperclip
+  .action-bar
+    .begin
+      %button.pure-button.button-primary.-inverted.attachment
+        %i.fa.fa-paperclip
+    .end
+      %a.pure-button.button-primary.-muted.cancel{href: "#{category_thread_path(@conn, :show, @category.slug, @thread.id)}"}
+        Cancel
+      %button.pure-button.button-primary.reply{type: "submit"}
+        %i.fa.fa-mail-reply
+        Reply

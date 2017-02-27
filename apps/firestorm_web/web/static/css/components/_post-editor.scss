@@ -5,15 +5,4 @@
     @include text-field();
     overflow: auto;
   }
-  > .actions {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: row-reverse;
-    > .spacer {
-      flex-grow: 1;
-    }
-    > .attachment {
-      align-self: flex-end;
-    }
-  }
 }
