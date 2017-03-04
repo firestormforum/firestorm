@@ -11,4 +11,8 @@
           %abbr.time{title: time_string }
             = time_string
       .supplemental
-        .badge-block.-highlight= length(thread.posts)
+        - # FIXME: LOL database access n + 1 so bad stop
+        - if Thread.completely_read?(thread, current_user(@conn)) do
+          .badge-block= length(thread.posts)
+        - else
+          .badge-block.-highlight= length(thread.posts)

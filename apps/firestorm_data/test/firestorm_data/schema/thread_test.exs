@@ -3,7 +3,7 @@ defmodule FirestormData.Schema.ThreadTest do
   use ExUnit.Case
 
   setup do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo, ownership_timeout: 300_000)
 
     bob =
       %User{username: "bob"}
@@ -37,6 +37,17 @@ defmodule FirestormData.Schema.ThreadTest do
     {:ok, _} = create_view(tests_thread, user)
 
     assert Viewable.view_count(tests_thread) == 3
+  end
+
+  test "it knows whether it is fully read", %{user: user} do
+    {:ok, {_elixir, tests_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
+    {:ok, _} = create_post(tests_thread, "knewter")
+    tests_thread = tests_thread |> Repo.preload(:posts)
+    [tests_thread_first_post|_] = tests_thread.posts
+
+    refute Thread.completely_read?(tests_thread, user)
+    {:ok, _} = create_view(tests_thread_first_post, user)
+    assert Thread.completely_read?(tests_thread, user)
   end
 
   test "it belongs to a category" do
@@ -88,9 +99,10 @@ defmodule FirestormData.Schema.ThreadTest do
       |> Repo.insert
   end
 
-  defp create_view(thread, user) do
-    thread
-    |> Ecto.build_assoc(:views, %{user_id: user.id})
-    |> Repo.insert
+  defp create_view(post, user) do
+    {:ok, _} =
+      post
+      |> Ecto.build_assoc(:views, %{user_id: user.id})
+      |> Repo.insert
   end
 end

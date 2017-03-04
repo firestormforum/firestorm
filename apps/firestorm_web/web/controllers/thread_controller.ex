@@ -3,7 +3,8 @@ defmodule FirestormWeb.ThreadController do
   alias FirestormData.Commands.{
     GetCategory,
     CreateThread,
-    GetThread
+    GetThread,
+    ViewPost
   }
 
   def action(conn, _) do
@@ -25,6 +26,12 @@ defmodule FirestormWeb.ThreadController do
     case GetThread.run(%GetThread{finder: finder, category_id: category.id}) do
       {:ok, thread} ->
         [first_post | posts] = thread.posts
+        # FIXME: lol don't do this
+        for post <- thread.posts do
+          %ViewPost{}
+          |> ViewPost.changeset(%{user_id: current_user(conn).id, post_id: post.id})
+          |> ViewPost.run
+        end
         category_breadcrumbs =
           [ thread.category | Repo.all Category.ancestors(thread.category) ]
           |> Enum.reverse
