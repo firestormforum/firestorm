@@ -26,7 +26,7 @@ defmodule FirestormWeb.DataHelper do
       |> CreateCategory.changeset(%{title: "Elm"})
       |> CreateCategory.run()
 
-    {:ok, elixir_thread_id} =
+    {:ok, _elixir_thread_id} =
       %CreateThread{}
       |> CreateThread.changeset(%{
         category_id: elixir_id,
@@ -36,7 +36,7 @@ defmodule FirestormWeb.DataHelper do
       })
       |> CreateThread.run
 
-    {:ok, elm_thread_id} =
+    {:ok, _elm_thread_id} =
       %CreateThread{}
       |> CreateThread.changeset(%{
         category_id: elm_id,

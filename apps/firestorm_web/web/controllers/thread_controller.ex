@@ -22,7 +22,7 @@ defmodule FirestormWeb.ThreadController do
   def show(conn, %{"id" => id_or_slug}, category) do
     finder = get_finder(id_or_slug)
 
-    case GetThread.run(%GetThread{finder: finder, category: category}) do
+    case GetThread.run(%GetThread{finder: finder, category_id: category.id}) do
       {:ok, thread} ->
         [first_post | posts] = thread.posts
         category_breadcrumbs =
