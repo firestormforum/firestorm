@@ -1,7 +1,6 @@
 defmodule FirestormData.Schema.ViewTest do
-  alias FirestormData.{User, View, Repo}
+  alias FirestormData.{View, Repo}
   use ExUnit.Case
-  import Ecto.Changeset
 
   @valid_attributes %{
     user_id: 1,

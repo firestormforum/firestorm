@@ -1,7 +1,6 @@
 defmodule FirestormData.Schema.PostTest do
   alias FirestormData.{Category, Thread, Post, Repo, User}
   use ExUnit.Case
-  import Ecto.Query
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
@@ -18,6 +17,15 @@ defmodule FirestormData.Schema.PostTest do
 
     refute changeset.valid?
     assert changeset.errors[:thread_id] == {"can't be blank", [validation: :required]}
+  end
+
+  test "it can have many views by users", %{user: user} do
+    {:ok, {_elixir, _tests_thread, post}} = create_post(user)
+    {:ok, _} = create_view(post, user)
+    {:ok, _} = create_view(post, user)
+    {:ok, _} = create_view(post, user)
+
+    assert Post.view_count(post) == 3
   end
 
   test "it requires a body" do
@@ -78,5 +86,11 @@ defmodule FirestormData.Schema.PostTest do
 
     {:ok, saved_post} = Repo.insert(changeset)
     {:ok, {category, thread, saved_post}}
+  end
+
+  defp create_view(thread, user) do
+    thread
+    |> Ecto.build_assoc(:views, %{user_id: user.id})
+    |> Repo.insert
   end
 end

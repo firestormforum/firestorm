@@ -1,7 +1,7 @@
 defmodule FirestormData.Commands.CreateThreadTest do
   use ExUnit.Case
   alias FirestormData.Commands.{CreateThread, CreateCategory}
-  alias FirestormData.{Category, User, Repo, Thread}
+  alias FirestormData.{User, Repo, Thread}
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)

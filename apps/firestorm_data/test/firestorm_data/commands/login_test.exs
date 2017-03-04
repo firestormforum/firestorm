@@ -1,7 +1,7 @@
 defmodule FirestormData.Commands.LoginTest do
   use ExUnit.Case
   alias FirestormData.Commands.{Login, Register}
-  alias FirestormData.{User, Repo}
+  alias FirestormData.{Repo}
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)

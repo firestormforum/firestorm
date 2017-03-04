@@ -1,5 +1,5 @@
 defmodule FirestormData.Schema.CategoryTest do
-  alias FirestormData.{Category, Repo, User, View}
+  alias FirestormData.{Category, Repo, User}
   use ExUnit.Case
   @valid_attributes %{
     title: "Something"
@@ -66,7 +66,7 @@ defmodule FirestormData.Schema.CategoryTest do
       %Category{title: "Elixir"}
         |> Repo.insert
 
-    {:ok, otp} =
+    {:ok, _otp} =
       %Category{title: "OTP", parent_id: elixir.id}
         |> Repo.insert
 

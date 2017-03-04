@@ -1,7 +1,7 @@
 defmodule FirestormData.Commands.GetHomeCategoriesTest do
   use ExUnit.Case
   alias FirestormData.Commands.{CreateCategory, GetHomeCategories}
-  alias FirestormData.{Category, Repo}
+  alias FirestormData.{Repo}
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)

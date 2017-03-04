@@ -20,7 +20,7 @@ defmodule FirestormData.Commands.GetCategoryTest do
           finder: category_id
         }
 
-      assert {:ok, %{id: category_id}} = GetCategory.run(options)
+      assert {:ok, %{id: ^category_id}} = GetCategory.run(options)
     end
 
     test "works via slug",
@@ -34,7 +34,7 @@ defmodule FirestormData.Commands.GetCategoryTest do
           finder: category.slug
         }
 
-      assert {:ok, %{id: category_id}} = GetCategory.run(options)
+      assert {:ok, %{id: ^category_id}} = GetCategory.run(options)
     end
   end
 

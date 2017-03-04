@@ -49,15 +49,4 @@ defmodule FirestormData.Commands.ViewThread do
     # need to do better than this
     {:error, Changeset.add_error(changeset, :user_id, "There was an error", changes.errors)}
   end
-
-  defp insert_post(%{thread: %{id: thread_id}}, user_id, body) do
-      %Post{}
-      |> Post.changeset(%{user_id: user_id, thread_id: thread_id, body: body})
-      |> Repo.insert
-  end
-
-  defp thread_changeset(user_id, category_id, title) do
-    %Thread{}
-    |> Thread.changeset(%{category_id: category_id, title: title, user_id: user_id})
-  end
 end
