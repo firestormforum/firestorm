@@ -1,5 +1,5 @@
 defmodule FirestormData.Schema.CategoryTest do
-  alias FirestormData.{Category, Repo}
+  alias FirestormData.{Category, Repo, User, View}
   use ExUnit.Case
   @valid_attributes %{
     title: "Something"
@@ -7,6 +7,12 @@ defmodule FirestormData.Schema.CategoryTest do
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
+
+    user =
+      %User{username: "knewter"}
+      |> Repo.insert!
+
+    {:ok, %{user: user}}
   end
 
   test "it requires a title" do
@@ -19,7 +25,7 @@ defmodule FirestormData.Schema.CategoryTest do
   end
 
   test "it generates a slug" do
-    Category.add("OTP")
+    create_category("OTP")
 
     assert Repo.one(Category).slug == "otp"
   end
@@ -28,10 +34,19 @@ defmodule FirestormData.Schema.CategoryTest do
     # NOTE: We will not be doing repo stuff in the modules but i'm in a hurry
     assert [] == Category.categories
 
-    Category.add("OTP")
-    Category.add("Phoenix")
+    create_category("OTP")
+    create_category("Phoenix")
 
     assert [%{title: "OTP"}, %{title: "Phoenix"}] = Category.categories
+  end
+
+  test "it can have many views by users", %{user: user} do
+    {:ok, elixir} = create_category("Elixir")
+    {:ok, _} = create_view(elixir, user)
+    {:ok, _} = create_view(elixir, user)
+    {:ok, _} = create_view(elixir, user)
+
+    assert Category.view_count(elixir) == 3
   end
 
   test "tree structure" do
@@ -56,5 +71,17 @@ defmodule FirestormData.Schema.CategoryTest do
         |> Repo.insert
 
     elixir
+  end
+
+  defp create_category(title) do
+    %Category{}
+    |> Category.changeset(%{title: title})
+    |> Repo.insert
+  end
+
+  defp create_view(category, user) do
+    category
+    |> Ecto.build_assoc(:views, %{user_id: user.id})
+    |> Repo.insert
   end
 end

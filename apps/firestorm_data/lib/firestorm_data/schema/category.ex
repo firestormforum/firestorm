@@ -14,7 +14,7 @@ defmodule FirestormData.Category do
 
   use Ecto.Schema
   import Ecto.Changeset
-  alias FirestormData.{Repo, Thread}
+  alias FirestormData.{Repo, Thread, View}
   use Arbor.Tree
 
   schema "categories" do
@@ -23,6 +23,7 @@ defmodule FirestormData.Category do
     field :children, :any, virtual: true
     belongs_to :parent, __MODULE__
     has_many :threads, Thread
+    has_many :views, {"categories_views", View}, foreign_key: :assoc_id
 
     timestamps()
   end
@@ -42,12 +43,6 @@ defmodule FirestormData.Category do
     Repo.all(__MODULE__)
   end
 
-  def add(title) do
-    %__MODULE__{}
-    |> changeset(%{title: title})
-    |> Repo.insert
-  end
-
   def color(category) do
     category
     |> hash_number
@@ -57,9 +52,20 @@ defmodule FirestormData.Category do
     :crypto.hash(:sha, category.slug)
   end
 
+  def hashlist(category) do
+    for <<num <- hash(category)>>, do: num
+  end
+
   def hash_number(category) do
-    (for <<num <- hash(category)>>, do: num)
+    category
+    |> hashlist
     |> Enum.sum
     |> rem(360)
+  end
+
+  def view_count(category) do
+    category
+    |> Ecto.assoc(:views)
+    |> Repo.aggregate(:count, :id)
   end
 end

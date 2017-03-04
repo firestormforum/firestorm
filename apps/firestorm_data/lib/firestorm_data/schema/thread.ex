@@ -6,12 +6,13 @@ defmodule FirestormData.Thread do
 
   use Ecto.Schema
   import Ecto.Changeset
-  alias FirestormData.{Repo, Category, Post}
+  alias FirestormData.{Repo, Category, Post, View}
 
   schema "threads" do
     belongs_to :category, Category
     has_many :posts, Post
     field :title, :string
+    has_many :views, {"threads_views", View}, foreign_key: :assoc_id
 
     timestamps()
   end
@@ -25,6 +26,9 @@ defmodule FirestormData.Thread do
     |> validate_required(@required_fields)
   end
 
+  def user(nil) do
+    {:error, "No first post!"}
+  end
   def user(thread) do
     thread =
       thread
@@ -35,7 +39,11 @@ defmodule FirestormData.Thread do
       [first_post|_] -> {:ok, first_post.user}
     end
   end
-  def user(nil) do
-    {:error, "No first post!"}
+
+  # NOTE: This should be a shared thing!
+  def view_count(thread) do
+    thread
+    |> Ecto.assoc(:views)
+    |> Repo.aggregate(:count, :id)
   end
 end

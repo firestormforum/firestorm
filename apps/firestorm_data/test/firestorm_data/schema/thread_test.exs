@@ -1,10 +1,15 @@
 defmodule FirestormData.Schema.ThreadTest do
   alias FirestormData.{Category, Thread, Repo, Post, User}
   use ExUnit.Case
-  import Ecto.Query
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
+
+    bob =
+      %User{username: "bob"}
+      |> Repo.insert!
+
+    {:ok, %{user: bob}}
   end
 
   test "it requires a category_id" do
@@ -25,6 +30,15 @@ defmodule FirestormData.Schema.ThreadTest do
     assert changeset.errors[:title] == {"can't be blank", [validation: :required]}
   end
 
+  test "it can have many views by users", %{user: user} do
+    {:ok, {_elixir, tests_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
+    {:ok, _} = create_view(tests_thread, user)
+    {:ok, _} = create_view(tests_thread, user)
+    {:ok, _} = create_view(tests_thread, user)
+
+    assert Thread.view_count(tests_thread) == 3
+  end
+
   test "it belongs to a category" do
     {:ok, {elixir, saved_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
 
@@ -37,7 +51,7 @@ defmodule FirestormData.Schema.ThreadTest do
   end
 
   test "it derives a user from the first post in the thread" do
-    {:ok, {elixir, saved_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
+    {:ok, {_elixir, saved_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
     {:ok, _} = create_post(saved_thread, "knewter")
 
     fetched_thread =
@@ -72,5 +86,11 @@ defmodule FirestormData.Schema.ThreadTest do
     %Post{}
       |> Post.changeset(%{user_id: user.id, body: "foo", thread_id: thread.id})
       |> Repo.insert
+  end
+
+  defp create_view(thread, user) do
+    thread
+    |> Ecto.build_assoc(:views, %{user_id: user.id})
+    |> Repo.insert
   end
 end

@@ -38,9 +38,6 @@ defmodule FirestormData.Schema.PostTest do
     assert changeset.errors[:user_id] == {"can't be blank", [validation: :required]}
   end
 
-  test "it belongs to a user" do
-  end
-
   test "it belongs to a category through its thread", %{user: user} do
     {:ok, {category, thread, saved_post}} = create_post(user)
 
