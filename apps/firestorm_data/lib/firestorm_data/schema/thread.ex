@@ -10,8 +10,8 @@ defmodule FirestormData.Thread do
 
   schema "threads" do
     belongs_to :category, Category
-    has_many :posts, Post
     field :title, :string
+    has_many :posts, Post
     has_many :views, {"threads_views", View}, foreign_key: :assoc_id
 
     timestamps()
@@ -38,12 +38,5 @@ defmodule FirestormData.Thread do
       [] -> {:error, "No first post"}
       [first_post|_] -> {:ok, first_post.user}
     end
-  end
-
-  # NOTE: This should be a shared thing!
-  def view_count(thread) do
-    thread
-    |> Ecto.assoc(:views)
-    |> Repo.aggregate(:count, :id)
   end
 end

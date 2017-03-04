@@ -1,6 +1,6 @@
 defmodule FirestormData.View do
   @moduledoc """
-  A `View` is a polymorphic representation that a user has views a thing in our system.
+  A `View` is a polymorphic representation that a user has viewed a thing in our system.
   """
 
   use Ecto.Schema

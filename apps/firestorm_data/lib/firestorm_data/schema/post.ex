@@ -25,10 +25,4 @@ defmodule FirestormData.Post do
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
   end
-
-  def view_count(post) do
-    post
-    |> Ecto.assoc(:views)
-    |> Repo.aggregate(:count, :id)
-  end
 end

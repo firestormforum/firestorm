@@ -1,5 +1,5 @@
 defmodule FirestormData.Schema.PostTest do
-  alias FirestormData.{Category, Thread, Post, Repo, User}
+  alias FirestormData.{Category, Thread, Post, Repo, User, Viewable}
   use ExUnit.Case
 
   setup do
@@ -25,7 +25,7 @@ defmodule FirestormData.Schema.PostTest do
     {:ok, _} = create_view(post, user)
     {:ok, _} = create_view(post, user)
 
-    assert Post.view_count(post) == 3
+    assert Viewable.view_count(post) == 3
   end
 
   test "it requires a body" do

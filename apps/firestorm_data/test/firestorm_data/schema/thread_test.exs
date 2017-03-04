@@ -1,5 +1,5 @@
 defmodule FirestormData.Schema.ThreadTest do
-  alias FirestormData.{Category, Thread, Repo, Post, User}
+  alias FirestormData.{Category, Thread, Repo, Post, User, Viewable}
   use ExUnit.Case
 
   setup do
@@ -36,7 +36,7 @@ defmodule FirestormData.Schema.ThreadTest do
     {:ok, _} = create_view(tests_thread, user)
     {:ok, _} = create_view(tests_thread, user)
 
-    assert Thread.view_count(tests_thread) == 3
+    assert Viewable.view_count(tests_thread) == 3
   end
 
   test "it belongs to a category" do

@@ -1,16 +1,16 @@
-defmodule FirestormData.Commands.ViewThread do
+defmodule FirestormData.Commands.ViewPost do
   @moduledoc """
-  A command to view a `Thread`. This records evidence that a given user viewed a given thread at a given time.
+  A command to view a `Post`. This records evidence that a given `User` viewed a given `Post` at a given time.
   """
 
   use FirestormData.Command
 
   embedded_schema do
     field :user_id, :integer
-    field :thread_id, :integer
+    field :post_id, :integer
   end
 
-  @required_fields ~w(user_id thread_id)a
+  @required_fields ~w(user_id post_id)a
   @optional_fields ~w()a
 
   def changeset(record, params \\ %{}) do
@@ -26,13 +26,13 @@ defmodule FirestormData.Commands.ViewThread do
   def run(changeset) do
     case changeset.valid? do
       true ->
-        %{user_id: user_id, thread_id: thread_id} =
+        %{user_id: user_id, post_id: post_id} =
           changeset
           |> apply_changes
 
-        thread = Repo.get(Thread, thread_id)
+        post = Repo.get(Post, post_id)
 
-        thread
+        post
         |> Ecto.build_assoc(:views, %{user_id: user_id})
         |> Repo.insert
         |> handle_result(changeset)

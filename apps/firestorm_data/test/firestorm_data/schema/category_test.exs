@@ -1,5 +1,5 @@
 defmodule FirestormData.Schema.CategoryTest do
-  alias FirestormData.{Category, Repo, User}
+  alias FirestormData.{Category, Repo, User, Viewable}
   use ExUnit.Case
   @valid_attributes %{
     title: "Something"
@@ -46,7 +46,7 @@ defmodule FirestormData.Schema.CategoryTest do
     {:ok, _} = create_view(elixir, user)
     {:ok, _} = create_view(elixir, user)
 
-    assert Category.view_count(elixir) == 3
+    assert Viewable.view_count(elixir) == 3
   end
 
   test "tree structure" do

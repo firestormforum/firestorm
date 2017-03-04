@@ -62,10 +62,4 @@ defmodule FirestormData.Category do
     |> Enum.sum
     |> rem(360)
   end
-
-  def view_count(category) do
-    category
-    |> Ecto.assoc(:views)
-    |> Repo.aggregate(:count, :id)
-  end
 end

@@ -1,7 +1,7 @@
 defmodule FirestormData.Commands.ViewThreadTest do
   use ExUnit.Case
   alias FirestormData.Commands.{CreateCategory, CreateThread, ViewThread}
-  alias FirestormData.{Thread, User, Repo}
+  alias FirestormData.{Thread, User, Repo, Viewable}
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
@@ -16,7 +16,7 @@ defmodule FirestormData.Commands.ViewThreadTest do
 
     test "creates a view in the database", %{thread_id: thread_id} do
       thread = Repo.get(Thread, thread_id)
-      assert 1 == Thread.view_count(thread)
+      assert 1 == Viewable.view_count(thread)
     end
   end
 
