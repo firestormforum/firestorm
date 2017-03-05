@@ -40,6 +40,7 @@ defmodule FirestormData.Thread do
     end
   end
 
+  def completely_read?(thread, nil), do: false
   def completely_read?(thread, user) do
     # find all posts with this thread id
     # where post id doesn't exist in posts_views with this user id

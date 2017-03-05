@@ -27,13 +27,9 @@ defmodule FirestormWeb.ThreadController do
       {:ok, thread} ->
         [first_post | posts] = thread.posts
         # FIXME: lol don't do this
-        for post <- thread.posts do
-          %ViewPost{}
-          |> ViewPost.changeset(%{user_id: current_user(conn).id, post_id: post.id})
-          |> ViewPost.run
-        end
+        view_posts(thread.posts, current_user(conn))
         category_breadcrumbs =
-          [ thread.category | Repo.all Category.ancestors(thread.category) ]
+          [thread.category | Repo.all Category.ancestors(thread.category)]
           |> Enum.reverse
 
         conn
@@ -88,6 +84,15 @@ defmodule FirestormWeb.ThreadController do
       false ->
         conn
         |> render("new.html", changeset: changeset, category: category)
+    end
+  end
+
+  defp view_posts(_posts, nil), do: :ok
+  defp view_posts(posts, user) do
+    for post <- posts do
+      %ViewPost{}
+      |> ViewPost.changeset(%{user_id: user.id, post_id: post.id})
+      |> ViewPost.run
     end
   end
 end

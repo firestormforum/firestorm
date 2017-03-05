@@ -55,6 +55,6 @@ defmodule FirestormData.Commands.ViewThreadTest do
       %ViewThread{}
       |> ViewThread.changeset(%{user_id: user_id, thread_id: thread_id})
 
-    {:ok, result: ViewThread.run(changeset) }
+    {:ok, result: ViewThread.run(changeset)}
   end
 end
