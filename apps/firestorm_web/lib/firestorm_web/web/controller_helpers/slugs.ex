@@ -1,4 +1,4 @@
-defmodule FirestormWeb.ControllerHelpers.Slugs do
+defmodule FirestormWeb.Web.ControllerHelpers.Slugs do
   @moduledoc """
   Controller helpers for things related to slugs
   """

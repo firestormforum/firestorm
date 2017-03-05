@@ -24,58 +24,78 @@ defmodule FirestormWeb.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller
+      use Phoenix.Controller, namespace: FirestormWeb.Web
 
-      import FirestormWeb.Router.Helpers
-      import FirestormWeb.Gettext
+      import FirestormWeb.Web.Router.Helpers
+      import FirestormWeb.Web.Gettext
       import Ecto.Query
+      import Plug.Conn
       alias FirestormData.{Category, Post, Thread, User, Repo}
 
       # Import session helpers
-      import FirestormWeb.Session, only: [current_user: 1, logged_in?: 1]
+      import FirestormWeb.Web.Session, only: [current_user: 1, logged_in?: 1]
 
       # Import slug helpers
-      import FirestormWeb.ControllerHelpers.Slugs
+      import FirestormWeb.Web.ControllerHelpers.Slugs
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "web/templates"
+      use Phoenix.View,
+        root: "lib/firestorm_web/web/templates",
+        namespace: FirestormWeb.Web
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, get_flash: 1, view_module: 1]
 
       # Import session helpers
-      import FirestormWeb.Session, only: [current_user: 1, logged_in?: 1]
+      import FirestormWeb.Web.Session, only: [current_user: 1, logged_in?: 1]
 
       import Phoenix.{HTML}
       import Phoenix.HTML.Form, except: [submit: 2, submit: 1]
       import Phoenix.HTML.{Link, Tag, Format}
 
-      # Our custom Form helpers
-      import FirestormWeb.{FormHelpers}
+      import FirestormWeb.Web.{
+        # Our custom Form helpers
+        FormHelpers,
+        ErrorHelpers,
+        Gettext,
+        ViewHelpers,
+        Router.Helpers
+      }
 
-      import FirestormWeb.Router.{Helpers}
-      import FirestormWeb.{ErrorHelpers, Gettext, ViewHelpers}
-      alias FirestormWeb.{CategoryView, ThreadView, LayoutView}
-      alias FirestormData.{Category, Thread, User, Post, Repo}
+      alias FirestormData.{
+        Category,
+        Thread,
+        User,
+        Post,
+        Repo
+      }
+
+      alias FirestormWeb.Web.{
+        CategoryView,
+        ThreadView,
+        LayoutView
+      }
 
       # Our navigation view defaults
-      use FirestormWeb.Navigation.{Defaults}
+      use FirestormWeb.Web.Navigation.Defaults
     end
   end
 
   def router do
     quote do
-      use Phoenix.{Router}
+      use Phoenix.Router
+      import Plug.Conn
+      import Phoenix.Controller
     end
   end
 
   def channel do
     quote do
-      use Phoenix.{Channel}
-      import FirestormWeb.{Gettext}
+      use Phoenix.Channel
+      import FirestormWeb.Web.Gettext
     end
   end
 

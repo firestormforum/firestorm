@@ -1,4 +1,4 @@
-defmodule FirestormWeb.AuthController do
+defmodule FirestormWeb.Web.AuthController do
   use FirestormWeb.Web, :controller
   plug Ueberauth
 

@@ -1,4 +1,4 @@
-defmodule FirestormWeb.FormHelpers do
+defmodule FirestormWeb.Web.FormHelpers do
   @moduledoc """
   View helpers for forms
   """

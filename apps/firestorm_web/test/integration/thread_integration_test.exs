@@ -3,7 +3,7 @@ defmodule FirestormWeb.ThreadIntegrationTest do
   use FirestormWeb.IntegrationCase, async: true
 
   setup do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(FirestormData.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
   end
 
   describe "With some sample data" do

@@ -1,4 +1,4 @@
-defmodule FirestormWeb.CategoryController do
+defmodule FirestormWeb.Web.CategoryController do
   use FirestormWeb.Web, :controller
   alias FirestormData.Commands.{GetCategory, CreateCategory}
 

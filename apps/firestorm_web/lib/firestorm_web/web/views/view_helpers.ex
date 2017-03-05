@@ -1,4 +1,4 @@
-defmodule FirestormWeb.ViewHelpers do
+defmodule FirestormWeb.Web.ViewHelpers do
   @moduledoc """
   View helpers for grab-bag functions we find useful.
   """

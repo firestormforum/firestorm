@@ -1,4 +1,6 @@
 defmodule FirestormWeb.CategoryControllerTest do
+  @moduledoc false
+
   use FirestormWeb.ConnCase
 
   setup do

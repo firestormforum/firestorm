@@ -1,4 +1,4 @@
-defmodule FirestormWeb.ThreadController do
+defmodule FirestormWeb.Web.ThreadController do
   use FirestormWeb.Web, :controller
   alias FirestormData.Commands.{
     GetCategory,

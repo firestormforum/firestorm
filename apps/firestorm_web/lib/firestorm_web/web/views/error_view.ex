@@ -1,4 +1,4 @@
-defmodule FirestormWeb.ErrorView do
+defmodule FirestormWeb.Web.ErrorView do
   use FirestormWeb.Web, :view
 
   def render("404.html", _assigns) do

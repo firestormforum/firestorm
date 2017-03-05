@@ -1,4 +1,4 @@
-defmodule FirestormWeb.ErrorHelpers do
+defmodule FirestormWeb.Web.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -32,9 +32,9 @@ defmodule FirestormWeb.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(FirestormWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(FirestormWeb.Web.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(FirestormWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(FirestormWeb.Web.Gettext, "errors", msg, opts)
     end
   end
 end

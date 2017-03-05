@@ -1,7 +1,5 @@
-defmodule FirestormWeb.CategoryView do
+defmodule FirestormWeb.Web.CategoryView do
   use FirestormWeb.Web, :view
-  # LOL PLEASE DO NOT MAKE QUERIES IN THE VIEW
-
   def children(category) do
     category
     |> Category.children

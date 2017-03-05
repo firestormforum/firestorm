@@ -20,16 +20,16 @@ defmodule FirestormWeb.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
-      import FirestormWeb.Router.Helpers
+      import FirestormWeb.Web.Router.Helpers
       alias FirestormData.Commands.CreateCategory
       alias FirestormData.{Category, User, Thread, Post, Repo}
 
       # The default endpoint for testing
-      @endpoint FirestormWeb.Endpoint
+      @endpoint FirestormWeb.Web.Endpoint
 
       def login_as(conn, user) do
         conn
-        |> bypass_through(FirestormWeb.Router, [:browser])
+        |> bypass_through(FirestormWeb.Web.Router, [:browser])
         |> get("/")
         |> fetch_session
         |> put_session(:current_user, user.id)
@@ -39,9 +39,12 @@ defmodule FirestormWeb.ConnCase do
     end
   end
 
-  setup tags do
-
-    _ = tags
+  setup _tags do
+    # :ok = Ecto.Adapters.SQL.Sandbox.checkout(FirestormData.Repo)
+    #
+    # unless tags[:async] do
+    #   Ecto.Adapters.SQL.Sandbox.mode(FirestormData.Repo, {:shared, self()})
+    # end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end

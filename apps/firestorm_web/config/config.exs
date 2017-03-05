@@ -11,17 +11,18 @@ config :phoenix, :template_engines,
 config :firestorm_web, ecto_repos: []
 
 # Configures the endpoint
-config :firestorm_web, FirestormWeb.Endpoint,
+config :firestorm_web, FirestormWeb.Web.Endpoint,
+  http: [port: 4000],
   url: [
     host: "localhost"
   ],
   secret_key_base: "+WIPnl6jAtKueGGXBI5TY+76Skp2AGuqMfvgW3Rg6oT4Txk+Xc8Qruz48mohK8ds",
   render_errors: [
-    view: FirestormWeb.ErrorView,
+    view: FirestormWeb.Web.ErrorView,
     accepts: ~w(html json)
   ],
   pubsub: [
-    name: FirestormWeb.PubSub,
+    name: FirestormWeb.Web.PubSub,
     adapter: Phoenix.PubSub.PG2
   ]
 

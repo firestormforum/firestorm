@@ -1,4 +1,4 @@
-defmodule FirestormWeb.Session do
+defmodule FirestormWeb.Web.Session do
   @moduledoc """
   Some helpers for session-related things
   """

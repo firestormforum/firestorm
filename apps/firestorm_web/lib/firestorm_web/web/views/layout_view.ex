@@ -1,4 +1,4 @@
-defmodule FirestormWeb.LayoutView do
+defmodule FirestormWeb.Web.LayoutView do
   use FirestormWeb.Web, :view
 
   def js_script_tag do

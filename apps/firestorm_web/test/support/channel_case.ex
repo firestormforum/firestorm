@@ -1,16 +1,13 @@
 defmodule FirestormWeb.ChannelCase do
   @moduledoc """
-  This module defines the test case to be used by
-  channel tests.
+  This module defines the test case to be used by channel tests.
 
-  Such tests rely on `Phoenix.ChannelTest` and also
-  import other functionality to make it easier
-  to build and query models.
+  Such tests rely on `Phoenix.ChannelTest` and also import other functionality
+  to make it easier to build common datastructures and query the data layer
 
-  Finally, if the test case interacts with the database,
-  it cannot be async. For this reason, every test runs
-  inside a transaction which is reset at the beginning
-  of the test unless the test case is marked as async.
+  Finally, if the test case interacts with the database, it cannot be async. For
+  this reason, every test runs inside a transaction which is reset at the
+  beginning of the test unless the test case is marked as async.
   """
 
   use ExUnit.CaseTemplate
@@ -22,13 +19,16 @@ defmodule FirestormWeb.ChannelCase do
 
 
       # The default endpoint for testing
-      @endpoint FirestormWeb.Endpoint
+      @endpoint FirestormWeb.Web.Endpoint
     end
   end
 
   setup tags do
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(FirestormData.Repo)
 
-    _ = tags
+    unless tags[:async] do
+      Ecto.Adapters.SQL.Sandbox.mode(FirestormData.Repo, {:shared, self()})
+    end
 
     :ok
   end

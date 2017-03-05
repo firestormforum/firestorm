@@ -1,4 +1,4 @@
-defmodule FirestormWeb.PostController do
+defmodule FirestormWeb.Web.PostController do
   use FirestormWeb.Web, :controller
   alias FirestormData.Commands.{GetCategory}
 

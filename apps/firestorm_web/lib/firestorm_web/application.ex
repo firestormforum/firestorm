@@ -1,6 +1,6 @@
-defmodule FirestormWeb do
+defmodule FirestormWeb.Application do
   @moduledoc """
-  The FirestormWeb Application module
+  The FirestormWeb.Application module
   """
 
   use Application
@@ -9,15 +9,10 @@ defmodule FirestormWeb do
     import Supervisor.Spec
 
     children = [
-      supervisor(FirestormWeb.Endpoint, []),
+      supervisor(FirestormWeb.Web.Endpoint, []),
     ]
 
     opts = [strategy: :one_for_one, name: FirestormWeb.Supervisor]
     Supervisor.start_link(children, opts)
-  end
-
-  def config_change(changed, _new, removed) do
-    FirestormWeb.Endpoint.config_change(changed, removed)
-    :ok
   end
 end

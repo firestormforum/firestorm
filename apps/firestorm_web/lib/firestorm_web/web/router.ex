@@ -1,4 +1,4 @@
-defmodule FirestormWeb.Router do
+defmodule FirestormWeb.Web.Router do
   use FirestormWeb.Web, :router
 
   pipeline :browser do
@@ -14,7 +14,7 @@ defmodule FirestormWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", FirestormWeb do
+  scope "/", FirestormWeb.Web do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
@@ -28,7 +28,7 @@ defmodule FirestormWeb.Router do
   end
 
   # OAuth routes (ueberauth)
-  scope "/auth", FirestormWeb do
+  scope "/auth", FirestormWeb.Web do
     pipe_through [:browser]
 
     get "/:provider", AuthController, :request
@@ -39,7 +39,7 @@ defmodule FirestormWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", FirestormWeb do
+  # scope "/api", FirestormWeb.Web do
   #   pipe_through :api
   # end
 end

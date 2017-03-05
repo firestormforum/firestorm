@@ -1,4 +1,4 @@
-defmodule FirestormWeb.PageController do
+defmodule FirestormWeb.Web.PageController do
   use FirestormWeb.Web, :controller
   alias FirestormData.Commands.GetHomeCategories
 

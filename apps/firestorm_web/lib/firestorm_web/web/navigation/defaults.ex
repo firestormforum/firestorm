@@ -1,12 +1,12 @@
-defmodule FirestormWeb.Navigation.Defaults do
+defmodule FirestormWeb.Web.Navigation.Defaults do
   @moduledoc """
   A module for describing the FirestormWeb navigation structure. A given
   controller can override it per-action in order to modify the menu shown in the
   drawer.
   """
 
-  import FirestormWeb.Session
-  import FirestormWeb.Router.Helpers
+  import FirestormWeb.Web.Session
+  import FirestormWeb.Web.Router.Helpers
 
   defmodule NavItem do
     @moduledoc """

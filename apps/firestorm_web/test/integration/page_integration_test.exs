@@ -3,7 +3,7 @@ defmodule FirestormWeb.PageIntegrationTest do
   use FirestormWeb.IntegrationCase, async: true
 
   setup do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(FirestormData.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
   end
 
   test "Login page", %{conn: conn} do
