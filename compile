@@ -1,4 +1,6 @@
 #!/bin/bash
 
+pushd assets
 ./node_modules/.bin/webpack -p
+popd
 mix phoenix.digest
