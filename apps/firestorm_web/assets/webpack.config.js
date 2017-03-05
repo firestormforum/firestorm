@@ -7,8 +7,8 @@ const isProd = nodeEnv === 'production'
 // Change node process to the firestorm_web root
 process.chdir(__dirname)
 
-const staticDir = path.join(__dirname, 'web/static')
-const destDir = path.join(__dirname, 'priv/static')
+const staticDir = path.join(__dirname, '.')
+const destDir = path.join(__dirname, '../priv/static')
 const publicPath = '/'
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -62,6 +62,6 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('css/app.css'),
-    new CopyWebpackPlugin([{ from: './web/static/assets/images', to: 'images' }]),
+    new CopyWebpackPlugin([{ from: './static/images', to: 'images' }]),
   ],
 }

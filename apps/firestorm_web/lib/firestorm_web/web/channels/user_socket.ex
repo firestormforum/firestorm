@@ -1,4 +1,4 @@
-defmodule FirestormWeb.UserSocket do
+defmodule FirestormWeb.Web.UserSocket do
   use Phoenix.Socket
 
   ## Channels

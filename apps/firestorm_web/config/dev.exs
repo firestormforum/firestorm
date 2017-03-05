@@ -19,7 +19,7 @@ use Mix.Config
 # If desired, both `http:` and `https:` keys can be
 # configured to run both http and https servers on
 # different ports.
-config :firestorm_web, FirestormWeb.Endpoint,
+config :firestorm_web, FirestormWeb.Web.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -34,7 +34,7 @@ config :firestorm_web, FirestormWeb.Endpoint,
       "--port", "8080",
       "--public", "localhost:8080",
       "--config", "webpack.config.js",
-      cd: Path.expand("../", __DIR__)
+      cd: Path.expand("../assets", __DIR__)
     ]
   ]
 
