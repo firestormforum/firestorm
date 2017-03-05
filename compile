@@ -1,4 +1,4 @@
 #!/bin/bash
 
 ./node_modules/.bin/webpack -p
-mix phoenix.digest
+mix phx.digest
