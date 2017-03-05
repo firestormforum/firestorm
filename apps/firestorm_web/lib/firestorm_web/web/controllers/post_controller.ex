@@ -1,56 +1,45 @@
 defmodule FirestormWeb.Web.PostController do
   use FirestormWeb.Web, :controller
-  alias FirestormData.Commands.{GetCategory}
+  alias FirestormData.Commands.{GetThread, CreatePost}
 
   def action(conn, _) do
-    case GetCategory.run(%GetCategory{finder: conn.params["category_id"]}) do
-      {:ok, category} ->
-        thread =
-          Thread
-          |> where([id: ^conn.params["thread_id"], category_id: ^category.id])
-          |> preload([:posts])
-          |> Repo.one
+    thread_finder = get_finder(conn.params["thread_id"])
+    category_finder = get_finder(conn.params["category_id"])
 
-        case thread do
-          nil ->
-            conn
-            |> put_flash(:error, "No such thread")
-            |> redirect(to: category_path(conn, :show, category.id))
-          thread ->
-            apply(__MODULE__, action_name(conn),
-              [conn, conn.params, category, thread])
-        end
+    case GetThread.run(%GetThread{finder: thread_finder, category_finder: category_finder}) do
+      {:ok, thread} ->
+        apply(__MODULE__, action_name(conn),
+          [conn, conn.params, thread.category, thread])
 
       {:error, :not_found} ->
         conn
-        |> put_flash(:error, "No such category")
+        |> put_flash(:error, "No such thread")
         |> redirect(to: page_path(conn, :home))
     end
   end
 
-  def new(conn, _params, category, thread) do
+  def new(conn, params, category, thread) do
     changeset =
-      %Post{}
-      |> Post.changeset(%{})
+      %CreatePost{}
+      |> CreatePost.changeset(params)
 
     conn
     |> render("new.html", changeset: changeset, category: category, thread: thread)
   end
 
-  def create(conn, %{"post" => post_params}, category, thread) do
-    post_params =
-      post_params
-      |> Map.put("category_id", category.id)
+  def create(conn, %{"create_post" => create_post_params}, category, thread) do
+    create_post_params =
+      create_post_params
       |> Map.put("thread_id", thread.id)
       |> Map.put("user_id", current_user(conn).id)
 
     changeset =
-      %Post{}
-      |> Post.changeset(post_params)
+      %CreatePost{}
+      |> CreatePost.changeset(create_post_params)
 
     case changeset.valid? do
       true ->
-        case Repo.insert(changeset) do
+        case CreatePost.run(changeset) do
           {:ok, _} ->
             conn
             |> put_flash(:info, "Post created successfully")

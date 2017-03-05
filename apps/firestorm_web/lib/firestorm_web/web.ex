@@ -30,7 +30,7 @@ defmodule FirestormWeb.Web do
       import FirestormWeb.Web.Gettext
       import Ecto.Query
       import Plug.Conn
-      alias FirestormData.{Category, Post, Thread, User, Repo}
+      alias FirestormData.{Category, Post, Thread, User}
 
       # Import session helpers
       import FirestormWeb.Web.Session, only: [current_user: 1, logged_in?: 1]

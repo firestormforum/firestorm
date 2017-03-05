@@ -4,6 +4,14 @@ defmodule FirestormData.Thread do
   created the thread.
   """
 
+  defmodule TitleSlug do
+    @moduledoc """
+    A configuration for turning thread titles into slugs.
+    """
+
+    use EctoAutoslugField.Slug, from: :title, to: :slug
+  end
+
   use Ecto.Schema
   import Ecto.{Changeset, Query}
   alias FirestormData.{Repo, Category, Post, View}
@@ -11,6 +19,7 @@ defmodule FirestormData.Thread do
   schema "threads" do
     belongs_to :category, Category
     field :title, :string
+    field :slug, TitleSlug.Type
     has_many :posts, Post
     has_many :views, {"threads_views", View}, foreign_key: :assoc_id
 
@@ -18,12 +27,14 @@ defmodule FirestormData.Thread do
   end
 
   @required_fields ~w(category_id title)a
-  @optional_fields ~w()a
+  @optional_fields ~w(slug)a
 
   def changeset(record, params \\ %{}) do
     record
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    |> TitleSlug.maybe_generate_slug
+    |> TitleSlug.unique_constraint
   end
 
   def user(nil) do

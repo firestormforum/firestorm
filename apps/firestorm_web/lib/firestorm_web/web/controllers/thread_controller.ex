@@ -23,13 +23,14 @@ defmodule FirestormWeb.Web.ThreadController do
   def show(conn, %{"id" => id_or_slug}, category) do
     finder = get_finder(id_or_slug)
 
-    case GetThread.run(%GetThread{finder: finder, category_id: category.id}) do
+    case GetThread.run(%GetThread{finder: finder, category_finder: category.id}) do
       {:ok, thread} ->
         [first_post | posts] = thread.posts
         # FIXME: lol don't do this
         view_posts(thread.posts, current_user(conn))
         category_breadcrumbs =
-          [thread.category | Repo.all Category.ancestors(thread.category)]
+          [thread.category | thread.category.ancestors ]
+          # Repo.all Category.ancestors(thread.category)]
           |> Enum.reverse
 
         conn

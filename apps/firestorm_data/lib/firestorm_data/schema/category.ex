@@ -21,6 +21,7 @@ defmodule FirestormData.Category do
     field :title, :string
     field :slug, TitleSlug.Type
     field :children, :any, virtual: true
+    field :ancestors, :any, virtual: true
     belongs_to :parent, __MODULE__
     has_many :threads, Thread
     has_many :views, {"categories_views", View}, foreign_key: :assoc_id

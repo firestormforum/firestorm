@@ -30,6 +30,12 @@ defmodule FirestormData.Schema.ThreadTest do
     assert changeset.errors[:title] == {"can't be blank", [validation: :required]}
   end
 
+  test "it generates a slug" do
+    {:ok, {_elixir, _tests_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
+
+    assert Repo.one(Thread).slug == "itt-tests"
+  end
+
   test "it can have many views by users", %{user: user} do
     {:ok, {_elixir, tests_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
     {:ok, _} = create_view(tests_thread, user)
