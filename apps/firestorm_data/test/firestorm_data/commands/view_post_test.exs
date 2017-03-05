@@ -1,10 +1,12 @@
 defmodule FirestormData.Commands.ViewPostTest do
+  @moduledoc false
+
   use ExUnit.Case
   alias FirestormData.Commands.{CreateCategory, CreateThread, ViewPost}
   alias FirestormData.{Thread, User, Repo, Post, Viewable}
 
   setup do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo, ownership_timeout: 3000_000)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
   end
 
   describe "viewing a post" do
@@ -69,6 +71,6 @@ defmodule FirestormData.Commands.ViewPostTest do
       %ViewPost{}
       |> ViewPost.changeset(%{user_id: user_id, post_id: fp.id})
 
-    {:ok, post_id: fp.id, result: ViewPost.run(changeset) }
+    {:ok, post_id: fp.id, result: ViewPost.run(changeset)}
   end
 end

@@ -5,9 +5,8 @@ defmodule FirestormData.Thread do
   """
 
   use Ecto.Schema
-  import Ecto.Changeset
+  import Ecto.{Changeset, Query}
   alias FirestormData.{Repo, Category, Post, View}
-  import Ecto.Query
 
   schema "threads" do
     belongs_to :category, Category
@@ -44,12 +43,15 @@ defmodule FirestormData.Thread do
   def completely_read?(thread, user) do
     # find all posts with this thread id
     # where post id doesn't exist in posts_views with this user id
-    unviewed_posts_count =
-      (from p in Post,
+    unviewed_posts_count_query =
+      from p in Post,
       where: p.thread_id == ^thread.id,
       left_join: post_view in "posts_views", on: [assoc_id: p.id, user_id: ^user.id],
       where: is_nil(post_view.id),
-      select: p.id)
+      select: p.id
+
+    unviewed_posts_count =
+      unviewed_posts_count_query
       |> Repo.aggregate(:count, :id)
 
     unviewed_posts_count == 0
