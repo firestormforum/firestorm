@@ -22,6 +22,8 @@ defmodule FirestormWeb.Web.Router do
 
     resources "/categories", CategoryController do
       resources "/threads", ThreadController do
+        get "/follow", ThreadController, :follow
+        get "/unfollow", ThreadController, :unfollow
         resources "/posts", PostController
       end
     end

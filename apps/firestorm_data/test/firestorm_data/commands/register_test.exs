@@ -10,7 +10,7 @@ defmodule FirestormData.Commands.RegisterTest do
   describe "registering a username that doesn't exist" do
     setup [:register_user]
 
-    test "returns expected results", %{result: result} do
+    test "returns expected result", %{result: result} do
       assert {:ok, _some_id} = result
     end
 

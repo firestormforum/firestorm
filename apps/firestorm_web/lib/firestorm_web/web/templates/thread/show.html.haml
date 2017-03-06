@@ -12,6 +12,6 @@
           = link category.title, to: category_path(@conn, :show, category.slug)
 
 %ol.post-list
-  %li= render "_first_post.html", post: @first_post, conn: @conn, category: @category, thread: @thread
+  %li= render "_first_post.html", post: @first_post, conn: @conn, category: @category, thread: @thread, following: @following
   - for post <- @posts do
     %li= render "_post.html", post: post, category: @category, thread: @thread, conn: @conn

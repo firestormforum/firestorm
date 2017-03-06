@@ -10,8 +10,14 @@
         %a{href: "#"}
           %i.emoticon-faces
       %li
-        %a{href: "#"}
-          %i.fa.fa-eye
+        - # LOL this path is stupid, but I don't see how to do proper non-REST member actions yet in
+        - #the phoenix router DSL and there aren't any examples in Phoenix's test suite that I can find.
+        - if @following do
+          %a{href: "#{category_thread_thread_path(@conn, :unfollow, @category.slug, @thread.id)}"}
+            %i.fa.fa-eye.-highlight
+        - else
+          %a{href: "#{category_thread_thread_path(@conn, :follow, @category.slug, @thread.id)}"}
+            %i.fa.fa-eye
       %li
         %a{href: "#"}
           %i.fa.fa-quote-right

@@ -12,7 +12,7 @@ defmodule FirestormData.Commands.ViewPostTest do
   describe "viewing a post" do
     setup [:create_user, :create_category, :create_thread, :view_post]
 
-    test "returns expected results", %{result: result} do
+    test "returns expected result", %{result: result} do
       assert {:ok, _some_id} = result
     end
 

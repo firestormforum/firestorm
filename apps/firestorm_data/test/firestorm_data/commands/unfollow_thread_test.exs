@@ -1,36 +1,35 @@
-defmodule FirestormData.Commands.FollowThreadTest do
+defmodule FirestormData.Commands.UnfollowThreadTest do
   use ExUnit.Case
-  alias FirestormData.Commands.{CreateCategory, CreateThread, FollowThread}
+  alias FirestormData.Commands.{CreateCategory, CreateThread, FollowThread, UnfollowThread}
   alias FirestormData.{Thread, User, Repo, Followable}
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
   end
 
-  describe "following a thread" do
-    setup [:create_user, :create_category, :create_thread, :follow_thread]
+  describe "Unfollowing a thread" do
+    setup [:create_user, :create_category, :create_thread, :follow_thread, :unfollow_thread]
 
     test "returns expected result", %{result: result} do
-      assert {:ok, _some_id} = result
+      assert :ok = result
     end
 
-    test "creates a follow in the database", %{thread_id: thread_id, user_id: user_id} do
+    test "deletes the follow from the database", %{thread_id: thread_id, user_id: user_id} do
       thread = Repo.get(Thread, thread_id)
       user = Repo.get(User, user_id)
-      assert Followable.followed_by?(thread, user)
+      refute Followable.followed_by?(thread, user)
     end
   end
 
-  describe "when a thread is already followed" do
-    setup [:create_user, :create_category, :create_thread, :follow_thread]
+  describe "when a thread is not followed" do
+    setup [:create_user, :create_category, :create_thread, :unfollow_thread]
 
-    test "following doesn't create a new record in the database", %{thread_id: thread_id, user_id: user_id} do
+    test "unfollowing does nothing and pretends to have worked", %{thread_id: thread_id, user_id: user_id} do
       thread = Repo.get(Thread, thread_id)
-      assert Followable.follow_count(thread) == 1
-      {:ok, result: result} = follow_thread(%{user_id: user_id, thread_id: thread_id})
-      {:error, changeset} = result
-      assert Followable.follow_count(thread) == 1
-      assert changeset.errors[:user_id] == {"User already follows this thread", []}
+      assert Followable.follow_count(thread) == 0
+      {:ok, result: result} = unfollow_thread(%{user_id: user_id, thread_id: thread_id})
+      assert :ok = result
+      assert Followable.follow_count(thread) == 0
     end
   end
 
@@ -68,7 +67,17 @@ defmodule FirestormData.Commands.FollowThreadTest do
     changeset =
       %FollowThread{}
       |> FollowThread.changeset(%{user_id: user_id, thread_id: thread_id})
+    {:ok, follow_id} = FollowThread.run(changeset)
 
-    {:ok, result: FollowThread.run(changeset)}
+    {:ok, follow_id: follow_id}
+  end
+
+  def unfollow_thread(%{user_id: user_id, thread_id: thread_id}) do
+    changeset =
+      %UnfollowThread{}
+      |> UnfollowThread.changeset(%{user_id: user_id, thread_id: thread_id})
+    result = UnfollowThread.run(changeset)
+
+    {:ok, result: result}
   end
 end
