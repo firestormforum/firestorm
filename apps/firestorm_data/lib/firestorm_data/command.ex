@@ -5,7 +5,15 @@ defmodule FirestormData.Command do
 
   defmacro __using__(_opts) do
     quote do
-      alias FirestormData.{Repo, User, Category, Thread, Post}
+      alias FirestormData.{
+        Repo,
+        User,
+        Category,
+        Thread,
+        Post,
+        Viewable,
+        Followable
+      }
       import Ecto.{Query, Changeset}
       alias Ecto.{Multi, Changeset}
       use Ecto.Schema

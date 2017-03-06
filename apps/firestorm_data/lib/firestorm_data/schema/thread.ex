@@ -6,13 +6,14 @@ defmodule FirestormData.Thread do
 
   use Ecto.Schema
   import Ecto.{Changeset, Query}
-  alias FirestormData.{Repo, Category, Post, View}
+  alias FirestormData.{Repo, Category, Post, View, Follow}
 
   schema "threads" do
     belongs_to :category, Category
     field :title, :string
     has_many :posts, Post
     has_many :views, {"threads_views", View}, foreign_key: :assoc_id
+    has_many :follows, {"threads_follows", Follow}, foreign_key: :assoc_id
 
     timestamps()
   end

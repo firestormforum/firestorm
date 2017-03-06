@@ -14,7 +14,7 @@ defmodule FirestormData.Category do
 
   use Ecto.Schema
   import Ecto.Changeset
-  alias FirestormData.{Repo, Thread, View}
+  alias FirestormData.{Repo, Thread, View, Follow}
   use Arbor.Tree
 
   schema "categories" do
@@ -24,6 +24,7 @@ defmodule FirestormData.Category do
     belongs_to :parent, __MODULE__
     has_many :threads, Thread
     has_many :views, {"categories_views", View}, foreign_key: :assoc_id
+    has_many :follows, {"categories_follows", Follow}, foreign_key: :assoc_id
 
     timestamps()
   end

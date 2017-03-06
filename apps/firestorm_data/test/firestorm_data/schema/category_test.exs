@@ -1,5 +1,5 @@
 defmodule FirestormData.Schema.CategoryTest do
-  alias FirestormData.{Category, Repo, User, Viewable}
+  alias FirestormData.{Category, Repo, User, Viewable, Followable}
   use ExUnit.Case
   @valid_attributes %{
     title: "Something"
@@ -49,6 +49,13 @@ defmodule FirestormData.Schema.CategoryTest do
     assert Viewable.view_count(elixir) == 3
   end
 
+  test "it can be followed by users", %{user: user} do
+    {:ok, elixir} = create_category("Elixir")
+    {:ok, _} = create_follow(elixir, user)
+
+    assert Followable.followed_by?(elixir, user)
+  end
+
   test "tree structure" do
     elixir = make_elixir_otp_tree()
 
@@ -82,6 +89,12 @@ defmodule FirestormData.Schema.CategoryTest do
   defp create_view(category, user) do
     category
     |> Ecto.build_assoc(:views, %{user_id: user.id})
+    |> Repo.insert
+  end
+
+  defp create_follow(category, user) do
+    category
+    |> Ecto.build_assoc(:follows, %{user_id: user.id})
     |> Repo.insert
   end
 end
