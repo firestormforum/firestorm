@@ -7,13 +7,19 @@ defmodule FirestormData.Followable do
   alias FirestormData.{Repo, User}
   import Ecto.Query
 
-  def followed_by?(followable, user=%User{}) do
-    follow_count =
-      followable
-      |> Ecto.assoc(:follows)
-      |> where([f], f.user_id == ^user.id)
-      |> Repo.aggregate(:count, :id)
+  def followed_by?(followable, user = %User{}) do
+    follow_count(followable, user) > 0
+  end
 
-    follow_count > 0
+  def follow_count(followable) do
+    followable
+    |> Ecto.assoc(:follows)
+    |> Repo.aggregate(:count, :id)
+  end
+  defp follow_count(followable, user = %User{}) do
+    followable
+    |> Ecto.assoc(:follows)
+    |> where([f], f.user_id == ^user.id)
+    |> Repo.aggregate(:count, :id)
   end
 end

@@ -31,11 +31,16 @@ defmodule FirestormData.Commands.FollowCategory do
           |> apply_changes
 
         category = Repo.get(Category, category_id)
+        user = Repo.get(User, user_id)
 
-        category
-        |> Ecto.build_assoc(:follows, %{user_id: user_id})
-        |> Repo.insert
-        |> handle_result(changeset)
+        if Followable.followed_by?(category, user) do
+          {:error, Changeset.add_error(changeset, :user_id, "User already follows this category")}
+        else
+          category
+          |> Ecto.build_assoc(:follows, %{user_id: user_id})
+          |> Repo.insert
+          |> handle_result(changeset)
+        end
 
       false ->
         {:error, changeset}

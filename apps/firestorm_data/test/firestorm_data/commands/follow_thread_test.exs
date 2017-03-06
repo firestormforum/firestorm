@@ -21,6 +21,19 @@ defmodule FirestormData.Commands.FollowThreadTest do
     end
   end
 
+  describe "when a thread is already followed" do
+    setup [:create_user, :create_category, :create_thread, :follow_thread]
+
+    test "following doesn't create a new record in the database", %{thread_id: thread_id, user_id: user_id} do
+      thread = Repo.get(Thread, thread_id)
+      assert Followable.follow_count(thread) == 1
+      {:ok, result: result} = follow_thread(%{user_id: user_id, thread_id: thread_id})
+      {:error, changeset} = result
+      assert Followable.follow_count(thread) == 1
+      assert changeset.errors[:user_id] == {"User already follows this thread", []}
+    end
+  end
+
   def create_category(_) do
     changeset =
       %CreateCategory{}

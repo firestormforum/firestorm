@@ -21,6 +21,19 @@ defmodule FirestormData.Commands.FollowCategoryTest do
     end
   end
 
+  describe "when a category is already followed" do
+    setup [:create_user, :create_category, :follow_category]
+
+    test "following doesn't create a new record in the database", %{category_id: category_id, user_id: user_id} do
+      category = Repo.get(Category, category_id)
+      assert Followable.follow_count(category) == 1
+      {:ok, result: result} = follow_category(%{user_id: user_id, category_id: category_id})
+      {:error, changeset} = result
+      assert Followable.follow_count(category) == 1
+      assert changeset.errors[:user_id] == {"User already follows this category", []}
+    end
+  end
+
   def create_category(_) do
     changeset =
       %CreateCategory{}

@@ -31,12 +31,16 @@ defmodule FirestormData.Commands.FollowThread do
           |> apply_changes
 
         thread = Repo.get(Thread, thread_id)
+        user = Repo.get(User, user_id)
 
-        thread
-        |> Ecto.build_assoc(:follows, %{user_id: user_id})
-        |> Repo.insert
-        |> handle_result(changeset)
-
+        if Followable.followed_by?(thread, user) do
+          {:error, Changeset.add_error(changeset, :user_id, "User already follows this thread")}
+        else
+          thread
+          |> Ecto.build_assoc(:follows, %{user_id: user_id})
+          |> Repo.insert
+          |> handle_result(changeset)
+        end
       false ->
         {:error, changeset}
     end
