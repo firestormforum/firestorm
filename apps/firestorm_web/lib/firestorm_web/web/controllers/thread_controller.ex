@@ -35,7 +35,10 @@ defmodule FirestormWeb.Web.ThreadController do
           [thread.category | Repo.all Category.ancestors(thread.category)]
           |> Enum.reverse
 
-        following = Followable.followed_by?(thread, current_user(conn))
+        following = case current_user(conn) do
+          nil -> false
+          u -> Followable.followed_by?(thread, u)
+        end
 
         conn
         |> render(
