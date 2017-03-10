@@ -79,6 +79,8 @@ defmodule FirestormData.Schema.ThreadTest do
   test "it derives a user from the first post in the thread" do
     {:ok, {_elixir, saved_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
     {:ok, _} = create_post(saved_thread, "knewter")
+    :timer.sleep 10
+    {:ok, _} = create_post(saved_thread, "adam")
 
     fetched_thread =
       Thread
