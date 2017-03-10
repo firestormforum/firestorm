@@ -108,7 +108,7 @@ defmodule FirestormWeb.Web.ThreadController do
         case FollowThread.run(changeset) do
           {:ok, _} ->
             conn
-            |> put_flash(:info, "You are now watching this thread")
+            |> put_flash(:info, "You are now following this thread")
             |> redirect(to: category_thread_path(conn, :show, category.slug, id_or_slug))
 
           {:error, _} ->
@@ -136,7 +136,7 @@ defmodule FirestormWeb.Web.ThreadController do
         case UnfollowThread.run(changeset) do
           :ok ->
             conn
-            |> put_flash(:info, "You are no longer watching this thread")
+            |> put_flash(:info, "You are no longer following this thread")
             |> redirect(to: category_thread_path(conn, :show, category.slug, id_or_slug))
         end
 
