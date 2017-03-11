@@ -12,7 +12,7 @@ defmodule FirestormData.Repo.Migrations.CreateThreadsTags do
 
     create table(:threads_taggings) do
       add :assoc_id, references(:threads)
-      add :thread_id, references(:tags)
+      add :tag_id, references(:tags)
       timestamps()
     end
   end
