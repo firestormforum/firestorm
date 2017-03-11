@@ -11,6 +11,7 @@ defmodule FirestormWeb.Earmark.HtmlRenderer do
   import Earmark.Inline,  only: [ convert: 3 ]
   import Earmark.Helpers, only: [ escape: 2 ]
   import Earmark.Helpers.HtmlHelpers
+  alias FirestormWeb.Earmark.AutoLinker
 
   def render(blocks, context=%Context{options: %Options{mapper: mapper}}) do
     html =
@@ -22,7 +23,11 @@ defmodule FirestormWeb.Earmark.HtmlRenderer do
   # Paragraph #
   #############
   defp render_block(%Block.Para{lnb: lnb, lines: lines, attrs: attrs}, context) do
-    lines = convert(lines, lnb, context)
+    lines =
+      lines
+      |> convert(lnb, context)
+      |> AutoLinker.run()
+
     add_attrs!("<p>#{lines}</p>\n", attrs, [], lnb)
   end
 
