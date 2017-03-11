@@ -64,6 +64,7 @@ defmodule FirestormWeb.Web do
         FormHelpers,
         ErrorHelpers,
         Gettext,
+        IconHelpers,
         LinkHelpers,
         Router.Helpers,
         SlugHelpers,

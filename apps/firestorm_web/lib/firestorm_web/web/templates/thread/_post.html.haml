@@ -1,4 +1,4 @@
-.post-item
+.post-item(id = "post-#{@post.id}")
   .item-metadata
     = user_link(@post.user)
     = time_abbr(@post.inserted_at)
@@ -10,11 +10,14 @@
     .spacer
     %ul.actions
       %li
+        %a{href: "#{category_thread_path(@conn, :show, category_finder(@category), thread_finder(@thread))}#post-#{@post.id}"}
+          = fa_icon("link")
+      %li
         %a{href: "#"}
           %i.emoticon-faces
       %li
         %a{href: "#"}
-          %i.fa.fa-quote-right
+          = fa_icon("quote-right")
       %li
-        %a{href: "#{category_thread_post_path(@conn, :new, category_finder(@category), @thread.id)}"}
-          %i.fa.fa-reply
+        %a{href: "#{category_thread_post_path(@conn, :new, category_finder(@category), thread_finder(@thread))}"}
+          = fa_icon("reply")
