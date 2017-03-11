@@ -8,7 +8,7 @@
         %i.fa.fa-plus
         New Category
     %li
-      %a.pure-button.button-primary{href: "#{category_thread_path(@conn, :new, @category.slug)}"}
+      %a.pure-button.button-primary{href: "#{category_thread_path(@conn, :new, category_finder(@category))}"}
         %i.fa.fa-plus
         New Thread
 

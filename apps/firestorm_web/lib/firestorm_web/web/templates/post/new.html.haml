@@ -1,6 +1,6 @@
 %h2 New Post
 
-- form_for @changeset, category_thread_post_path(@conn, :create, @category.slug, @thread.id), [class: "post-editor"], fn f ->
+- form_for @changeset, category_thread_post_path(@conn, :create, category_finder(@category), @thread.id), [class: "post-editor"], fn f ->
   = textarea f, :body, class: "autoexpand", "data-min-rows": 4, rows: 4
 
   .action-bar
@@ -8,7 +8,7 @@
       %button.pure-button.button-primary.-inverted.attachment
         %i.fa.fa-paperclip
     .end
-      %a.pure-button.button-primary.-muted.cancel{href: "#{category_thread_path(@conn, :show, @category.slug, @thread.id)}"}
+      %a.pure-button.button-primary.-muted.cancel{href: "#{category_thread_path(@conn, :show, category_finder(@category), @thread.id)}"}
         Cancel
       %button.pure-button.button-primary.reply{type: "submit"}
         %i.fa.fa-mail-reply

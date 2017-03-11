@@ -1,6 +1,6 @@
 %h2 Start a new thread
 
-- form_for @changeset, category_thread_path(@conn, :create, @category.slug), [class: 'new-thread'], fn f ->
+- form_for @changeset, category_thread_path(@conn, :create, category_finder(@category)), [class: 'new-thread'], fn f ->
   = text_input f, :title, placeholder: "Type a title"
   = textarea f, :body, placeholder: "Type thread content here. Use markdown syntax.", class: "autoexpand", rows: 4, "data-min-rows": 4
 
@@ -9,7 +9,7 @@
       %button.pure-button.button-primary.-inverted.attachment{type: "submit"}
         %i.fa.fa-paperclip
     .end
-      %a.pure-button.button-primary.-muted.cancel{href: "#{category_path(@conn, :show, @category.slug)}"}
+      %a.pure-button.button-primary.-muted.cancel{href: "#{category_path(@conn, :show, category_finder(@category))}"}
         Cancel
       %button.pure-button.button-primary.reply
         %i.fa.fa-plus
