@@ -5,10 +5,10 @@ defmodule FirestormWeb.Earmark.AutoLinker do
   """
 
   # A RegEx to match any URL that has spaces or newlinex on either side of it.
-  @url_regex ~r{(\s|\A\^)*(https?://[^ $\n]*)(\s|$|\z)+}
+  @url_regex ~r{(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?}
 
   def run(body) do
     @url_regex
-    |> Regex.replace(body, "<a href=\"\\2\">\\2</a>")
+    |> Regex.replace(body, "<a href=\"\\0\">\\0</a>")
   end
 end
