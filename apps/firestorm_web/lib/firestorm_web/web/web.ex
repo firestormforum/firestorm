@@ -37,6 +37,9 @@ defmodule FirestormWeb.Web do
 
       # Import slug helpers
       import FirestormWeb.Web.ControllerHelpers.Slugs
+      # Oops we have a 'view' version and a 'controller' version and they're
+      # schizophrenic - we should integrate them at some point.
+      import FirestormWeb.Web.SlugHelpers
     end
   end
 
@@ -61,24 +64,25 @@ defmodule FirestormWeb.Web do
         FormHelpers,
         ErrorHelpers,
         Gettext,
-        ViewHelpers,
-        Router.Helpers,
         LinkHelpers,
+        Router.Helpers,
+        SlugHelpers,
         TagHelpers,
+        ViewHelpers,
       }
 
       alias FirestormData.{
         Category,
+        Post,
+        Repo,
         Thread,
         User,
-        Post,
-        Repo
       }
 
       alias FirestormWeb.Web.{
         CategoryView,
+        LayoutView,
         ThreadView,
-        LayoutView
       }
 
       # Our navigation view defaults

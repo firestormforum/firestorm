@@ -11,7 +11,8 @@ defmodule FirestormWeb.Web.ThreadController do
   alias FirestormData.Followable
 
   def action(conn, _) do
-    case GetCategory.run(%GetCategory{finder: conn.params["category_id"]}) do
+    finder = get_finder(conn.params["category_id"])
+    case GetCategory.run(%GetCategory{finder: finder}) do
       {:ok, category} ->
         apply(__MODULE__, action_name(conn),
           [conn, conn.params, category])
@@ -54,7 +55,7 @@ defmodule FirestormWeb.Web.ThreadController do
       {:error, :not_found} ->
         conn
         |> put_flash(:error, "No such thread")
-        |> redirect(to: category_path(conn, :show, category.slug))
+        |> redirect(to: category_path(conn, :show, category_finder(category)))
     end
   end
 
@@ -83,7 +84,7 @@ defmodule FirestormWeb.Web.ThreadController do
           {:ok, thread_id} ->
             conn
             |> put_flash(:info, "Thread created successfully")
-            |> redirect(to: category_thread_path(conn, :show, category.slug, thread_id))
+            |> redirect(to: category_thread_path(conn, :show, category_finder(category), thread_id))
 
           {:error, changeset} ->
             conn
@@ -109,18 +110,18 @@ defmodule FirestormWeb.Web.ThreadController do
           {:ok, _} ->
             conn
             |> put_flash(:info, "You are now following this thread")
-            |> redirect(to: category_thread_path(conn, :show, category.slug, id_or_slug))
+            |> redirect(to: category_thread_path(conn, :show, category_finder(category), id_or_slug))
 
           {:error, _} ->
             conn
             |> put_flash(:error, "An error occurred")
-            |> redirect(to: category_thread_path(conn, :show, category.slug, id_or_slug))
+            |> redirect(to: category_thread_path(conn, :show, category_finder(category), id_or_slug))
         end
 
       {:error, :not_found} ->
         conn
         |> put_flash(:error, "No such thread")
-        |> redirect(to: category_thread_path(conn, :show, category.slug, id_or_slug))
+        |> redirect(to: category_thread_path(conn, :show, category_finder(category), id_or_slug))
     end
   end
 
@@ -137,13 +138,13 @@ defmodule FirestormWeb.Web.ThreadController do
           :ok ->
             conn
             |> put_flash(:info, "You are no longer following this thread")
-            |> redirect(to: category_thread_path(conn, :show, category.slug, id_or_slug))
+            |> redirect(to: category_thread_path(conn, :show, category_finder(category), id_or_slug))
         end
 
       {:error, :not_found} ->
         conn
         |> put_flash(:error, "No such thread")
-        |> redirect(to: category_thread_path(conn, :show, category.slug, id_or_slug))
+        |> redirect(to: category_thread_path(conn, :show, category_finder(category), id_or_slug))
     end
   end
 

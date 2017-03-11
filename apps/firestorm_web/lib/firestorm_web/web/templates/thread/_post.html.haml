@@ -16,5 +16,5 @@
         %a{href: "#"}
           %i.fa.fa-quote-right
       %li
-        %a{href: "#{category_thread_post_path(@conn, :new, @category.slug, @thread.id)}"}
+        %a{href: "#{category_thread_post_path(@conn, :new, category_finder(@category), @thread.id)}"}
           %i.fa.fa-reply

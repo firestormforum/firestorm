@@ -15,7 +15,7 @@ defmodule FirestormWeb.Web.PostController do
           nil ->
             conn
             |> put_flash(:error, "No such thread")
-            |> redirect(to: category_path(conn, :show, category.id))
+            |> redirect(to: category_path(conn, :show, category_finder(category)))
           thread ->
             apply(__MODULE__, action_name(conn),
               [conn, conn.params, category, thread])
@@ -54,7 +54,7 @@ defmodule FirestormWeb.Web.PostController do
           {:ok, _} ->
             conn
             |> put_flash(:info, "Post created successfully")
-            |> redirect(to: category_thread_path(conn, :show, category.slug, thread.id))
+            |> redirect(to: category_thread_path(conn, :show, category_finder(category), thread.id))
 
           {:error, changeset} ->
             conn
