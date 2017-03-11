@@ -9,7 +9,7 @@ defmodule FirestormWeb.Web.ThreadView do
 
   def markdown(body) do
     body
-    |> Earmark.as_html!
+    |> as_html!
     |> raw
   end
 
@@ -18,4 +18,13 @@ defmodule FirestormWeb.Web.ThreadView do
     category_path(conn, :show, category.slug)
   end
   def back(_template, _conn), do: nil
+
+  defp earmark_options() do
+    %Earmark.Options{gfm: true, breaks: true}
+  end
+
+  defp as_html!(body) do
+    body
+    |> Earmark.as_html!(earmark_options)
+  end
 end
