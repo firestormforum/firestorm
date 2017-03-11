@@ -3,13 +3,10 @@
     %li.thread-list-item
       .details
         .summary
-          = link thread.title, to: category_thread_path(@conn, :show, thread.category.slug, thread.id), class: "title"
-          %a.user-name{href: "#"}
-            @#{user(thread).username}
+          = thread_title_link(@conn, thread)
+          = user_link(user(thread))
         .metadata
-          - time_string = Timex.format!(thread.inserted_at, "{ISO:Extended}")
-          %abbr.time{title: time_string }
-            = time_string
+          = time_abbr(thread.inserted_at)
       .supplemental
         - # FIXME: LOL database access n + 1 so bad stop
         - if Thread.completely_read?(thread, current_user(@conn)) do

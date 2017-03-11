@@ -62,7 +62,9 @@ defmodule FirestormWeb.Web do
         ErrorHelpers,
         Gettext,
         ViewHelpers,
-        Router.Helpers
+        Router.Helpers,
+        LinkHelpers,
+        TagHelpers,
       }
 
       alias FirestormData.{

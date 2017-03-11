@@ -1,10 +1,7 @@
 .post-item
   .item-metadata
-    = link "@#{@post.user.username}", to: "#", class: "username"
-
-    - time_string = Timex.format!(@post.inserted_at, "{ISO:Extended}")
-    %abbr.time{title: "#{time_string}" }
-      = time_string
+    = user_link(@post.user)
+    = time_abbr(@post.inserted_at)
 
   .body
     = markdown(@post.body)

@@ -25,6 +25,6 @@ defmodule FirestormWeb.Web.ThreadView do
 
   defp as_html!(body) do
     body
-    |> Earmark.as_html!(earmark_options)
+    |> Earmark.as_html!(earmark_options())
   end
 end
