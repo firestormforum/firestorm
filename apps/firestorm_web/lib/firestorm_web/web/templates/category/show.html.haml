@@ -1,12 +1,13 @@
 .category-header
-  %h2= @category.title
+  %h2
+    = category_title_link(@conn, @category)
   .spacer
   %ul.actions
-    %li
     %li
       %a.pure-button{href: "#{category_path(@conn, :new, parent_id: @category.id)}"}
         %i.fa.fa-plus
         New Category
+    %li
       %a.pure-button.button-primary{href: "#{category_thread_path(@conn, :new, @category.slug)}"}
         %i.fa.fa-plus
         New Thread

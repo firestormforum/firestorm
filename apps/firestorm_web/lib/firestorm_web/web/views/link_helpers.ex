@@ -13,6 +13,13 @@ defmodule FirestormWeb.Web.LinkHelpers do
     link thread.title, to: category_thread_path(conn, :show, thread.category.slug, thread.id), class: "title"
   end
 
+  @doc """
+  Link to a category using the category's title as the link text
+  """
+  def category_title_link(conn, category) do
+    link category.title, to: category_path(conn, :show, category.slug)
+  end
+
   def user_link(user) do
     link "@#{user.username}", to: "#", class: "user-name"
   end

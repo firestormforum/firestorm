@@ -2,7 +2,7 @@
   - for category <- @categories do
     %li
       %h2.title
-        = link category.title, to: category_path(@conn, :show, category.slug)
+        = category_title_link(@conn, category)
 
       - if category.children && !Enum.empty?(category.children) do
         = render "_list.html", conn: @conn, categories: category.children
