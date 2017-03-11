@@ -10,6 +10,11 @@ config :phoenix, :template_engines,
 
 config :firestorm_web, ecto_repos: []
 
+# To make acceptance testing easier, we have a flag we can flip to let us get
+# the current user from a cookie rather than the session store. We don't do that
+# by default.
+config :firestorm_web, :get_session_from_cookies, false
+
 # Configures the endpoint
 config :firestorm_web, FirestormWeb.Web.Endpoint,
   http: [port: 4000],
