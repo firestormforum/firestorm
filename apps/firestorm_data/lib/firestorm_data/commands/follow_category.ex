@@ -4,6 +4,7 @@ defmodule FirestormData.Commands.FollowCategory do
   """
 
   use FirestormData.Command
+  alias FirestormData.Follow
 
   embedded_schema do
     field :user_id, :integer
@@ -38,6 +39,7 @@ defmodule FirestormData.Commands.FollowCategory do
         else
           category
           |> Ecto.build_assoc(:follows, %{user_id: user_id})
+          |> Follow.changeset(%{})
           |> Repo.insert
           |> handle_result(changeset)
         end

@@ -1,5 +1,13 @@
 defmodule FirestormData.Schema.CategoryTest do
-  alias FirestormData.{Category, Repo, User, Viewable, Followable}
+  alias FirestormData.{
+    Category,
+    Repo,
+    User,
+    View,
+    Viewable,
+    Follow,
+    Followable,
+  }
   use ExUnit.Case
   @valid_attributes %{
     title: "Something"
@@ -89,12 +97,14 @@ defmodule FirestormData.Schema.CategoryTest do
   defp create_view(category, user) do
     category
     |> Ecto.build_assoc(:views, %{user_id: user.id})
+    |> View.changeset(%{})
     |> Repo.insert
   end
 
   defp create_follow(category, user) do
     category
     |> Ecto.build_assoc(:follows, %{user_id: user.id})
+    |> Follow.changeset(%{})
     |> Repo.insert
   end
 end

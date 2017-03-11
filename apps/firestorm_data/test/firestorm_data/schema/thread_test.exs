@@ -5,7 +5,9 @@ defmodule FirestormData.Schema.ThreadTest do
     Repo,
     Post,
     User,
+    View,
     Viewable,
+    Follow,
     Followable,
     Tag,
     Taggable,
@@ -137,12 +139,14 @@ defmodule FirestormData.Schema.ThreadTest do
   defp create_view(thread, user) do
     thread
     |> Ecto.build_assoc(:views, %{user_id: user.id})
+    |> View.changeset(%{})
     |> Repo.insert
   end
 
   defp create_follow(thread, user) do
     thread
     |> Ecto.build_assoc(:follows, %{user_id: user.id})
+    |> Follow.changeset(%{})
     |> Repo.insert
   end
 

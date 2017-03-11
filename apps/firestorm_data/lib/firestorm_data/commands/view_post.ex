@@ -4,6 +4,7 @@ defmodule FirestormData.Commands.ViewPost do
   """
 
   use FirestormData.Command
+  alias FirestormData.View
 
   embedded_schema do
     field :user_id, :integer
@@ -34,6 +35,7 @@ defmodule FirestormData.Commands.ViewPost do
 
         post
         |> Ecto.build_assoc(:views, %{user_id: user_id})
+        |> View.changeset(%{})
         |> Repo.insert
         |> handle_result(changeset)
 
