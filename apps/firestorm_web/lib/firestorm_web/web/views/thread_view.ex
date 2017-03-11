@@ -34,7 +34,10 @@ defmodule FirestormWeb.Web.ThreadView do
       breaks: true,
       # Prefix the `code` tag language class, as in `language-elixir`, for
       # proper support from http://prismjs.com/
-      code_class_prefix: "language-"
+      code_class_prefix: "language-",
+      # Use our custom Earmark renderer so we can take advantage of various
+      # features in Prism that require us to tweak the generated `pre/code` tags
+      renderer: FirestormWeb.Earmark.HtmlRenderer,
     }
   end
 

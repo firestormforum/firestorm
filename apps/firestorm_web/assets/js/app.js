@@ -11,10 +11,9 @@ import 'prismjs/plugins/autolinker/prism-autolinker'
 import 'prismjs/plugins/autolinker/prism-autolinker.css'
 import 'prismjs/plugins/line-numbers/prism-line-numbers'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
-import 'prismjs/plugins/line-highlight/prism-line-highlight'
-import 'prismjs/plugins/line-highlight/prism-line-highlight.css'
 import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace'
-import 'prismjs/plugins/show-language/prism-show-language'
+import 'prismjs/plugins/toolbar/prism-toolbar'
+import 'prismjs/plugins/toolbar/prism-toolbar.css'
 
 let moment = require('moment')
 let $ = require('jquery')
