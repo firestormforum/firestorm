@@ -20,8 +20,22 @@ defmodule FirestormWeb.Web.ThreadView do
   end
   def back(_template, _conn), do: nil
 
+  # Options to control how earmark works. We should probably expose these in
+  # some fashion in the configuration, so people can more easily tweak the
+  # forum's behaviour to their liking without changing code. Not a high priority
+  # though.
   defp earmark_options() do
-    %Earmark.Options{gfm: true, breaks: true}
+    %Earmark.Options{
+      # Add some "github-flavored-markdown" features (tables, strikethrough, &c.)
+      gfm: true,
+      # Honor line breaks in markdown (i.e. not quite to spec) - I think that
+      # this is useful behaviour for a forum but I'm not above being convinced
+      # I'm wrong and dumb on this
+      breaks: true,
+      # Prefix the `code` tag language class, as in `language-elixir`, for
+      # proper support from http://prismjs.com/
+      code_class_prefix: "language-"
+    }
   end
 
   defp as_html!(body) do

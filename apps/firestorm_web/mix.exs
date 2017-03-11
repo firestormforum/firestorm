@@ -46,7 +46,7 @@ defmodule FirestormWeb.Mixfile do
       {:cowboy, "~> 1.0"},
       {:ueberauth, "~> 0.4"},
       {:ueberauth_github, "~> 0.4"},
-      {:earmark, "~> 1.1.1"},
+      {:earmark, "~> 1.2.0"},
       {:timex, "~> 3.0"},
 
       # UMBRELLA
