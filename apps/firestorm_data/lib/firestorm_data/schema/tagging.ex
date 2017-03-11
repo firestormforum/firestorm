@@ -20,5 +20,6 @@ defmodule FirestormData.Tagging do
     record
     |> cast(params, @required_fields)
     |> validate_required(@required_fields)
+    |> unique_constraint(:tag_id, name: :taggings_assoc_id_tag_id_index)
   end
 end

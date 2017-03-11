@@ -6,7 +6,10 @@ defmodule FirestormData.Schema.ThreadTest do
     Post,
     User,
     Viewable,
-    Followable
+    Followable,
+    Tag,
+    Taggable,
+    Tagging,
   }
   use ExUnit.Case
 
@@ -52,6 +55,21 @@ defmodule FirestormData.Schema.ThreadTest do
     {:ok, _} = create_follow(tests_thread, user)
 
     assert Followable.followed_by?(tests_thread, user)
+  end
+
+  test "it can be tagged" do
+    {:ok, {_elixir, tests_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
+    {:ok, testing_tag} = create_tag("testing")
+    {:ok, _} = create_tagging(tests_thread, testing_tag)
+
+    assert Taggable.tagged_with?(tests_thread, testing_tag)
+  end
+
+  test "it can only be tagged once with a given tag" do
+    {:ok, {_elixir, tests_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
+    {:ok, testing_tag} = create_tag("testing")
+    {:ok, _} = create_tagging(tests_thread, testing_tag)
+    assert {:error, _} = create_tagging(tests_thread, testing_tag)
   end
 
   test "it knows whether it is fully read", %{user: user} do
@@ -117,15 +135,27 @@ defmodule FirestormData.Schema.ThreadTest do
   end
 
   defp create_view(thread, user) do
-    {:ok, _} =
-      thread
-      |> Ecto.build_assoc(:views, %{user_id: user.id})
-      |> Repo.insert
+    thread
+    |> Ecto.build_assoc(:views, %{user_id: user.id})
+    |> Repo.insert
   end
 
   defp create_follow(thread, user) do
     thread
     |> Ecto.build_assoc(:follows, %{user_id: user.id})
+    |> Repo.insert
+  end
+
+  defp create_tag(title) do
+    %Tag{}
+    |> Tag.changeset(%{title: title})
+    |> Repo.insert
+  end
+
+  defp create_tagging(thread, tag) do
+    thread
+    |> Ecto.build_assoc(:taggings, %{tag_id: tag.id})
+    |> Tagging.changeset(%{})
     |> Repo.insert
   end
 end

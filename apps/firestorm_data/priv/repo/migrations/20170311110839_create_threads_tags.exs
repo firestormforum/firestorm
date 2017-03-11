@@ -15,5 +15,6 @@ defmodule FirestormData.Repo.Migrations.CreateThreadsTags do
       add :tag_id, references(:tags)
       timestamps()
     end
+    create unique_index(:threads_taggings, [:assoc_id, :tag_id], name: :taggings_assoc_id_tag_id_index)
   end
 end
