@@ -7,6 +7,9 @@ defmodule FirestormData.Schema.CategoryTest do
     Viewable,
     Follow,
     Followable,
+    Tag,
+    Taggable,
+    Tagging,
   }
   use ExUnit.Case
   @valid_attributes %{
@@ -76,6 +79,21 @@ defmodule FirestormData.Schema.CategoryTest do
     assert hd(children).title == "OTP"
   end
 
+  test "it can be tagged" do
+    {:ok, elixir} = create_category("Elixir")
+    {:ok, testing_tag} = create_tag("testing")
+    {:ok, _} = create_tagging(elixir, testing_tag)
+
+    assert Taggable.tagged_with?(elixir, testing_tag)
+  end
+
+  test "it can only be tagged once with a given tag" do
+    {:ok, elixir} = create_category("Elixir")
+    {:ok, testing_tag} = create_tag("testing")
+    {:ok, _} = create_tagging(elixir, testing_tag)
+    assert {:error, _} = create_tagging(elixir, testing_tag)
+  end
+
   defp make_elixir_otp_tree() do
     {:ok, elixir} =
       %Category{title: "Elixir"}
@@ -105,6 +123,19 @@ defmodule FirestormData.Schema.CategoryTest do
     category
     |> Ecto.build_assoc(:follows, %{user_id: user.id})
     |> Follow.changeset(%{})
+    |> Repo.insert
+  end
+
+  defp create_tag(title) do
+    %Tag{}
+    |> Tag.changeset(%{title: title})
+    |> Repo.insert
+  end
+
+  defp create_tagging(category, tag) do
+    category
+    |> Ecto.build_assoc(:taggings, %{tag_id: tag.id})
+    |> Tagging.category_changeset(%{})
     |> Repo.insert
   end
 end

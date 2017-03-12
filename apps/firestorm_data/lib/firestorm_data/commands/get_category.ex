@@ -20,7 +20,9 @@ defmodule FirestormData.Commands.GetCategory do
     query =
       Category
       |> where(^[{finder_key, finder}])
-      |> preload([threads: [:posts, :category], parent: []])
+      |> preload(threads: [:posts, :category])
+      |> preload(:parent)
+      |> preload(:tags)
 
     case Repo.one(query) do
       nil -> {:error, :not_found}

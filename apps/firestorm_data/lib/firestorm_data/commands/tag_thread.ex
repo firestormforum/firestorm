@@ -4,6 +4,7 @@ defmodule FirestormData.Commands.TagThread do
   """
 
   use FirestormData.Command
+  alias FirestormData.Tagging
 
   embedded_schema do
     field :tag_id, :integer
@@ -34,6 +35,7 @@ defmodule FirestormData.Commands.TagThread do
 
         thread
         |> Ecto.build_assoc(:taggings, %{tag_id: tag_id})
+        |> Tagging.thread_changeset(%{})
         |> Repo.insert
         |> handle_result(changeset)
 
