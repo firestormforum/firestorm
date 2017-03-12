@@ -26,7 +26,18 @@ defmodule FirestormData.Commands.GetCategory do
 
     case Repo.one(query) do
       nil -> {:error, :not_found}
-      c -> {:ok, c}
+      c ->
+        c = Map.put(c, :children, get_children(c))
+        {:ok, c}
     end
+  end
+
+  defp get_children(category) do
+    category
+    |> Category.children
+    |> Repo.all
+    |> Enum.map(fn c ->
+      Repo.preload(c, [threads: [:posts]])
+    end)
   end
 end
