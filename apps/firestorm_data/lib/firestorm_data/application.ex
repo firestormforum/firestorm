@@ -7,7 +7,8 @@ defmodule FirestormData.Application do
     import Supervisor.Spec, warn: false
 
     children = [
-      supervisor(FirestormData.Repo, [])
+      supervisor(FirestormData.Repo, []),
+      worker(FirestormData.Events, []),
     ]
 
     opts = [strategy: :one_for_one, name: FirestormData.Supervisor]
