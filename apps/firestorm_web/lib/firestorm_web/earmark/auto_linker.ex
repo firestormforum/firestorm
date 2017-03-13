@@ -4,8 +4,8 @@ defmodule FirestormWeb.Earmark.AutoLinker do
   wrapped in an `a` tag with the link as both content and href..
   """
 
-  # A RegEx to match any URL that has spaces or newlinex on either side of it.
-  @url_regex ~r{(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?}
+  # A RegEx to match any URL that has spaces or newlines on either side of it.
+  @url_regex ~r{([ \n]+|^)(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?}
 
   def run(body) do
     @url_regex
