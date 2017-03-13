@@ -1,5 +1,5 @@
 defmodule FirestormData.Commands.GetCategoryTest do
-  use ExUnit.Case
+  use FirestormData.UnitCase
   alias FirestormData.Commands.{CreateCategory, GetCategory}
   alias FirestormData.{Category, Repo}
 

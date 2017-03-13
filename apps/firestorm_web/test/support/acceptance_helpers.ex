@@ -23,7 +23,9 @@ defmodule FirestormWeb.AcceptanceHelpers do
     user = build(:user)
 
     {:ok, user} =
-      LoginOrRegisterFromGitHub.run(%{username: user.username})
+      %LoginOrRegisterFromGitHub{}
+      |> LoginOrRegisterFromGitHub.changeset(%{username: user.username, email: user.email})
+      |> LoginOrRegisterFromGitHub.run()
 
     {:ok, user: user}
   end

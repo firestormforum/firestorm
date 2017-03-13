@@ -1,5 +1,5 @@
 defmodule FirestormData.Commands.TagCategoryTest do
-  use ExUnit.Case
+  use FirestormData.UnitCase
   alias FirestormData.Commands.{CreateCategory, TagCategory}
   alias FirestormData.{Category, User, Repo, Tag, Taggable, Tagging}
   import Ecto.Query
@@ -37,16 +37,6 @@ defmodule FirestormData.Commands.TagCategoryTest do
     {:ok, category_id} = CreateCategory.run(changeset)
 
     {:ok, category_id: category_id}
-  end
-
-  def create_user(_) do
-    changeset =
-      %User{}
-      |> User.changeset(%{username: "sonny"})
-
-    {:ok, user} = Repo.insert(changeset)
-
-    {:ok, user_id: user.id}
   end
 
   def tag_category(%{category_id: category_id}) do

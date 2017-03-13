@@ -3,8 +3,10 @@ defmodule FirestormWeb.Factory do
   alias FirestormData.{User, Category, Thread, Post}
 
   def user_factory do
+    user_name = Faker.Internet.user_name
     %User{
-      username: Faker.Internet.user_name
+      username: user_name,
+      email: "#{user_name}@example.org"
     }
   end
 

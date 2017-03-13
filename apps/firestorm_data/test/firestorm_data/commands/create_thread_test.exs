@@ -1,5 +1,5 @@
 defmodule FirestormData.Commands.CreateThreadTest do
-  use ExUnit.Case
+  use FirestormData.UnitCase
   alias FirestormData.Commands.{CreateThread, CreateCategory}
   alias FirestormData.{User, Repo, Thread}
 
@@ -32,15 +32,6 @@ defmodule FirestormData.Commands.CreateThreadTest do
 
     {:ok, category_id} = CreateCategory.run(changeset)
     {:ok, %{category_id: category_id}}
-  end
-
-  def create_user(_) do
-    changeset =
-      %User{}
-      |> User.changeset(%{username: "sonny"})
-
-    {:ok, user} = Repo.insert(changeset)
-    {:ok, %{user_id: user.id}}
   end
 
   def create_thread(%{user_id: user_id, category_id: category_id}) do

@@ -1,5 +1,5 @@
 defmodule FirestormData.Commands.TagThreadTest do
-  use ExUnit.Case
+  use FirestormData.UnitCase
   alias FirestormData.Commands.{CreateCategory, CreateThread, TagThread}
   alias FirestormData.{Thread, User, Repo, Tag, Taggable}
 
@@ -29,16 +29,6 @@ defmodule FirestormData.Commands.TagThreadTest do
     {:ok, category_id} = CreateCategory.run(changeset)
 
     {:ok, category_id: category_id}
-  end
-
-  def create_user(_) do
-    changeset =
-      %User{}
-      |> User.changeset(%{username: "sonny"})
-
-    {:ok, user} = Repo.insert(changeset)
-
-    {:ok, user_id: user.id}
   end
 
   def create_tag(_) do

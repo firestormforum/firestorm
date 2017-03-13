@@ -11,6 +11,13 @@ defmodule FirestormData.Followable do
     follow_count(followable, user) > 0
   end
 
+  def follower_ids(followable) do
+    followable
+    |> Ecto.assoc(:follows)
+    |> select([f], f.user_id)
+    |> Repo.all
+  end
+
   def follow_count(followable) do
     followable
     |> Ecto.assoc(:follows)

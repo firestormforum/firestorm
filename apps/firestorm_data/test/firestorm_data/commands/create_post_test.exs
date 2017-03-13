@@ -1,22 +1,25 @@
-defmodule FirestormData.Commands.ViewThreadTest do
+defmodule FirestormData.Commands.CreatePostTest do
   use FirestormData.UnitCase
-  alias FirestormData.Commands.{CreateCategory, CreateThread, ViewThread}
-  alias FirestormData.{Thread, User, Repo, Viewable}
+  alias FirestormData.Commands.{CreateThread, CreateCategory, CreatePost}
+  alias FirestormData.{User, Repo, Thread, Post}
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
   end
 
-  describe "viewing a thread" do
-    setup [:create_user, :create_category, :create_thread, :view_thread]
+  describe "creating a post" do
+    setup [:create_user, :create_category, :create_thread, :create_post]
 
     test "returns expected result", %{result: result} do
       assert {:ok, _some_id} = result
     end
 
-    test "creates a view in the database", %{thread_id: thread_id} do
-      thread = Repo.get(Thread, thread_id)
-      assert 1 == Viewable.view_count(thread)
+    test "creates a post in the database", %{result: {:ok, post_id}} do
+      post =
+        Post
+        |> Repo.get(post_id)
+
+      assert post
     end
   end
 
@@ -26,8 +29,7 @@ defmodule FirestormData.Commands.ViewThreadTest do
       |> CreateCategory.changeset(%{title: "some title"})
 
     {:ok, category_id} = CreateCategory.run(changeset)
-
-    {:ok, category_id: category_id}
+    {:ok, %{category_id: category_id}}
   end
 
   def create_thread(%{user_id: user_id, category_id: category_id}) do
@@ -40,11 +42,11 @@ defmodule FirestormData.Commands.ViewThreadTest do
     {:ok, thread_id: thread_id}
   end
 
-  def view_thread(%{user_id: user_id, thread_id: thread_id}) do
+  def create_post(%{user_id: user_id, thread_id: thread_id}) do
     changeset =
-      %ViewThread{}
-      |> ViewThread.changeset(%{user_id: user_id, thread_id: thread_id})
+      %CreatePost{}
+      |> CreatePost.changeset(%{user_id: user_id, thread_id: thread_id, body: "Some body"})
 
-    {:ok, result: ViewThread.run(changeset)}
+    {:ok, result: CreatePost.run(changeset)}
   end
 end
