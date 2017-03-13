@@ -16,22 +16,16 @@ defmodule FirestormData.Tagging do
 
   @required_fields ~w(assoc_id tag_id)a
 
-  def thread_changeset(record, params \\ :empty) do
+  def changeset(record, params \\ :empty) do
     record
     |> cast(params, @required_fields)
     |> validate_required(@required_fields)
-    |> unique_constraint(:tag_id, name: :threads_taggings_assoc_id_tag_id_index)
+    |> unique_tag_constaint()
   end
 
-  # Since we have to have a different name for each unique constraint (because
-  # they're complex - i.e. on 2 fields - we have to have a different changeset
-  # for each type of thing we can tag.
-  #
-  # I don't love it, but that's where we are atm.
-  def category_changeset(record, params \\ :empty) do
-    record
-    |> cast(params, @required_fields)
-    |> validate_required(@required_fields)
-    |> unique_constraint(:tag_id, name: :categories_taggings_assoc_id_tag_id_index)
+  defp unique_tag_constaint(changeset) do
+    table = Ecto.get_meta(changeset.data, :source)
+    constraint = String.to_atom("#{table}_assoc_id_tag_id_index")
+    unique_constraint(changeset, :tag_id, name: constraint)
   end
 end
