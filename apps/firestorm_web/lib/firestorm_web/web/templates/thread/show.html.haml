@@ -10,6 +10,13 @@
       - for category <- @category_breadcrumbs do
         %li.category{class: "-color-#{Category.color(category)}"}
           = category_title_link(@conn, category)
+  .item-metadata
+    = render "_tag_list.html", tags: @thread.tags, conn: @conn
+    - form_for @tag_thread_changeset, category_thread_thread_path(@conn, :tag, category_finder(@category), @thread.id), [class: "tag-form"], fn f ->
+      = text_input f, :tag_title, class: "title"
+      %button.pure-button.button-primary
+        %i.fa.fa-plus
+        Add Tag
 
 %ol.post-list
   %li= render "_first_post.html", post: @first_post, conn: @conn, category: @category, thread: @thread, following: @following

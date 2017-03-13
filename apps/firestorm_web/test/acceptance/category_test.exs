@@ -1,4 +1,4 @@
-defmodule FirestormWeb.CategoryTest do
+defmodule FirestormWeb.Acceptance.CategoryTest do
   @moduledoc false
   use FirestormWeb.AcceptanceCase, async: true
 
