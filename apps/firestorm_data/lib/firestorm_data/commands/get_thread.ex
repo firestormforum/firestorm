@@ -23,6 +23,7 @@ defmodule FirestormData.Commands.GetThread do
       |> where(category_id: ^category_id)
       |> preload(posts: [:user])
       |> preload(:category)
+      |> preload(:tags)
 
     case Repo.one(query) do
       nil -> {:error, :not_found}

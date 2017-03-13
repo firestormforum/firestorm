@@ -2,21 +2,28 @@ defmodule FirestormData.Commands.TagThreadTest do
   use FirestormData.UnitCase
   alias FirestormData.Commands.{CreateCategory, CreateThread, TagThread}
   alias FirestormData.{Thread, User, Repo, Tag, Taggable}
+  import Ecto.Query
+  @tag_title "phoenix"
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
   end
 
   describe "tagging a thread" do
-    setup [:create_user, :create_category, :create_tag, :create_thread, :tag_thread]
+    setup [:create_user, :create_category, :create_thread, :tag_thread]
 
     test "returns expected result", %{result: result} do
       assert {:ok, _some_id} = result
     end
 
-    test "creates a tagging in the database", %{thread_id: thread_id, tag_id: tag_id} do
+    test "creates a tagging in the database", %{thread_id: thread_id} do
       thread = Repo.get(Thread, thread_id)
-      tag = Repo.get(Tag, tag_id)
+      tag =
+        Tag
+        |> where(title: ^@tag_title)
+        |> limit(1)
+        |> Repo.one
+
       assert Taggable.tagged_with?(thread, tag)
     end
   end
@@ -31,18 +38,6 @@ defmodule FirestormData.Commands.TagThreadTest do
     {:ok, category_id: category_id}
   end
 
-  def create_tag(_) do
-    title = "phoenix"
-
-    changeset =
-      %Tag{}
-      |> Tag.changeset(%{title: title})
-
-    {:ok, tag} = Repo.insert(changeset)
-
-    {:ok, tag_id: tag.id, tag_title: title}
-  end
-
   def create_thread(%{user_id: user_id, category_id: category_id}) do
     changeset =
       %CreateThread{}
@@ -53,10 +48,10 @@ defmodule FirestormData.Commands.TagThreadTest do
     {:ok, thread_id: thread_id}
   end
 
-  def tag_thread(%{tag_id: tag_id, thread_id: thread_id}) do
+  def tag_thread(%{thread_id: thread_id}) do
     changeset =
       %TagThread{}
-      |> TagThread.changeset(%{tag_id: tag_id, thread_id: thread_id})
+      |> TagThread.changeset(%{tag_title: @tag_title, thread_id: thread_id})
 
     {:ok, result: TagThread.run(changeset)}
   end

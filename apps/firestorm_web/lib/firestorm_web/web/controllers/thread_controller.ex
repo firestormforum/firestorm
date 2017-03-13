@@ -7,6 +7,7 @@ defmodule FirestormWeb.Web.ThreadController do
     ViewPost,
     FollowThread,
     UnfollowThread,
+    TagThread,
   }
   alias FirestormData.Followable
 
@@ -26,6 +27,10 @@ defmodule FirestormWeb.Web.ThreadController do
 
   def show(conn, %{"id" => id_or_slug}, category) do
     finder = get_finder(id_or_slug)
+
+    tag_thread_changeset =
+      %TagThread{}
+      |> TagThread.changeset(%{})
 
     case GetThread.run(%GetThread{finder: finder, category_id: category.id}) do
       {:ok, thread} ->
@@ -49,8 +54,40 @@ defmodule FirestormWeb.Web.ThreadController do
              first_post: first_post,
              posts: posts,
              category_breadcrumbs: category_breadcrumbs,
-             following: following
+             following: following,
+             tag_thread_changeset: tag_thread_changeset
            )
+
+      {:error, :not_found} ->
+        conn
+        |> put_flash(:error, "No such thread")
+        |> redirect(to: category_path(conn, :show, category_finder(category)))
+    end
+  end
+
+  def tag(conn, %{"thread_id" => id_or_slug, "tag_thread" => tag_thread_params}, category) do
+    finder = get_finder(id_or_slug)
+
+    case GetThread.run(%GetThread{finder: finder, category_id: category.id}) do
+      {:ok, thread} ->
+        changeset =
+          %TagThread{}
+          |> TagThread.changeset(
+            tag_thread_params
+            |> Map.put("thread_id", thread.id)
+          )
+
+        case TagThread.run(changeset) do
+          {:ok, _} ->
+            conn
+            |> put_flash(:info, "Tagged thread")
+            |> redirect(to: category_thread_path(conn, :show, category_finder(category), thread.id))
+
+          {:error, e} ->
+            conn
+            |> put_flash(:error, "An error occurred #{inspect e}")
+            |> redirect(to: category_thread_path(conn, :show, category_finder(category), thread.id))
+        end
 
       {:error, :not_found} ->
         conn

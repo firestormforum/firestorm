@@ -7,10 +7,12 @@ defmodule FirestormWeb.AcceptanceHelpers do
   alias FirestormData.{
     Repo,
     Category,
+    Thread,
   }
   alias FirestormData.Commands.{
     LoginOrRegisterFromGitHub,
     CreateCategory,
+    CreateThread,
   }
 
   def log_in_as(session, user) do
@@ -43,5 +45,25 @@ defmodule FirestormWeb.AcceptanceHelpers do
       |> CreateCategory.run()
 
     Repo.get(Category, c_id)
+  end
+
+  def create_threads(%{elixir: elixir, elm: elm, user: user}) do
+    with elixir_thread <- create_thread(elixir, user, "First elixir thread", "This is some content for the first elixir thread post"),
+         elm_thread <- create_thread(elm, user, "First elm thread", "This is some content for the first elm thread post"),
+      do: {:ok, %{elixir_thread: elixir_thread, elm_thread: elm_thread}}
+  end
+
+  def create_thread(category, user, title, body) do
+    {:ok, t_id} =
+      %CreateThread{}
+      |> CreateThread.changeset(%{
+        category_id: category.id,
+        user_id: user.id,
+        title: title,
+        body: body
+      })
+      |> CreateThread.run
+
+    Repo.get(Thread, t_id)
   end
 end
