@@ -1,6 +1,9 @@
 defmodule FirestormWeb.Web.PostController do
   use FirestormWeb.Web, :controller
-  alias FirestormData.Commands.{GetCategory}
+  alias FirestormData.Commands.{
+    GetCategory,
+    CreatePost
+  }
 
   def action(conn, _) do
     case GetCategory.run(%GetCategory{finder: conn.params["category_id"]}) do
@@ -30,28 +33,28 @@ defmodule FirestormWeb.Web.PostController do
 
   def new(conn, _params, category, thread) do
     changeset =
-      %Post{}
-      |> Post.changeset(%{})
+      %CreatePost{}
+      |> CreatePost.changeset(%{})
 
     conn
     |> render("new.html", changeset: changeset, category: category, thread: thread)
   end
 
-  def create(conn, %{"post" => post_params}, category, thread) do
-    post_params =
-      post_params
+  def create(conn, %{"create_post" => create_post_params}, category, thread) do
+    create_post_params =
+      create_post_params
       |> Map.put("category_id", category.id)
       |> Map.put("thread_id", thread.id)
       |> Map.put("user_id", current_user(conn).id)
 
     changeset =
-      %Post{}
-      |> Post.changeset(post_params)
+      %CreatePost{}
+      |> CreatePost.changeset(create_post_params)
 
     case changeset.valid? do
       true ->
-        case Repo.insert(changeset) do
-          {:ok, _} ->
+        case CreatePost.run(changeset) do
+          {:ok, _post_id} ->
             conn
             |> put_flash(:info, "Post created successfully")
             |> redirect(to: category_thread_path(conn, :show, category_finder(category), thread.id))

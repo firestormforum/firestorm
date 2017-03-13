@@ -1,7 +1,7 @@
 defmodule FirestormData.Commands.ViewPostTest do
   @moduledoc false
 
-  use ExUnit.Case
+  use FirestormData.UnitCase
   alias FirestormData.Commands.{CreateCategory, CreateThread, ViewPost}
   alias FirestormData.{Thread, User, Repo, Post, Viewable}
 
@@ -30,16 +30,6 @@ defmodule FirestormData.Commands.ViewPostTest do
     {:ok, category_id} = CreateCategory.run(changeset)
 
     {:ok, category_id: category_id}
-  end
-
-  def create_user(_) do
-    changeset =
-      %User{}
-      |> User.changeset(%{username: "sonny"})
-
-    {:ok, user} = Repo.insert(changeset)
-
-    {:ok, user_id: user.id}
   end
 
   def create_thread(%{user_id: user_id, category_id: category_id}) do
