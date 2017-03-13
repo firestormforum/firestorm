@@ -14,7 +14,7 @@ defmodule FirestormData.Schema.TaggingTest do
   test "it requires a tag_id" do
     changeset =
       %Tagging{}
-        |> Tagging.thread_changeset(Map.delete(@valid_attributes, :tag_id))
+        |> Tagging.changeset(Map.delete(@valid_attributes, :tag_id))
 
     refute changeset.valid?
     assert changeset.errors[:tag_id] == {"can't be blank", [validation: :required]}
@@ -23,7 +23,7 @@ defmodule FirestormData.Schema.TaggingTest do
   test "it requires an assoc_id" do
     changeset =
       %Tagging{}
-        |> Tagging.thread_changeset(Map.delete(@valid_attributes, :assoc_id))
+        |> Tagging.changeset(Map.delete(@valid_attributes, :assoc_id))
 
     refute changeset.valid?
     assert changeset.errors[:assoc_id] == {"can't be blank", [validation: :required]}

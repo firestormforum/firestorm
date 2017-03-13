@@ -35,7 +35,7 @@ defmodule FirestormData.Commands.TagThread do
 
         thread
         |> Ecto.build_assoc(:taggings, %{tag_id: tag_id})
-        |> Tagging.thread_changeset(%{})
+        |> Tagging.changeset(%{})
         |> Repo.insert
         |> handle_result(changeset)
 

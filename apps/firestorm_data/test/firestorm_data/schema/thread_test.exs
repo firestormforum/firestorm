@@ -161,7 +161,7 @@ defmodule FirestormData.Schema.ThreadTest do
   defp create_tagging(thread, tag) do
     thread
     |> Ecto.build_assoc(:taggings, %{tag_id: tag.id})
-    |> Tagging.thread_changeset(%{})
+    |> Tagging.changeset(%{})
     |> Repo.insert
   end
 end

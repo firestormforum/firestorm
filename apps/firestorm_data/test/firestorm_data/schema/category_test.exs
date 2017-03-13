@@ -135,7 +135,7 @@ defmodule FirestormData.Schema.CategoryTest do
   defp create_tagging(category, tag) do
     category
     |> Ecto.build_assoc(:taggings, %{tag_id: tag.id})
-    |> Tagging.category_changeset(%{})
+    |> Tagging.changeset(%{})
     |> Repo.insert
   end
 end
