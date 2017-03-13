@@ -64,7 +64,7 @@ defmodule FirestormData.Commands.TagCategory do
 
     category
     |> Ecto.build_assoc(:taggings, %{tag_id: tag.id})
-    |> Tagging.category_changeset(%{})
+    |> Tagging.changeset(%{})
     |> Repo.insert
     |> handle_result(changeset)
   end
