@@ -42,6 +42,15 @@ defmodule FirestormData.Commands.CreatePost do
   end
 
   def handle_result({:ok, post}, _changeset) do
+    # Get the post and its user and thread and notify
+    post =
+      Post
+      |> where(id: ^post.id)
+      |> preload(:thread)
+      |> preload(:user)
+      |> Repo.one
+
+    Events.notify({:new_post, post})
     {:ok, post.id}
   end
   def handle_result({:error, changes}, changeset) do

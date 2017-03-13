@@ -57,6 +57,8 @@ defmodule FirestormData.Schema.ThreadTest do
     {:ok, _} = create_follow(tests_thread, user)
 
     assert Followable.followed_by?(tests_thread, user)
+    follower_ids = Followable.follower_ids(tests_thread)
+    assert Enum.member?(follower_ids, user.id)
   end
 
   test "it can be tagged" do

@@ -1,9 +1,10 @@
 defmodule FirestormNotifier.EmailerTest do
+  use ExUnit.Case
   import Bamboo.Email
 
   test "creating an email" do
     email =
-      new_email
+      new_email()
       |> to("josh@dailydrip.com")
       |> from("adam@dailydrip.com")
       |> subject("Testing Bamboo")

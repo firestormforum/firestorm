@@ -13,7 +13,8 @@ defmodule FirestormData.Command do
         Post,
         Viewable,
         Followable,
-        Taggable
+        Taggable,
+        Events,
       }
       import Ecto.{Query, Changeset}
       alias Ecto.{Multi, Changeset}

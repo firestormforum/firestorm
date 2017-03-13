@@ -19,7 +19,7 @@ defmodule FirestormNotifier.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger, :firestorm_data],
+    [extra_applications: [:logger],
      mod: {FirestormNotifier.Application, []}]
   end
 
@@ -42,7 +42,8 @@ defmodule FirestormNotifier.Mixfile do
       {:bamboo, "~> 0.8"},
 
       # UMBRELLA
-      {:firestorm_data, in_umbrella: true}
+      {:firestorm_data, in_umbrella: true},
+      {:firestorm_web, in_umbrella: true},
     ]
   end
 end
