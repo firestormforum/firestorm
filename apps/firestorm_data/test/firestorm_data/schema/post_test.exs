@@ -1,5 +1,13 @@
 defmodule FirestormData.Schema.PostTest do
-  alias FirestormData.{Category, Thread, Post, Repo, User, Viewable}
+  alias FirestormData.{
+    Category,
+    Thread,
+    Post,
+    Repo,
+    User,
+    View,
+    Viewable,
+  }
   use ExUnit.Case
 
   setup do
@@ -91,6 +99,7 @@ defmodule FirestormData.Schema.PostTest do
   defp create_view(thread, user) do
     thread
     |> Ecto.build_assoc(:views, %{user_id: user.id})
+    |> View.changeset(%{})
     |> Repo.insert
   end
 end

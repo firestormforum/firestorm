@@ -6,7 +6,7 @@ defmodule FirestormData.Thread do
 
   use Ecto.Schema
   import Ecto.{Changeset, Query}
-  alias FirestormData.{Repo, Category, Post, View, Follow}
+  alias FirestormData.{Repo, Category, Post, View, Follow, Tagging, Tag}
 
   schema "threads" do
     belongs_to :category, Category
@@ -14,6 +14,8 @@ defmodule FirestormData.Thread do
     has_many :posts, Post
     has_many :views, {"threads_views", View}, foreign_key: :assoc_id
     has_many :follows, {"threads_follows", Follow}, foreign_key: :assoc_id
+    has_many :taggings, {"threads_taggings", Tagging}, foreign_key: :assoc_id
+    many_to_many :tags, Tag, join_through: "threads_taggings", join_keys: [assoc_id: :id, tag_id: :id]
 
     timestamps()
   end

@@ -1,12 +1,11 @@
-defmodule FirestormData.Category do
+defmodule FirestormData.Tag do
   @moduledoc """
-  A `Category` is a grouping of related `Thread`s. Categories are modeled as a
-  Forest of Trees.
+  A `Tag` is a rough way to organize items by giving them essentially free-form labels.
   """
 
   defmodule TitleSlug do
     @moduledoc """
-    A configuration for turning category titles into slugs.
+    A configuration for turning tag titles into slugs.
     """
 
     use EctoAutoslugField.Slug, from: :title, to: :slug
@@ -14,25 +13,16 @@ defmodule FirestormData.Category do
 
   use Ecto.Schema
   import Ecto.Changeset
-  alias FirestormData.{Repo, Thread, View, Follow, Tagging, Tag}
-  use Arbor.Tree
 
-  schema "categories" do
+  schema "tags" do
     field :title, :string
     field :slug, TitleSlug.Type
-    field :children, :any, virtual: true
-    belongs_to :parent, __MODULE__
-    has_many :threads, Thread
-    has_many :views, {"categories_views", View}, foreign_key: :assoc_id
-    has_many :follows, {"categories_follows", Follow}, foreign_key: :assoc_id
-    has_many :taggings, {"categories_taggings", Tagging}, foreign_key: :assoc_id
-    many_to_many :tags, Tag, join_through: "categories_taggings", join_keys: [assoc_id: :id, tag_id: :id]
 
     timestamps()
   end
 
   @required_fields ~w(title)a
-  @optional_fields ~w(parent_id slug)a
+  @optional_fields ~w(slug)a
 
   def changeset(record, params \\ :empty) do
     record
@@ -40,10 +30,6 @@ defmodule FirestormData.Category do
     |> validate_required(@required_fields)
     |> TitleSlug.maybe_generate_slug
     |> TitleSlug.unique_constraint
-  end
-
-  def categories do
-    Repo.all(__MODULE__)
   end
 
   def color(category) do

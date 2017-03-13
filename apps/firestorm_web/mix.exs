@@ -41,13 +41,13 @@ defmodule FirestormWeb.Mixfile do
       {:phoenix_html, "~> 2.6"},
       {:phoenix_haml, "~> 0.2"},
       {:phoenix_ecto, "~> 3.2"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:ueberauth, "~> 0.4"},
       {:ueberauth_github, "~> 0.4"},
       {:earmark, "~> 1.2.0"},
       {:timex, "~> 3.0"},
+      {:fs, "~> 2.12", override: true},
 
       # UMBRELLA
       {:firestorm_data, in_umbrella: true},
@@ -55,6 +55,10 @@ defmodule FirestormWeb.Mixfile do
       # DEV/TEST
       {:credo, "~> 0.6.1", only: [:dev, :test]},
       {:phoenix_integration, "~> 0.2", only: :test},
+      {:wallaby, github: "keathley/wallaby", branch: "features/adding-and-listing-cookies", only: [:dev, :test]},
+      {:ex_machina, "~> 2.0", only: [:dev, :test]},
+      {:faker, "~> 0.7", only: [:dev, :test]},
+      {:phoenix_live_reload, "~> 1.0.8", only: :dev},
     ]
   end
 
