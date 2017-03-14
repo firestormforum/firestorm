@@ -32,7 +32,10 @@ defmodule FirestormWeb.Web.Navigation.Defaults do
               %NavItem{text: "Log Out", path: auth_path(conn, :delete), options: [method: :delete]}
             ]
         else
-          defaults
+          defaults ++
+            [
+              %NavItem{text: "Log In", path: auth_path(conn, :request, :github)}
+            ]
         end
       end
 
