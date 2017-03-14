@@ -29,6 +29,24 @@ defmodule FirestormData.Commands.TagCategoryTest do
     end
   end
 
+  describe "tagging two categories with a tag that generates the same slug" do
+    setup [:create_user, :create_category, :tag_category]
+
+    test "creating a second category and tagging it with a tag that generates the same slug as an existing tag", %{category_id: category_id} do
+      changeset =
+        %CreateCategory{}
+        |> CreateCategory.changeset(%{title: "second category"})
+
+      {:ok, second_category_id} = CreateCategory.run(changeset)
+
+      changeset =
+        %TagCategory{}
+        |> TagCategory.changeset(%{tag_title: ":#{@tag_title}", category_id: second_category_id})
+
+      assert {:ok, _tagging_id} = TagCategory.run(changeset)
+    end
+  end
+
   def create_category(_) do
     changeset =
       %CreateCategory{}

@@ -17,10 +17,12 @@ defmodule FirestormWeb.Acceptance.CategoryTest do
       form = Query.css(".tag-form")
       title_field = Query.css(".title")
       button = Query.css("button")
+      add_tag = Query.css(".add-tag")
 
       session
       |> log_in_as(user)
       |> visit(category_path(Endpoint, :show, elixir.slug))
+      |> click(add_tag)
       |> find(form, fn(form) ->
         form
         |> fill_in(title_field, with: "functional-programming")

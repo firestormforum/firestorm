@@ -9,6 +9,33 @@ defmodule FirestormData.Tag do
     """
 
     use EctoAutoslugField.Slug, from: :title, to: :slug
+    alias FirestormData.{Repo, Tag}
+    import Ecto.{Query}
+
+    def build_slug(sources) do
+      base_slug = super(sources)
+      get_unused_slug(base_slug, 0)
+    end
+
+    def get_unused_slug(base_slug, number) do
+      slug = get_slug(base_slug, number)
+      if slug_used?(slug) do
+        get_unused_slug(base_slug, number + 1)
+      else
+        slug
+      end
+    end
+
+    def slug_used?(slug) do
+      Tag
+      |> where(slug: ^slug)
+      |> Repo.one
+    end
+
+    def get_slug(base_slug, 0), do: base_slug
+    def get_slug(base_slug, number) do
+      "#{base_slug}-#{number}"
+    end
   end
 
   use Ecto.Schema
