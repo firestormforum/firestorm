@@ -41,3 +41,7 @@ $(document)
   })
 
 Prism.highlightAll()
+
+$('.tag-editor .add-tag').on('click', function() {
+  $(this).parent().addClass('editing')
+})
