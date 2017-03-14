@@ -5,19 +5,19 @@ defmodule FirestormWeb.Earmark.EmojiReplacer do
   """
 
   # A RegEx to match any emoji mark that has spaces or newlines on either side of it.
-  @emoji_regex ~r{([ \n]+|^):([^:]*):([ \n]+|\Z)}
+  @emoji_regex ~r{([ \n]*|^):([a-z]+):([ \n]+|\Z)}
 
   def run(body) do
     @emoji_regex
-    |> Regex.replace(body, &emojify_short_name/3)
+    |> Regex.replace(body, &emojify_short_name/4)
   end
 
-  def emojify_short_name(whole_match, _, short_name) do
+  def emojify_short_name(whole_match, pre, short_name, post) do
     case Exmoji.from_short_name(short_name) do
       nil -> whole_match
       emoji ->
         output = Exmoji.EmojiChar.render(emoji)
-        " #{output} "
+        "#{pre}#{output}#{post}"
     end
   end
 end
