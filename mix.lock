@@ -14,6 +14,7 @@
   "ecto": {:hex, :ecto, "2.1.3", "ffb24e150b519a4c0e4c84f9eabc8587199389bc499195d5d1a93cd3b2d9a045", [:mix], [{:db_connection, "~> 1.1", [hex: :db_connection, optional: true]}, {:decimal, "~> 1.2", [hex: :decimal, optional: false]}, {:mariaex, "~> 0.8.0", [hex: :mariaex, optional: true]}, {:poison, "~> 2.2 or ~> 3.0", [hex: :poison, optional: true]}, {:poolboy, "~> 1.5", [hex: :poolboy, optional: false]}, {:postgrex, "~> 0.13.0", [hex: :postgrex, optional: true]}, {:sbroker, "~> 1.0", [hex: :sbroker, optional: true]}]},
   "ecto_autoslug_field": {:hex, :ecto_autoslug_field, "0.2.1", "eed693e0e072bbadc9da869871014cdff5901fd184d10b821a5eedb66159b100", [:mix], [{:ecto, "~> 2.0", [hex: :ecto, optional: false]}, {:slugger, "~> 0.1", [hex: :slugger, optional: false]}]},
   "ex_machina": {:hex, :ex_machina, "2.0.0", "ec284c6f57233729cea9319e083f66e613e82549f78eccdb2059aeba5d0df9f3", [:mix], [{:ecto, "~> 2.1", [hex: :ecto, optional: true]}]},
+  "exmoji": {:hex, :exmoji, "0.2.2", "fae4e012d3b78771436d19ff8922219bd93d9115364226da5cc5d4703d5d879f", [:mix], [{:poison, "~> 1.5", [hex: :poison, optional: false]}]},
   "faker": {:hex, :faker, "0.7.0", "2c42deeac7be717173c78c77fb3edc749fb5d5e460e33d01fe592ae99acc2f0d", [:mix], []},
   "floki": {:hex, :floki, "0.14.0", "91a6be57349e10a63cf52d7890479a19012cef9185fa93c305d4fe42e6a50dee", [:mix], [{:mochiweb, "~> 2.15", [hex: :mochiweb, optional: false]}]},
   "fs": {:hex, :fs, "2.12.0", "ad631efacc9a5683c8eaa1b274e24fa64a1b8eb30747e9595b93bec7e492e25e", [:rebar3], []},

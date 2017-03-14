@@ -12,6 +12,7 @@ defmodule FirestormWeb.Earmark.HtmlRenderer do
   import Earmark.Helpers, only: [ escape: 2 ]
   import Earmark.Helpers.HtmlHelpers
   alias FirestormWeb.Earmark.AutoLinker
+  alias FirestormWeb.Earmark.EmojiReplacer
 
   def render(blocks, context=%Context{options: %Options{mapper: mapper}}) do
     html =
@@ -27,6 +28,7 @@ defmodule FirestormWeb.Earmark.HtmlRenderer do
       lines
       |> convert(lnb, context)
       |> AutoLinker.run()
+      |> EmojiReplacer.run()
 
     add_attrs!("<p>#{lines}</p>\n", attrs, [], lnb)
   end
