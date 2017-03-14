@@ -13,6 +13,14 @@ defmodule FirestormWeb.Acceptance.ThreadTest do
       assert has?(session, Query.css(".thread-header", text: elixir_thread.title))
     end
 
+    test "replying to a thread redirects if not logged in", %{session: session, elixir: elixir, elixir_thread: elixir_thread} do
+      session
+      |> visit(category_thread_post_path(Endpoint, :new, elixir.slug, elixir_thread.id))
+      |> take_screenshot
+
+      assert has?(session, Query.css(".alert-box.-info", text: "Please log in to perform this action."))
+    end
+
     test "can tag a thread", %{session: session, user: user, elixir: elixir, elixir_thread: elixir_thread} do
       form = Query.css(".tag-form")
       title_field = Query.css(".title")
