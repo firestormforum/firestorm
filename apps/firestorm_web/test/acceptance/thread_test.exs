@@ -19,15 +19,24 @@ defmodule FirestormWeb.Acceptance.ThreadTest do
       button = Query.css("button")
       add_tag = Query.css(".add-tag")
 
+      session =
+        session
+        |> log_in_as(user)
+        |> visit(category_thread_path(Endpoint, :show, elixir.slug, elixir_thread.id))
+
+      # wait for js to run, sorry!
+      :timer.sleep(1_000)
+
       session
-      |> log_in_as(user)
-      |> visit(category_thread_path(Endpoint, :show, elixir.slug, elixir_thread.id))
       |> click(add_tag)
       |> find(form, fn(form) ->
         form
         |> fill_in(title_field, with: "functional-programming")
         |> click(button)
       end)
+
+      # wait for js to run, sorry!
+      :timer.sleep(1_000)
 
       assert has?(session, Query.css(".thread-header", text: elixir_thread.title))
       assert has?(session, Query.css(".tag-list .tag", text: "functional-programming"))
