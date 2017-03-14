@@ -55,7 +55,7 @@ defmodule FirestormWeb.Mixfile do
       # DEV/TEST
       {:credo, "~> 0.6.1", only: [:dev, :test]},
       {:phoenix_integration, "~> 0.2", only: :test},
-      {:wallaby, github: "keathley/wallaby", branch: "features/adding-and-listing-cookies", only: [:dev, :test]},
+      {:wallaby, github: "keathley/wallaby", only: [:dev, :test]},
       {:ex_machina, "~> 2.0", only: [:dev, :test]},
       {:faker, "~> 0.7", only: [:dev, :test]},
       {:phoenix_live_reload, "~> 1.0.8", only: :dev},
