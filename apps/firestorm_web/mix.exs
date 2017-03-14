@@ -48,6 +48,8 @@ defmodule FirestormWeb.Mixfile do
       {:earmark, "~> 1.2.0"},
       {:timex, "~> 3.0"},
       {:fs, "~> 2.12", override: true},
+      {:exmoji, "~> 0.2.2"},
+      {:poison, "~> 3.1.0", override: true},
 
       # UMBRELLA
       {:firestorm_data, in_umbrella: true},
