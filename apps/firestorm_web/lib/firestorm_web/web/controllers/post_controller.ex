@@ -4,6 +4,8 @@ defmodule FirestormWeb.Web.PostController do
     GetCategory,
     CreatePost
   }
+  plug FirestormWeb.Plugs.RequireUser
+
 
   def action(conn, _) do
     case GetCategory.run(%GetCategory{finder: conn.params["category_id"]}) do

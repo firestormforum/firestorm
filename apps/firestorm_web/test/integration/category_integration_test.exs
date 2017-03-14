@@ -1,13 +1,17 @@
 defmodule FirestormWeb.CategoryIntegrationTest do
   @moduledoc false
   use FirestormWeb.IntegrationCase, async: true
+  alias FirestormData.Commands.LoginOrRegisterFromGitHub
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
   end
 
   test "creating a category", %{conn: conn} do
+    {:ok, knewter} = create_user("knewter")
+
     conn
+    |> login_as(knewter)
     |> get(category_path(conn, :new))
     |> follow_form(
       %{
@@ -36,5 +40,11 @@ defmodule FirestormWeb.CategoryIntegrationTest do
         html: hd(elixir.threads).title,
       )
     end
+  end
+
+  def create_user(username) do
+    %LoginOrRegisterFromGitHub{}
+    |> LoginOrRegisterFromGitHub.changeset(%{username: username, email: "#{username}@example.org"})
+    |> LoginOrRegisterFromGitHub.run()
   end
 end

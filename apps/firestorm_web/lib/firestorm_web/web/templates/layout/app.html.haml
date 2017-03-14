@@ -22,7 +22,7 @@
           = render "_navigation.html", conn: @conn, view_module: @view_module, view_template: @view_template
 
           - for {key, val} <- get_flash(@conn) do
-            %p{class: "alert-box -#{key}", role: "alert"}= val
+            %p(class = "alert-box -#{key}", role = "alert")= val
 
           .layout-content
             = render @view_module, @view_template, assigns

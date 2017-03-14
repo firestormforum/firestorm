@@ -1,6 +1,7 @@
 defmodule FirestormWeb.Web.CategoryController do
   use FirestormWeb.Web, :controller
   alias FirestormData.Commands.{GetCategory, CreateCategory, TagCategory}
+  plug FirestormWeb.Plugs.RequireUser when action in [:tag, :new, :create]
 
   def show(conn, %{"id" => id_or_slug}) do
     finder = get_finder(id_or_slug)

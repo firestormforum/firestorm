@@ -10,6 +10,7 @@ defmodule FirestormWeb.Web.ThreadController do
     TagThread,
   }
   alias FirestormData.Followable
+  plug FirestormWeb.Plugs.RequireUser when action in [:tag, :new, :create, :follow, :unfollow]
 
   def action(conn, _) do
     finder = get_finder(conn.params["category_id"])
