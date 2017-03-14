@@ -19,8 +19,8 @@ defmodule FirestormWeb.MarkdownTest do
   test "converts words like :poop: into their emoji unicode representation" do
     poop = Exmoji.from_short_name("poop") |> Exmoji.EmojiChar.render
     fire = Exmoji.from_short_name("fire") |> Exmoji.EmojiChar.render
-    input = "This :poop: :fire: is great!"
-    output = "<p>This #{poop} #{fire} is great!</p>\n"
+    input = "This :poop::fire: is great!"
+    output = "<p>This #{poop}#{fire} is great!</p>\n"
     assert output == Markdown.render(input)
   end
 end
