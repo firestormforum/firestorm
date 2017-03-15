@@ -43,7 +43,9 @@ defmodule FirestormWeb.Web.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", FirestormWeb.Web do
-  #   pipe_through :api
-  # end
+  scope "/api/v1", FirestormWeb.Web.Api.V1 do
+    pipe_through :api
+
+    get "/home", HomeController, :index
+  end
 end
