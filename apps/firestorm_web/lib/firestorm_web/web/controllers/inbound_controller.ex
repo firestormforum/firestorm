@@ -3,7 +3,7 @@ defmodule FirestormWeb.Web.InboundController do
   require Logger
 
   def sendgrid(conn, params) do
-    Logger.warn(params)
+    Logger.warn(inspect(params))
 
     conn
     |> render("sendgrid.json", %{})
