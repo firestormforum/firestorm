@@ -42,10 +42,17 @@ defmodule FirestormWeb.Web.Router do
     get "/logout", AuthController, :delete
   end
 
-  # Other scopes may use custom stacks.
+  # API routes
   scope "/api/v1", FirestormWeb.Web.Api.V1 do
     pipe_through :api
 
     get "/home", HomeController, :index
+  end
+
+  # Inbound email routes
+  scope "/inbound", FirestormWeb.Web do
+    pipe_through :api
+
+    post "/sendgrid", InboundController, :sendgrid
   end
 end

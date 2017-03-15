@@ -23,6 +23,11 @@ defmodule FirestormWeb.Web.Api.V1.HomeControllerTest do
       response = json_response(conn, 200)
       assert response
       assert length(response["categories"]) == 2
+      first_category = hd(response["categories"])
+      assert length(first_category["threads"]) == 1
+      first_thread = hd(first_category["threads"])
+      assert first_thread["user"]["username"] == "knewter"
+      assert length(first_thread["posts"]) == 1
     end
   end
 end

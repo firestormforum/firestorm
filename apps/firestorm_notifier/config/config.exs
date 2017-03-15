@@ -3,9 +3,8 @@
 use Mix.Config
 
 config :firestorm_notifier, FirestormNotifier.Mailer,
-  adapter: Bamboo.MailgunAdapter,
-  api_key: System.get_env("MAILGUN_API_KEY"),
-  domain: System.get_env("MAILGUN_DOMAIN")
+  adapter: Bamboo.SendgridAdapter,
+  api_key: System.get_env("SENDGRID_API_KEY")
 
 config :firestorm_notifier, ecto_repos: []
 

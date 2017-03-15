@@ -42,6 +42,8 @@ defmodule FirestormWeb.Web.Endpoint do
     key: "_firestorm_web_key",
     signing_salt: "iu1NRaJ+"
 
+  plug CORSPlug
+
   plug FirestormWeb.Web.Router
 
   @doc """
