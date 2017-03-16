@@ -13,6 +13,8 @@ defmodule FirestormWeb.Web.Api.V1.HomeView do
       title: category.title,
       inserted_at: category.inserted_at,
       updated_at: category.updated_at,
+      parent_id: category.parent_id,
+      children: Enum.map(category.children || [], &category_json/1),
       threads: Enum.map(category.threads, &thread_json/1)
     }
   end

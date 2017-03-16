@@ -33,9 +33,9 @@ defmodule FirestormWeb.Web.AuthController do
             |> put_session(:current_user, user.id)
             |> redirect(to: "/")
 
-          {:error, reason} ->
+          {:error, changeset} ->
             conn
-            |> put_flash(:error, reason)
+            |> put_flash(:error, inspect changeset)
             |> redirect(to: "/")
         end
     end
