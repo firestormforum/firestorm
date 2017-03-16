@@ -49,6 +49,7 @@ defmodule FirestormWeb.Web.Api.V1.HomeView do
     %{
       id: category.id,
       title: category.title,
+      slug: category.slug,
       inserted_at: category.inserted_at,
       updated_at: category.updated_at,
       parent_id: category.parent_id,
