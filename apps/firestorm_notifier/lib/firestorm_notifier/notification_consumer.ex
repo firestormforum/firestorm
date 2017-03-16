@@ -30,8 +30,10 @@ defmodule FirestormNotifier.NotificationConsumer do
     for user_id <- Followable.follower_ids(thread) do
       user = Repo.get(User, user_id)
       if user.email do
-        mail = Emails.thread_new_post_notification(user, thread, post)
-        Mailer.deliver_now(mail)
+        if(post.user.id !== user.id) do
+          mail = Emails.thread_new_post_notification(user, thread, post)
+          Mailer.deliver_now(mail)
+        end
       end
     end
   end
