@@ -5,8 +5,8 @@ defmodule FirestormWeb.Web.InboundController do
 
   @inbound_domain "notifier.firestormforum.org"
   # Get the thread id out of something like
-  # "thread-123@notifier.firestormforum.org"
-  @thread_email_regex ~r/thread-([0-9]*)@#{@inbound_domain}/
+  # "replythread-123@notifier.firestormforum.org"
+  @thread_email_regex ~r/reply-thread-([0-9]*)@#{@inbound_domain}/
   # Get the email part out of something like "Josh Adams <josh@dailydrip.com>"
   @email_regex ~r/[^<]*<?(.*@[^>]*)[^>]*/
 

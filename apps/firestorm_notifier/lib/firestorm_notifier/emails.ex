@@ -9,7 +9,7 @@ defmodule FirestormNotifier.Emails do
     |> subject("There was a new post in a thread you are watching on Firestorm")
     |> html_body("thread: #{thread.title}")
     |> text_body("thread: #{thread.title}")
-    |> put_header("Reply-To", reply_to_thread_address(thread))
+    |> put_header("reply-to", reply_to_thread_address(thread))
   end
 
   defp reply_to_thread_address(%{id: id}) do

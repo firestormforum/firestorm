@@ -48,7 +48,7 @@ defmodule FirestormWeb.InboundControllerTest do
       "sender_ip" => "74.125.82.180",
       "subject" => "test",
       "text" => "#{@body}",
-      "to" => "thread-#{thread_id}@notifier.firestormforum.org"
+      "to" => "reply-thread-#{thread_id}@notifier.firestormforum.org"
     }
   end
 end

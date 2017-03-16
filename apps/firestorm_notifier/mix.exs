@@ -39,7 +39,7 @@ defmodule FirestormNotifier.Mixfile do
   defp deps do
     [
       {:gen_stage, "~> 0.11"},
-      {:bamboo, "~> 0.8"},
+      {:bamboo, github: "thoughtbot/bamboo"},
 
       # UMBRELLA
       {:firestorm_data, in_umbrella: true},

@@ -8,6 +8,6 @@ defmodule FirestormNotifier.EmailsTest do
     thread = %{title: "Some thread", id: "123"}
     post = %{}
     email = Emails.thread_new_post_notification(user, thread, post)
-    assert email.headers["Reply-To"] == "reply-thread-123@notifier.firestormforum.org"
+    assert email.headers["reply-to"] == "reply-thread-123@notifier.firestormforum.org"
   end
 end

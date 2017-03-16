@@ -55,4 +55,9 @@ defmodule FirestormWeb.Web.Router do
 
     post "/sendgrid", InboundController, :sendgrid
   end
+
+  # Bamboo dev mail server
+  if Mix.env == :dev do
+    forward "/sent_emails", Bamboo.EmailPreviewPlug
+  end
 end
