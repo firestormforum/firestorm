@@ -11,7 +11,7 @@ dogfooding" phase and you can view the first deployed version at
 <http://firestorm-dogfood.herokuapp.com>.
 
 [The design document](design/README.md) is a good place to start reading if
-you're unfamiliar with th eproject.
+you're unfamiliar with the project.
 
 ## Patrons
 
