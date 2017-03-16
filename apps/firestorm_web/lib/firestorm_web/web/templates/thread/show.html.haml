@@ -2,16 +2,24 @@
   %h2= @thread.title
   .item-metadata
     = link "@#{user(@thread).username}", to: "#", class: "username"
-    - time_string = Timex.format!(@thread.inserted_at, "{ISO:Extended}")
-    %abbr.time{title: "#{time_string}" }
-      = time_string
+    = time_abbr(@thread.inserted_at)
   .item-metadata
     %ul.category-pill
       - for category <- @category_breadcrumbs do
         %li.category{class: "-color-#{Category.color(category)}"}
-          = link category.title, to: category_path(@conn, :show, category.slug)
+          = category_title_link(@conn, category)
+  .item-metadata
+    .tag-editor
+      = render "_tag_list.html", tags: @thread.tags, conn: @conn
+      %button.pure-button.add-tag
+        %i.fa.fa-plus
+      - form_for @tag_thread_changeset, category_thread_thread_path(@conn, :tag, category_finder(@category), @thread.id), [class: "tag-form"], fn f ->
+        = text_input f, :tag_title, class: "title"
+        %button.pure-button.button-primary
+          %i.fa.fa-plus
+          Add Tag
 
 %ol.post-list
-  %li= render "_first_post.html", post: @first_post, conn: @conn, category: @category, thread: @thread
+  %li= render "_first_post.html", post: @first_post, conn: @conn, category: @category, thread: @thread, following: @following
   - for post <- @posts do
     %li= render "_post.html", post: post, category: @category, thread: @thread, conn: @conn

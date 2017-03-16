@@ -1,6 +1,12 @@
 defmodule FirestormWeb.Web.PostController do
   use FirestormWeb.Web, :controller
-  alias FirestormData.Commands.{GetThread, CreatePost}
+  alias FirestormData.Commands.{
+    GetCategory,
+    GetThread,
+    CreatePost
+  }
+  plug FirestormWeb.Plugs.RequireUser
+
 
   def action(conn, _) do
     thread_finder = get_finder(conn.params["thread_id"])
@@ -40,10 +46,10 @@ defmodule FirestormWeb.Web.PostController do
     case changeset.valid? do
       true ->
         case CreatePost.run(changeset) do
-          {:ok, _} ->
+          {:ok, _post_id} ->
             conn
             |> put_flash(:info, "Post created successfully")
-            |> redirect(to: category_thread_path(conn, :show, category.slug, thread.id))
+            |> redirect(to: category_thread_path(conn, :show, category_finder(category), thread.id))
 
           {:error, changeset} ->
             conn

@@ -1,5 +1,5 @@
 defmodule FirestormData.Commands.CreateCategoryTest do
-  use ExUnit.Case
+  use FirestormData.UnitCase
   alias FirestormData.Commands.CreateCategory
   alias FirestormData.{Category, Repo}
 
@@ -10,7 +10,7 @@ defmodule FirestormData.Commands.CreateCategoryTest do
   describe "creating a category" do
     setup [:create_category]
 
-    test "returns expected results", %{result: result} do
+    test "returns expected result", %{result: result} do
       assert {:ok, _some_id} = result
     end
 

@@ -1,5 +1,5 @@
 defmodule FirestormData.Commands.ViewThreadTest do
-  use ExUnit.Case
+  use FirestormData.UnitCase
   alias FirestormData.Commands.{CreateCategory, CreateThread, ViewThread}
   alias FirestormData.{Thread, User, Repo, Viewable}
 
@@ -10,7 +10,7 @@ defmodule FirestormData.Commands.ViewThreadTest do
   describe "viewing a thread" do
     setup [:create_user, :create_category, :create_thread, :view_thread]
 
-    test "returns expected results", %{result: result} do
+    test "returns expected result", %{result: result} do
       assert {:ok, _some_id} = result
     end
 
@@ -28,16 +28,6 @@ defmodule FirestormData.Commands.ViewThreadTest do
     {:ok, category_id} = CreateCategory.run(changeset)
 
     {:ok, category_id: category_id}
-  end
-
-  def create_user(_) do
-    changeset =
-      %User{}
-      |> User.changeset(%{username: "sonny"})
-
-    {:ok, user} = Repo.insert(changeset)
-
-    {:ok, user_id: user.id}
   end
 
   def create_thread(%{user_id: user_id, category_id: category_id}) do

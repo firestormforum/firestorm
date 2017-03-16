@@ -1,9 +1,22 @@
 defmodule FirestormData.Schema.ThreadTest do
-  alias FirestormData.{Category, Thread, Repo, Post, User, Viewable}
+  alias FirestormData.{
+    Category,
+    Thread,
+    Repo,
+    Post,
+    User,
+    View,
+    Viewable,
+    Follow,
+    Followable,
+    Tag,
+    Taggable,
+    Tagging,
+  }
   use ExUnit.Case
 
   setup do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo, ownership_timeout: 300_000)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
 
     bob =
       %User{username: "bob"}
@@ -45,6 +58,30 @@ defmodule FirestormData.Schema.ThreadTest do
     assert Viewable.view_count(tests_thread) == 3
   end
 
+  test "it can be followed by users", %{user: user} do
+    {:ok, {_elixir, tests_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
+    {:ok, _} = create_follow(tests_thread, user)
+
+    assert Followable.followed_by?(tests_thread, user)
+    follower_ids = Followable.follower_ids(tests_thread)
+    assert Enum.member?(follower_ids, user.id)
+  end
+
+  test "it can be tagged" do
+    {:ok, {_elixir, tests_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
+    {:ok, testing_tag} = create_tag("testing")
+    {:ok, _} = create_tagging(tests_thread, testing_tag)
+
+    assert Taggable.tagged_with?(tests_thread, testing_tag)
+  end
+
+  test "it can only be tagged once with a given tag" do
+    {:ok, {_elixir, tests_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
+    {:ok, testing_tag} = create_tag("testing")
+    {:ok, _} = create_tagging(tests_thread, testing_tag)
+    assert {:error, _} = create_tagging(tests_thread, testing_tag)
+  end
+
   test "it knows whether it is fully read", %{user: user} do
     {:ok, {_elixir, tests_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
     {:ok, _} = create_post(tests_thread, "knewter")
@@ -70,6 +107,8 @@ defmodule FirestormData.Schema.ThreadTest do
   test "it derives a user from the first post in the thread" do
     {:ok, {_elixir, saved_thread}} = create_category_and_thread("Elixir", "ITT: Tests")
     {:ok, _} = create_post(saved_thread, "knewter")
+    :timer.sleep 10
+    {:ok, _} = create_post(saved_thread, "adam")
 
     fetched_thread =
       Thread
@@ -105,10 +144,30 @@ defmodule FirestormData.Schema.ThreadTest do
       |> Repo.insert
   end
 
-  defp create_view(post, user) do
-    {:ok, _} =
-      post
-      |> Ecto.build_assoc(:views, %{user_id: user.id})
-      |> Repo.insert
+  defp create_view(thread, user) do
+    thread
+    |> Ecto.build_assoc(:views, %{user_id: user.id})
+    |> View.changeset(%{})
+    |> Repo.insert
+  end
+
+  defp create_follow(thread, user) do
+    thread
+    |> Ecto.build_assoc(:follows, %{user_id: user.id})
+    |> Follow.changeset(%{})
+    |> Repo.insert
+  end
+
+  defp create_tag(title) do
+    %Tag{}
+    |> Tag.changeset(%{title: title})
+    |> Repo.insert
+  end
+
+  defp create_tagging(thread, tag) do
+    thread
+    |> Ecto.build_assoc(:taggings, %{tag_id: tag.id})
+    |> Tagging.changeset(%{})
+    |> Repo.insert
   end
 end

@@ -33,7 +33,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: ExtractTextPlugin.extract({
           use: "css-loader!sass-loader!import-glob-loader",
           fallback: "style-loader",

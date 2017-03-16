@@ -1,6 +1,6 @@
 defmodule FirestormData.Commands.CreatePost do
   @moduledoc """
-  A command to create a post in a thread.
+  A command to create a `Post` in a `Thread`.
   """
 
   use FirestormData.Command
@@ -41,9 +41,20 @@ defmodule FirestormData.Commands.CreatePost do
     end
   end
 
-  defp handle_result({:ok, c}, _changeset), do: {:ok, c.id}
-  defp handle_result({:error, changes}, changeset) do
-    # need to do better than this
-    {:error, Changeset.add_error(changeset, :title, "There was an error", changes.errors)}
+  def handle_result({:ok, post}, _changeset) do
+    # Get the post and its user and thread and notify
+    post =
+      Post
+      |> where(id: ^post.id)
+      |> preload(thread: [category: []])
+      |> preload(:user)
+      |> Repo.one
+
+    Events.notify({:new_post, post})
+    {:ok, post.id}
+  end
+  def handle_result({:error, changes}, changeset) do
+    # FIXME: We really don't know what to do with these changesets yet sigh
+    {:error, Changeset.add_error(changeset, :body, changes[:body].errors)}
   end
 end

@@ -20,18 +20,22 @@ defmodule FirestormWeb.Web.AuthController do
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     case auth.provider do
       :github ->
-        %{name: _name, nickname: nickname, email: _email} = auth.info
+        %{name: name, nickname: nickname, email: email} = auth.info
 
-        case LoginOrRegisterFromGitHub.run(%{username: nickname}) do
+        changeset =
+          %LoginOrRegisterFromGitHub{}
+          |> LoginOrRegisterFromGitHub.changeset(%{username: nickname, name: name, email: email})
+
+        case LoginOrRegisterFromGitHub.run(changeset) do
           {:ok, user} ->
             conn
             |> put_flash(:info, "Successfully authenticated.")
             |> put_session(:current_user, user.id)
             |> redirect(to: "/")
 
-          {:error, reason} ->
+          {:error, changeset} ->
             conn
-            |> put_flash(:error, reason)
+            |> put_flash(:error, inspect changeset)
             |> redirect(to: "/")
         end
     end

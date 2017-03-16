@@ -1,7 +1,8 @@
 defmodule FirestormData.Commands.CreatePostTest do
   use ExUnit.Case
   alias FirestormData.Commands.{CreatePost, CreateThread, CreateCategory}
-  alias FirestormData.{User, Repo, Post}
+  alias FirestormData.{User, Repo, Thread, Post}
+  use FirestormData.UnitCase
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
@@ -10,7 +11,7 @@ defmodule FirestormData.Commands.CreatePostTest do
   describe "creating a post" do
     setup [:create_user, :create_category, :create_thread, :create_post]
 
-    test "returns expected results", %{result: result} do
+    test "returns expected result", %{result: result} do
       assert {:ok, _some_id} = result
     end
 
@@ -54,7 +55,7 @@ defmodule FirestormData.Commands.CreatePostTest do
   def create_post(%{user_id: user_id, thread_id: thread_id}) do
     changeset =
       %CreatePost{}
-      |> CreatePost.changeset(%{user_id: user_id, body: "Some body", thread_id: thread_id})
+      |> CreatePost.changeset(%{user_id: user_id, thread_id: thread_id, body: "Some body"})
 
     {:ok, result: CreatePost.run(changeset)}
   end

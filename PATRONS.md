@@ -211,3 +211,4 @@ opted to not be listed.
 - Tom Brukner | [ [GitHub](https://www.github.com/xbrukner) ]
 - Wendy Smoak | [ [GitHub](https://www.github.com/wsmoak) ] [ [Twitter](https://www.twitter.com/wsmoak) ] [ [Website](http://wsmoak.net) ]
 - Marcelo De Polli | [ [GitHub](https://www.github.com/mdepolli) ] [ [Twitter](https://www.twitter.com/mdepolli) ]
+- Dirk Johnson

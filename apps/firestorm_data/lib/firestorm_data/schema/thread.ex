@@ -14,7 +14,7 @@ defmodule FirestormData.Thread do
 
   use Ecto.Schema
   import Ecto.{Changeset, Query}
-  alias FirestormData.{Repo, Category, Post, View}
+  alias FirestormData.{Repo, Category, Post, View, Follow, Tagging, Tag, User}
 
   schema "threads" do
     belongs_to :category, Category
@@ -22,6 +22,10 @@ defmodule FirestormData.Thread do
     field :slug, TitleSlug.Type
     has_many :posts, Post
     has_many :views, {"threads_views", View}, foreign_key: :assoc_id
+    has_many :follows, {"threads_follows", Follow}, foreign_key: :assoc_id
+    many_to_many :followers, User, join_through: "threads_follows", join_keys: [assoc_id: :id, user_id: :id]
+    has_many :taggings, {"threads_taggings", Tagging}, foreign_key: :assoc_id
+    many_to_many :tags, Tag, join_through: "threads_taggings", join_keys: [assoc_id: :id, tag_id: :id]
 
     timestamps()
   end
@@ -41,13 +45,17 @@ defmodule FirestormData.Thread do
     {:error, "No first post!"}
   end
   def user(thread) do
-    thread =
-      thread
-      |> Repo.preload(posts: [:user])
+    first_post =
+      Post
+      |> where([p], p.thread_id == ^thread.id)
+      |> order_by(:inserted_at)
+      |> limit(1)
+      |> preload(:user)
+      |> Repo.one
 
-    case thread.posts do
-      [] -> {:error, "No first post"}
-      [first_post|_] -> {:ok, first_post.user}
+    case first_post do
+      nil -> {:error, "No first post"}
+      _ -> {:ok, first_post.user}
     end
   end
 

@@ -4,11 +4,17 @@ defmodule FirestormWeb.Web.ThreadController do
     GetCategory,
     CreateThread,
     GetThread,
-    ViewPost
+    ViewPost,
+    FollowThread,
+    UnfollowThread,
+    TagThread,
   }
+  alias FirestormData.Followable
+  plug FirestormWeb.Plugs.RequireUser when action in [:tag, :new, :create, :follow, :unfollow]
 
   def action(conn, _) do
-    case GetCategory.run(%GetCategory{finder: conn.params["category_id"]}) do
+    finder = get_finder(conn.params["category_id"])
+    case GetCategory.run(%GetCategory{finder: finder}) do
       {:ok, category} ->
         apply(__MODULE__, action_name(conn),
           [conn, conn.params, category])
@@ -23,6 +29,10 @@ defmodule FirestormWeb.Web.ThreadController do
   def show(conn, %{"id" => id_or_slug}, category) do
     finder = get_finder(id_or_slug)
 
+    tag_thread_changeset =
+      %TagThread{}
+      |> TagThread.changeset(%{})
+
     case GetThread.run(%GetThread{finder: finder, category_finder: category.id}) do
       {:ok, thread} ->
         [first_post | posts] = thread.posts
@@ -33,6 +43,11 @@ defmodule FirestormWeb.Web.ThreadController do
           # Repo.all Category.ancestors(thread.category)]
           |> Enum.reverse
 
+        following = case current_user(conn) do
+          nil -> false
+          u -> Followable.followed_by?(thread, u)
+        end
+
         conn
         |> render(
              "show.html",
@@ -40,13 +55,46 @@ defmodule FirestormWeb.Web.ThreadController do
              category: category,
              first_post: first_post,
              posts: posts,
-             category_breadcrumbs: category_breadcrumbs
+             category_breadcrumbs: category_breadcrumbs,
+             following: following,
+             tag_thread_changeset: tag_thread_changeset
            )
 
       {:error, :not_found} ->
         conn
         |> put_flash(:error, "No such thread")
-        |> redirect(to: category_path(conn, :show, category.slug))
+        |> redirect(to: category_path(conn, :show, category_finder(category)))
+    end
+  end
+
+  def tag(conn, %{"thread_id" => id_or_slug, "tag_thread" => tag_thread_params}, category) do
+    finder = get_finder(id_or_slug)
+
+    case GetThread.run(%GetThread{finder: finder, category_id: category.id}) do
+      {:ok, thread} ->
+        changeset =
+          %TagThread{}
+          |> TagThread.changeset(
+            tag_thread_params
+            |> Map.put("thread_id", thread.id)
+          )
+
+        case TagThread.run(changeset) do
+          {:ok, _} ->
+            conn
+            |> put_flash(:info, "Tagged thread")
+            |> redirect(to: category_thread_path(conn, :show, category_finder(category), thread.id))
+
+          {:error, e} ->
+            conn
+            |> put_flash(:error, "An error occurred #{inspect e}")
+            |> redirect(to: category_thread_path(conn, :show, category_finder(category), thread.id))
+        end
+
+      {:error, :not_found} ->
+        conn
+        |> put_flash(:error, "No such thread")
+        |> redirect(to: category_path(conn, :show, category_finder(category)))
     end
   end
 
@@ -75,7 +123,7 @@ defmodule FirestormWeb.Web.ThreadController do
           {:ok, thread_id} ->
             conn
             |> put_flash(:info, "Thread created successfully")
-            |> redirect(to: category_thread_path(conn, :show, category.slug, thread_id))
+            |> redirect(to: category_thread_path(conn, :show, category_finder(category), thread_id))
 
           {:error, changeset} ->
             conn
@@ -85,6 +133,57 @@ defmodule FirestormWeb.Web.ThreadController do
       false ->
         conn
         |> render("new.html", changeset: changeset, category: category)
+    end
+  end
+
+  def follow(conn, %{"thread_id" => id_or_slug}, category) do
+    finder = get_finder(id_or_slug)
+
+    case GetThread.run(%GetThread{finder: finder, category_id: category.id}) do
+      {:ok, thread} ->
+        changeset =
+          %FollowThread{}
+          |> FollowThread.changeset(%{user_id: current_user(conn).id, thread_id: thread.id})
+
+        case FollowThread.run(changeset) do
+          {:ok, _} ->
+            conn
+            |> put_flash(:info, "You are now following this thread")
+            |> redirect(to: category_thread_path(conn, :show, category_finder(category), id_or_slug))
+
+          {:error, _} ->
+            conn
+            |> put_flash(:error, "An error occurred")
+            |> redirect(to: category_thread_path(conn, :show, category_finder(category), id_or_slug))
+        end
+
+      {:error, :not_found} ->
+        conn
+        |> put_flash(:error, "No such thread")
+        |> redirect(to: category_thread_path(conn, :show, category_finder(category), id_or_slug))
+    end
+  end
+
+  def unfollow(conn, %{"thread_id" => id_or_slug}, category) do
+    finder = get_finder(id_or_slug)
+
+    case GetThread.run(%GetThread{finder: finder, category_id: category.id}) do
+      {:ok, thread} ->
+        changeset =
+          %UnfollowThread{}
+          |> UnfollowThread.changeset(%{user_id: current_user(conn).id, thread_id: thread.id})
+
+        case UnfollowThread.run(changeset) do
+          :ok ->
+            conn
+            |> put_flash(:info, "You are no longer following this thread")
+            |> redirect(to: category_thread_path(conn, :show, category_finder(category), id_or_slug))
+        end
+
+      {:error, :not_found} ->
+        conn
+        |> put_flash(:error, "No such thread")
+        |> redirect(to: category_thread_path(conn, :show, category_finder(category), id_or_slug))
     end
   end
 

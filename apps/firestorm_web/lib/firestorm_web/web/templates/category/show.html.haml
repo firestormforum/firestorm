@@ -1,15 +1,27 @@
 .category-header
-  %h2= @category.title
+  %h2
+    = category_title_link(@conn, @category)
   .spacer
   %ul.actions
-    %li
     %li
       %a.pure-button{href: "#{category_path(@conn, :new, parent_id: @category.id)}"}
         %i.fa.fa-plus
         New Category
-      %a.pure-button.button-primary{href: "#{category_thread_path(@conn, :new, @category.slug)}"}
+    %li
+      %a.pure-button.button-primary{href: "#{category_thread_path(@conn, :new, category_finder(@category))}"}
         %i.fa.fa-plus
         New Thread
+
+.item-metadata
+  .tag-editor
+    = render "_tag_list.html", tags: @category.tags, conn: @conn
+    %button.pure-button.add-tag
+      %i.fa.fa-plus
+    - form_for @tag_category_changeset, category_category_path(@conn, :tag, category_finder(@category)), [class: "tag-form"], fn f ->
+      = text_input f, :tag_title, class: "title"
+      %button.pure-button.button-primary
+        %i.fa.fa-plus
+        Add Tag
 
 = render "_back.html", conn: @conn, parent: @category.parent
 

@@ -1,5 +1,5 @@
 defmodule FirestormData.Commands.LoginTest do
-  use ExUnit.Case
+  use FirestormData.UnitCase
   alias FirestormData.Commands.{Login, Register}
   alias FirestormData.{Repo}
 
@@ -35,6 +35,8 @@ defmodule FirestormData.Commands.LoginTest do
     options =
       %Register{
         username: "josh",
+        email: "josh@example.org",
+        name: "Josh Adams",
         password: "secret"
       }
 

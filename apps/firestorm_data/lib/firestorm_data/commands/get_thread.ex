@@ -42,6 +42,7 @@ defmodule FirestormData.Commands.GetThread do
       |> where(^[{category_finder_key, category_finder}])
       |> preload(posts: [:user])
       |> preload(:category)
+      |> preload(:tags)
 
     case Repo.one(query) do
       nil ->

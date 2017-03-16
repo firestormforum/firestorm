@@ -10,11 +10,38 @@ defmodule FirestormData.Category do
     """
 
     use EctoAutoslugField.Slug, from: :title, to: :slug
+    alias FirestormData.{Repo, Category}
+    import Ecto.{Query}
+
+    def build_slug(sources) do
+      base_slug = super(sources)
+      get_unused_slug(base_slug, 0)
+    end
+
+    def get_unused_slug(base_slug, number) do
+      slug = get_slug(base_slug, number)
+      if slug_used?(slug) do
+        get_unused_slug(base_slug, number + 1)
+      else
+        slug
+      end
+    end
+
+    def slug_used?(slug) do
+      Category
+      |> where(slug: ^slug)
+      |> Repo.one
+    end
+
+    def get_slug(base_slug, 0), do: base_slug
+    def get_slug(base_slug, number) do
+      "#{base_slug}-#{number}"
+    end
   end
 
   use Ecto.Schema
   import Ecto.Changeset
-  alias FirestormData.{Repo, Thread, View}
+  alias FirestormData.{Repo, Thread, View, Follow, Tagging, Tag}
   use Arbor.Tree
 
   schema "categories" do
@@ -25,6 +52,9 @@ defmodule FirestormData.Category do
     belongs_to :parent, __MODULE__
     has_many :threads, Thread
     has_many :views, {"categories_views", View}, foreign_key: :assoc_id
+    has_many :follows, {"categories_follows", Follow}, foreign_key: :assoc_id
+    has_many :taggings, {"categories_taggings", Tagging}, foreign_key: :assoc_id
+    many_to_many :tags, Tag, join_through: "categories_taggings", join_keys: [assoc_id: :id, tag_id: :id]
 
     timestamps()
   end

@@ -1,4 +1,4 @@
-![Firestorm](./apps/firestorm_web/web/static/assets/images/firestorm-logo.png)
+![Firestorm](./apps/firestorm_web/assets/static/images/firestorm-logo.png)
 ### An open-source forum engine, with an Elixir+Phoenix backend and an Elm frontend.
 #### A community-funded project from [DailyDrip](https://www.dailydrip.com).
 
@@ -11,7 +11,7 @@ dogfooding" phase and you can view the first deployed version at
 <http://firestorm-dogfood.herokuapp.com>.
 
 [The design document](design/README.md) is a good place to start reading if
-you're unfamiliar with th eproject.
+you're unfamiliar with the project.
 
 ## Patrons
 

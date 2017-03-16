@@ -12,7 +12,7 @@
     %script{:src => "https://use.fontawesome.com/b706cffc0a.js"}
   %body
     - for {key, val} <- get_flash(@conn) do
-      %p{:class => "alert alert-#{key}", :role => "alert"}= val
+      %p(class = "alert-box -#{key}", role = "alert")= val
 
     = render @view_module, @view_template, assigns
     = {:safe, js_script_tag()}

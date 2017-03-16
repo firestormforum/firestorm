@@ -1,5 +1,5 @@
 defmodule FirestormData.Commands.LogoutTest do
-  use ExUnit.Case
+  use FirestormData.UnitCase
   alias FirestormData.Commands.{Logout}
 
   describe "logging out" do

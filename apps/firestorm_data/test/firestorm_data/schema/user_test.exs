@@ -15,10 +15,19 @@ defmodule FirestormData.Schema.UserTest do
     assert changeset.errors[:username] == {"can't be blank", [validation: :required]}
   end
 
+  test "it requires an email" do
+    changeset =
+      %User{}
+        |> User.changeset(%{})
+
+    refute changeset.valid?
+    assert changeset.errors[:email] == {"can't be blank", [validation: :required]}
+  end
+
   test "it can be created" do
     {:ok, user} =
       %User{}
-        |> User.changeset(%{username: "knewter"})
+        |> User.changeset(%{username: "knewter", email: "knewter@example.com"})
         |> Repo.insert
 
     assert user.id

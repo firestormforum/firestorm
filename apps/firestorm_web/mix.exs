@@ -36,18 +36,21 @@ defmodule FirestormWeb.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.3.0-rc.0", override: true},
+      {:phoenix, "~> 1.3.0-rc.1", override: true},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_html, "~> 2.6"},
       {:phoenix_haml, "~> 0.2"},
       {:phoenix_ecto, "~> 3.2"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:ueberauth, "~> 0.4"},
       {:ueberauth_github, "~> 0.4"},
-      {:earmark, "~> 1.1.1"},
+      {:earmark, "~> 1.2.0"},
       {:timex, "~> 3.0"},
+      {:fs, "~> 2.12", override: true},
+      {:exmoji, "~> 0.2.2"},
+      {:poison, "~> 3.1.0", override: true},
+      {:cors_plug, "~> 1.2"},
 
       # UMBRELLA
       {:firestorm_data, in_umbrella: true},
@@ -55,6 +58,10 @@ defmodule FirestormWeb.Mixfile do
       # DEV/TEST
       {:credo, "~> 0.6.1", only: [:dev, :test]},
       {:phoenix_integration, "~> 0.2", only: :test},
+      {:wallaby, github: "keathley/wallaby", only: [:dev, :test]},
+      {:ex_machina, "~> 2.0", only: [:dev, :test]},
+      {:faker, "~> 0.7", only: [:dev, :test]},
+      {:phoenix_live_reload, "~> 1.0.8", only: :dev},
     ]
   end
 

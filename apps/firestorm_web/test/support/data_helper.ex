@@ -11,7 +11,9 @@ defmodule FirestormWeb.DataHelper do
 
   def create_users(_) do
     {:ok, knewter} =
-      LoginOrRegisterFromGitHub.run(%{username: "knewter"})
+      %LoginOrRegisterFromGitHub{}
+      |> LoginOrRegisterFromGitHub.changeset(%{username: "knewter", email: "knewter@example.org"})
+      |> LoginOrRegisterFromGitHub.run()
 
     {:ok, %{users: %{knewter: knewter}}}
   end

@@ -21,7 +21,11 @@ defmodule FirestormWeb.Web.Router do
     get "/home", PageController, :home
 
     resources "/categories", CategoryController do
+      post "/tag", CategoryController, :tag
       resources "/threads", ThreadController do
+        post "/tag", ThreadController, :tag
+        get "/follow", ThreadController, :follow
+        get "/unfollow", ThreadController, :unfollow
         resources "/posts", PostController
       end
     end
@@ -38,8 +42,22 @@ defmodule FirestormWeb.Web.Router do
     get "/logout", AuthController, :delete
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", FirestormWeb.Web do
-  #   pipe_through :api
-  # end
+  # API routes
+  scope "/api/v1", FirestormWeb.Web.Api.V1 do
+    pipe_through :api
+
+    get "/home", HomeController, :index
+  end
+
+  # Inbound email routes
+  scope "/inbound", FirestormWeb.Web do
+    pipe_through :api
+
+    post "/sendgrid", InboundController, :sendgrid
+  end
+
+  # Bamboo dev mail server
+  if Mix.env == :dev do
+    forward "/sent_emails", Bamboo.EmailPreviewPlug
+  end
 end

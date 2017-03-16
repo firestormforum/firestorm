@@ -9,12 +9,14 @@ defmodule FirestormData.User do
 
   schema "users" do
     field :username, :string
+    field :name, :string
+    field :email, :string
 
     timestamps()
   end
 
-  @required_fields ~w(username)a
-  @optional_fields ~w()a
+  @required_fields ~w(username email)a
+  @optional_fields ~w(name)a
 
   def changeset(record, params \\ :empty) do
     record

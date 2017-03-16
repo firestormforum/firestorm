@@ -1,6 +1,9 @@
 .post-item {
   border-bottom: 1px solid $botticcelli;
-  padding: $padding-medium 0;
+  padding: $padding-medium;
+  &:target {
+    background-color: rgba($punch, 0.03);
+  }
   > .body {
   }
 }
