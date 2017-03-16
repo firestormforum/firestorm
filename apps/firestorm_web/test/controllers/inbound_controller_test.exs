@@ -5,6 +5,7 @@ defmodule FirestormWeb.InboundControllerTest do
   use FirestormWeb.ConnCase
   import FirestormWeb.DataHelper
   alias FirestormData.Commands.GetThread
+  alias FirestormData.Repo
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
@@ -23,7 +24,7 @@ defmodule FirestormWeb.InboundControllerTest do
 
       assert json_response(conn, 200) =~ "ok"
       {:ok, thread} =
-        %GetThread{finder: thread.id, category_id: elixir.id}
+        %GetThread{finder: thread.id, category_finder: elixir.id}
         |> GetThread.run
 
       last_post =

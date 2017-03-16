@@ -33,15 +33,6 @@ defmodule FirestormData.Commands.CreatePostTest do
     {:ok, %{category_id: category_id}}
   end
 
-  def create_user(_) do
-    changeset =
-      %User{}
-      |> User.changeset(%{username: "sonny"})
-
-    {:ok, user} = Repo.insert(changeset)
-    {:ok, %{user_id: user.id}}
-  end
-
   def create_thread(%{user_id: user_id, category_id: category_id}) do
     changeset =
       %CreateThread{}

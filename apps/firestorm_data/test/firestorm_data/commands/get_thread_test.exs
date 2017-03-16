@@ -111,7 +111,7 @@ defmodule FirestormData.Commands.GetThreadTest do
   def create_user(_) do
     changeset =
       %User{}
-      |> User.changeset(%{username: "sonny"})
+      |> User.changeset(%{username: "sonny", email: "sonny@example.com"})
 
     {:ok, user} = Repo.insert(changeset)
     {:ok, %{user_id: user.id}}

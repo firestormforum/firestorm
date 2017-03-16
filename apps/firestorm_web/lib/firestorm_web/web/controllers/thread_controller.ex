@@ -70,7 +70,7 @@ defmodule FirestormWeb.Web.ThreadController do
   def tag(conn, %{"thread_id" => id_or_slug, "tag_thread" => tag_thread_params}, category) do
     finder = get_finder(id_or_slug)
 
-    case GetThread.run(%GetThread{finder: finder, category_id: category.id}) do
+    case GetThread.run(%GetThread{finder: finder, category_finder: category.id}) do
       {:ok, thread} ->
         changeset =
           %TagThread{}
@@ -139,7 +139,7 @@ defmodule FirestormWeb.Web.ThreadController do
   def follow(conn, %{"thread_id" => id_or_slug}, category) do
     finder = get_finder(id_or_slug)
 
-    case GetThread.run(%GetThread{finder: finder, category_id: category.id}) do
+    case GetThread.run(%GetThread{finder: finder, category_finder: category.id}) do
       {:ok, thread} ->
         changeset =
           %FollowThread{}
@@ -167,7 +167,7 @@ defmodule FirestormWeb.Web.ThreadController do
   def unfollow(conn, %{"thread_id" => id_or_slug}, category) do
     finder = get_finder(id_or_slug)
 
-    case GetThread.run(%GetThread{finder: finder, category_id: category.id}) do
+    case GetThread.run(%GetThread{finder: finder, category_finder: category.id}) do
       {:ok, thread} ->
         changeset =
           %UnfollowThread{}

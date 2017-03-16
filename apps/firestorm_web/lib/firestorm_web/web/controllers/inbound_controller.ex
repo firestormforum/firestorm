@@ -2,6 +2,8 @@ defmodule FirestormWeb.Web.InboundController do
   use FirestormWeb.Web, :controller
   require Logger
   alias FirestormData.Commands.CreatePost
+  # NOTE: We should get rid of this and add a query to find users by email
+  alias FirestormData.Repo
 
   @inbound_domain "notifier.firestormforum.org"
   # Get the thread id out of something like
