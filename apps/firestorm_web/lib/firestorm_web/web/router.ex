@@ -47,6 +47,7 @@ defmodule FirestormWeb.Web.Router do
     pipe_through :api
 
     get "/home", HomeController, :index
+    resources "/categories", CategoryController
   end
 
   # Inbound email routes

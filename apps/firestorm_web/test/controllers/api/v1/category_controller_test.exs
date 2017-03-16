@@ -1,4 +1,4 @@
-defmodule FirestormWeb.Web.Api.V1.HomeControllerTest do
+defmodule FirestormWeb.Web.Api.V1.CategoryControllerTest do
   use FirestormWeb.ConnCase
   import FirestormWeb.DataHelper
 
@@ -6,26 +6,14 @@ defmodule FirestormWeb.Web.Api.V1.HomeControllerTest do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
   end
 
-  describe "with no categories" do
-    test "GET /", %{conn: conn} do
-      conn = get conn, "/api/v1/home"
-      assert json_response(conn, 200) == %{
-        "categories" => [],
-        "users" => [],
-        "posts" => [],
-        "threads" => []
-      }
-    end
-  end
-
   describe "with some categories" do
     setup [:create_users, :create_categories_and_threads]
 
-    test "GET /", %{conn: conn, categories: %{elixir: elixir, elm: elm}, users: %{knewter: knewter}} do
-      conn = get conn, "/api/v1/home"
+    test "GET /api/v1/categories/:id", %{conn: conn, categories: %{elixir: elixir, elm: elm}, users: %{knewter: knewter}} do
+      conn = get conn, "/api/v1/categories/#{elm.id}"
       response = json_response(conn, 200)
       assert response
-      assert length(response["categories"]) == 2
+      assert length(response["categories"]) == 1
       first_category = hd(response["categories"])
       assert length(first_category["thread_ids"]) == 1
       threads = response["threads"]

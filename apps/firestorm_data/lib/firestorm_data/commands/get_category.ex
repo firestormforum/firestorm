@@ -20,7 +20,7 @@ defmodule FirestormData.Commands.GetCategory do
     query =
       Category
       |> where(^[{finder_key, finder}])
-      |> preload(threads: [:posts, :category])
+      |> preload(threads: [posts: [user: []], category: []])
       |> preload(:parent)
       |> preload(:tags)
 
