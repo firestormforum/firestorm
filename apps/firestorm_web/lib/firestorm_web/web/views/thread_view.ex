@@ -10,7 +10,8 @@ defmodule FirestormWeb.Web.ThreadView do
   end
 
   def markdown(body) do
-    Markdown.render(body)
+    body
+    |> Markdown.render
     |> raw
   end
 

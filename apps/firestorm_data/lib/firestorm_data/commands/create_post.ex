@@ -46,7 +46,7 @@ defmodule FirestormData.Commands.CreatePost do
     post =
       Post
       |> where(id: ^post.id)
-      |> preload(:thread)
+      |> preload(thread: [category: []])
       |> preload(:user)
       |> Repo.one
 
