@@ -51,6 +51,7 @@ defmodule FirestormWeb.Mixfile do
       {:exmoji, "~> 0.2.2"},
       {:poison, "~> 3.1.0", override: true},
       {:cors_plug, "~> 1.2"},
+      {:bamboo, github: "thoughtbot/bamboo"},
 
       # UMBRELLA
       {:firestorm_data, in_umbrella: true},

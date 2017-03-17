@@ -21,7 +21,7 @@ defmodule FirestormWeb.Web.CategoryController do
     end
   end
 
-  def tag(conn, %{"category_id" => id_or_slug, "tag_category" => tag_category_params}) do
+  def tag(conn, %{"id" => id_or_slug, "tag_category" => tag_category_params}) do
     finder = get_finder(id_or_slug)
 
     case GetCategory.run(%GetCategory{finder: finder}) do

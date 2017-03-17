@@ -13,6 +13,7 @@ defmodule FirestormWeb.Web.Api.V1.HomeView do
       categories: Enum.map(categories, &category_json/1),
       threads: Enum.map(threads, &thread_json/1),
       posts: Enum.map(posts, &post_json/1),
+      # NOTE: Unique these things fool! -ja
       users: Enum.map(users, &user_json/1)
     }
   end
@@ -63,6 +64,7 @@ defmodule FirestormWeb.Web.Api.V1.HomeView do
     %{
       id: thread.id,
       title: thread.title,
+      slug: thread.slug,
       post_ids: Enum.map(thread.posts, &(&1.id)),
       user_id: user.id
     }
