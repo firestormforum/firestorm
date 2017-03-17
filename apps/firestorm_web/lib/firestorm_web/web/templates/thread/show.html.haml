@@ -13,7 +13,7 @@
       = render "_tag_list.html", tags: @thread.tags, conn: @conn
       %button.pure-button.add-tag
         %i.fa.fa-plus
-      - form_for @tag_thread_changeset, category_thread_thread_path(@conn, :tag, category_finder(@category), @thread.id), [class: "tag-form"], fn f ->
+      - form_for @tag_thread_changeset, category_thread_path(@conn, :tag, category_finder(@category), @thread.id), [class: "tag-form"], fn f ->
         = text_input f, :tag_title, class: "title"
         %button.pure-button.button-primary
           %i.fa.fa-plus
