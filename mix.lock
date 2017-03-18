@@ -17,7 +17,7 @@
   "ex_machina": {:hex, :ex_machina, "2.0.0", "ec284c6f57233729cea9319e083f66e613e82549f78eccdb2059aeba5d0df9f3", [:mix], [{:ecto, "~> 2.1", [hex: :ecto, optional: true]}]},
   "exmoji": {:hex, :exmoji, "0.2.2", "fae4e012d3b78771436d19ff8922219bd93d9115364226da5cc5d4703d5d879f", [:mix], [{:poison, "~> 1.5", [hex: :poison, optional: false]}]},
   "faker": {:hex, :faker, "0.7.0", "2c42deeac7be717173c78c77fb3edc749fb5d5e460e33d01fe592ae99acc2f0d", [:mix], []},
-  "floki": {:hex, :floki, "0.14.0", "91a6be57349e10a63cf52d7890479a19012cef9185fa93c305d4fe42e6a50dee", [:mix], [{:mochiweb, "~> 2.15", [hex: :mochiweb, optional: false]}]},
+  "floki": {:hex, :floki, "0.15.0", "c5b7ac5d585c93da4cec61fc9bac7b8c2655883a085d740871057aa30a0f1258", [:mix], [{:mochiweb, "~> 2.15", [hex: :mochiweb, optional: false]}]},
   "fs": {:hex, :fs, "2.12.0", "ad631efacc9a5683c8eaa1b274e24fa64a1b8eb30747e9595b93bec7e492e25e", [:rebar3], []},
   "gen_stage": {:hex, :gen_stage, "0.11.0", "943bdfa85c75fa624e0a36a9d135baad20a523be040178f5a215444b45c66ea4", [:mix], []},
   "gettext": {:hex, :gettext, "0.13.1", "5e0daf4e7636d771c4c71ad5f3f53ba09a9ae5c250e1ab9c42ba9edccc476263", [:mix], []},

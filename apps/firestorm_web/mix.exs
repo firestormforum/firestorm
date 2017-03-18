@@ -52,6 +52,7 @@ defmodule FirestormWeb.Mixfile do
       {:poison, "~> 3.1.0", override: true},
       {:cors_plug, "~> 1.2"},
       {:bamboo, github: "thoughtbot/bamboo"},
+      {:floki, "~> 0.15.0"},
 
       # UMBRELLA
       {:firestorm_data, in_umbrella: true},
