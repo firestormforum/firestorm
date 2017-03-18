@@ -1,6 +1,9 @@
 defmodule FirestormWeb.Markdown.Sanitizer do
   alias Floki.HTMLTree
 
+  @module """
+  Strip unsafe elements from HTML string
+  """
   def sanitize(html) do
     allowed_tags = MapSet.new([
       "a",

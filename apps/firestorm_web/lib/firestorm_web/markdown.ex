@@ -2,7 +2,8 @@ defmodule FirestormWeb.Markdown do
   alias FirestormWeb.Markdown.Sanitizer
 
   @moduledoc """
-  Render a string as markdown in the FirestormWeb style
+  Render a string as markdown in the FirestormWeb style.
+  Then sanitize the resulting HTML.
   """
 
   def render(body) do
