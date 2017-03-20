@@ -4,16 +4,30 @@ defmodule FirestormWeb.Web.Api.V1.HomeView do
   import Ecto.Query
 
   def render("index.json", %{categories: root_categories}) do
-    categories = whole_category_tree_for(root_categories)
-    threads = threads_for(categories)
-    posts = posts_for(threads)
-    users = users_for(posts)
+    categories =
+      root_categories
+      |> whole_category_tree_for
+      |> Enum.uniq
+
+    threads =
+      categories
+      |> threads_for
+      |> Enum.uniq
+
+    posts =
+      threads
+      |> posts_for
+      |> Enum.uniq
+
+    users =
+      posts
+      |> users_for
+      |> Enum.uniq
 
     %{
       categories: Enum.map(categories, &category_json/1),
       threads: Enum.map(threads, &thread_json/1),
       posts: Enum.map(posts, &post_json/1),
-      # NOTE: Unique these things fool! -ja
       users: Enum.map(users, &user_json/1)
     }
   end
@@ -66,7 +80,8 @@ defmodule FirestormWeb.Web.Api.V1.HomeView do
       title: thread.title,
       slug: thread.slug,
       post_ids: Enum.map(thread.posts, &(&1.id)),
-      user_id: user.id
+      user_id: user.id,
+      category_id: thread.category_id,
     }
   end
 
@@ -74,7 +89,9 @@ defmodule FirestormWeb.Web.Api.V1.HomeView do
     %{
       id: post.id,
       body: post.body,
-      user_id: post.user_id
+      user_id: post.user_id,
+      thread_id: post.thread_id,
+      inserted_at: post.inserted_at,
     }
   end
 
