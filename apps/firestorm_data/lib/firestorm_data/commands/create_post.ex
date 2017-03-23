@@ -46,11 +46,20 @@ defmodule FirestormData.Commands.CreatePost do
     post =
       Post
       |> where(id: ^post.id)
-      |> preload(thread: [category: []])
+      |> preload(thread: [category: [threads: [posts: [:user]]], posts: [:user]])
       |> preload(:user)
       |> Repo.one
 
+    payload =
+      %{
+        categories: [],
+        threads: [post.thread],
+        users: [post.user],
+        posts: [post]
+      }
+
     Events.notify({:new_post, post})
+    broadcast_endpoint().broadcast! "threads:#{post.thread_id}", "update", payload
     {:ok, post.id}
   end
   def handle_result({:error, changes}, changeset) do

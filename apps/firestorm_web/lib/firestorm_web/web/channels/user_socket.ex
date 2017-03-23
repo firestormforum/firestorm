@@ -3,6 +3,11 @@ defmodule FirestormWeb.Web.UserSocket do
 
   ## Channels
   # channel "room:*", FirestormWeb.Web.RoomChannel
+  channel "store:home", FirestormWeb.Web.StoreChannel
+  channel "categories:*", FirestormWeb.Web.CategoriesChannel
+  channel "threads:*", FirestormWeb.Web.ThreadsChannel
+  channel "posts:*", FirestormWeb.Web.PostsChannel
+  channel "users:*", FirestormWeb.Web.UsersChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket, timeout: 45_000

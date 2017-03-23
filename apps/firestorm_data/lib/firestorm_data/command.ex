@@ -19,6 +19,10 @@ defmodule FirestormData.Command do
       import Ecto.{Query, Changeset}
       alias Ecto.{Multi, Changeset}
       use Ecto.Schema
+      import FirestormData.Command
+
     end
   end
+
+  def broadcast_endpoint(), do: Application.get_env(:firestorm_data, :broadcast_endpoint)
 end

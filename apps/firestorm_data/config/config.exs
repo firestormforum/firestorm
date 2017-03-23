@@ -29,5 +29,6 @@ use Mix.Config
 #
 
 config :firestorm_data, ecto_repos: [FirestormData.Repo]
+config :firestorm_data, broadcast_endpoint: FirestormWeb.Web.Endpoint
 
 import_config "#{Mix.env}.exs"

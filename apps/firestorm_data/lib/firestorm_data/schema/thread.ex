@@ -45,19 +45,21 @@ defmodule FirestormData.Thread do
     {:error, "No first post!"}
   end
   def user(thread) do
-    first_post =
-      Post
-      |> where([p], p.thread_id == ^thread.id)
-      |> order_by(:inserted_at)
-      |> limit(1)
-      |> preload(:user)
-      |> Repo.one
-
-    case first_post do
+    case first_post(thread) do
       nil -> {:error, "No first post"}
-      _ -> {:ok, first_post.user}
+      p -> {:ok, p.user}
     end
   end
+
+  def first_post(thread) do
+    Post
+    |> where([p], p.thread_id == ^thread.id)
+    |> order_by(:inserted_at)
+    |> limit(1)
+    |> preload(:user)
+    |> Repo.one
+  end
+
 
   def completely_read?(thread, nil), do: false
   def completely_read?(thread, user) do

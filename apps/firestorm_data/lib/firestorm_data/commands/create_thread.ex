@@ -45,6 +45,31 @@ defmodule FirestormData.Commands.CreateThread do
   end
 
   def handle_result({:ok, %{thread: thread, post: _post}}, _changeset) do
+    first_post = Thread.first_post(thread)
+
+    thread =
+      thread
+      |> Repo.preload([
+        category: [threads: [posts: [:user]]],
+        posts: [:user]
+      ])
+
+    {posts, users} =
+      case first_post do
+        nil -> {[], []}
+        post -> {[post], [post.user]}
+      end
+    payload =
+      %{
+        categories: [thread.category],
+        threads: [thread],
+        users: users,
+        posts: posts
+      }
+
+    # Tell connected clients about the new thread - also update their category
+    broadcast_endpoint().broadcast! "categories:#{thread.category_id}", "update", payload
+
     {:ok, thread.id}
   end
   def handle_result({:error, errored_key, changes}, changeset) do
