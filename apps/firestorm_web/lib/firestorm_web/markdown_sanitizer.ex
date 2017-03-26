@@ -56,6 +56,7 @@ defmodule FirestormWeb.Markdown.Sanitizer do
       HTMLTree.to_tuple(sanitized_tree, root)
     end)
 
-    Floki.raw_html(document)
+    html = Floki.raw_html(document)
+    "#{html}\n"
   end
 end

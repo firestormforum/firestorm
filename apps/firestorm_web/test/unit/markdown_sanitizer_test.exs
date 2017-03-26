@@ -7,7 +7,7 @@ defmodule FirestormWeb.Markdown.SanitizerTest do
       <a href="#safe">Safe</a>
       <script></script>
     )
-    expected = ~s(<a href="#safe">Safe</a>)
+    expected = ~s(<a href="#safe">Safe</a>\n)
     actual = Sanitizer.sanitize(input)
 
     assert expected == actual
@@ -18,7 +18,7 @@ defmodule FirestormWeb.Markdown.SanitizerTest do
       <a on_click="function(){alert('pwned');}" href="#unsafe">Unsafe</a>
       <h1>Safe</h1>
     """
-    expected = ~s(<h1>Safe</h1>)
+    expected = ~s(<h1>Safe</h1>\n)
     actual = Sanitizer.sanitize(input)
 
     assert expected == actual
