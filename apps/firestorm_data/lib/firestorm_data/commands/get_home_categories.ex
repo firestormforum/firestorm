@@ -13,6 +13,7 @@ defmodule FirestormData.Commands.GetHomeCategories do
     categories =
       Category.roots
       |> preload([threads: [posts: [:user], category: []], parent: []])
+      |> order_by(:inserted_at)
       |> Repo.all
       |> Enum.map(&add_children/1)
 
