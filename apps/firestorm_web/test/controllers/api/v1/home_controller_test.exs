@@ -36,14 +36,14 @@ defmodule FirestormWeb.Web.Api.V1.HomeControllerTest do
         |> hd
       assert first_category_first_thread["user_id"] == knewter.id
       assert length(first_category_first_thread["post_ids"]) == 1
-      assert first_category_first_thread["title"] == "First elm thread"
+      assert first_category_first_thread["title"] == "First elixir thread"
       first_category_first_thread_first_post_id = hd(first_category_first_thread["post_ids"])
       posts = response["posts"]
       first_category_first_thread_first_post =
         posts
         |> Enum.filter(fn(p) -> p["id"] == first_category_first_thread_first_post_id end)
         |> hd
-      assert first_category_first_thread_first_post["body"] == "This is some content for the first elm thread post"
+      assert first_category_first_thread_first_post["body"] == "This is some content for the first elixir thread post"
       first_category_first_thread_first_post_user_id = first_category_first_thread_first_post["user_id"]
       users = response["users"]
       first_category_first_thread_first_post_user =
