@@ -53,3 +53,7 @@ said that, here are the planned features and their status:
 - [ ] Search
 - [ ] Slack Integration
 - [ ] Plugin System
+
+## License
+
+Firestorm is [MIT Licensed](./LICENSE).
