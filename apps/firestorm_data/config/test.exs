@@ -7,3 +7,5 @@ config :firestorm_data, FirestormData.Repo,
   password: System.get_env("POSTGRES_PASSWORD") || "postgres",
   hostname: System.get_env("DB_HOST")           || "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :firestorm_data, :broadcast_endpoint, FirestormData.MockEndpoint
