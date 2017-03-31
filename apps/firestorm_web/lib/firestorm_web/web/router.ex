@@ -25,8 +25,11 @@ defmodule FirestormWeb.Web.Router do
       post "/threads/:id/tag", ThreadController, :tag
       get "/threads/:id/follow", ThreadController, :follow
       get "/threads/:id/unfollow", ThreadController, :unfollow
+
       resources "/threads", ThreadController do
-        resources "/posts", PostController
+        resources "/posts", PostController do
+          resources "/reactions", ReactionController
+        end
       end
     end
   end

@@ -40,7 +40,7 @@ defmodule FirestormData.Commands.GetThread do
       Thread
       |> where(^[{finder_key, finder}])
       |> where(^[{category_finder_key, category_finder}])
-      |> preload(posts: [:user])
+      |> preload(posts: [:user, :reactions])
       |> preload(:category)
       |> preload(:tags)
 
