@@ -13,3 +13,5 @@ these meetings here.
 - [Weekly Design Meeting #6](./weekly_design_meetings/design_meeting_6.md)
 - [Weekly Design Meeting #7](./weekly_design_meetings/design_meeting_7.md)
 - [Weekly Design Meeting #8](./weekly_design_meetings/design_meeting_8.md)
+- [Weekly Design Meeting #9](./weekly_design_meetings/design_meeting_9.md)
+- [Weekly Design Meeting #10](./weekly_design_meetings/design_meeting_10.md)
