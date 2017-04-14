@@ -1,4 +1,4 @@
-![Firestorm](./apps/firestorm_web/assets/static/images/firestorm-logo.png)
+![Firestorm](./firestorm-logo.png)
 ### An open-source forum engine, with an Elixir+Phoenix backend and an Elm frontend.
 #### A community-funded project from [DailyDrip](https://www.dailydrip.com).
 
