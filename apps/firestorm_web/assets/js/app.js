@@ -15,8 +15,11 @@ import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace'
 import 'prismjs/plugins/toolbar/prism-toolbar'
 import 'prismjs/plugins/toolbar/prism-toolbar.css'
 
-let moment = require('moment')
-let $ = require('jquery')
+// Our components
+import Reaction from './components/reaction'
+
+const moment = require('moment')
+const $ = require('jquery')
 
 $('abbr.time').html((_, html) => {
   return moment.utc(html.trim(), moment.ISO_8601).fromNow()
@@ -45,3 +48,5 @@ Prism.highlightAll()
 $('.tag-editor .add-tag').on('click', function() {
   $(this).parent().addClass('editing')
 })
+
+Reaction.mount()

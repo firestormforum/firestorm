@@ -10,7 +10,7 @@
     .spacer
     %ul.actions
       %li.reaction
-        %a{href: "#"}
+        %a.reaction-picker{href: "#"}
           %i.emoticon-faces
             - form_for (%CreateReaction{} |> CreateReaction.changeset(%{})), category_thread_post_reaction_path(@conn, :create, category_finder(@category), @thread.id, @post.id), [id: "post-#{@post.id}-reaction"], fn f ->
               = text_input f, :emoji, class: "emoji"
