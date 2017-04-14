@@ -5,8 +5,8 @@
   .post-item-actions
     .reply-count #{length(@thread.posts) - 1} replies
     .reactions
-      - for reaction <- @post.reactions do
-        = Exmoji.from_short_name(reaction.emoji) |> Exmoji.EmojiChar.render
+      - for emoji <- (@post.reactions |> Enum.map(fn(r) -> r.emoji end) |> Enum.uniq) do
+        = Exmoji.from_short_name(emoji) |> Exmoji.EmojiChar.render
     .spacer
     %ul.actions
       %li.reaction
