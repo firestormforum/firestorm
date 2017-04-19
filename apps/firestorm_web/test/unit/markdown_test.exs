@@ -3,16 +3,16 @@ defmodule FirestormWeb.MarkdownTest do
   alias FirestormWeb.Markdown
 
   test "renders basic things" do
-    assert "<p>foo</p>\n" == Markdown.render("foo")
+    assert "<p>foo</p>" == Markdown.render("foo")
   end
 
   test "autolinks URLs" do
-    assert "<p><a href=\"http://slashdot.org\">http://slashdot.org</a></p>\n" == Markdown.render("http://slashdot.org")
+    assert "<p><a href=\"http://slashdot.org\">http://slashdot.org</a></p>" == Markdown.render("http://slashdot.org")
   end
 
   test "handles markdown links reasonably" do
     input = "[This is a link](http://slashdot.org)"
-    output = "<p><a href=\"http://slashdot.org\">This is a link</a></p>\n"
+    output = "<p><a href=\"http://slashdot.org\">This is a link</a></p>"
     assert output == Markdown.render(input)
   end
 
@@ -20,7 +20,7 @@ defmodule FirestormWeb.MarkdownTest do
     poop = Exmoji.from_short_name("poop") |> Exmoji.EmojiChar.render
     fire = Exmoji.from_short_name("fire") |> Exmoji.EmojiChar.render
     input = "This :poop::fire: is great!"
-    output = "<p>This #{poop}#{fire} is great!</p>\n"
+    output = "<p>This #{poop}#{fire} is great!</p>"
     assert output == Markdown.render(input)
   end
 end

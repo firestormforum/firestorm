@@ -1,5 +1,4 @@
 defmodule FirestormWeb.Markdown do
-  alias FirestormWeb.Markdown.Sanitizer
 
   @moduledoc """
   Render a string as markdown in the FirestormWeb style.
@@ -14,7 +13,7 @@ defmodule FirestormWeb.Markdown do
   defp as_html!(body) do
     body
     |> Earmark.as_html!(earmark_options())
-    |> Sanitizer.sanitize
+    |> HtmlSanitizeEx.markdown_html
   end
 
   # Options to control how earmark works. We should probably expose these in
