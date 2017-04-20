@@ -50,6 +50,7 @@ const appendToTextArea = (filename, mimeType, xml) => {
   const $textArea = $(textAreaSelector)
   const fileMarkdown = makeMarkdown(filename, mimeType, location)
   $textArea.val(`${$textArea.val()}\n\n${fileMarkdown}`)
+  $textArea.change()
 }
 
 const mount = () => {
