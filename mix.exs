@@ -13,7 +13,7 @@ defmodule Firestorm.Mixfile do
 
   defp deps do
     [
-      {:credo, "~> 0.6.1", only: [:dev, :test]},
+      {:credo, "~> 0.7.3", only: [:dev, :test]},
     ]
   end
 

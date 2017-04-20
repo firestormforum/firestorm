@@ -39,7 +39,7 @@ defmodule FirestormData.Mixfile do
       {:ecto_autoslug_field, "~> 0.2"},
       {:gen_stage, "~> 0.11"},
 
-      {:credo, "~> 0.5", only: [:dev, :test]},
+      {:credo, "~> 0.7.3", only: [:dev, :test]},
     ]
   end
 
