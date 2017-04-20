@@ -52,12 +52,13 @@ defmodule FirestormWeb.Mixfile do
       {:poison, "~> 3.1.0", override: true},
       {:cors_plug, "~> 1.2"},
       {:bamboo, github: "thoughtbot/bamboo"},
+      { :uuid, "~> 1.1" },
 
       # UMBRELLA
       {:firestorm_data, in_umbrella: true},
 
       # DEV/TEST
-      {:credo, "~> 0.6.1", only: [:dev, :test]},
+      {:credo, "~> 0.7.3", only: [:dev, :test]},
       {:phoenix_integration, "~> 0.2", only: :test},
       {:wallaby, github: "keathley/wallaby", only: [:dev, :test]},
       {:ex_machina, "~> 2.0", only: [:dev, :test]},

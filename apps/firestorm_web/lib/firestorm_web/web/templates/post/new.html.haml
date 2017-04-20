@@ -5,8 +5,10 @@
 
   .action-bar
     .begin
-      %button.pure-button.button-primary.-inverted.attachment
-        %i.fa.fa-paperclip
+      .add-attachment
+        %label.pure-button.button-primary.-inverted.attachment
+          %input{type: "file"}
+          %i.fa.fa-paperclip
     .end
       %a.pure-button.button-primary.-muted.cancel{href: "#{category_thread_path(@conn, :show, category_finder(@category), @thread.id)}"}
         Cancel

@@ -51,6 +51,7 @@ defmodule FirestormWeb.Web.Router do
 
     get "/home", HomeController, :index
     resources "/fetch", FetchController
+    resources "/upload_signature", UploadSignatureController, only: [:create]
   end
 
   # Inbound email routes
