@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.0-beta IN PROGRESS WIP NOT YET TAGGED
+
+- Add post previews
+
 ## 0.8.0-alpha (2017-04-20)
 
 - Initial release. Basic working project with lots left to do.
