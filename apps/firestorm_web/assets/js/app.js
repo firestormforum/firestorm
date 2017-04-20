@@ -1,9 +1,9 @@
 require('../css/app.scss')
 import '../../../../deps/phoenix_html/priv/static/phoenix_html'
 // polyfill es6 promises
-//require('es6-promise')
+require('es6-promise')
 // polyfill fetch browser api
-//require('isomorphic-fetch')
+require('isomorphic-fetch')
 
 // Our components
 import Reaction from './components/reaction'
