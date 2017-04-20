@@ -35,8 +35,26 @@ const UploadSignature = {
   }
 }
 
+const Preview = {
+  create: (postBody) => {
+    const payload = {
+      post: {
+        body: postBody
+      }
+    }
+    const fetch = createFetch(
+      commonStack,
+      method('POST'),
+      body(JSON.stringify(payload), 'application/json')
+    )
+
+    return fetch('/preview')
+  }
+}
+
 const Api = {
-  UploadSignature
+  UploadSignature,
+  Preview,
 }
 
 export default Api
