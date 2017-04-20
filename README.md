@@ -54,6 +54,43 @@ said that, here are the planned features and their status:
 - [ ] Slack Integration
 - [ ] Plugin System
 
+## Configuration
+
+### S3
+
+Attachments are stored on S3. Consequently, you will need to create an S3 bucket
+to store them, as well as an API user that can write to it and list all of your
+buckets, and configure the bucket for CORS.
+
+You also need to set 4 environment variables:
+
+```sh
+export AWS_ACCESS_KEY_ID=XXXX
+export AWS_SECRET_ACCESS_KEY=XXXX
+export AWS_S3_BUCKET=XXXX
+export AWS_S3_REGION=XXXX
+```
+
+#### CORS configuration
+
+Here's an example CORS configuration:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <CORSRule>
+    <AllowedOrigin>http://localhost:4000</AllowedOrigin>
+    <AllowedMethod>POST</AllowedMethod>
+    <AllowedHeader>*</AllowedHeader>
+  </CORSRule>
+  <CORSRule>
+    <AllowedOrigin>http://firestorm-dogfood.herokuapp.com</AllowedOrigin>
+    <AllowedMethod>POST</AllowedMethod>
+    <AllowedHeader>*</AllowedHeader>
+  </CORSRule>
+</CORSConfiguration>
+```
+
 ## License
 
 Firestorm is [MIT Licensed](./LICENSE).
