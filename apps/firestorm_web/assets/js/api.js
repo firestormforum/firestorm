@@ -9,11 +9,10 @@ import {
   parse,
 } from 'http-client'
 
-// FIXME: set this in config
-const basePath = 'http://localhost:4000/api/v1/'
+import config from 'config'
 
 const commonStack = createStack(
-  base(basePath),
+  base(config.apiBaseUrl),
   accept('application/json'),
   parse('json', 'jsonData'),
 )
