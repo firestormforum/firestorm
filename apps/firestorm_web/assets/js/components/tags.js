@@ -1,7 +1,9 @@
 const $ = require('jquery')
 
+const selector = '.tag-editor .add-tag'
+
 const handleEditor = () => {
-  $('.tag-editor .add-tag').on('click', function() {
+  $(selector).on('click', function() {
     let $parent = $(this).parent()
     $parent.addClass('editing')
     setTimeout(() => {

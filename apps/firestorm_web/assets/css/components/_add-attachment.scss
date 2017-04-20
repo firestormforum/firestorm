@@ -1,0 +1,13 @@
+// Styling file input informed by https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
+.add-attachment {
+  > label {
+    > input {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+  }
+}

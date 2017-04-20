@@ -9,13 +9,6 @@ config :firestorm_web, FirestormWeb.Web.Endpoint,
   http: [port: 4001],
   server: true
 
-# Configuration for AWS integration
-config :firestorm_web, :aws,
-  access_key_id: System.get_env("AWS_ACCESS_KEY_ID"),
-  secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY"),
-  bucket: System.get_env("AWS_S3_BUCKET"),
-  region: System.get_env("AWS_S3_REGION")
-
 # We check this config key in FirestormWeb.Endpoint to determine whether to use
 # a SQL sandbox or not when spinning up the Phoenix app
 config :firestorm_web, :sql_sandbox, true
