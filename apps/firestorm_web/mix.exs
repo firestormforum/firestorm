@@ -52,7 +52,7 @@ defmodule FirestormWeb.Mixfile do
       {:poison, "~> 3.1.0", override: true},
       {:cors_plug, "~> 1.2"},
       {:bamboo, github: "thoughtbot/bamboo"},
-      {:html_sanitize_ex, github: "marvelm/html_sanitize_ex"},
+      {:html_sanitize_ex, "~> 1.2"},
 
       # UMBRELLA
       {:firestorm_data, in_umbrella: true},
