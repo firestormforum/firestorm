@@ -21,6 +21,11 @@ module.exports = {
     filename: 'js/app.js',
     publicPath,
   },
+  resolve: {
+    alias: {
+      config: path.resolve(__dirname, `./config/${nodeEnv}.js`)
+    }
+  },
   module: {
     rules: [
       {

@@ -25,8 +25,11 @@ defmodule FirestormWeb.Web.Router do
       post "/threads/:id/tag", ThreadController, :tag
       get "/threads/:id/follow", ThreadController, :follow
       get "/threads/:id/unfollow", ThreadController, :unfollow
+
       resources "/threads", ThreadController do
-        resources "/posts", PostController
+        resources "/posts", PostController do
+          resources "/reactions", ReactionController
+        end
       end
     end
   end
@@ -47,7 +50,9 @@ defmodule FirestormWeb.Web.Router do
     pipe_through :api
 
     get "/home", HomeController, :index
-    resources "/categories", CategoryController
+    resources "/fetch", FetchController
+    resources "/upload_signature", UploadSignatureController, only: [:create]
+    resources "/preview", PreviewController, only: [:create]
   end
 
   # Inbound email routes

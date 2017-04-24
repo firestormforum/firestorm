@@ -4,11 +4,19 @@
 
   .post-item-actions
     .reply-count #{length(@thread.posts) - 1} replies
+    .reactions
+      - for emoji <- (@post.reactions |> Enum.map(fn(r) -> r.emoji end) |> Enum.uniq) do
+        = Exmoji.from_short_name(emoji) |> Exmoji.EmojiChar.render
     .spacer
     %ul.actions
-      %li
-        %a{href: "#"}
+      %li.reaction
+        %a.reaction-picker{href: "#"}
           %i.emoticon-faces
+            - form_for (%CreateReaction{} |> CreateReaction.changeset(%{})), category_thread_post_reaction_path(@conn, :create, category_finder(@category), @thread.id, @post.id), [id: "post-#{@post.id}-reaction"], fn f ->
+              = text_input f, :emoji, class: "emoji"
+              %button.pure-button.button-primary
+                %i.fa.fa-plus
+                Add Reaction
       %li
         - # LOL this path is stupid, but I don't see how to do proper non-REST member actions yet in
         - #the phoenix router DSL and there aren't any examples in Phoenix's test suite that I can find.

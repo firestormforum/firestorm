@@ -80,6 +80,10 @@ defmodule FirestormWeb.Web do
         User,
       }
 
+      alias FirestormData.Commands.{
+        CreateReaction
+      }
+
       alias FirestormWeb.Web.{
         CategoryView,
         LayoutView,

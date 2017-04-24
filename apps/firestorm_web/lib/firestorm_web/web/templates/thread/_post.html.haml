@@ -7,14 +7,22 @@
     = markdown(@post.body)
 
   .post-item-actions
+    .reactions
+      - for emoji <- (@post.reactions |> Enum.map(fn(r) -> r.emoji end) |> Enum.uniq) do
+        = Exmoji.from_short_name(emoji) |> Exmoji.EmojiChar.render
     .spacer
     %ul.actions
       %li
         %a{href: "#{category_thread_path(@conn, :show, category_finder(@category), thread_finder(@thread))}#post-#{@post.id}"}
           = fa_icon("link")
       %li
-        %a{href: "#"}
+        %a.reaction-picker{href: "#"}
           %i.emoticon-faces
+            - form_for (%CreateReaction{} |> CreateReaction.changeset(%{})), category_thread_post_reaction_path(@conn, :create, category_finder(@category), @thread.id, @post.id), [id: "post-#{@post.id}-reaction"], fn f ->
+              = text_input f, :emoji, class: "emoji"
+              %button.pure-button.button-primary
+                %i.fa.fa-plus
+                Add Reaction
       %li
         %a{href: "#"}
           = fa_icon("quote-right")

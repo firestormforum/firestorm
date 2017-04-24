@@ -3,7 +3,7 @@ defmodule FirestormWeb.Mixfile do
 
   def project do
     [app: :firestorm_web,
-     version: "0.0.1",
+     version: "0.8.0",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
      deps_path: "../../deps",
@@ -53,12 +53,13 @@ defmodule FirestormWeb.Mixfile do
       {:cors_plug, "~> 1.2"},
       {:bamboo, github: "thoughtbot/bamboo"},
       {:html_sanitize_ex, "~> 1.2"},
+      { :uuid, "~> 1.1" },
 
       # UMBRELLA
       {:firestorm_data, in_umbrella: true},
 
       # DEV/TEST
-      {:credo, "~> 0.6.1", only: [:dev, :test]},
+      {:credo, "~> 0.7.3", only: [:dev, :test]},
       {:phoenix_integration, "~> 0.2", only: :test},
       {:wallaby, github: "keathley/wallaby", only: [:dev, :test]},
       {:ex_machina, "~> 2.0", only: [:dev, :test]},

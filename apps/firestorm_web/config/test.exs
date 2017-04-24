@@ -21,3 +21,4 @@ config :firestorm_web, :get_session_from_cookies, true
 config :logger, level: :warn
 
 config :wallaby, screenshot_on_failure: true
+

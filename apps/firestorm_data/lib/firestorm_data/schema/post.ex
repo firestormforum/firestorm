@@ -5,7 +5,13 @@ defmodule FirestormData.Post do
 
   use Ecto.Schema
   import Ecto.Changeset
-  alias FirestormData.{Thread, User, View, Repo}
+  alias FirestormData.{
+    Thread,
+    User,
+    View,
+    Repo,
+    Reaction
+  }
 
   schema "posts" do
     belongs_to :thread, Thread
@@ -13,6 +19,7 @@ defmodule FirestormData.Post do
     belongs_to :user, User
     field :body, :string
     has_many :views, {"posts_views", View}, foreign_key: :assoc_id
+    has_many :reactions, Reaction
 
     timestamps()
   end

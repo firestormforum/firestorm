@@ -7,6 +7,7 @@ defmodule FirestormWeb.DataHelper do
     CreatePost,
     LoginOrRegisterFromGitHub,
     GetCategory,
+    GetThread,
   }
 
   def create_users(_) do
@@ -29,7 +30,7 @@ defmodule FirestormWeb.DataHelper do
       |> CreateCategory.changeset(%{title: "Elm"})
       |> CreateCategory.run()
 
-    {:ok, _elixir_thread_id} =
+    {:ok, elixir_thread_id} =
       %CreateThread{}
       |> CreateThread.changeset(%{
         category_id: elixir_id,
@@ -39,7 +40,7 @@ defmodule FirestormWeb.DataHelper do
       })
       |> CreateThread.run
 
-    {:ok, _elm_thread_id} =
+    {:ok, elm_thread_id} =
       %CreateThread{}
       |> CreateThread.changeset(%{
         category_id: elm_id,
@@ -57,6 +58,37 @@ defmodule FirestormWeb.DataHelper do
       %GetCategory{finder: elm_id}
       |> GetCategory.run
 
-    {:ok, %{categories: %{elixir: elixir, elm: elm}}}
+    {:ok, elixir_thread} =
+      %GetThread{finder: elixir_thread_id, category_finder: elixir_id}
+      |> GetThread.run
+
+    {:ok, elm_thread} =
+      %GetThread{finder: elm_thread_id, category_finder: elm_id}
+      |> GetThread.run
+
+    elixir_post =
+      elixir_thread.posts
+      |> hd
+
+    elm_post =
+      elm_thread.posts
+      |> hd
+
+    {:ok,
+      %{
+        categories: %{
+          elixir: elixir,
+          elm: elm
+        },
+        threads: %{
+          elixir_thread: elixir_thread,
+          elm_thread: elm_thread
+        },
+        posts: %{
+          elixir_post: elixir_post,
+          elm_post: elm_post
+        }
+      }
+    }
   end
 end

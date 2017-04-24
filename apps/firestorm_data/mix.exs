@@ -4,7 +4,7 @@ defmodule FirestormData.Mixfile do
   def project do
     [
       app: :firestorm_data,
-      version: "0.1.0",
+      version: "0.8.0",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
@@ -39,7 +39,7 @@ defmodule FirestormData.Mixfile do
       {:ecto_autoslug_field, "~> 0.2"},
       {:gen_stage, "~> 0.11"},
 
-      {:credo, "~> 0.5", only: [:dev, :test]},
+      {:credo, "~> 0.7.3", only: [:dev, :test]},
     ]
   end
 
