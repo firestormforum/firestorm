@@ -14,4 +14,18 @@ defmodule FirestormData.Post do
     post
     |> cast(params, [:body, :thread_id, :user_id])
   end
+
+  def for_user(user) do
+    import Ecto.Query
+
+    __MODULE__
+    |> where([p], p.user_id == ^user.id)
+  end
+
+  def containing_body(body) do
+    import Ecto.Query
+
+    __MODULE__
+    |> where([p], ilike(p.body, ^"%#{body}%"))
+  end
 end

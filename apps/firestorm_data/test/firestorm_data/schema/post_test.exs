@@ -2,6 +2,7 @@ defmodule FirestormData.PostTest do
   alias FirestormData.{Category, User, Thread, Post, Repo}
   use ExUnit.Case
   import Ecto.Query
+  import FirestormData.Factory
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
@@ -41,6 +42,38 @@ defmodule FirestormData.PostTest do
       posts_count = Repo.aggregate(query, :count, :id)
       assert posts_count == 2
     end
+  end
+
+  test "finding a user's Posts", %{josh: josh} do
+    [post1, post2, post3] = insert_list(3, :post, %{user: josh})
+    [post4, post5, post6] = insert_list(3, :post)
+
+    post_ids =
+      josh
+      |> Post.for_user
+      |> Repo.all
+      |> Enum.map(&(&1.id))
+
+    assert post1.id in post_ids
+    assert post2.id in post_ids
+    assert post3.id in post_ids
+    refute post4.id in post_ids
+    refute post5.id in post_ids
+    refute post6.id in post_ids
+  end
+
+  test "finding posts with a particular string in them" do
+    post1 = insert(:post, %{body: "bar banana foo"})
+    post2 = insert(:post, %{body: "bar potato foo"})
+    post3 = insert(:post, %{body: "bar zanzibar foo"})
+
+    post_ids =
+      "banana"
+      |> Post.containing_body
+      |> Repo.all
+      |> Enum.map(&(&1.id))
+
+    assert [post1.id] == post_ids
   end
 
   defp create_other_users(_) do

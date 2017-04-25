@@ -32,10 +32,8 @@ defmodule FirestormData.ThreadTest do
 
     recent_threads =
       category
-      |> Category.get_recent_threads
+      |> Thread.get_recent_threads
       |> Repo.all
-
-    IO.inspect recent_threads
 
     thread_ids =
       recent_threads
@@ -46,5 +44,30 @@ defmodule FirestormData.ThreadTest do
     assert thread5.id in thread_ids
     refute thread2.id in thread_ids
     refute thread4.id in thread_ids
+  end
+
+  test "find threads a user has posted in" do
+    user = insert(:user)
+    [thread1, thread2, thread3] = insert_list(3, :thread)
+    insert(:post, %{thread: thread1, user: user})
+    insert(:post, %{thread: thread3, user: user})
+    insert(:post, %{thread: thread2})
+
+    user_thread_ids =
+      user
+      |> Thread.posted_in_by_user
+      |> Repo.all
+      |> Enum.map(&(&1.id))
+
+    assert thread1.id in user_thread_ids
+    assert thread3.id in user_thread_ids
+    refute thread2.id in user_thread_ids
+  end
+
+  test "find out how many posts there are in a thread" do
+    thread = insert(:thread)
+    insert_list(5, :post, %{thread: thread})
+
+    assert 5 = thread |> Thread.post_count |> Repo.one
   end
 end
