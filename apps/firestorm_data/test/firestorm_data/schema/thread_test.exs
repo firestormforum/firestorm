@@ -29,6 +29,7 @@ defmodule FirestormData.ThreadTest do
     insert(:post, %{thread: thread1})
     insert(:post, %{thread: thread3})
     insert(:post, %{thread: thread5})
+    other_thread_post = insert(:post)
 
     recent_threads =
       category
@@ -44,6 +45,7 @@ defmodule FirestormData.ThreadTest do
     assert thread5.id in thread_ids
     refute thread2.id in thread_ids
     refute thread4.id in thread_ids
+    refute other_thread_post.thread_id in thread_ids
   end
 
   test "find threads a user has posted in" do

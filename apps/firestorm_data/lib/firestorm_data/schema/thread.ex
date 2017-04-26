@@ -22,6 +22,7 @@ defmodule FirestormData.Thread do
     __MODULE__
       |> join(:left_lateral, [t], p in fragment("SELECT thread_id, inserted_at FROM posts WHERE posts.thread_id = ? ORDER BY posts.inserted_at DESC LIMIT 1", t.id))
       |> order_by([t, p], [desc: p.inserted_at])
+      |> where(category_id: ^category.id)
       |> select([t], t)
       |> limit(3)
   end
