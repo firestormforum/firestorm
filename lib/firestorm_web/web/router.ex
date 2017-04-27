@@ -18,10 +18,6 @@ defmodule FirestormWeb.Web.Router do
 
     get "/", PageController, :index
     resources "/users", UserController
+    resources "/categories", CategoryController
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", FirestormWeb.Web do
-  #   pipe_through :api
-  # end
 end
