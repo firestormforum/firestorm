@@ -20,14 +20,12 @@
       .pure-pusher-container
         .pure-pusher
           = render "_navigation.html", conn: @conn, view_module: @view_module, view_template: @view_template
-
-          - for {key, val} <- get_flash(@conn) do
-            %p(class = "alert-box -#{key}", role = "alert")= val
-
           .layout-content
             .layout-drawer-tablet
               = render "_drawer.html", conn: @conn, view_module: @view_module, view_template: @view_template
             .layout-content-main
+              - for {key, val} <- get_flash(@conn) do
+                %p(class = "alert-box -#{key}", role = "alert")= val
               = render @view_module, @view_template, assigns
       %label.pure-overlay(data-overlay: "right", for: "pure-toggle-right")
     = {:safe, js_script_tag()}

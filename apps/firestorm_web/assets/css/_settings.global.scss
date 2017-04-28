@@ -1,20 +1,9 @@
 // Settings - Global
 // =================
-// This holds mixins, functions, breakpoints, etc.
+// This holds functions, breakpoints, etc.
 
-// - #mixins
 // - #fonts
 // - #breakpoints
-
-// --------------
-// Mixins #mixins
-// --------------
-@mixin underline-on-hover() {
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-}
 
 // ------------
 // Fonts #fonts
