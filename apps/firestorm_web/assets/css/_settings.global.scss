@@ -4,6 +4,7 @@
 
 // - #mixins
 // - #fonts
+// - #breakpoints
 
 // --------------
 // Mixins #mixins
@@ -66,3 +67,9 @@
        url('../static/fonts/fira-sans-v7-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
        url('../static/fonts/fira-sans-v7-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
+
+// ------------------------
+// Breakpoints #breakpoints
+// ------------------------
+$break-small: 320px;
+$break-large: 1200px;

@@ -4,6 +4,12 @@
   align-items: center;
   flex-direction: column;
   padding: 2rem;
+
+  @media screen and (min-width: $break-large) {
+    max-width: $break-large;
+    margin: 0 auto;
+  }
+
   .logo {
     margin-bottom: 4rem;
     margin-top: 4rem;
