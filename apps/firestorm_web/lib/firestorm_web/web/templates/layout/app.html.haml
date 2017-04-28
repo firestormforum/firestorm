@@ -25,6 +25,9 @@
             %p(class = "alert-box -#{key}", role = "alert")= val
 
           .layout-content
-            = render @view_module, @view_template, assigns
+            .layout-drawer-tablet
+              = render "_drawer.html", conn: @conn, view_module: @view_module, view_template: @view_template
+            .layout-content-main
+              = render @view_module, @view_template, assigns
       %label.pure-overlay(data-overlay: "right", for: "pure-toggle-right")
     = {:safe, js_script_tag()}
