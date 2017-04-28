@@ -20,6 +20,7 @@ defmodule FirestormWeb.Web.Router do
     get "/", PageController, :index
     get "/home", PageController, :home
 
+    get "/followed", FollowedController, :index
     post "/categories/:id/tag", CategoryController, :tag
     resources "/categories", CategoryController do
       post "/threads/:id/tag", ThreadController, :tag
