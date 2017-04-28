@@ -14,6 +14,11 @@
     "brunch": "2.10.7",
     "clean-css-brunch": "2.10.0",
     "css-brunch": "2.10.0",
+    "node-sass": "^4.5.2",
+    "normalize-css": "^2.3.1",
+    "purecss": "^0.6.2",
+    "sass-brunch": "^2.10.4",
+    "typeplate-starter-kit": "^3.0.2",
     "uglify-js-brunch": "2.1.1"
   }
 }

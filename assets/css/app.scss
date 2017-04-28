@@ -1,0 +1,38 @@
+// This should only have imports :)
+//
+// Inverted triangle for the import order, but modified a little bit for our
+// purposes.
+//
+// Here's what Inverted Triangle CSS is:
+// - https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
+
+// == SETTINGS ==
+@import "settings.colors";
+@import "settings.metrics";
+@import "settings.global";
+
+// == TOOLS ==
+@import "tools.mixins";
+
+// == GENERIC ==
+@import "generic.normalize";
+@import "generic.purecss";
+@import "generic.typeplate";
+
+// == ELEMENTS ==
+// NOTE: This will hold element-specific styles in one file for now, but I
+// expect it to expand later
+@import "elements";
+
+// == PAGES ==
+// @import "./pages/*";
+
+// == LAYOUTS ==
+// @import "./layouts/*";
+
+// == COMPONENTS ==
+// @import "./components/*";
+// NOTE: We can't use "globbing" in sass with sass-brunch until the next release
+// easily, so I'll list each component for now. I will ultimately switch to
+// webpack so I didn't want to spend time fixing this for brunch.
+@import "components/category-list";
