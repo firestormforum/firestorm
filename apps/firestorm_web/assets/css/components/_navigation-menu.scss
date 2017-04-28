@@ -9,4 +9,9 @@
     float: right;
     padding: 0.5rem;
   }
+  > a.back-arrow {
+    @media screen and (min-width: $lg){
+      display: none;
+    }
+  }
 }

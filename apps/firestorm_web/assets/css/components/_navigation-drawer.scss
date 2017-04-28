@@ -1,4 +1,13 @@
 .navigation-drawer {
+  position: relative;
+  > a.back-arrow {
+    position: absolute;
+    left: -1rem;
+    top: -.35rem;
+    @media screen and (max-width: $lg){
+      display: none;
+    }
+  }
   > ul {
     padding: 0;
     margin: 0;

@@ -1,4 +1,8 @@
 .navigation-drawer
+  - # Show back arrow if we should do that
+  - if link = @view_module.back(@view_template, @conn) do
+    %a.back-arrow.pure-menu-link{href: link}
+      %i.fa.fa-arrow-left
   - for nav_item_section <- @view_module.nav_item_sections(@view_template, @conn) do
     %ul
       - for nav_item <- nav_item_section.items do
