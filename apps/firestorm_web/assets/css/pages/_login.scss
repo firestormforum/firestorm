@@ -5,8 +5,8 @@
   flex-direction: column;
   padding: 2rem;
 
-  @media screen and (min-width: $break-large) {
-    max-width: $break-large;
+  @media screen and (min-width: $lg) {
+    max-width: $lg;
     margin: 0 auto;
   }
 

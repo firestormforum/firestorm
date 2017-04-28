@@ -71,5 +71,8 @@
 // ------------------------
 // Breakpoints #breakpoints
 // ------------------------
-$break-small: 320px;
-$break-large: 1200px;
+// NOTE: These are the purecss defaults
+$sm: 568px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;
