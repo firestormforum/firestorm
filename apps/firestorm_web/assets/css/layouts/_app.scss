@@ -4,10 +4,10 @@
     display: flex;
     flex-direction: row;
     .layout-drawer-tablet {
-      @media screen and (max-width: $break-large){
+      @media screen and (max-width: $lg){
         display: none;
       }
-      @media screen and (min-width: $break-large){
+      @media screen and (min-width: $lg){
         min-width: 200px;
       }
     }
@@ -16,7 +16,7 @@
     }
   }
   // FIXME: This probably / maybe doesn't belong here?
-  @media screen and (min-width: $break-large){
+  @media screen and (min-width: $lg){
     .pure-toggle-label {
       display: none;
     }
