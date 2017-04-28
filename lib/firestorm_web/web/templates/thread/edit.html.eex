@@ -1,0 +1,6 @@
+<h2>Edit Thread</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: category_thread_path(@conn, :update, @category, @thread) %>
+
+<span><%= link "Back", to: category_thread_path(@conn, :index, @category) %></span>

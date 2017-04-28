@@ -209,4 +209,112 @@ defmodule FirestormWeb.Forums do
     |> cast(attrs, [:title])
     |> validate_required([:title])
   end
+
+  alias FirestormWeb.Forums.Thread
+
+  @doc """
+  Returns the list of threads for a given category.
+
+  ## Examples
+
+      iex> list_threads(category)
+      [%Thread{}, ...]
+
+  """
+  def list_threads(category) do
+    Thread
+    |> where([t], t.category_id == ^category.id)
+    |> Repo.all
+  end
+
+  @doc """
+  Gets a single thread in a category.
+
+  Raises `Ecto.NoResultsError` if the Thread does not exist in that category.
+
+  ## Examples
+
+      iex> get_thread!(category, 123)
+      %Thread{}
+
+      iex> get_thread!(category, 456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_thread!(category, id) do
+    Thread
+    |> where([t], t.category_id == ^category.id)
+    |> Repo.get!(id)
+  end
+
+  @doc """
+  Creates a thread.
+
+  ## Examples
+
+      iex> create_thread(%{field: value})
+      {:ok, %Thread{}}
+
+      iex> create_thread(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_thread(attrs \\ %{}) do
+    %Thread{}
+    |> thread_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a thread.
+
+  ## Examples
+
+      iex> update_thread(thread, %{field: new_value})
+      {:ok, %Thread{}}
+
+      iex> update_thread(thread, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_thread(%Thread{} = thread, attrs) do
+    thread
+    |> thread_changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Thread.
+
+  ## Examples
+
+      iex> delete_thread(thread)
+      {:ok, %Thread{}}
+
+      iex> delete_thread(thread)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_thread(%Thread{} = thread) do
+    Repo.delete(thread)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking thread changes.
+
+  ## Examples
+
+      iex> change_thread(thread)
+      %Ecto.Changeset{source: %Thread{}}
+
+  """
+  def change_thread(%Thread{} = thread) do
+    thread_changeset(thread, %{})
+  end
+
+  defp thread_changeset(%Thread{} = thread, attrs) do
+    thread
+    |> cast(attrs, [:title, :category_id])
+    |> validate_required([:title, :category_id])
+  end
 end
