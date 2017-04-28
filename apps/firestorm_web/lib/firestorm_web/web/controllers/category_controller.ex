@@ -1,7 +1,16 @@
 defmodule FirestormWeb.Web.CategoryController do
   use FirestormWeb.Web, :controller
-  alias FirestormData.Commands.{GetCategory, CreateCategory, TagCategory}
+  alias FirestormData.Commands.{GetCategory, CreateCategory, TagCategory, GetHomeCategories}
   plug FirestormWeb.Plugs.RequireUser when action in [:tag, :new, :create]
+
+  def index(conn, _) do
+    {:ok, categories} =
+      %GetHomeCategories{user_id: 1}
+      |> GetHomeCategories.run()
+
+    conn
+    |> render("index.html", categories: categories)
+  end
 
   def show(conn, %{"id" => id_or_slug}) do
     finder = get_finder(id_or_slug)

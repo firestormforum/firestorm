@@ -41,7 +41,7 @@ defmodule FirestormWeb.Web.Navigation.Defaults do
 
         default_middle_section =
           %NavItemSection{ items: [
-              nav_item(conn, "Categories", "#"),
+              nav_item(conn, "Categories", category_path(conn, :index)),
               nav_item(conn, "Tags", "#"),
               nav_item(conn, "Users", "#"),
           ]}
