@@ -1,5 +1,24 @@
 .layout-app {
   .layout-content {
     padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    .layout-drawer-tablet {
+      @media screen and (max-width: $break-large){
+        display: none;
+      }
+      @media screen and (min-width: $break-large){
+        min-width: 200px;
+      }
+    }
+    > .layout-content-main {
+      flex-grow: 1;
+    }
+  }
+  // FIXME: This probably / maybe doesn't belong here?
+  @media screen and (min-width: $break-large){
+    .pure-toggle-label {
+      display: none;
+    }
   }
 }
