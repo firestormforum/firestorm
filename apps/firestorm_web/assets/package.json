@@ -25,6 +25,7 @@
     "purecss": "^0.6.2",
     "sass-loader": "^6.0.0",
     "style-loader": "^0.13.1",
+    "typeplate-starter-kit": "^3.0.2",
     "url-loader": "^0.5.7",
     "webpack-dev-server": "2",
     "write-file-webpack-plugin": "^3.4.2"

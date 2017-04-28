@@ -5,16 +5,18 @@
 // Here's what Inverted Triangle CSS is:
 // - https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
 
+// == SETTINGS ==
 @import "settings.colors";
 @import "settings.metrics";
 @import "settings.global";
 
+// == TOOLS ==
 @import "tools.mixins";
 
-@import "~normalize-scss";
-
-// Pure.css - https://purecss.io/
-@import "~purecss";
+// == GENERIC ==
+@import "generic.normalize";
+@import "generic.purecss";
+@import "generic.typeplate";
 
 // pure-drawer - a pure css off-canvas sliding drawer
 @import "../static/vendor/pure-drawer";
