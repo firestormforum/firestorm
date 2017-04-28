@@ -8,6 +8,14 @@ defmodule FirestormWeb.Web.Navigation.Defaults do
   import FirestormWeb.Web.Session
   import FirestormWeb.Web.Router.Helpers
 
+  defmodule NavItemSection do
+    @moduledoc """
+    A collection of NavItems in the drawer
+    """
+
+    defstruct items: []
+  end
+
   defmodule NavItem do
     @moduledoc """
     A single nav item in the drawer.
@@ -20,23 +28,36 @@ defmodule FirestormWeb.Web.Navigation.Defaults do
     quote do
       def back(_template, conn), do: nil
 
-      def nav_items(_template, conn) do
-        defaults =
-          [
-            nav_item(conn, "Home", page_path(conn, :home))
-          ]
+      def nav_item_sections(_template, conn) do
+        default_top_section =
+          %NavItemSection{ items: [
+            nav_item(conn, "Home", page_path(conn, :home)),
+            nav_item(conn, "Following", "#"),
+            nav_item(conn, "Participating in", "#"),
+            nav_item(conn, "Recently viewed", "#"),
+            nav_item(conn, "Top", "#"),
+            nav_item(conn, "Mentions", "#"),
+          ]}
 
-        if logged_in?(conn) do
-          defaults ++
-            [
-              nav_item(conn, "Log Out", auth_path(conn, :delete), [method: :delete])
-            ]
-        else
-          defaults ++
-            [
+        default_middle_section =
+          %NavItemSection{ items: [
+              nav_item(conn, "Categories", "#"),
+              nav_item(conn, "Tags", "#"),
+              nav_item(conn, "Users", "#"),
+          ]}
+
+        default_bottom_section =
+          if logged_in?(conn) do
+              %NavItemSection{ items: [
+                nav_item(conn, "Log Out", auth_path(conn, :delete), [method: :delete])
+              ]}
+          else
+            %NavItemSection{ items: [
               nav_item(conn, "Log In", auth_path(conn, :request, :github))
-            ]
-        end
+            ]}
+          end
+
+        [ default_top_section, default_middle_section, default_bottom_section ]
       end
 
       def nav_item(conn, text, path, options \\ []) do
@@ -44,7 +65,7 @@ defmodule FirestormWeb.Web.Navigation.Defaults do
         %NavItem{text: text, path: path, active: current_path == path, options: options}
       end
 
-      defoverridable [back: 2, nav_items: 2]
+      defoverridable [back: 2, nav_item_sections: 2]
     end
   end
 end

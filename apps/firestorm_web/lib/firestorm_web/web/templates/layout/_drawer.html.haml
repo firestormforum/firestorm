@@ -1,8 +1,9 @@
 .navigation-drawer
-  %ul
-    - for nav_item <- @view_module.nav_items(@view_template, @conn) do
-      %li
-        - klasses = []
-        - if nav_item.active do
-          - klasses = ["active" | klasses]
-        = link nav_item.text, Keyword.merge([to: nav_item.path, class: Enum.join(klasses, " ")], nav_item.options)
+  - for nav_item_section <- @view_module.nav_item_sections(@view_template, @conn) do
+    %ul
+      - for nav_item <- nav_item_section.items do
+        %li
+          - klasses = []
+          - if nav_item.active do
+            - klasses = ["active" | klasses]
+          = link nav_item.text, Keyword.merge([to: nav_item.path, class: Enum.join(klasses, " ")], nav_item.options)

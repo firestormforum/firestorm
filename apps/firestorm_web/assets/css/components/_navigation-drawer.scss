@@ -2,6 +2,10 @@
   > ul {
     padding: 0;
     margin: 0;
+    border-bottom: 1px solid $botticcelli;
+    &:last-child {
+      border-bottom: 0;
+    }
     > li {
       list-style-type: none;
       display: block;
