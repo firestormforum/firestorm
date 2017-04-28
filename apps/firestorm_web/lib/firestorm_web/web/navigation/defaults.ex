@@ -13,7 +13,7 @@ defmodule FirestormWeb.Web.Navigation.Defaults do
     A single nav item in the drawer.
     """
 
-    defstruct text: "", path: "", options: []
+    defstruct text: "", path: "", options: [], active: false
   end
 
   defmacro __using__(_) do
@@ -23,20 +23,25 @@ defmodule FirestormWeb.Web.Navigation.Defaults do
       def nav_items(_template, conn) do
         defaults =
           [
-            %NavItem{text: "Home", path: page_path(conn, :home)}
+            nav_item(conn, "Home", page_path(conn, :home))
           ]
 
         if logged_in?(conn) do
           defaults ++
             [
-              %NavItem{text: "Log Out", path: auth_path(conn, :delete), options: [method: :delete]}
+              nav_item(conn, "Log Out", auth_path(conn, :delete), [method: :delete])
             ]
         else
           defaults ++
             [
-              %NavItem{text: "Log In", path: auth_path(conn, :request, :github)}
+              nav_item(conn, "Log In", auth_path(conn, :request, :github))
             ]
         end
+      end
+
+      def nav_item(conn, text, path, options \\ []) do
+        current_path = conn.request_path
+        %NavItem{text: text, path: path, active: current_path == path, options: options}
       end
 
       defoverridable [back: 2, nav_items: 2]

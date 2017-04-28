@@ -1,4 +1,8 @@
-.pure-menu.pure-menu-vertical
-  %ul.pure-menu-list
+.navigation-drawer
+  %ul
     - for nav_item <- @view_module.nav_items(@view_template, @conn) do
-      %li.pure-menu-item= link nav_item.text, Keyword.merge([to: nav_item.path, class: "pure-menu-link"], nav_item.options)
+      %li
+        - klasses = []
+        - if nav_item.active do
+          - klasses = ["active" | klasses]
+        = link nav_item.text, Keyword.merge([to: nav_item.path, class: Enum.join(klasses, " ")], nav_item.options)
