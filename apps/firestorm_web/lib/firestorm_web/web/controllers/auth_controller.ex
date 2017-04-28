@@ -40,6 +40,7 @@ defmodule FirestormWeb.Web.AuthController do
           end
         else
           %{ email: email } -> show_github_oauth_required_field_error(conn, "username")
+        end
     end
   end
 
