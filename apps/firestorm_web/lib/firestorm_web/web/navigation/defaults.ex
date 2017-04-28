@@ -32,7 +32,7 @@ defmodule FirestormWeb.Web.Navigation.Defaults do
         default_top_section =
           %NavItemSection{ items: [
             nav_item(conn, "Home", page_path(conn, :home)),
-            nav_item(conn, "Following", "#"),
+            nav_item(conn, "Following", followed_path(conn, :index)),
             nav_item(conn, "Participating in", "#"),
             nav_item(conn, "Recently viewed", "#"),
             nav_item(conn, "Top", "#"),
