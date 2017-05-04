@@ -20,4 +20,12 @@ defmodule FirestormWeb.Web.ThreadView do
     category_path(conn, :show, category_finder(category))
   end
   def back(_template, _conn), do: nil
+
+  def post_class(post, first_unread_post) do
+    if post.id == first_unread_post.id do
+      "first-unread"
+    else
+      ""
+    end
+  end
 end

@@ -1,4 +1,4 @@
-.post-item(id = "post-#{@post.id}")
+.post-item{id: "post-#{@post.id}", class: "#{post_class(@post, @first_unread_post)}"}
   .item-metadata
     = user_link(@post.user)
     = time_abbr(@post.inserted_at)
