@@ -63,19 +63,39 @@ defmodule FirestormData.Thread do
 
   def completely_read?(thread, nil), do: false
   def completely_read?(thread, user) do
-    # find all posts with this thread id
-    # where post id doesn't exist in posts_views with this user id
-    unviewed_posts_count_query =
-      from p in Post,
-      where: p.thread_id == ^thread.id,
-      left_join: post_view in "posts_views", on: [assoc_id: p.id, user_id: ^user.id],
-      where: is_nil(post_view.id),
-      select: p.id
-
     unviewed_posts_count =
-      unviewed_posts_count_query
+      thread
+      |> unviewed_posts_query(user)
+      |> select([p, _], p.id)
       |> Repo.aggregate(:count, :id)
 
     unviewed_posts_count == 0
+  end
+
+  def first_unread_post(thread, nil) do
+    Post
+    |> where([p], p.thread_id == ^thread.id)
+    |> order_by([p], p.inserted_at)
+    |> limit(1)
+    |> Repo.one
+  end
+  def first_unread_post(thread, user) do
+    fp =
+      thread
+      |> unviewed_posts_query(user)
+      |> order_by([p], p.inserted_at)
+      |> limit(1)
+      |> Repo.one
+
+    fp || first_unread_post(thread, nil)
+  end
+
+  def unviewed_posts_query(thread, user) do
+    # find all posts with this thread id
+    # where post id doesn't exist in posts_views with this user id
+    Post
+    |> where([p], p.thread_id == ^thread.id)
+    |> join(:left, [p], post_view in "posts_views", [assoc_id: p.id, user_id: ^user.id])
+    |> where([p, post_view], is_nil(post_view.id))
   end
 end

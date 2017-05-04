@@ -54,7 +54,7 @@ defmodule FirestormWeb.Mixfile do
       {:bamboo, github: "thoughtbot/bamboo"},
       {:html_sanitize_ex, "~> 1.2"},
       {:uuid, "~> 1.1" },
-      {:scout_apm, "~> 0.0", only: [:prod]},
+      {:scout_apm, "~> 0.0"},
 
       # UMBRELLA
       {:firestorm_data, in_umbrella: true},

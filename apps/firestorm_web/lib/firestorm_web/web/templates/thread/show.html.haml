@@ -22,4 +22,4 @@
 %ol.post-list
   %li= render "_first_post.html", post: @first_post, conn: @conn, category: @category, thread: @thread, following: @following
   - for post <- @posts do
-    %li= render "_post.html", post: post, category: @category, thread: @thread, conn: @conn
+    %li= render "_post.html", post: post, category: @category, thread: @thread, conn: @conn, first_unread_post: @first_unread_post

@@ -8,11 +8,13 @@ defmodule FirestormWeb.AcceptanceHelpers do
     Repo,
     Category,
     Thread,
+    Post,
   }
   alias FirestormData.Commands.{
     LoginOrRegisterFromGitHub,
     CreateCategory,
     CreateThread,
+    CreatePost,
   }
 
   def log_in_as(session, user) do
@@ -65,5 +67,19 @@ defmodule FirestormWeb.AcceptanceHelpers do
       |> CreateThread.run
 
     Repo.get(Thread, t_id)
+  end
+
+  def create_post(thread) do
+    {:ok, user: user} = create_user(%{})
+    {:ok, p_id} =
+      %CreatePost{}
+      |> CreatePost.changeset(%{
+        thread_id: thread.id,
+        user_id: user.id,
+        body: "anything"
+      })
+      |> CreatePost.run
+
+    Repo.get(Post, p_id)
   end
 end

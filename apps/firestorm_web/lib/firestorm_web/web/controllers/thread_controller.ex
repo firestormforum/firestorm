@@ -35,12 +35,12 @@ defmodule FirestormWeb.Web.ThreadController do
 
     case GetThread.run(%GetThread{finder: finder, category_finder: category.id}) do
       {:ok, thread} ->
+        first_unread_post = Thread.first_unread_post(thread, current_user(conn))
         [first_post | posts] = thread.posts
         # FIXME: lol don't do this
         view_posts(thread.posts, current_user(conn))
         category_breadcrumbs =
           [thread.category | thread.category.ancestors ]
-          # Repo.all Category.ancestors(thread.category)]
           |> Enum.reverse
 
         following = case current_user(conn) do
@@ -57,7 +57,8 @@ defmodule FirestormWeb.Web.ThreadController do
              posts: posts,
              category_breadcrumbs: category_breadcrumbs,
              following: following,
-             tag_thread_changeset: tag_thread_changeset
+             tag_thread_changeset: tag_thread_changeset,
+             first_unread_post: first_unread_post
            )
 
       {:error, :not_found} ->

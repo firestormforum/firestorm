@@ -49,5 +49,20 @@ defmodule FirestormWeb.Acceptance.ThreadTest do
       assert has?(session, Query.css(".thread-header", text: elixir_thread.title))
       assert has?(session, Query.css(".tag-list .tag", text: "functional-programming"))
     end
+
+    test "when viewing a thread, I'm shown the first unread post first", %{session: session, user: user, elixir: elixir, elixir_thread: elixir_thread} do
+      session =
+        session
+        |> log_in_as(user)
+        |> visit(category_thread_path(Endpoint, :show, elixir.slug, elixir_thread.id))
+
+      post = create_post(elixir_thread)
+
+      session =
+        session
+        |> visit(category_thread_path(Endpoint, :show, elixir.slug, elixir_thread.id))
+
+      assert has?(session, Query.css("#post-#{post.id}.first-unread"))
+    end
   end
 end
