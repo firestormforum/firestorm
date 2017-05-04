@@ -62,8 +62,7 @@ defmodule FirestormWeb.Acceptance.ThreadTest do
         session
         |> visit(category_thread_path(Endpoint, :show, elixir.slug, elixir_thread.id))
 
-      assert has?(session, Query.css("#post-#{post.id}"))
-      assert has?(session, Query.css("#post-#{post.id}.newest"))
+      assert has?(session, Query.css("#post-#{post.id}.first-unread"))
     end
   end
 end
