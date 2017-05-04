@@ -14,6 +14,7 @@ defmodule Firestorm.Mixfile do
   defp deps do
     [
       {:credo, "~> 0.7.3", only: [:dev, :test]},
+      {:scout_apm, "~> 0.0"}
     ]
   end
 

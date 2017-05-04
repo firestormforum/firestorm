@@ -25,6 +25,7 @@ defmodule FirestormWeb.Web do
   def controller do
     quote do
       use Phoenix.Controller, namespace: FirestormWeb.Web
+      use ScoutApm.Instrumentation
 
       import FirestormWeb.Web.Router.Helpers
       import FirestormWeb.Web.Gettext
