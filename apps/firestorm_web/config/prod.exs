@@ -65,3 +65,12 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
+#
+# We're adding support for application monitoring via Scout APM
+config :scout_apm,
+  name: "Firestorm", # The app name that will appear within the Scout UI
+  key: System.get_env("SCOUT_APM_KEY")
+
+config :phoenix, :template_engines,
+  eex: ScoutApm.Instruments.EExEngine,
+  exs: ScoutApm.Instruments.ExsEngine
