@@ -5,14 +5,25 @@ use Mix.Config
 #
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
-# with brunch.io to recompile .js and .css sources.
+# with webpack to recompile .js and .css sources.
 config :firestorm_web, FirestormWeb.Web.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
-                    cd: Path.expand("../assets", __DIR__)]]
+  watchers: [
+    node: [
+      "node_modules/.bin/webpack-dev-server",
+      "--inline",
+      "--hot",
+      "--stdin",
+      "--host", "localhost",
+      "--port", "8080",
+      "--public", "localhost:8080",
+      "--config", "webpack.config.js",
+      cd: Path.expand("../assets", __DIR__)
+    ]
+  ]
 
 # ## SSL Support
 #

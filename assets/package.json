@@ -11,14 +11,29 @@
   },
   "devDependencies": {
     "babel-brunch": "6.0.6",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
     "brunch": "2.10.7",
     "clean-css-brunch": "2.10.0",
+    "copy-webpack-plugin": "^4.0.1",
     "css-brunch": "2.10.0",
+    "css-loader": "^0.28.1",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "import-glob-loader": "^1.1.0",
     "node-sass": "^4.5.2",
     "normalize-css": "^2.3.1",
+    "normalize-scss": "^6.0.0",
     "purecss": "^0.6.2",
     "sass-brunch": "^2.10.4",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.17.0",
     "typeplate-starter-kit": "^3.0.2",
-    "uglify-js-brunch": "2.1.1"
+    "uglify-js-brunch": "2.1.1",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.5.0",
+    "webpack-dev-server": "^2.4.5",
+    "write-file-webpack-plugin": "^4.0.2"
   }
 }
