@@ -164,7 +164,7 @@ opted to not be listed.
 - Lyuben Petrov | [ [GitHub](https://www.github.com/agit0) ] [ [Twitter](https://www.twitter.com/LyubenP) ]
 - Milad Rastian | [ [GitHub](https://www.github.com/slashmili) ] [ [Twitter](https://www.twitter.com/slashmili) ]
 - Tom Stones | [ [GitHub](https://www.github.com/stones) ] [ [Website](http://www.tomstones.com.au) ]
-- Tomasz Tomczyk | [ [GitHub](https://www.github.com/tomasz-tomczyk) ] [ [Twitter](https://www.twitter.com/tomasztomczyk.com) ] [ [Website](http://tomasztomczyk.com/) ]
+- Tomasz Tomczyk | [ [GitHub](https://www.github.com/tomasz-tomczyk) ] [ [Twitter](https://www.twitter.com/tomasztomczyk) ] [ [Website](http://tomasztomczyk.com/) ]
 - Erlang Solutions | [ [GitHub](https://www.github.com/@esl) ] [ [Twitter](https://www.twitter.com/ErlangSolutions) ] [ [Website](https://www.erlang-solutions.com) ]
 - IJ | [ [GitHub](https://www.github.com/ij@internet2.edu) ] [ [Website](https://www.internet2.edu) ]
 - Mark Goody | [ [GitHub](https://www.github.com/marramgrass) ] [ [Twitter](https://www.twitter.com/marramgrass) ] [ [Website](http://markgoody.ie/) ]
