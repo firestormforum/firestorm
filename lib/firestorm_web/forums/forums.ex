@@ -5,8 +5,8 @@ defmodule FirestormWeb.Forums do
 
   import Ecto.{Query, Changeset}, warn: false
   alias FirestormWeb.Repo
-
-  alias FirestormWeb.Forums.User
+  alias Ecto.Multi
+  alias FirestormWeb.Forums.{User, Category, Thread, Post}
 
   @doc """
   Returns the list of users.
@@ -111,8 +111,6 @@ defmodule FirestormWeb.Forums do
     |> unique_constraint(:username)
   end
 
-  alias FirestormWeb.Forums.Category
-
   @doc """
   Returns the list of categories.
 
@@ -213,8 +211,6 @@ defmodule FirestormWeb.Forums do
     |> validate_required([:title])
   end
 
-  alias FirestormWeb.Forums.Thread
-
   @doc """
   Returns the list of threads for a given category.
 
@@ -255,17 +251,50 @@ defmodule FirestormWeb.Forums do
 
   ## Examples
 
-      iex> create_thread(%{field: value})
-      {:ok, %Thread{}}
+      iex> create_thread(category, user, %{field: value, body: "some body"})
+      {:ok, {%Thread{}, %Post{}}}
 
-      iex> create_thread(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
+      iex> create_thread(category, user, %{field: bad_value})
+      {:error, :thread, %Ecto.Changeset{}}
 
   """
-  def create_thread(attrs \\ %{}) do
-    %Thread{}
-    |> thread_changeset(attrs)
-    |> Repo.insert()
+  def create_thread(category, user, attrs \\ %{}) do
+    post_attrs =
+      attrs
+      |> Map.take([:body])
+      |> Map.put(:user_id, user.id)
+
+    thread_attrs =
+      attrs
+      |> Map.take([:title])
+      |> Map.put(:category_id, category.id)
+
+    thread_changeset =
+      %Thread{}
+      |> thread_changeset(thread_attrs)
+
+    multi =
+      Multi.new
+      |> Multi.insert(:thread, thread_changeset)
+      |> Multi.run(:post, fn %{thread: thread} ->
+        post_attrs =
+          post_attrs
+          |> Map.put(:thread_id, thread.id)
+
+        post_changeset =
+          %Post{}
+          |> post_changeset(post_attrs)
+          |> Repo.insert
+      end)
+
+    case Repo.transaction(multi) do
+      {:ok, result} ->
+        {:ok, {result.thread, result.post}}
+      {:error, :thread, thread_changeset, _changes_so_far} ->
+        {:error, :thread, thread_changeset}
+      {:error, :post, post_changeset, _changes_so_far} ->
+        {:error, :post, post_changeset}
+    end
   end
 
   @doc """
@@ -328,5 +357,22 @@ defmodule FirestormWeb.Forums do
       user ->
         {:ok, user}
     end
+  end
+
+  def create_post(%Thread{} = thread, %User{} = user, attrs) do
+    attrs =
+      attrs
+      |> Map.put(:thread_id, thread.id)
+      |> Map.put(:user_id, user.id)
+
+    %Post{}
+    |> post_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  defp post_changeset(%Post{} = post, attrs) do
+    post
+    |> cast(attrs, [:body, :thread_id, :user_id])
+    |> validate_required([:body, :thread_id, :user_id])
   end
 end

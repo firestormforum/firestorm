@@ -23,16 +23,12 @@ defmodule FirestormWeb.Web.ThreadController do
   end
 
   def create(conn, %{"thread" => thread_params}, category) do
-    thread_params =
-      thread_params
-      |> Map.put("category_id", category.id)
-
-    case Forums.create_thread(thread_params) do
-      {:ok, thread} ->
+    case Forums.create_thread(category, current_user(conn), %{title: thread_params["title"], body: thread_params["body"]}) do
+      {:ok, {thread, _first_post}} ->
         conn
         |> put_flash(:info, "Thread created successfully.")
         |> redirect(to: category_thread_path(conn, :show, category, thread))
-      {:error, %Ecto.Changeset{} = changeset} ->
+      {:error, _, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset, category: category)
     end
   end
