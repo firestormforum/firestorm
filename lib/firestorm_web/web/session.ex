@@ -3,10 +3,10 @@ defmodule FirestormWeb.Web.Session do
   Some helpers for session-related things
   """
 
-  alias FirestormData.Forums
+  alias FirestormWeb.Forums
 
   def current_user(conn) do
-    case conn.assigns[:current_user] do
+    case Plug.Conn.get_session(conn, :current_user) do
       nil ->
         nil
 

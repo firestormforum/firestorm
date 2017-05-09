@@ -1,6 +1,6 @@
 defmodule FirestormWeb.Web.AuthController do
   use FirestormWeb.Web, :controller
-  plug Ueberauth
+  alias FirestormWeb.Forums
 
   def delete(conn, _params) do
     conn
