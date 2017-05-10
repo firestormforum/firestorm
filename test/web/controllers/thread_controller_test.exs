@@ -19,7 +19,7 @@ defmodule FirestormWeb.Web.ThreadControllerTest do
   end
 
   def fixture(category, user, :thread) do
-    {:ok, {thread, _first_post}} = Forums.create_thread(category, user, @create_attrs)
+    {:ok, thread} = Forums.create_thread(category, user, @create_attrs)
     thread
   end
 

@@ -269,32 +269,19 @@ defmodule FirestormWeb.Forums do
       |> Map.take([:title])
       |> Map.put(:category_id, category.id)
 
-    thread_changeset =
-      %Thread{}
-      |> thread_changeset(thread_attrs)
+    new_thread_changeset(%{thread: thread_attrs, post: post_attrs})
+    |> Repo.insert
+  end
 
-    multi =
-      Multi.new
-      |> Multi.insert(:thread, thread_changeset)
-      |> Multi.run(:post, fn %{thread: thread} ->
-        post_attrs =
-          post_attrs
-          |> Map.put(:thread_id, thread.id)
+  defp new_thread_changeset(%{thread: thread_attrs, post: post_attrs}) do
+    post_changeset =
+      %Post{}
+      |> cast(post_attrs, [:body, :user_id])
+      |> validate_required([:body, :user_id])
 
-        post_changeset =
-          %Post{}
-          |> post_changeset(post_attrs)
-          |> Repo.insert
-      end)
-
-    case Repo.transaction(multi) do
-      {:ok, result} ->
-        {:ok, {result.thread, result.post}}
-      {:error, :thread, thread_changeset, _changes_so_far} ->
-        {:error, :thread, thread_changeset}
-      {:error, :post, post_changeset, _changes_so_far} ->
-        {:error, :post, post_changeset}
-    end
+    %Thread{}
+    |> thread_changeset(thread_attrs)
+    |> put_assoc(:posts, [post_changeset])
   end
 
   @doc """
