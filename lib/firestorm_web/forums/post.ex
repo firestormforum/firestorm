@@ -1,10 +1,11 @@
 defmodule FirestormWeb.Forums.Post do
   use Ecto.Schema
+  alias FirestormWeb.Forums.{User, Thread}
 
   schema "forums_posts" do
     field :body, :string
-    field :thread_id, :id
-    field :user_id, :id
+    belongs_to :thread, Thread
+    belongs_to :user, User
 
     timestamps()
   end
