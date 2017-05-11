@@ -1,0 +1,12 @@
+.button-primary {
+  background: $punch;
+  color: $white;
+  &.-inverted {
+    background: transparent;
+    color: $punch;
+  }
+  &.-muted {
+    background: transparent;
+    color: $tundora;
+  }
+}

@@ -11,3 +11,4 @@
 
 <span><%= link "Edit", to: category_path(@conn, :edit, @category) %></span>
 <span><%= link "Back", to: category_path(@conn, :index) %></span>
+<span><%= link "New Thread", to: category_thread_path(@conn, :new, @category) %></span>

@@ -1,6 +1,18 @@
-<h2>New Thread</h2>
+<h2>Start a new thread</h2>
 
-<%= render "form.html", changeset: @changeset,
-                        action: category_thread_path(@conn, :create, @category) %>
-
-<span><%= link "Back", to: category_thread_path(@conn, :index, @category) %></span>
+<%= form_for @changeset, category_thread_path(@conn, :create, @category), [class: "new-thread"], fn f -> %>
+  <%= text_input f, :title, placeholder: "Type a title" %>
+  <%= error_tag f, :title %>
+  <%= textarea f, :body, placeholder: "Type thread content here. Use markdown syntax." %>
+  <%= if Map.has_key?(@changeset.changes, :posts) do %>
+    <%= error_tag hd(@changeset.changes.posts), :body %>
+  <% end %>
+  <div class="action-bar">
+    <div class="begin">
+    </div>
+    <div class="end">
+      <%= link "Cancel", to: category_path(@conn, :show, @category), class: "pure-button button-primary -muted cancel" %>
+      <%= submit "Create Thread", class: "pure-button button-primary reply" %>
+    </div>
+  </div>
+<% end %>
