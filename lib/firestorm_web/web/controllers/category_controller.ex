@@ -25,7 +25,10 @@ defmodule FirestormWeb.Web.CategoryController do
   end
 
   def show(conn, %{"id" => id}) do
-    category = Forums.get_category!(id)
+    category =
+      id
+      |> Forums.get_category!
+      |> FirestormWeb.Repo.preload(:threads)
     render(conn, "show.html", category: category)
   end
 
