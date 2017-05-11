@@ -1,0 +1,35 @@
+.post-item-actions {
+  display: flex;
+  flex-direction: row;
+  > .spacer {
+    flex-grow: 1;
+  }
+  > .actions {
+    align-self: flex-end;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    > li {
+      display: inline-block;
+      > a {
+        padding: $padding-medium;
+        color: $tower-gray;
+        transition-property: color;
+        transition-duration: 0.5s;
+        transition-timing-function: easeInOutSine;
+        &:active {
+          color: $punch;
+        }
+        > i.fa {
+          font-size: 22px;
+          &.fa-eye {
+            &:before {
+              top: -2px;
+              position: relative;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,13 +1,15 @@
 .category-list {
   padding: 0;
   margin-top: 0;
-
   .category-list {
     margin-left: 1rem;
   }
-
   > li {
     list-style-type: none;
+  }
+
+  > li > h2 > a {
+    @include underline-on-hover;
   }
 
   > li > h2 {

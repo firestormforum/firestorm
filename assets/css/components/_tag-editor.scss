@@ -1,0 +1,19 @@
+.tag-editor {
+  > .add-tag {
+    display: block;
+  }
+  > .tag-form {
+    display: none;
+    > button {
+      font-size: 75%;
+    }
+  }
+  &.editing {
+    > .add-tag {
+      display: none;
+    }
+    > .tag-form {
+      display: block;
+    }
+  }
+}

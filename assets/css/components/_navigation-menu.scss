@@ -1,0 +1,17 @@
+.navigation-menu {
+  padding: 0.5rem;
+  background: $white;
+  box-shadow: 0 1.5px 4px $shadow-color;
+  a {
+    vertical-align: middle;
+  }
+  > ul {
+    float: right;
+    padding: 0.5rem;
+  }
+  > a.back-arrow {
+    @media screen and (min-width: $lg){
+      display: none;
+    }
+  }
+}

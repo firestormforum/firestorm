@@ -1,7 +1,8 @@
-.new-thread {
+.post-editor {
   display: flex;
   flex-direction: column;
-  > input, > textarea {
+  > textarea {
     @include text-field();
+    overflow: auto;
   }
 }

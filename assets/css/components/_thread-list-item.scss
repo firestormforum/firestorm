@@ -1,0 +1,23 @@
+.thread-list-item {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid $botticcelli;
+  > .details {
+    flex-grow: 1;
+    > .summary {
+      > .title {
+        color: $tundora;
+        @include underline-on-hover;
+      }
+      > .user-name {
+        @include underline-on-hover;
+      }
+    }
+    > .metadata {
+      color: $tower-gray;
+    }
+  }
+  > .supplemental {
+  }
+}

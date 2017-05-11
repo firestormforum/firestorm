@@ -1,0 +1,37 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem;
+
+  @media screen and (min-width: $lg) {
+    max-width: $lg;
+    margin: 0 auto;
+  }
+
+  .logo {
+    margin-bottom: 4rem;
+    margin-top: 4rem;
+  }
+  > button, > .github-link, > .pure-button {
+    margin-bottom: 1rem;
+    width: 100%;
+    font-size: 1.5rem;
+    position: relative;
+    > i {
+      position: absolute;
+      left: 2rem;
+      font-size: 2rem;
+    }
+  }
+  a.sign-in-link {
+    text-transform: uppercase;
+    padding: 1rem 0 1rem 1rem;
+    align-self: flex-end;
+    text-decoration: none;
+  }
+  .legal-disclaimer {
+    color: $tower-gray;
+  }
+}

@@ -1,7 +1,6 @@
 // This should only have imports :)
 //
-// Inverted triangle for the import order, but modified a little bit for our
-// purposes.
+// Inverted triangle for the import order
 //
 // Here's what Inverted Triangle CSS is:
 // - https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
@@ -19,16 +18,23 @@
 @import "generic.purecss";
 @import "generic.typeplate";
 
-// == ELEMENTS ==
-// NOTE: This will hold element-specific styles in one file for now, but I
-// expect it to expand later
-@import "elements";
+// pure-drawer - a pure css off-canvas sliding drawer
+@import "../static/vendor/pure-drawer";
 
-// == PAGES ==
-// @import "./pages/*";
+@import "typography";
 
-// == LAYOUTS ==
-// @import "./layouts/*";
+// @import "elements.headings";
+//
+// @import "objects.animations";
+//
+// @import "components.404";
+@import "layouts/*";
+@import "pages/*";
+@import "components/*";
 
-// == COMPONENTS ==
-@import "./components/*";
+// @import "vendor.prism";
+//
+// @import "trumps.clearfix";
+// @import "trumps.utilities";
+//
+// @import "healthcheck";

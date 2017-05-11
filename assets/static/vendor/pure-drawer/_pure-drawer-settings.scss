@@ -1,0 +1,58 @@
+// Point $show-drawer to one of the variables in _pure-drawer-breakpoints.scss to control which breakpoints drawers should appear.
+// $show-drawer: $small-only;
+
+/**************
+## Animation ##
+**************/
+
+$pure-drawer-animation-duration-slide: 350ms;
+// $pure-drawer-animation-duration-reveal: 500ms;
+// $pure-drawer-animation-duration-slideAlong: 500ms;
+// $pure-drawer-animation-duration-reverseSlide: 500ms;
+// $pure-drawer-animation-duration-scaleDown: 500ms;
+// $pure-drawer-animation-duration-scaleUp: 500ms;
+// $pure-drawer-animation-duration-scaleRotate: 500ms;
+// $pure-drawer-animation-duration-fall: 500ms;
+// $pure-drawer-animation-duration-push: 500ms;
+// $pure-drawer-animation-duration-bounce: 1000ms;
+// $pure-drawer-animation-duration-fade: 1000ms;
+// $pure-drawer-animation-duration-flipX: 1000ms !default;
+// $pure-drawer-animation-duration-flipY: 1000ms !default;
+// $pure-drawer-animation-duration-zoom: 1000ms !default;
+
+
+/************
+## Toggler ##
+************/
+
+$toggler-color: $tundora;
+$toggler-checked-color: $punch;
+$toggler-focus-color: $punch;
+
+/***********
+## Drawer ##
+***********/
+
+$drawer-bgcolor: $white;
+
+// For 'left' and 'right' positioned drawers.
+$drawer-width-small: 80%;
+// $drawer-width-medium: 300px;
+// $drawer-width-large: 300px;
+
+// For 'top' positioned drawers.
+// $drawer-height-small: 100%;
+// $drawer-height-medium: 100%;
+// $drawer-height-large: 100px;
+
+/***********
+## Pusher ##
+***********/
+
+// $pusher-bgcolor: #fff;
+
+/*******************
+## Pusher Overlay ##
+*******************/
+
+// $overlay-bgcolor: rgba(0,0,0,0.4);

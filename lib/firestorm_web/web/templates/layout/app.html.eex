@@ -7,33 +7,77 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello FirestormWeb!</title>
+    <!-- We obviously should have a decent title, for starters -->
+    <title>Firestorm</title>
     <%= {:safe, css_link_tag()} %>
+    <!-- We bring in fontawesome because it's awesome -->
+    <script src="https://use.fontawesome.com/b706cffc0a.js"></script>
   </head>
 
-  <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <%= if current_user(@conn) do %>
-              <li><%= link "Log Out #{current_user(@conn).username}", to: auth_path(@conn, :delete) %></li>
-            <% else %>
-              <li><%= link "Log In", to: auth_path(@conn, :request, :github) %></li>
-            <% end %>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
-
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
-
-    </div> <!-- /container -->
+  <!-- I'll add a layout-specific class to any layout I create -->
+  <body class="layout-app">
+    <!-- I'm using pure-drawer - http://mac81.github.io/pure-drawer/ - for a mobile navigation drawer -->
+    <div class="pure-container" data-effect="pure-effect-slide">
+      <input id="pure-toggle-right" class="pure-toggle" data-toggle="right" type="checkbox" />
+      <label class="pure-toggle-label" data-toggle-label="right" for="pure-toggle-right">
+        <span class="pure-toggle-icon"></span>
+      </label>
+      <div class="pure-drawer" data-position="right">
+        <!-- for now we'll put navigation bits in the right-hand-side drawer -->
+        <ul>
+          <%= if current_user(@conn) do %>
+            <li><%= link "Log Out #{current_user(@conn).username}", to: auth_path(@conn, :delete) %></li>
+          <% else %>
+            <li><%= link "Log In", to: auth_path(@conn, :request, :github) %></li>
+          <% end %>
+        </ul>
+      </div>
+      <!--
+        this is the container for pure-drawer that holds the main content
+        that the drawer will appear in front of
+      -->
+      <div class="pure-pusher-container">
+        <!-- Stuff inside pure-pusher gets pushed if the drawer pushes content -->
+        <div class="pure-pusher">
+          any top navigation should go here
+          <!-- Now our styles take over and we'll define the main content area -->
+          <div class="layout-content">
+            <div class="layout-drawer-tablet">
+              <!--
+                We also have the same navigation in the tablet drawer...we
+                should reduce duplication here!
+              -->
+              <ul>
+                <%= if current_user(@conn) do %>
+                  <li><%= link "Log Out #{current_user(@conn).username}", to: auth_path(@conn, :delete) %></li>
+                <% else %>
+                  <li><%= link "Log In", to: auth_path(@conn, :request, :github) %></li>
+                <% end %>
+              </ul>
+            </div>
+            <!-- We made it to the main content! -->
+            <div class="layout-content-main">
+              <!--
+                Here's an example alert - we'll grab these from the flash
+                ultimately
+              -->
+              <p class="alert-box -error" role="alert">
+                zomg an error
+              </p>
+              <!--
+                And here's where we render a given view inside of the
+                template
+              -->
+              <%= render @view_module, @view_template, assigns %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--
+        Finally, this label will act as the overlay when it needs to appear
+      -->
+      <label class="pure-overlay" data-overlay="right" for="pure-toggle-right"></label>
+    </div>
     <%= {:safe, js_script_tag()} %>
   </body>
 </html>

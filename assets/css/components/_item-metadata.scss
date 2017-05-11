@@ -1,0 +1,15 @@
+.item-metadata {
+  display: flex;
+  flex-direction: row;
+  color: $tower-gray;
+  > * {
+    margin-right: $margin-medium;
+  }
+  > .username {
+    @include underline-on-hover;
+  }
+  > abbr {
+    border-bottom: none;
+  }
+}
+

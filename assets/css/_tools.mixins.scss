@@ -1,0 +1,23 @@
+// Tools - Mixins
+// ==============
+// Mixins that we use.
+
+@mixin underline-on-hover() {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@mixin text-field() {
+  border-width: 0 0 1px 0;
+  border-color: $tower-gray;
+  resize: vertical;
+  margin-top: .1rem;
+  margin-bottom: .1rem;
+  &:focus {
+    border-color: $sky-blue;
+    outline: none;
+    box-shadow: none;
+  }
+}
