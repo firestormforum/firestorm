@@ -1,0 +1,7 @@
+<ul>
+  <%= if current_user(@conn) do %>
+    <li><%= link "Log Out #{current_user(@conn).username}", to: auth_path(@conn, :delete) %></li>
+  <% else %>
+    <li><%= link "Log In", to: auth_path(@conn, :request, :github) %></li>
+  <% end %>
+</ul>

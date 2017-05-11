@@ -27,7 +27,7 @@ defmodule FirestormWeb.Web.Router do
   scope "/", FirestormWeb.Web do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", CategoryController, :index
     resources "/users", UserController
     resources "/categories", CategoryController do
       resources "/threads", ThreadController

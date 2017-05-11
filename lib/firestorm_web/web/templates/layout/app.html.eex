@@ -23,14 +23,7 @@
         <span class="pure-toggle-icon"></span>
       </label>
       <div class="pure-drawer" data-position="right">
-        <!-- for now we'll put navigation bits in the right-hand-side drawer -->
-        <ul>
-          <%= if current_user(@conn) do %>
-            <li><%= link "Log Out #{current_user(@conn).username}", to: auth_path(@conn, :delete) %></li>
-          <% else %>
-            <li><%= link "Log In", to: auth_path(@conn, :request, :github) %></li>
-          <% end %>
-        </ul>
+        <%= render "_drawer.html", conn: @conn %>
       </div>
       <!--
         this is the container for pure-drawer that holds the main content
@@ -43,27 +36,15 @@
           <!-- Now our styles take over and we'll define the main content area -->
           <div class="layout-content">
             <div class="layout-drawer-tablet">
-              <!--
-                We also have the same navigation in the tablet drawer...we
-                should reduce duplication here!
-              -->
-              <ul>
-                <%= if current_user(@conn) do %>
-                  <li><%= link "Log Out #{current_user(@conn).username}", to: auth_path(@conn, :delete) %></li>
-                <% else %>
-                  <li><%= link "Log In", to: auth_path(@conn, :request, :github) %></li>
-                <% end %>
-              </ul>
+              <%= render "_drawer.html", conn: @conn %>
             </div>
             <!-- We made it to the main content! -->
             <div class="layout-content-main">
-              <!--
-                Here's an example alert - we'll grab these from the flash
-                ultimately
-              -->
-              <p class="alert-box -error" role="alert">
-                zomg an error
-              </p>
+              <%= for {key, val} <- get_flash(@conn) do %>
+                <p class="alert-box -<%= key %>" role="alert">
+                  <%= val %>
+                </p>
+              <% end %>
               <!--
                 And here's where we render a given view inside of the
                 template
