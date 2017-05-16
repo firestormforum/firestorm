@@ -39,7 +39,8 @@ defmodule FirestormWeb.Mixfile do
       {:cowboy, "~> 1.0"},
       {:ueberauth, "0.4.0"},
       {:ueberauth_github, "0.4.1"},
-      {:oauth2, "0.9.0"}
+      {:oauth2, "0.9.0"},
+      {:earmark, "~> 1.2.2"},
     ]
   end
 
