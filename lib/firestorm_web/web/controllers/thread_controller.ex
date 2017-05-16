@@ -1,6 +1,7 @@
 defmodule FirestormWeb.Web.ThreadController do
   use FirestormWeb.Web, :controller
 
+  alias FirestormWeb.Repo
   alias FirestormWeb.Forums
   alias FirestormWeb.Forums.Thread
 
@@ -34,8 +35,13 @@ defmodule FirestormWeb.Web.ThreadController do
   end
 
   def show(conn, %{"id" => id}, category) do
-    thread = Forums.get_thread!(category, id)
-    render(conn, "show.html", thread: thread, category: category)
+    thread =
+      Forums.get_thread!(category, id)
+      |> Repo.preload(:posts)
+
+    [ first_post | posts ] = thread.posts
+
+    render(conn, "show.html", thread: thread, category: category, first_post: first_post, posts: posts)
   end
 
   def edit(conn, %{"id" => id}, category) do

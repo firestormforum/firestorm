@@ -1,13 +1,19 @@
-<h2>Show Thread</h2>
+<div class="thread-header">
+  <h2><%= @thread.title %></h2>
+  <div class="item-metadata">
+    <%= link "@some_user", to: "#", class: "username" %>
+    <%= @thread.inserted_at %>
+  </div>
+</div>
 
-<ul>
-
-  <li>
-    <strong>Title:</strong>
-    <%= @thread.title %>
-  </li>
-
-</ul>
+<ol class="post-list">
+  <li><%= render "_first_post.html", post: @first_post, conn: @conn, category: @category, thread: @thread %></li>
+  <%= for post <- @posts do %>
+    <li>
+      <%= render "_post.html", post: post, category: @category, thread: @thread, conn: @conn %>
+    </li>
+  <% end %>
+</ol>
 
 <span><%= link "Edit", to: category_thread_path(@conn, :edit, @category, @thread) %></span>
 <span><%= link "Back", to: category_thread_path(@conn, :index, @category) %></span>

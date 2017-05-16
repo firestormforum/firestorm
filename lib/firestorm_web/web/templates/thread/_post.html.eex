@@ -1,0 +1,39 @@
+<div class="post-item">
+  <div class="item-metadata">
+    <%= link "@some_user", to: "#", class: "username" %>
+    <%= @post.inserted_at %>
+  </div>
+
+  <div class="body">
+    <%= @post.body %>
+  </div>
+
+  <div class="post-item-actions">
+    <div class="reactions">
+      🦀
+    </div>
+    <div class="spacer"></div>
+    <ul class="actions">
+      <li>
+        <a href="#">
+          <i class="fa fa-link"></i>
+        </a>
+      </li>
+      <li>
+        <a class="reaction-picker" href="#">
+          <i class="emoticon-faces"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-quote-right"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-reply"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
