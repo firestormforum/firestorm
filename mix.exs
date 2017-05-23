@@ -41,6 +41,9 @@ defmodule FirestormWeb.Mixfile do
       {:ueberauth_github, "0.4.1"},
       {:oauth2, "0.9.0"},
       {:earmark, "~> 1.2.2"},
+
+      # TEST DEPENDENCIES
+      {:wallaby, "~> 0.17.0", only: [:test]}
     ]
   end
 

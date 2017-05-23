@@ -17,11 +17,11 @@ defmodule FirestormWeb.Web.Router do
   scope "/auth", FirestormWeb.Web do
     pipe_through :browser
 
+    get "/logout", AuthController, :delete
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
     post "/:provider/callback", AuthController, :callback
     delete "/logout", AuthController, :delete
-    get "/logout", AuthController, :delete
   end
 
   scope "/", FirestormWeb.Web do
