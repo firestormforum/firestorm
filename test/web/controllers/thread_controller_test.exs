@@ -30,7 +30,7 @@ defmodule FirestormWeb.Web.ThreadControllerTest do
 
   test "renders form for new threads", %{conn: conn, category: category} do
     conn = get conn, category_thread_path(conn, :new, category)
-    assert html_response(conn, 200) =~ "New Thread"
+    assert html_response(conn, 200) =~ "Start a new thread"
   end
 
   test "creates thread and redirects to show when data is valid", %{conn: conn, category: category} do
@@ -40,12 +40,12 @@ defmodule FirestormWeb.Web.ThreadControllerTest do
     assert redirected_to(conn) == category_thread_path(conn, :show, category, id)
 
     conn = get conn, category_thread_path(conn, :show, category, id)
-    assert html_response(conn, 200) =~ "Show Thread"
+    assert html_response(conn, 200) =~ "some title"
   end
 
   test "does not create thread and renders errors when data is invalid", %{conn: conn, category: category} do
     conn = post conn, category_thread_path(conn, :create, category), thread: @invalid_attrs
-    assert html_response(conn, 200) =~ "New Thread"
+    assert html_response(conn, 200) =~ "Start a new thread"
   end
 
   test "renders form for editing chosen thread", %{conn: conn, category: category, user: user} do

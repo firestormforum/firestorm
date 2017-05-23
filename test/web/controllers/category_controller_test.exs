@@ -30,7 +30,7 @@ defmodule FirestormWeb.Web.CategoryControllerTest do
     assert redirected_to(conn) == category_path(conn, :show, id)
 
     conn = get conn, category_path(conn, :show, id)
-    assert html_response(conn, 200) =~ "Show Category"
+    assert html_response(conn, 200) =~ "some title"
   end
 
   test "does not create category and renders errors when data is invalid", %{conn: conn} do

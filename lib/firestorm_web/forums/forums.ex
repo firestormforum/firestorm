@@ -329,6 +329,7 @@ defmodule FirestormWeb.Forums do
   """
   def change_thread(%Thread{} = thread) do
     thread
+    |> Repo.preload(:posts)
     |> thread_changeset(%{})
     |> put_assoc(:posts, thread.posts)
   end
