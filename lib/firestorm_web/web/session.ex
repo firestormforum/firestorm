@@ -6,7 +6,7 @@ defmodule FirestormWeb.Web.Session do
   alias FirestormWeb.Forums
 
   def current_user(conn) do
-    case Plug.Conn.get_session(conn, :current_user) do
+    case get_current_user(conn) do
       nil ->
         nil
 
@@ -16,4 +16,22 @@ defmodule FirestormWeb.Web.Session do
   end
 
   def logged_in?(conn), do: !!current_user(conn)
+
+  # NOTE: This exists primarily to aid in acceptance tests. We can trivially set
+  # cookies in Wallaby, and this makes things easier in tests since logging in
+  # via OAuth is remarkably not-easy.
+  defp get_current_user(conn) do
+    if get_session_from_cookies() do
+      case conn.cookies["current_user"] do
+        nil -> Plug.Conn.get_session(conn, :current_user)
+        u -> u
+      end
+    else
+      Plug.Conn.get_session(conn, :current_user)
+    end
+  end
+
+  defp get_session_from_cookies() do
+    Application.get_env(:firestorm_web, :get_session_from_cookies) || false
+  end
 end
