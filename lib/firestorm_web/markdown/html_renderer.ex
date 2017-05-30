@@ -24,12 +24,13 @@ defmodule FirestormWeb.Markdown.HtmlRenderer do
   # Paragraph #
   #############
   defp render_block(%Block.Para{lnb: lnb, lines: lines, attrs: attrs}, context) do
-    alias FirestormWeb.Markdown.AutoLinker
+    alias FirestormWeb.Markdown.{AutoLinker, EmojiReplacer}
 
     lines =
       lines
       |> convert(lnb, context)
       |> AutoLinker.run()
+      |> EmojiReplacer.run()
 
     add_attrs!("<p>#{lines}</p>\n", attrs, [], lnb)
   end
