@@ -30,6 +30,6 @@ defmodule FirestormWeb.MarkdownTest do
   end
 
   test "autolinks URLs" do
-    assert "<p><a href=\"http://slashdot.org\">http://slashdot.org</a></p>" == Markdown.render("http://slashdot.org")
+    assert "<p><a href=\"http://slashdot.org\">http://slashdot.org</a></p>\n" == Markdown.render("http://slashdot.org")
   end
 end
