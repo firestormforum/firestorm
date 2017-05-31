@@ -4,6 +4,6 @@ defmodule Page.Layout do
   def error(text), do: alert_box(:error, text)
 
   def alert_box(type, text) do
-    css(".alert-box .-#{type}", text: text)
+    css(".alert-box.-#{type}", text: text)
   end
 end
