@@ -11,6 +11,13 @@ defmodule FirestormWeb.Web.FeatureCase do
       import Ecto.Query
 
       import FirestormWeb.Web.Router.Helpers
+
+      alias FirestormWeb.Forums.{
+        User,
+        Category,
+        Thread,
+        Post
+      }
     end
   end
 

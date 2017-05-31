@@ -1,23 +1,14 @@
-<h2>Show User</h2>
+<div class="user-details">
+  <div class="contact">
+    <img src="https://api.adorable.io/avatars/285/abott@adorable.png" class="user-avatar" />
+    <h1 class="username"><%= @user.username %></h1>
+    <h3 class="name"><%= @user.name %></h3>
+    <p class="site"><a href="http://www.dailydrip.com">dailydrip.com</a></p>
+  </div>
+  <div class="meta">
+  </div>
+</div>
 
-<ul>
-
-  <li>
-    <strong>Username:</strong>
-    <%= @user.username %>
-  </li>
-
-  <li>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </li>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @user.name %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
-<span><%= link "Back", to: user_path(@conn, :index) %></span>
+<ol class="user-posts">
+  <li>post1</li>
+</ol>
