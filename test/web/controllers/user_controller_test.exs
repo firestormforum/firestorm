@@ -29,7 +29,7 @@ defmodule FirestormWeb.Web.UserControllerTest do
     assert redirected_to(conn) == user_path(conn, :show, id)
 
     conn = get conn, user_path(conn, :show, id)
-    assert html_response(conn, 200) =~ "Show User"
+    assert html_response(conn, 200) =~ "some name"
   end
 
   test "does not create user and renders errors when data is invalid", %{conn: conn} do
@@ -49,7 +49,7 @@ defmodule FirestormWeb.Web.UserControllerTest do
     assert redirected_to(conn) == user_path(conn, :show, user)
 
     conn = get conn, user_path(conn, :show, user)
-    assert html_response(conn, 200) =~ "some updated email"
+    assert html_response(conn, 200) =~ "some updated name"
   end
 
   test "does not update chosen user and renders errors when data is invalid", %{conn: conn} do
