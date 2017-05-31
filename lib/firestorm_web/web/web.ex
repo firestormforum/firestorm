@@ -41,6 +41,7 @@ defmodule FirestormWeb.Web do
       import FirestormWeb.Web.ErrorHelpers
       import FirestormWeb.Web.Gettext
       import FirestormWeb.Web.Session
+      import FirestormWeb.Web.ViewHelpers
     end
   end
 

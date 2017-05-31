@@ -32,7 +32,7 @@
       <div class="pure-pusher-container">
         <!-- Stuff inside pure-pusher gets pushed if the drawer pushes content -->
         <div class="pure-pusher">
-          any top navigation should go here
+          <%= render "_navigation.html", conn: @conn, view_module: @view_module, view_template: @view_template %>
           <!-- Now our styles take over and we'll define the main content area -->
           <div class="layout-content">
             <div class="layout-drawer-tablet">
