@@ -8,6 +8,9 @@
   }
   > .contact {
     text-align: center;
+    @include lg {
+      text-align: left;
+    }
     > .username {
       margin-bottom: 0.75rem;
       color: $white;
