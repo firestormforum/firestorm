@@ -21,3 +21,28 @@
     box-shadow: none;
   }
 }
+
+// Media Queries
+@mixin sm {
+  @media (min-width: #{$sm}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$md}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$lg}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: #{$xl}) {
+    @content;
+  }
+}

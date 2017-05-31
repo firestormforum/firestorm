@@ -1,11 +1,13 @@
+// design bits! See bottom for layout bits...
 .user-details {
   background-color: $sky-blue;
   color: $white;
+  > .user-avatar {
+    margin: 1rem;
+    width: 4rem;
+  }
   > .contact {
-    > .user-avatar {
-      margin: 1rem;
-      width: 4rem;
-    }
+    text-align: center;
     > .username {
       margin-bottom: 0.75rem;
       color: $white;
@@ -24,5 +26,60 @@
         color: $white;
       }
     }
+  }
+
+  > hr {
+    width: 80%;
+    height: 0;
+    border-color: $white;
+    color: transparent;
+    background-color: transparent;
+    border-style: solid;
+    border-width: 1px 0 0 0;
+  }
+
+  > .meta {
+    padding-bottom: 0.001rem; // magic number to make the margin apply below the last ul
+    > ul {
+      list-style-type: none;
+      padding-left: 0;
+      > li {
+        > strong {
+          &:after {
+            content: ':';
+          }
+        }
+      }
+    }
+  }
+}
+
+// layout bits! keeping them separate to make it easier to read
+.user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0.5rem;
+  @include lg {
+    flex-direction: row;
+  }
+  > .user-avatar {
+  }
+  > .contact {
+    > .site {
+      margin-bottom: 0;
+    }
+  }
+  > hr {
+    @include lg {
+      border-width: 0 0 0 1px;
+      width: 1px;
+      display: block;
+      height: 9rem;
+      margin: 0 2rem;
+    }
+  }
+  > .meta {
+    flex-grow: 1;
   }
 }

@@ -1,11 +1,37 @@
 <div class="user-details">
+  <img src="https://api.adorable.io/avatars/285/abott@adorable.png" class="user-avatar" />
   <div class="contact">
-    <img src="https://api.adorable.io/avatars/285/abott@adorable.png" class="user-avatar" />
     <h1 class="username"><%= @user.username %></h1>
     <h3 class="name"><%= @user.name %></h3>
     <p class="site"><a href="http://www.dailydrip.com">dailydrip.com</a></p>
   </div>
+  <hr />
   <div class="meta">
+    <ul>
+      <li>
+        <strong>Languages</strong>
+        Java, Scala, French, Elixir
+      </li>
+      <li>
+        <strong>Interested in</strong>
+        Elm, Erlang, OCaml, Unison, Oz, Scheme
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        <strong>Joined</strong>
+        Apr 15, '16
+      </li>
+      <li>
+        <strong>Last post</strong>
+        Jan 23, '17
+      </li>
+      <li>
+        <strong>Last seen</strong>
+        2 hours ago
+      </li>
+    </ul>
   </div>
 </div>
 
