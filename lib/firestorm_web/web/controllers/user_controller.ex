@@ -25,7 +25,9 @@ defmodule FirestormWeb.Web.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = Forums.get_user!(id)
+    user =
+      Forums.get_user!(id)
+      |> Forums.preload_posts()
     render(conn, "show.html", user: user)
   end
 

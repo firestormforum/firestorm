@@ -10,8 +10,8 @@ defmodule FirestormWeb.Feature.UsersTest do
   setup do
     {:ok, bob} = Forums.create_user(@bob)
     {:ok, elixir} = Forums.create_category(@elixir)
-    {:ok, otp_is_cool} = Forums.create_thread(elixir, bob, @otp_is_cool)
-    {:ok, genstage} = Forums.create_thread(elixir, bob, @genstage)
+    {:ok, _otp_is_cool} = Forums.create_thread(elixir, bob, @otp_is_cool)
+    {:ok, _genstage} = Forums.create_thread(elixir, bob, @genstage)
 
     {:ok, bob: bob}
   end

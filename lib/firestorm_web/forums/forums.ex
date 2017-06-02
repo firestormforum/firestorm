@@ -365,4 +365,9 @@ defmodule FirestormWeb.Forums do
     |> cast(attrs, [:body, :thread_id, :user_id])
     |> validate_required([:body, :thread_id, :user_id])
   end
+
+  def preload_posts(thing) do
+    thing
+    |> Repo.preload(:posts)
+  end
 end
