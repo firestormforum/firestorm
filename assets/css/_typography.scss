@@ -6,3 +6,7 @@ body {
 a {
   color: $punch;
 }
+
+p + p {
+  text-indent: 0;
+}

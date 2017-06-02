@@ -5,7 +5,7 @@
   </div>
 
   <div class="body">
-    <%= @post.body %>
+    <%= markdown(@post.body) %>
   </div>
 
   <div class="post-item-actions">
