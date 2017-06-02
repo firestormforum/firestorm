@@ -36,9 +36,10 @@
 </div>
 
 <ol class="user-posts post-list">
-  <%= for post <- @user.posts do %>
+  <%= for post <- @posts_page do %>
     <li>
       <%= FirestormWeb.Web.ThreadView.render("_post.html", conn: @conn, post: post) %>
     </li>
   <% end %>
 </ol>
+<%= pagination_links @posts_page %>

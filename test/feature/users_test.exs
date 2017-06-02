@@ -23,6 +23,5 @@ defmodule FirestormWeb.Feature.UsersTest do
     |> visit(user_path(FirestormWeb.Web.Endpoint, :show, bob))
     |> assert_has(user_details())
     |> assert_has(user_posts(2))
-    |> Browser.take_screenshot()
   end
 end

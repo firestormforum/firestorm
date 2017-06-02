@@ -366,8 +366,9 @@ defmodule FirestormWeb.Forums do
     |> validate_required([:body, :thread_id, :user_id])
   end
 
-  def preload_posts(thing) do
-    thing
-    |> Repo.preload(:posts)
+  def user_posts(user, %{page: page}) do
+    Post
+    |> where([p], p.user_id == ^user.id)
+    |> Repo.paginate(page: page)
   end
 end
