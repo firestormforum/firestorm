@@ -4,6 +4,7 @@ defmodule FirestormWeb.Web.ThreadController do
   alias FirestormWeb.Repo
   alias FirestormWeb.Forums
   alias FirestormWeb.Forums.Thread
+  plug FirestormWeb.Web.Plugs.RequireUser when action in [:new, :create]
 
   def action(conn, _) do
     category = Forums.get_category!(conn.params["category_id"])
