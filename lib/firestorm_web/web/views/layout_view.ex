@@ -1,11 +1,58 @@
+defmodule FirestormWeb.Web.Layout.PageTitle do
+  alias FirestormWeb.Web.{CategoryView, ThreadView, UserView}
+  @app_name "Firestorm"
+
+  def for({view, action, assigns}) do
+    {view, action, assigns}
+    |> get()
+    |> add_app_name()
+  end
+
+  defp get({CategoryView, :index, _}) do
+    "Categories"
+  end
+  defp get({CategoryView, :show, %{category: category}}) do
+    category.title
+  end
+  defp get({CategoryView, :new, _}) do
+    "New Category"
+  end
+  defp get({CategoryView, :edit, %{category: category}}) do
+    "Edit #{category.title}"
+  end
+  defp get({ThreadView, :show, %{thread: thread, category: category}}) do
+    "#{thread.title} - #{category.title}"
+  end
+  defp get({ThreadView, :new, %{category: category}}) do
+    "New Thread - #{category.title}"
+  end
+  defp get({ThreadView, :edit, %{thread: thread}}) do
+    "Edit #{thread.title}"
+  end
+  defp get({UserView, :show, %{user: user}}) do
+    "#{user.username} - Users"
+  end
+  defp get(_), do: nil
+
+  defp add_app_name(nil), do: @app_name
+  defp add_app_name(title), do: "#{title} - #{@app_name}"
+end
+
 defmodule FirestormWeb.Web.LayoutView do
   use FirestormWeb.Web, :view
+  alias FirestormWeb.Web.Layout.PageTitle
+
+  def page_title(conn) do
+    view = view_module(conn)
+    action = action_name(conn)
+    PageTitle.for({view, action, conn.assigns})
+  end
 
   def page_class(conn) do
     [
       "page",
       controller_simple_name(conn),
-      Phoenix.Controller.action_name(conn)
+      action_name(conn)
     ] |> Enum.join("-")
   end
 
