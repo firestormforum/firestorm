@@ -1,14 +1,28 @@
-<h2>Replying in thread: <%= @thread.title %></h2>
+<h2>New Post</h2>
 
-<%= form_for @changeset, category_thread_post_path(@conn, :create, @category, @thread), [class: "new-post"], fn f -> %>
-  <%= textarea f, :body, placeholder: "Type post content here. Use markdown syntax." %>
+<%= form_for @changeset, category_thread_post_path(@conn, :create, @category, @thread), [class: "post-editor"], fn f -> %>
+  <%= textarea f, :body, placeholder: "Type post content here. Use markdown syntax.", rows: 4, class: "autoexpand", "data-min-rows": 4 %>
   <%= error_tag f, :body %>
   <div class="action-bar">
     <div class="begin">
+      <div class="add-attachment">
+        <label class="pure-button button-primary -inverted attachment">
+          <input type="file" />
+          <i class="fa fa-paperclip"></i>
+        </label>
+      </div>
     </div>
     <div class="end">
       <%= link "Cancel", to: category_thread_path(@conn, :show, @category, @thread), class: "pure-button button-primary -muted cancel" %>
-      <%= submit "Create Post", class: "pure-button button-primary reply" %>
+      <%= submit class: "pure-button button-primary reply" do %>
+        <i class="fa fa-mail-reply"></i>
+        Reply
+      <% end %>
     </div>
   </div>
 <% end %>
+
+<div class="post-preview">
+  <h3>Preview</h3>
+  <div class="content"></div>
+</div>

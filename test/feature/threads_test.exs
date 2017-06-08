@@ -45,7 +45,7 @@ defmodule FirestormWeb.Feature.ThreadsTest do
     |> assert_has(thread_title(@otp_is_cool_parameters[:title]))
     |> click(reply_link())
     |> fill_in(body_field(), with: "I agree!")
-    |> click(create_post_button())
+    |> click(reply_button())
     |> assert_has(thread_title(@otp_is_cool_parameters[:title]))
     |> assert_has(post_item("I agree!"))
   end
