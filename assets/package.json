@@ -6,8 +6,12 @@
     "watch": "brunch watch --stdin"
   },
   "dependencies": {
+    "es6-promise": "^4.1.0",
+    "isomorphic-fetch": "^2.2.1",
+    "jquery": "^3.2.1",
     "phoenix": "file:../deps/phoenix",
-    "phoenix_html": "file:../deps/phoenix_html"
+    "phoenix_html": "file:../deps/phoenix_html",
+    "prismjs": "^1.6.0"
   },
   "devDependencies": {
     "babel-brunch": "6.0.6",

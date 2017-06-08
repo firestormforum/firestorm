@@ -19,20 +19,20 @@
           <i class="fa fa-link"></i>
         </a>
       </li>
-      <li>
+      <li class="reaction">
         <a class="reaction-picker" href="#">
           <i class="emoticon-faces"></i>
         </a>
       </li>
-      <li>
+      <li class="quote">
         <a href="#">
           <i class="fa fa-quote-right"></i>
         </a>
       </li>
-      <li>
-        <a href="#">
+      <li class="reply">
+        <%= link to: category_thread_post_path(@conn, :new, @category, @thread) do %>
           <i class="fa fa-reply"></i>
-        </a>
+        <% end %>
       </li>
     </ul>
   </div>
