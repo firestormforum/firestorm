@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 2rem;
+  padding: $padding-xlarge;
 
   @media screen and (min-width: $lg) {
     max-width: $lg;
@@ -11,23 +11,23 @@
   }
 
   .logo {
-    margin-bottom: 4rem;
-    margin-top: 4rem;
+    margin-bottom: $margin-xxlarge;
+    margin-top: $margin-xxlarge;
   }
   > button, > .github-link, > .pure-button {
-    margin-bottom: 1rem;
+    margin-bottom: $margin-large;
     width: 100%;
-    font-size: 1.5rem;
+    font-size: $font-size-large;
     position: relative;
     > i {
       position: absolute;
-      left: 2rem;
-      font-size: 2rem;
+      left: $margin-xlarge;
+      font-size: $font-size-xlarge;
     }
   }
   a.sign-in-link {
     text-transform: uppercase;
-    padding: 1rem 0 1rem 1rem;
+    padding: $padding-large 0 $padding-large $padding-large;
     align-self: flex-end;
     text-decoration: none;
   }

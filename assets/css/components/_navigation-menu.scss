@@ -1,5 +1,6 @@
 .navigation-menu {
-  padding: 0.5rem;
+  position: relative;
+  padding: $padding-medium;
   background: $white;
   box-shadow: 0 1.5px 4px $shadow-color;
   a {
@@ -7,7 +8,7 @@
   }
   > ul {
     float: right;
-    padding: 0.5rem;
+    padding: $padding-medium;
   }
   > a.back-arrow {
     @media screen and (min-width: $lg){

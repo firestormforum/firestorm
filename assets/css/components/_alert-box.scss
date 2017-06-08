@@ -1,6 +1,6 @@
 .alert-box {
-  padding: 1rem;
-  color: white;
+  padding: $padding-large;
+  color: $white;
   &.-success {
     background-color: $forest-green;
   }

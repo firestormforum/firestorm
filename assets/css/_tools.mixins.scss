@@ -13,12 +13,18 @@
   border-width: 0 0 1px 0;
   border-color: $tower-gray;
   resize: vertical;
-  margin-top: .1rem;
-  margin-bottom: .1rem;
+  margin-top: $margin-xsmall;
+  margin-bottom: $margin-xsmall;
   &:focus {
     border-color: $sky-blue;
     outline: none;
     box-shadow: none;
+  }
+}
+
+@mixin padded_page() {
+  .layout-content-main {
+    padding: $padding-large;
   }
 }
 

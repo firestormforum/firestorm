@@ -5,7 +5,7 @@ $purple: #673AB7;
   flex-direction: row;
   margin: 0;
   padding: 0;
-  font-size: .75rem;
+  font-size: $font-size-xsmall;
   > .category {
     list-style-type: none;
     > a {
@@ -13,7 +13,7 @@ $purple: #673AB7;
       text-decoration: none;
       display: inline-block;
       padding: $padding-small $padding-medium;
-      border-right: 1px solid white;
+      border-right: 1px solid $white;
       &:hover {
         background: lighten($purple, 10%);
       }

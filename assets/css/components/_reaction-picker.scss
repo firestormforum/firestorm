@@ -13,10 +13,10 @@
     top: 0;
     left: 0;
     z-index: 100;
-    padding: 0.5rem;
+    padding: $padding-medium;
     > div {
       > input {
-        padding: 0.5rem;
+        padding: $padding-medium;
         &::-webkit-input-placeholder {
           color: $tower-gray;
         }
@@ -24,7 +24,7 @@
     }
     div.emoji {
       display: inline-block;
-      padding: 0.5rem;
+      padding: $padding-medium;
     }
   }
 }

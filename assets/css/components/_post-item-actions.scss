@@ -21,7 +21,7 @@
           color: $punch;
         }
         > i.fa {
-          font-size: 22px;
+          font-size: $font-size-fa-icon;
           &.fa-eye {
             &:before {
               top: -2px;

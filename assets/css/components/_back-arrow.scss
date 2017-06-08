@@ -1,7 +1,7 @@
 .back-arrow {
   text-decoration: none;
-  font-size: 1.3rem;
-  padding: .5rem;
+  font-size: $font-size-medium;
+  padding: $padding-medium;
   color: $tundora;
   display: inline-block;
   &:hover {

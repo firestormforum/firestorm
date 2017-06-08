@@ -15,7 +15,8 @@
   </head>
 
   <!-- I'll add a layout-specific class to any layout I create -->
-  <body class="layout-app">
+  <!-- I'll also add a template-specific class for styling individual pages easily -->
+  <body class="layout-app <%= page_class(@conn) %>">
     <!-- I'm using pure-drawer - http://mac81.github.io/pure-drawer/ - for a mobile navigation drawer -->
     <div class="pure-container" data-effect="pure-effect-slide">
       <input id="pure-toggle-right" class="pure-toggle" data-toggle="right" type="checkbox" />
