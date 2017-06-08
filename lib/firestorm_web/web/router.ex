@@ -31,7 +31,9 @@ defmodule FirestormWeb.Web.Router do
     get "/", CategoryController, :index
     resources "/users", UserController
     resources "/categories", CategoryController do
-      resources "/threads", ThreadController
+      resources "/threads", ThreadController do
+        resources "/posts", PostController, only: [:new, :create]
+      end
     end
   end
 end

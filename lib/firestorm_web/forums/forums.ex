@@ -360,6 +360,20 @@ defmodule FirestormWeb.Forums do
     |> Repo.insert()
   end
 
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking post changes.
+
+  ## Examples
+
+      iex> change_post(post)
+      %Ecto.Changeset{source: %Post{}}
+
+  """
+  def change_post(%Post{} = post) do
+    post
+    |> post_changeset(%{})
+  end
+
   defp post_changeset(%Post{} = post, attrs) do
     post
     |> cast(attrs, [:body, :thread_id, :user_id])

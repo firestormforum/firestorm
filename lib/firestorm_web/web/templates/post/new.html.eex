@@ -1,0 +1,14 @@
+<h2>Replying in thread: <%= @thread.title %></h2>
+
+<%= form_for @changeset, category_thread_post_path(@conn, :create, @category, @thread), [class: "new-post"], fn f -> %>
+  <%= textarea f, :body, placeholder: "Type post content here. Use markdown syntax." %>
+  <%= error_tag f, :body %>
+  <div class="action-bar">
+    <div class="begin">
+    </div>
+    <div class="end">
+      <%= link "Cancel", to: category_thread_path(@conn, :show, @category, @thread), class: "pure-button button-primary -muted cancel" %>
+      <%= submit "Create Post", class: "pure-button button-primary reply" %>
+    </div>
+  </div>
+<% end %>

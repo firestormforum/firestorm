@@ -1,4 +1,4 @@
-<div class="post-item">
+<div class="post-item first-post">
   <div class="body">
     <%= markdown(@post.body) %>
   </div>
@@ -14,20 +14,20 @@
           <i class="emoticon-faces"></i>
         </a>
       </li>
-      <li>
+      <li class="watch">
         <a href="#">
           <i class="fa fa-eye"></i>
         </a>
       </li>
-      <li>
+      <li class="quote">
         <a href="#">
           <i class="fa fa-quote-right"></i>
         </a>
       </li>
-      <li>
-        <a href="#">
+      <li class="reply">
+        <%= link to: category_thread_post_path(@conn, :new, @category, @thread) do %>
           <i class="fa fa-reply"></i>
-        </a>
+        <% end %>
       </li>
     </ul>
   </div>
