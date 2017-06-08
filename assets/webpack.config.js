@@ -1,6 +1,8 @@
 const webpack = require("webpack");
 const path = require("path");
 
+const nodeEnv = process.env.NODE_ENV || "development";
+
 const staticDir = path.join(__dirname, ".");
 const destDir = path.join(__dirname, "../priv/static");
 const publicPath = "/";
@@ -14,6 +16,11 @@ module.exports = {
     path: destDir,
     filename: "js/app.js",
     publicPath
+  },
+  resolve: {
+    alias: {
+      config: path.resolve(__dirname, `./config/${nodeEnv}.js`)
+    }
   },
   module: {
     rules: [
