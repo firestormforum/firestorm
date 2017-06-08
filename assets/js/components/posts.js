@@ -15,12 +15,26 @@ import "prismjs/plugins/normalize-whitespace/prism-normalize-whitespace";
 import "prismjs/plugins/toolbar/prism-toolbar";
 import "prismjs/plugins/toolbar/prism-toolbar.css";
 
+import Api from "../api";
+
 function decorate() {
   Prism.highlightAll();
 }
 
 function preview() {
-  console.log("TODO: Implement markdown preview!");
+  const textareaSelector = ".post-editor textarea";
+  const previewContentSelector = ".post-preview .content";
+  const $textarea = $(textareaSelector);
+  const $previewContent = $(previewContentSelector);
+
+  const updatePreview = () => {
+    const body = $textarea.val();
+    Api.Preview.create(body).then(response => {
+      $previewContent.html(response.jsonData.data.html);
+    });
+  };
+
+  $textarea.on("keyup change", updatePreview);
 }
 
 const Posts = {
