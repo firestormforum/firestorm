@@ -4,7 +4,7 @@ defmodule FirestormWeb.Forums do
   """
 
   import Ecto.{Query, Changeset}, warn: false
-  alias FirestormWeb.Repo
+  alias FirestormWeb.{Repo, Notifications}
   alias Ecto.Multi
   alias FirestormWeb.Forums.{User, Category, Thread, Post}
 
@@ -355,9 +355,11 @@ defmodule FirestormWeb.Forums do
       |> Map.put(:thread_id, thread.id)
       |> Map.put(:user_id, user.id)
 
-    %Post{}
-    |> post_changeset(attrs)
-    |> Repo.insert()
+    with changeset <- post_changeset(%Post{}, attrs),
+         {:ok, post} <- Repo.insert(changeset),
+         :ok <- Notifications.post_created(post) do
+         {:ok, post}
+    end
   end
 
   @doc """
