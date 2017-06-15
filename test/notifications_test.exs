@@ -1,6 +1,6 @@
 defmodule FirestormWeb.NotificationsTest do
   use FirestormWeb.DataCase
-  alias FirestormWeb.{Forums, Notifications}
+  alias FirestormWeb.Forums
   use Bamboo.Test, shared: true
 
   test "creating a post in a thread notifies everyone involved in the thread" do

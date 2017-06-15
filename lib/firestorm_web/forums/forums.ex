@@ -37,7 +37,15 @@ defmodule FirestormWeb.Forums do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  @doc """
+  Gets a single user by username. Maybe.
+  """
   def get_user_by_username(username), do: Repo.get_by(User, %{username: username})
+
+  @doc """
+  Gets a single user by email address. Maybe.
+  """
+  def get_user_by_email(email), do: Repo.get_by(User, %{email: email})
 
   @doc """
   Creates a user.
@@ -244,6 +252,16 @@ defmodule FirestormWeb.Forums do
     Thread
     |> where([t], t.category_id == ^category.id)
     |> Repo.get!(id)
+  end
+
+  @doc """
+  Gets a thread by id.
+
+  Maybe returns a thread.
+  """
+  def get_thread(id) do
+    Thread
+    |> Repo.get(id)
   end
 
   @doc """

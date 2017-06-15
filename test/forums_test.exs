@@ -1,5 +1,5 @@
 defmodule FirestormWeb.ForumsTest do
-  use FirestormWeb.DataCase
+  use FirestormWeb.DataCase, async: false
 
   alias FirestormWeb.Forums
   alias FirestormWeb.Forums.{User, Category, Thread}

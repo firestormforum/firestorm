@@ -1,5 +1,5 @@
 defmodule FirestormWeb.Feature.ThreadsTest do
-  use FirestormWeb.Web.FeatureCase, async: true
+  use FirestormWeb.Web.FeatureCase, async: false
   alias FirestormWeb.Forums
 
   @otp_is_cool_parameters %{title: "OTP is cool", body: "Don't you think?"}
