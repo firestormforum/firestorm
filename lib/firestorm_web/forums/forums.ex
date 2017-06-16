@@ -214,9 +214,12 @@ defmodule FirestormWeb.Forums do
   end
 
   defp category_changeset(%Category{} = category, attrs) do
+    alias FirestormWeb.Forums.Slugs.CategoryTitleSlug
     category
     |> cast(attrs, [:title])
     |> validate_required([:title])
+    |> CategoryTitleSlug.maybe_generate_slug
+    |> CategoryTitleSlug.unique_constraint
   end
 
   @doc """
@@ -353,9 +356,12 @@ defmodule FirestormWeb.Forums do
   end
 
   defp thread_changeset(%Thread{} = thread, attrs) do
+    alias FirestormWeb.Forums.Slugs.ThreadTitleSlug
     thread
     |> cast(attrs, [:title, :category_id])
     |> validate_required([:title, :category_id])
+    |> ThreadTitleSlug.maybe_generate_slug
+    |> ThreadTitleSlug.unique_constraint
   end
 
   def login_or_register_from_github(%{nickname: nickname, name: name, email: email}) do
