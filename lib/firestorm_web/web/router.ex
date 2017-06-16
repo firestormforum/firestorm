@@ -42,6 +42,7 @@ defmodule FirestormWeb.Web.Router do
     pipe_through :api
 
     resources "/preview", PreviewController, only: [:create]
+    resources "/upload_signature", UploadSignatureController, only: [:create]
   end
 
   # Inbound email routes

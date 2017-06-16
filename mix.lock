@@ -1,5 +1,6 @@
 %{"bamboo": {:git, "https://github.com/thoughtbot/bamboo.git", "d8451d6976b6438301571a37aefaafe31aee502e", []},
   "certifi": {:hex, :certifi, "1.1.0", "c9b71a547016c2528a590ccfc28de786c7edb74aafa17446b84f54e04efc00ee", [:rebar3], []},
+  "combine": {:hex, :combine, "0.9.6", "8d1034a127d4cbf6924c8a5010d3534d958085575fa4d9b878f200d79ac78335", [:mix], []},
   "connection": {:hex, :connection, "1.0.4", "a1cae72211f0eef17705aaededacac3eb30e6625b04a6117c1b2db6ace7d5976", [:mix], []},
   "cowboy": {:hex, :cowboy, "1.1.2", "61ac29ea970389a88eca5a65601460162d370a70018afe6f949a29dca91f3bb0", [:rebar3], [{:cowlib, "~> 1.0.2", [hex: :cowlib, optional: false]}, {:ranch, "~> 1.3.2", [hex: :ranch, optional: false]}]},
   "cowlib": {:hex, :cowlib, "1.0.2", "9d769a1d062c9c3ac753096f868ca121e2730b9a377de23dec0f7e08b1df84ee", [:make], []},
@@ -33,6 +34,9 @@
   "scrivener_html": {:hex, :scrivener_html, "1.7.0", "73c9f444fe0036cd9c73f5232b89b314c620916b1782ff4485443993a71ae57e", [:mix], [{:phoenix, "~> 1.0-pre and < 1.4.0", [hex: :phoenix, optional: true]}, {:phoenix_html, "~> 2.2", [hex: :phoenix_html, optional: false]}, {:plug, "~> 1.1", [hex: :plug, optional: false]}, {:scrivener, "~> 1.2 or ~> 2.0", [hex: :scrivener, optional: false]}]},
   "slugger": {:hex, :slugger, "0.2.0", "7c609e6eee6dbb44e7b0db07982932356cab476f00fc8d73320cdc50d7efa18e", [:mix], []},
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.1", "28a4d65b7f59893bc2c7de786dec1e1555bd742d336043fe644ae956c3497fbe", [:make, :rebar], []},
+  "timex": {:hex, :timex, "3.1.15", "94abaec8fef2436ced4d0e1b4ed50c8eaa5fb9138fc0699946ddee7abf5aaff2", [:mix], [{:combine, "~> 0.7", [hex: :combine, optional: false]}, {:gettext, "~> 0.10", [hex: :gettext, optional: false]}, {:tzdata, "~> 0.1.8 or ~> 0.5", [hex: :tzdata, optional: false]}]},
+  "tzdata": {:hex, :tzdata, "0.5.12", "1c17b68692c6ba5b6ab15db3d64cc8baa0f182043d5ae9d4b6d35d70af76f67b", [:mix], [{:hackney, "~> 1.0", [hex: :hackney, optional: false]}]},
   "ueberauth": {:hex, :ueberauth, "0.4.0", "bc72d5e5a7bdcbfcf28a756e34630816edabc926303bdce7e171f7ac7ffa4f91", [:mix], [{:plug, "~> 1.2", [hex: :plug, optional: false]}]},
   "ueberauth_github": {:hex, :ueberauth_github, "0.4.1", "b117f455da93771850ccf0bcf50593604a761006beb855cace43093592d265b4", [:mix], [{:oauth2, "~> 0.8", [hex: :oauth2, optional: false]}, {:ueberauth, "~> 0.4", [hex: :ueberauth, optional: false]}]},
+  "uuid": {:hex, :uuid, "1.1.7", "007afd58273bc0bc7f849c3bdc763e2f8124e83b957e515368c498b641f7ab69", [:mix], []},
   "wallaby": {:hex, :wallaby, "0.17.0", "a5c348c7a4b203bb5abd53716a5cd81ad8b2545508fa5a6c90efe3daee3f5c5f", [:mix], [{:httpoison, "~> 0.11.0", [hex: :httpoison, optional: false]}, {:poison, ">= 1.4.0", [hex: :poison, optional: false]}, {:poolboy, "~> 1.5", [hex: :poolboy, optional: false]}]}}
