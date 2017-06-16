@@ -10,6 +10,7 @@ require("isomorphic-fetch");
 
 // == COMPONENTS ==
 import Posts from "./components/posts";
+import Attachments from "./components/attachments";
 // == END COMPONENTS ==
 
 // == USING COMPONENTS ==
@@ -18,5 +19,7 @@ import Posts from "./components/posts";
 Posts.decorate();
 // Preview markdown
 Posts.preview();
+// Handle attachments for posts
+Attachments.mount();
 // ==== END POSTS ====
 // == END USING COMPONENTS ==
