@@ -20,3 +20,5 @@ config :firestorm_web, sql_sandbox: true
 
 config :firestorm_web, FirestormWeb.Mailer,
   adapter: Bamboo.TestAdapter
+
+config :bamboo, :refute_timeout, 10
