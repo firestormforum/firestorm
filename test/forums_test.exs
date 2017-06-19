@@ -230,6 +230,15 @@ defmodule FirestormWeb.ForumsTest do
     end
   end
 
+  describe "watching a thread" do
+    setup [:create_user, :create_category, :create_thread]
+
+    test "watching a thread", %{thread: thread, user: user} do
+      {:ok, _watch} = user |> Forums.watch(thread)
+      assert thread |> Forums.watched_by?(user)
+    end
+  end
+
   def create_category(_) do
     category = fixture(:category, @create_category_attrs)
     {:ok, category: category}

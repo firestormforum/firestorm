@@ -6,7 +6,7 @@ defmodule FirestormWeb.Forums do
   import Ecto.{Query, Changeset}, warn: false
   alias FirestormWeb.{Repo, Notifications}
   alias Ecto.Multi
-  alias FirestormWeb.Forums.{User, Category, Thread, Post}
+  alias FirestormWeb.Forums.{User, Category, Thread, Post, Watch}
 
   @doc """
   Returns the list of users.
@@ -411,5 +411,60 @@ defmodule FirestormWeb.Forums do
     |> where([p], p.user_id == ^user.id)
     |> preload([p], [thread: [:category]])
     |> Repo.paginate(page: page)
+  end
+
+  @doc """
+  Have a user watch a thread:
+
+      iex> %User{} |> watch(%Thread{})
+      {:ok, %Watch{}}
+
+  """
+  def watch(%User{} = user, %Thread{} = thread) do
+    thread
+    |> Ecto.build_assoc(:watches, %{user_id: user.id})
+    |> watch_changeset(%{})
+    |> Repo.insert()
+  end
+
+  @doc """
+  Determine if a user is watching a given watchable (Thread, etc):
+
+      iex> %Thread{} |> watched_by?(%User{})
+      false
+
+  """
+  def watched_by?(watchable, user = %User{}) do
+    watch_count(watchable, user) > 0
+  end
+
+  def watcher_ids(watchable) do
+    watchable
+    |> watches()
+    |> select([f], f.user_id)
+    |> Repo.all
+  end
+
+  def watch_count(watchable) do
+    watchable
+    |> watches()
+    |> Repo.aggregate(:count, :id)
+  end
+  defp watch_count(watchable, user = %User{}) do
+    watchable
+    |> watches()
+    |> where([f], f.user_id == ^user.id)
+    |> Repo.aggregate(:count, :id)
+  end
+
+  defp watches(watchable) do
+    watchable
+    |> Ecto.assoc(:watches)
+  end
+
+  defp watch_changeset(%Watch{} = watch, attrs) do
+    watch
+    |> cast(attrs, [:assoc_id, :user_id])
+    |> validate_required([:assoc_id, :user_id])
   end
 end
