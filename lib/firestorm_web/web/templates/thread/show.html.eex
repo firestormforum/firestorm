@@ -7,7 +7,7 @@
 </div>
 
 <ol class="post-list">
-  <li><%= render "_first_post.html", post: @first_post, conn: @conn, category: @category, thread: @thread %></li>
+  <li><%= render "_first_post.html", post: @first_post, conn: @conn, category: @category, thread: @thread, watched: @watched %></li>
   <%= for post <- @posts do %>
     <li>
       <%= render "_post.html", post: post, category: @category, thread: @thread, conn: @conn %>

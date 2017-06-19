@@ -15,9 +15,15 @@
         </a>
       </li>
       <li class="watch">
-        <a href="#">
-          <i class="fa fa-eye"></i>
-        </a>
+        <%= if @watched do %>
+          <a href="<%= category_thread_path(@conn, :unwatch, @category, @thread) %>">
+            <i class="fa fa-eye -highlight"></i>
+          </a>
+        <% else %>
+          <a href="<%= category_thread_path(@conn, :watch, @category, @thread) %>">
+            <i class="fa fa-eye"></i>
+          </a>
+        <% end %>
       </li>
       <li class="quote">
         <a href="#">

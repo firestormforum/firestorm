@@ -4,7 +4,7 @@ defmodule FirestormWeb.Web.ThreadController do
   alias FirestormWeb.Repo
   alias FirestormWeb.Forums
   alias FirestormWeb.Forums.Thread
-  plug FirestormWeb.Web.Plugs.RequireUser when action in [:new, :create]
+  plug FirestormWeb.Web.Plugs.RequireUser when action in [:new, :create, :watch, :unwatch]
 
   def action(conn, _) do
     category = Forums.get_category!(conn.params["category_id"])
@@ -42,7 +42,36 @@ defmodule FirestormWeb.Web.ThreadController do
 
     [ first_post | posts ] = thread.posts
 
-    render(conn, "show.html", thread: thread, category: category, first_post: first_post, posts: posts)
+    watched =
+      if current_user(conn) do
+        thread |> Forums.watched_by?(current_user(conn))
+      else
+        false
+      end
+
+    render(conn, "show.html", thread: thread, category: category, first_post: first_post, posts: posts, watched: watched)
+  end
+
+  def watch(conn, %{"id" => id}, category) do
+    thread =
+      Forums.get_thread!(category, id)
+
+    current_user(conn)
+    |> Forums.watch(thread)
+
+    conn
+    |> redirect to: category_thread_path(conn, :show, category.id, id)
+  end
+
+  def unwatch(conn, %{"id" => id}, category) do
+    thread =
+      Forums.get_thread!(category, id)
+
+    current_user(conn)
+    |> Forums.unwatch(thread)
+
+    conn
+    |> redirect to: category_thread_path(conn, :show, category.id, id)
   end
 
   def edit(conn, %{"id" => id}, category) do

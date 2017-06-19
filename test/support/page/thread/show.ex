@@ -7,6 +7,10 @@ defmodule Page.Thread.Show do
 
   def post_item(body), do: css(".post-item", text: body)
 
+  def watched_icon(), do: css(".fa-eye.-highlight")
+
+  def watch_link(), do: action_link("watch")
+
   defp action_link(name) do
     css("#{first_post_actions_selector()} > li.#{name} > a")
   end

@@ -50,6 +50,23 @@ defmodule FirestormWeb.Feature.ThreadsTest do
     |> assert_has(post_item("I agree!"))
   end
 
+  test "watching a thread", %{session: session} do
+    import Page.Thread.Show
+
+    {:ok, [elixir]} = create_categories(["Elixir"])
+    {:ok, user} = Forums.create_user(%{username: "knewter", email: "josh@dailydrip.com", name: "Josh Adams"})
+    {:ok, otp_is_cool} = Forums.create_thread(elixir, user, @otp_is_cool_parameters)
+
+    session
+    |> log_in_as(user)
+    |> visit(category_thread_path(FirestormWeb.Web.Endpoint, :show, elixir, otp_is_cool))
+    |> refute_has(watched_icon())
+    |> click(watch_link())
+    |> assert_has(watched_icon())
+    |> click(watch_link())
+    |> refute_has(watched_icon())
+  end
+
   defp create_categories(titles) do
     categories =
       for title <- titles do

@@ -428,6 +428,22 @@ defmodule FirestormWeb.Forums do
   end
 
   @doc """
+  Ensure a user no longer watches a thread:
+
+      iex> %User{} |> unwatch(%Thread{})
+      :ok
+
+  """
+  def unwatch(%User{} = user, %Thread{} = thread) do
+    "forums_threads_watches"
+    |> where(assoc_id: ^thread.id)
+    |> where(user_id: ^user.id)
+    |> Repo.delete_all()
+
+    :ok
+  end
+
+  @doc """
   Determine if a user is watching a given watchable (Thread, etc):
 
       iex> %Thread{} |> watched_by?(%User{})
