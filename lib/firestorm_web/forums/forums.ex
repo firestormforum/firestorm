@@ -65,6 +65,12 @@ defmodule FirestormWeb.Forums do
     |> Repo.insert()
   end
 
+  def register_user(attrs \\ %{}) do
+    %User{}
+    |> user_registration_changeset(attrs)
+    |> Repo.insert()
+  end
+
   @doc """
   Updates a user.
 
@@ -115,8 +121,26 @@ defmodule FirestormWeb.Forums do
   defp user_changeset(%User{} = user, attrs) do
     user
     |> cast(attrs, [:username, :email, :name])
-    |> validate_required([:username, :email, :name])
+    |> validate_required([:username, :name])
     |> unique_constraint(:username)
+  end
+
+  def user_registration_changeset(%User{} = user, attrs) do
+    user
+    |> user_changeset(attrs)
+    |> cast(attrs, [:password])
+    |> validate_length(:password, min: 6)
+    |> put_password_hash()
+  end
+
+  defp put_password_hash(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
+        changeset
+        |> put_change(:password_hash, Comeonin.Bcrypt.hashpwsalt(pass))
+      _ ->
+        changeset
+    end
   end
 
   @doc """
@@ -370,6 +394,27 @@ defmodule FirestormWeb.Forums do
         create_user(%{email: email, name: name, username: nickname})
       user ->
         {:ok, user}
+    end
+  end
+
+  def login_or_register_from_identity(%{username: username, password: password}) do
+    import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
+
+    case get_user_by_username(username) do
+      nil ->
+        # No user, let's register one!
+        register_user(%{username: username, name: username, password: password})
+      user ->
+        # We'll check the password with checkpw against the user's stored
+        # password hash
+        case checkpw(password, user.password_hash) do
+          true ->
+            # Everything checks out, success
+            {:ok, user}
+          _ ->
+            # User existed, we checked the password, but no dice
+            {:error, "No user found with that username or password"}
+        end
     end
   end
 

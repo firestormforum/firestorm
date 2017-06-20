@@ -7,6 +7,9 @@ defmodule FirestormWeb.Forums.User do
     field :email, :string
     field :name, :string
     field :username, :string
+    field :password_hash, :string
+    field :password, :string, virtual: true
+
     has_many :posts, Post
 
     timestamps()

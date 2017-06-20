@@ -2,6 +2,7 @@
   <%= if current_user(@conn) do %>
     <li><%= link "Log Out #{current_user(@conn).username}", to: auth_path(@conn, :delete) %></li>
   <% else %>
-    <li><%= link "Log In", to: auth_path(@conn, :request, :github) %></li>
+    <li><%= link "Log In (github)", to: auth_path(@conn, :request, :github) %></li>
+    <li><%= link "Log In (email)", to: auth_path(@conn, :request, :identity) %></li>
   <% end %>
 </ul>

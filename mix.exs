@@ -39,6 +39,7 @@ defmodule FirestormWeb.Mixfile do
       {:cowboy, "~> 1.0"},
       {:ueberauth, "0.4.0"},
       {:ueberauth_github, "0.4.1"},
+      {:ueberauth_identity, "~> 0.2.3"},
       {:oauth2, "0.9.0"},
       {:earmark, "~> 1.2.2"},
       {:exmoji, "~> 0.2.2"},
@@ -48,6 +49,7 @@ defmodule FirestormWeb.Mixfile do
       {:ecto_autoslug_field, "~> 0.3.0"},
       {:uuid, "~> 1.1"},
       {:timex, "~> 3.1.15"},
+      {:comeonin, "~> 3.0.2"},
 
       # TEST DEPENDENCIES
       {:wallaby, "~> 0.17.0", only: [:test]},
