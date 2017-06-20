@@ -38,7 +38,7 @@ defmodule FirestormWeb.Web.ThreadController do
   def show(conn, %{"id" => id}, category) do
     thread =
       Forums.get_thread!(category, id)
-      |> Repo.preload(:posts)
+      |> Repo.preload(posts: [:user])
 
     [ first_post | posts ] = thread.posts
 

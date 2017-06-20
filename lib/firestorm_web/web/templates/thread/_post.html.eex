@@ -1,6 +1,6 @@
 <div class="post-item">
   <div class="item-metadata">
-    <%= link "@some_user", to: "#", class: "username" %>
+    <%= link "@#{@post.user.username}", to: user_path(@conn, :show, @post.user_id), class: "username" %>
     <%= @post.inserted_at %>
   </div>
 
