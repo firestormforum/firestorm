@@ -5,7 +5,6 @@ defmodule FirestormWeb.Forums do
 
   import Ecto.{Query, Changeset}, warn: false
   alias FirestormWeb.{Repo, Notifications}
-  alias Ecto.Multi
   alias FirestormWeb.Forums.{User, Category, Thread, Post, Watch}
 
   @doc """
@@ -398,7 +397,7 @@ defmodule FirestormWeb.Forums do
   end
 
   def login_or_register_from_identity(%{username: username, password: password}) do
-    import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
+    import Comeonin.Bcrypt, only: [checkpw: 2]
 
     case get_user_by_username(username) do
       nil ->

@@ -10,7 +10,7 @@ defmodule FirestormWeb.Notifications do
   alias FirestormWeb.{Repo, Emails, Mailer}
 
   ### Client API
-  @moduledoc """
+  @doc """
   Start the notifications system and link it.
 
       iex> {:ok, pid} = FirestormWeb.Notifications.start_link()

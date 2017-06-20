@@ -4,7 +4,6 @@ defmodule FirestormWeb.Forums.Watch do
   """
 
   use Ecto.Schema
-  import Ecto.Changeset
 
   schema "abstract table: watches" do
     # This will be used by associations on each "concrete" table

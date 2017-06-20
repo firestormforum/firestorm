@@ -8,7 +8,7 @@ defmodule FirestormWeb.Emails do
   alias FirestormWeb.Forums.{Post, Thread, User}
 
   def thread_new_post_notification(%User{} = user, %Thread{} = thread, %Post{} = post) do
-    new_email
+    new_email()
     |> to(user.email)
     |> from("noreply@firestormforum.org")
     |> subject("There was a new post in a thread you are watching on Firestorm")
@@ -18,7 +18,7 @@ defmodule FirestormWeb.Emails do
   end
 
   defp reply_to_thread_address(%{id: id}) do
-    "reply-thread-#{id}@#{inbound_email_domain}"
+    "reply-thread-#{id}@#{inbound_email_domain()}"
   end
 
   defp inbound_email_domain do

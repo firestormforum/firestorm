@@ -60,7 +60,7 @@ defmodule FirestormWeb.Web.ThreadController do
     |> Forums.watch(thread)
 
     conn
-    |> redirect to: category_thread_path(conn, :show, category.id, id)
+    |> redirect(to: category_thread_path(conn, :show, category.id, id))
   end
 
   def unwatch(conn, %{"id" => id}, category) do
@@ -71,7 +71,7 @@ defmodule FirestormWeb.Web.ThreadController do
     |> Forums.unwatch(thread)
 
     conn
-    |> redirect to: category_thread_path(conn, :show, category.id, id)
+    |> redirect(to: category_thread_path(conn, :show, category.id, id))
   end
 
   def edit(conn, %{"id" => id}, category) do
