@@ -7,6 +7,8 @@ defmodule Page.Thread.Show do
 
   def post_item(body), do: css(".post-item", text: body)
 
+  def post_username(username), do: css(".post-item > .item-metadata > .username", text: username)
+
   def watched_icon(), do: css(".fa-eye.-highlight")
 
   def watch_link(), do: action_link("watch")
