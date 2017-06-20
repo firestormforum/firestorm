@@ -10,7 +10,7 @@ defmodule FirestormWeb.InboundControllerTest do
       {:ok, user} = Forums.create_user(%{username: "knewter", email: "josh@dailydrip.com", name: "Josh Adams"})
       {:ok, elixir} = Forums.create_category(%{title: "Elixir"})
       {:ok, otp_is_cool} = Forums.create_thread(elixir, user, %{title: "OTP is cool", body: "Don't you think?"})
-      {:ok, yup} = Forums.create_post(otp_is_cool, user, %{body: "yup"})
+      {:ok, _yup} = Forums.create_post(otp_is_cool, user, %{body: "yup"})
 
       conn =
         conn
