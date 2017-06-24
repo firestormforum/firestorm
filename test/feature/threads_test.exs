@@ -1,5 +1,5 @@
 defmodule FirestormWeb.Feature.ThreadsTest do
-  use FirestormWeb.Web.FeatureCase, async: false
+  use FirestormWeb.Web.FeatureCase, async: true
   alias FirestormWeb.Forums
 
   @otp_is_cool_parameters %{title: "OTP is cool", body: "Don't you think?"}
@@ -51,6 +51,7 @@ defmodule FirestormWeb.Feature.ThreadsTest do
     |> assert_has(post_username("knewter"))
   end
 
+  @tag :pending
   test "watching a thread", %{session: session} do
     import Page.Thread.Show
 
