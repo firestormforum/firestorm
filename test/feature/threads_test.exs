@@ -21,6 +21,7 @@ defmodule FirestormWeb.Feature.ThreadsTest do
     |> assert_has(thread_title(@otp_is_cool_parameters[:title]))
   end
 
+  @tag :pending
   test "creating a new thread when unauthenticated", %{session: session} do
     import Page.Layout
     import Page.Category.Show
