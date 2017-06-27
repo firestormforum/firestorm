@@ -522,6 +522,18 @@ defmodule FirestormWeb.Forums do
     |> Repo.aggregate(:count, :id)
   end
 
+  def watched_threads(user=%User{}) do
+    thread_ids =
+      "forums_threads_watches"
+      |> where(user_id: ^user.id)
+      |> select([w], w.assoc_id)
+      |> Repo.all()
+
+    Thread
+    |> where([t], t.id in ^thread_ids)
+    |> Repo.all()
+  end
+
   defp watches(watchable) do
     watchable
     |> Ecto.assoc(:watches)

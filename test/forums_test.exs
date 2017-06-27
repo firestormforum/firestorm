@@ -237,6 +237,16 @@ defmodule FirestormWeb.ForumsTest do
       {:ok, _watch} = user |> Forums.watch(thread)
       assert thread |> Forums.watched_by?(user)
     end
+
+    test "finding a user's watched threads", %{thread: thread, user: user} do
+      {:ok, _watch} = user |> Forums.watch(thread)
+      watched_ids =
+        user
+        |> Forums.watched_threads
+        |> Enum.map(&(&1.id))
+
+      assert thread.id in watched_ids
+    end
   end
 
   def create_category(_) do
