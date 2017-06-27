@@ -1,4 +1,4 @@
-<div class="post-item">
+<div class="post-item" id="post-<%= @post.id %>">
   <div class="item-metadata">
     <div class="avatar">
       <img src="<%= avatar_url(@post.user) %>" class="user-avatar -borderless" />
@@ -17,7 +17,7 @@
     <div class="spacer"></div>
     <ul class="actions">
       <li>
-        <a href="#">
+        <a href="<%= category_thread_path(@conn, :show, @category.id, @thread.id) %>#post-<%= @post.id %>">
           <i class="fa fa-link"></i>
         </a>
       </li>
