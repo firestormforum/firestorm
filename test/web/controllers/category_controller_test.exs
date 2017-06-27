@@ -35,7 +35,7 @@ defmodule FirestormWeb.Web.CategoryControllerTest do
 
   test "does not create category and renders errors when data is invalid", %{conn: conn} do
     conn = post conn, category_path(conn, :create), category: @invalid_attrs
-    assert html_response(conn, 200) =~ "New Category"
+    assert html_response(conn, 200) =~ "Create a new category"
   end
 
   test "renders form for editing chosen category", %{conn: conn} do

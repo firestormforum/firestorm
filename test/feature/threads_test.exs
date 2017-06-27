@@ -50,7 +50,7 @@ defmodule FirestormWeb.Feature.ThreadsTest do
     |> click(reply_button())
     |> assert_has(thread_title(@otp_is_cool_parameters[:title]))
     |> assert_has(post_item("I agree!"))
-    |> assert_has(post_username("knewter"))
+    |> assert_has(post_username("knewter", 2))
   end
 
   @tag :pending
