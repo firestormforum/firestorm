@@ -1,4 +1,11 @@
 <div class="post-item first-post">
+  <div class="item-metadata">
+    <div class="avatar">
+      <img src="<%= avatar_url(@post.user) %>" class="user-avatar -borderless" />
+    </div>
+    <%= link "@#{@post.user.username}", to: user_path(@conn, :show, @post.user), class: "username" %>
+    <%= @post.inserted_at %>
+  </div>
   <div class="body">
     <%= markdown(@post.body) %>
   </div>

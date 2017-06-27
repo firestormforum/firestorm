@@ -1,6 +1,8 @@
 .thread-header {
+  border-bottom: 1px solid $botticcelli;
   > h2 {
     margin-bottom: 0;
     margin-top: 0;
+    font-size: $font-size-large;
   }
 }

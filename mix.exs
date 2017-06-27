@@ -50,6 +50,7 @@ defmodule FirestormWeb.Mixfile do
       {:uuid, "~> 1.1"},
       {:timex, "~> 3.1.15"},
       {:comeonin, "~> 3.0.2"},
+      {:exgravatar, "~> 2.0.0"},
 
       # TEST DEPENDENCIES
       {:wallaby, "~> 0.17.0", only: [:test]},

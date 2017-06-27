@@ -1,0 +1,7 @@
+.new-category {
+  display: flex;
+  flex-direction: column;
+  > input, > textarea {
+    @include text-field();
+  }
+}

@@ -2,8 +2,13 @@
   display: flex;
   flex-direction: row;
   color: $tower-gray;
+  align-items: center;
   > * {
     margin-right: $margin-medium;
+  }
+  > .avatar {
+    width: $item-metadata-avatar-size;
+    height: $item-metadata-avatar-size;
   }
   > .username {
     @include underline-on-hover;
