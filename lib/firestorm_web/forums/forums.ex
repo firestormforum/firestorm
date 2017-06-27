@@ -257,7 +257,12 @@ defmodule FirestormWeb.Forums do
   def list_threads(category) do
     Thread
     |> where([t], t.category_id == ^category.id)
+    |> preload(posts: :user)
     |> Repo.all
+    |> Enum.map(fn(thread) ->
+      first_post = Enum.at(thread.posts, 0)
+      %Thread{thread | first_post: first_post}
+    end)
   end
 
   @doc """

@@ -7,6 +7,7 @@ defmodule FirestormWeb.Forums.Thread do
   schema "forums_threads" do
     field :title, :string
     field :slug, ThreadTitleSlug.Type
+    field :first_post, {:map, %Post{}}, virtual: true
     belongs_to :category, Category
     has_many :posts, Post
     has_many :watches, {"forums_threads_watches", Watch}, foreign_key: :assoc_id

@@ -12,22 +12,23 @@
 </div>
 
 <ol class="thread-list">
-  <%= for thread <- @category.threads do %>
+  <%= for thread <- @threads do %>
     <li class="thread-list-item">
       <div class="details">
         <div class="summary">
           <%= link thread.title, to: category_thread_path(@conn, :show, @category, thread), class: "title" %>
+          <%= link "@#{thread.first_post.user.username}", to: user_path(@conn, :show, thread.first_post.user), class: "username" %>
         </div>
         <div class="metadata">
-          <%= thread.inserted_at %>
+          <abbr class="time"><%= thread.inserted_at %></abbr>
         </div>
       </div>
       <div class="supplemental">
         <div class="badge-block">1</div>
       </div>
+      <div class="preview">
+        <%= markdown(thread.first_post.body) %>
+      </div>
     </li>
   <% end %>
 </ol>
-
-<span><%= link "Edit", to: category_path(@conn, :edit, @category) %></span>
-<span><%= link "Back", to: category_path(@conn, :index) %></span>

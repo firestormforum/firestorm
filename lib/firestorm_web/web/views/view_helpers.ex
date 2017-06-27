@@ -3,6 +3,8 @@ defmodule FirestormWeb.Web.ViewHelpers do
   View helpers for grab-bag functions we find useful.
   """
   alias FirestormWeb.Forums.User
+  alias FirestormWeb.Markdown
+  import Phoenix.HTML, only: [raw: 1]
 
   def image_path(path) do
     if Mix.env == :prod do
@@ -12,7 +14,7 @@ defmodule FirestormWeb.Web.ViewHelpers do
     end
   end
 
-  def avatar_url(%User{email: email, username: username} = user, size \\ 256) do
+  def avatar_url(%User{email: email, username: username}, size \\ 256) do
     if email do
       gravatar_url(email, username, size)
     else
@@ -27,5 +29,11 @@ defmodule FirestormWeb.Web.ViewHelpers do
 
   defp adorable_url(username, size) do
     "https://api.adorable.io/avatars/#{size}/#{username}@adorable.png"
+  end
+
+  def markdown(body) do
+    body
+    |> Markdown.render
+    |> raw
   end
 end

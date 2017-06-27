@@ -10,6 +10,3 @@
     </li>
   <% end %>
 </ol>
-
-<span><%= link "Edit", to: category_thread_path(@conn, :edit, @category, @thread) %></span>
-<span><%= link "Back", to: category_thread_path(@conn, :index, @category) %></span>
