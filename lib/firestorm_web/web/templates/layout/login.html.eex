@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="theme-color" content="#DB3440" />
+
+    <title><%= page_title(@conn) %></title>
+    <%= {:safe, css_link_tag()} %>
+    <!-- We bring in fontawesome because it's awesome -->
+    <script src="https://use.fontawesome.com/b706cffc0a.js"></script>
+  </head>
+  <body>
+    <%= for {key, val} <- get_flash(@conn) do %>
+      <p class="alert-box -<%= key %>" role="alert">
+    <% end %>
+    <%= render @view_module, @view_template, assigns %>
+    <%= {:safe, js_script_tag()} %>
+  </body>
+</html>

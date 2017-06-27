@@ -3,6 +3,12 @@ defmodule FirestormWeb.Web.AuthController do
   alias FirestormWeb.Forums
   alias FirestormWeb.Forums.User
 
+  def login(conn, _params) do
+    conn
+    |> put_layout("login.html")
+    |> render("login.html")
+  end
+
   def delete(conn, _params) do
     conn
     |> put_flash(:info, "You have been logged out!")
