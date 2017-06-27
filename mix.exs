@@ -53,7 +53,7 @@ defmodule FirestormWeb.Mixfile do
       {:exgravatar, "~> 2.0.0"},
 
       # TEST DEPENDENCIES
-      {:wallaby, "~> 0.17.0", only: [:test]},
+      {:wallaby, github: "keathley/wallaby", branch: "spike/raise-errors-on-poison-timeout", only: [:test]},
 
       # OVERRIDES
       # We can remove this override once we're on exmoji > 0.2.2
