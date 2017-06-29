@@ -147,7 +147,7 @@ defmodule FirestormWeb.ForumsTest do
       assert expected == result
     end
 
-  test "recent_threads/1 finds the three threads with the most recent posts in a given category", %{category: category, user: user} do
+  test "recent_threads/1 returns a category's threads ordered by most recent post", %{category: category, user: user} do
     threads =
       for num <- ~w(First Second Third Fourth Fifth) do
         fixture(:thread, category, user, %{title: "#{num} thread", body: "#{num} thread body"})
@@ -160,8 +160,8 @@ defmodule FirestormWeb.ForumsTest do
     [thread1, thread2, thread3, thread4, thread5] = threads
     :timer.sleep 1
     fixture(:post, thread1, user, %{body: "last post in thread1"})
-    fixture(:post, thread2, user, %{body: "last post in thread2"})
-    fixture(:post, thread3, user, %{body: "last post in thread3"})
+    fixture(:post, thread3, user, %{body: "last post in thread2"})
+    fixture(:post, thread5, user, %{body: "last post in thread3"})
     other_category = fixture(:category, %{title: "other category"})
     other_thread = fixture(:thread, other_category, user, %{title: "other thread", body: "other thread body"})
     other_thread_post = fixture(:post, other_thread, user, %{body: "Other thread last post"})
@@ -174,12 +174,8 @@ defmodule FirestormWeb.ForumsTest do
       recent_threads
       |> Enum.map(&(&1.id))
 
-    assert thread1.id in thread_ids
-    assert thread3.id in thread_ids
-    assert thread5.id in thread_ids
-    refute thread2.id in thread_ids
-    refute thread4.id in thread_ids
-    refute other_thread_post.thread_id in thread_ids
+    expected_ids = [thread5.id, thread3.id, thread1.id, thread4.id, thread2.id]
+    assert expected_ids == thread_ids
   end
 
     test "get_thread! returns the thread with given id", %{category: category, user: user} do

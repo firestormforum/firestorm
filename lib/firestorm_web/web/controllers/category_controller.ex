@@ -28,11 +28,10 @@ defmodule FirestormWeb.Web.CategoryController do
     category =
       id
       |> Forums.get_category!
-      |> FirestormWeb.Repo.preload(:threads)
 
     threads =
       category
-      |> Forums.list_threads(current_user(conn))
+      |> Forums.recent_threads(current_user(conn))
 
     render(conn, "show.html", category: category, threads: threads)
   end
