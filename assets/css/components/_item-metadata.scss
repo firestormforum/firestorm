@@ -13,6 +13,12 @@
   > .username {
     @include underline-on-hover;
   }
+  > .headline {
+    color: $tundora;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-large;
+    @include underline-on-hover;
+  }
   > abbr {
     border-bottom: none;
   }
