@@ -31,6 +31,11 @@ defmodule FirestormWeb.ForumsTest do
     thread
   end
 
+  def fixture(:post, thread, user, attrs) do
+    {:ok, post} = Forums.create_post(thread, user, attrs)
+    post
+  end
+
   test "list_users/1 returns all users" do
     user = fixture(:user, @create_user_attrs)
     assert Forums.list_users() == [user]
@@ -141,6 +146,41 @@ defmodule FirestormWeb.ForumsTest do
 
       assert expected == result
     end
+
+  test "recent_threads/1 finds the three threads with the most recent posts in a given category", %{category: category, user: user} do
+    threads =
+      for num <- ~w(First Second Third Fourth Fifth) do
+        fixture(:thread, category, user, %{title: "#{num} thread", body: "#{num} thread body"})
+      end
+    for thread <- threads do
+      for n <- [2, 3, 4] do
+        fixture(:post, thread, user, %{body: "Post #{n} in #{thread.title}"})
+      end
+    end
+    [thread1, thread2, thread3, thread4, thread5] = threads
+    :timer.sleep 1
+    fixture(:post, thread1, user, %{body: "last post in thread1"})
+    fixture(:post, thread2, user, %{body: "last post in thread2"})
+    fixture(:post, thread3, user, %{body: "last post in thread3"})
+    other_category = fixture(:category, %{title: "other category"})
+    other_thread = fixture(:thread, other_category, user, %{title: "other thread", body: "other thread body"})
+    other_thread_post = fixture(:post, other_thread, user, %{body: "Other thread last post"})
+
+    recent_threads =
+      category
+      |> Forums.recent_threads
+
+    thread_ids =
+      recent_threads
+      |> Enum.map(&(&1.id))
+
+    assert thread1.id in thread_ids
+    assert thread3.id in thread_ids
+    assert thread5.id in thread_ids
+    refute thread2.id in thread_ids
+    refute thread4.id in thread_ids
+    refute other_thread_post.thread_id in thread_ids
+  end
 
     test "get_thread! returns the thread with given id", %{category: category, user: user} do
       thread = fixture(:thread, category, user, @create_thread_attrs)
