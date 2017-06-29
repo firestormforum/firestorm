@@ -7,7 +7,7 @@
     <i class="fa fa-github"></i>
     Log in with GitHub
   </a>
-  <a class="pure-button">Create Account</a>
+  <%= link "Create Account", to: auth_path(@conn, :request, :identity), class: "pure-button" %>
   <%= link "Sign In", to: auth_path(@conn, :request, :identity), class: "sign-in-link" %>
   <p class="legal-disclaimer">
     By signing up, I agree to Firestorm's

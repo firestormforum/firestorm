@@ -23,5 +23,7 @@ config :firestorm_web, FirestormWeb.Mailer,
 
 config :bamboo, :refute_timeout, 10
 
+config :wallaby, screenshot_on_failure: true
+
 config :comeonin, :bcrypt_log_rounds, 4
 config :comeonin, :pbkdf2_rounds, 1
