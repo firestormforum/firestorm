@@ -246,7 +246,7 @@ defmodule FirestormWeb.Forums do
   end
 
   @doc """
-  Returns the list of threads for a given category.
+  Returns the list of threads for a given category. If provided a user, will determine whether each thread has been completely read or not.
 
   ## Examples
 
@@ -254,14 +254,24 @@ defmodule FirestormWeb.Forums do
       [%Thread{}, ...]
 
   """
-  def list_threads(category) do
+  def list_threads(category, user \\ nil) do
     Thread
     |> where([t], t.category_id == ^category.id)
     |> preload(posts: :user)
     |> Repo.all
     |> Enum.map(fn(thread) ->
       first_post = Enum.at(thread.posts, 0)
-      %Thread{thread | first_post: first_post}
+      posts_count = length(thread.posts)
+      completely_read? =
+        if user do
+          # TODO: Return true if the user has completely read this thread -
+          # i.e., if each post has a corresponding view in the database for the
+          # user
+          false
+        else
+          false
+        end
+      %Thread{thread | first_post: first_post, posts_count: posts_count, completely_read?: completely_read?}
     end)
   end
 
