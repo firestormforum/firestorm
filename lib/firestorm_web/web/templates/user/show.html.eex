@@ -3,34 +3,40 @@
   <div class="contact">
     <h1 class="username"><%= @user.username %></h1>
     <h3 class="name"><%= @user.name %></h3>
-    <p class="site"><a href="http://www.dailydrip.com">dailydrip.com</a></p>
+    <!-- <p class="site"><a href="http://www.dailydrip.com">dailydrip.com</a></p> -->
   </div>
   <hr />
   <div class="meta">
-    <ul>
-      <li>
-        <strong>Languages</strong>
-        Java, Scala, French, Elixir
-      </li>
-      <li>
-        <strong>Interested in</strong>
-        Elm, Erlang, OCaml, Unison, Oz, Scheme
-      </li>
-    </ul>
+    <!--
+      <ul>
+        <li>
+          <strong>Languages</strong>
+          Java, Scala, French, Elixir
+        </li>
+        <li>
+          <strong>Interested in</strong>
+          Elm, Erlang, OCaml, Unison, Oz, Scheme
+        </li>
+      </ul>
+    -->
 
     <ul>
       <li>
         <strong>Joined</strong>
-        Apr 15, '16
+        <%= short_date(@user.inserted_at) %>
       </li>
-      <li>
-        <strong>Last post</strong>
-        Jan 23, '17
-      </li>
-      <li>
-        <strong>Last seen</strong>
-        2 hours ago
-      </li>
+      <%= if @last_post do %>
+        <li>
+          <strong>Last post</strong>
+          <%= short_date(@last_post.inserted_at) %>
+        </li>
+      <% end %>
+      <%= if @last_seen do %>
+        <li>
+          <strong>Last seen</strong>
+          <%= short_date(@last_seen) %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>

@@ -36,4 +36,8 @@ defmodule FirestormWeb.Web.ViewHelpers do
     |> Markdown.render
     |> raw
   end
+
+  def short_date(date) do
+    Timex.format!(date, "{Mshort} {D}, '{YY}")
+  end
 end

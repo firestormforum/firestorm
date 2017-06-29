@@ -511,6 +511,26 @@ defmodule FirestormWeb.Forums do
     |> Repo.paginate(page: page)
   end
 
+  def user_last_post(user) do
+    Post
+    |> where([p], p.user_id == ^user.id)
+    |> order_by([p], [desc: p.inserted_at])
+    |> limit(1)
+    |> Repo.one
+  end
+
+  # FIXME: Should track when users log in rather than proxying that by
+  # pretending them making a view always happens when they're on the site.
+  def user_last_seen(user) do
+    last_view =
+      "forums_posts_views"
+      |> where([v], v.user_id == ^user.id)
+      |> order_by([v], [desc: v.inserted_at])
+      |> select([v], v.inserted_at)
+      |> limit(1)
+      |> Repo.one
+  end
+
   @doc """
   Have a user watch a thread:
 
