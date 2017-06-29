@@ -253,7 +253,8 @@ defmodule FirestormWeb.Forums do
   end
 
   @doc """
-  Returns the list of threads for a given category. If provided a user, will determine whether each thread has been completely read or not.
+  Returns the list of threads for a given category. If provided a user, will
+  determine whether each thread has been completely read or not.
 
   ## Examples
 
@@ -266,6 +267,38 @@ defmodule FirestormWeb.Forums do
     |> where([t], t.category_id == ^category.id)
     |> preload(posts: :user)
     |> Repo.all
+    |> decorate_threads(user)
+  end
+
+  @doc """
+  Returns the threads in a given category ordered by those with the most recent
+  posts. If provided a user, will determine whether each thread has been
+  completely read or not.
+
+  ## Examples
+
+      iex> recent_threads(category)
+      [%Thread{}, ...]
+
+  """
+  def recent_threads(category, user \\ nil) do
+    thread_ids =
+      Thread
+      |> join(:left_lateral, [t], p in fragment("SELECT thread_id, inserted_at FROM forums_posts WHERE forums_posts.thread_id = ? ORDER BY forums_posts.inserted_at DESC LIMIT 1", t.id))
+      |> order_by([t, p], [desc: p.inserted_at])
+      |> where(category_id: ^category.id)
+      |> select([t], t)
+      |> Repo.all
+      |> Repo.preload(posts: from(p in Post, order_by: p.inserted_at, preload: :user))
+      |> decorate_threads(user)
+  end
+
+  # Decorate a list of threads with:
+  # - first_post
+  # - posts_count
+  # - completely_read?
+  defp decorate_threads(threads, user) do
+    threads
     |> Enum.map(fn(thread) ->
       first_post = Enum.at(thread.posts, 0)
       posts_count = length(thread.posts)
