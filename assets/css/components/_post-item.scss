@@ -6,5 +6,8 @@
   }
   > .body {
     margin-top: $margin-medium;
+    img {
+      max-width: 100%;
+    }
   }
 }
