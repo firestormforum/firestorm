@@ -49,17 +49,14 @@ module.exports = {
         loader: "file-loader?name=fonts/[name].[ext]"
       },
       {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader?limit=10000&mimetype=application/font-woff"
-      },
-      {
         test: /\.(svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: "file-loader?name=images/[name].[ext]"
       }
     ]
   },
   devServer: {
-    contentBase: staticDir
+    contentBase: staticDir,
+    headers: { "Access-Control-Allow-Origin": "*" }
   },
   plugins: [
     new ExtractTextPlugin("css/app.css"),
