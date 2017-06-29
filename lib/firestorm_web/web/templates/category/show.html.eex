@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="supplemental">
-        <div class="badge-block">1</div>
+        <div class="badge-block<%= if thread.completely_read?, do: "", else: " -highlight" %>"><%= thread.posts_count %></div>
       </div>
       <div class="preview">
         <%= markdown(thread.first_post.body) %>

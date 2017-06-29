@@ -8,6 +8,8 @@ defmodule FirestormWeb.Forums.Thread do
     field :title, :string
     field :slug, ThreadTitleSlug.Type
     field :first_post, {:map, %Post{}}, virtual: true
+    field :posts_count, :integer, virtual: true
+    field :completely_read?, :boolean, virtual: true
     belongs_to :category, Category
     has_many :posts, Post
     has_many :watches, {"forums_threads_watches", Watch}, foreign_key: :assoc_id
