@@ -7,11 +7,13 @@ defmodule Page.Category.Show do
   def thread_title(title), do: css("a.title", text: title)
   def thread_posts_count(count, opts \\ []) do
     opts
-    |> Keyword.get(:unread)
-    |> badge_class
+    |> Keyword.get(:completely_read?)
+    |> badge_class()
     |> css(text: "#{count}")
   end
 
-  def badge_class(true), do: "#{badge_class(false)}.-highlighted"
+  # Argument is "is this completely read?"
+  def badge_class(true), do: "#{badge_class(:default)}:not(.-highlight)"
+  def badge_class(false), do: "#{badge_class(:default)}.-highlight"
   def badge_class(_), do: ".supplemental .badge-block"
 end
