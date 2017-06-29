@@ -39,7 +39,7 @@ defmodule FirestormWeb.Feature.CategoriesTest do
     |> all(threads(1))
     |> List.first()
     |> assert_has(thread_title("OTP is cool"))
-    |> assert_has(thread_posts_count(2, unread: true))
+    |> assert_has(thread_posts_count(2, completely_read?: false))
   end
 
   def create_categories(titles) do
