@@ -5,7 +5,14 @@ defmodule FirestormWeb.Forums do
 
   import Ecto.{Query, Changeset}, warn: false
   alias FirestormWeb.{Repo, Notifications}
-  alias FirestormWeb.Forums.{User, Category, Thread, Post, Watch}
+  alias FirestormWeb.Forums.{
+    User,
+    Category,
+    Thread,
+    Post,
+    Watch,
+    View
+  }
 
   @doc """
   Returns the list of users.
@@ -264,10 +271,9 @@ defmodule FirestormWeb.Forums do
       posts_count = length(thread.posts)
       completely_read? =
         if user do
-          # TODO: Return true if the user has completely read this thread -
-          # i.e., if each post has a corresponding view in the database for the
-          # user
-          false
+          # FIXME: This is insanely inefficient, lol?
+          thread.posts
+          |> Enum.all?(fn(post) -> post |> viewed_by?(user) end)
         else
           false
         end
@@ -539,6 +545,54 @@ defmodule FirestormWeb.Forums do
 
   defp watch_changeset(%Watch{} = watch, attrs) do
     watch
+    |> cast(attrs, [:assoc_id, :user_id])
+    |> validate_required([:assoc_id, :user_id])
+  end
+
+  @doc """
+  Indicate a user viewed a post:
+
+      iex> %User{} |> view(%Post{})
+      {:ok, %Post{}}
+
+  """
+  def view(%User{} = user, %Post{} = post) do
+    post
+    |> Ecto.build_assoc(:views, %{user_id: user.id})
+    |> view_changeset(%{})
+    |> Repo.insert()
+  end
+
+  @doc """
+  Determine if a user has viewed a given viewable (Post, etc):
+
+      iex> %Post{} |> viewed_by?(%User{})
+      false
+
+  """
+  def viewed_by?(viewable, user = %User{}) do
+    view_count(viewable, user) > 0
+  end
+
+  def view_count(viewable) do
+    viewable
+    |> views()
+    |> Repo.aggregate(:count, :id)
+  end
+  defp view_count(viewable, user = %User{}) do
+    viewable
+    |> views()
+    |> where([f], f.user_id == ^user.id)
+    |> Repo.aggregate(:count, :id)
+  end
+
+  defp views(viewable) do
+    viewable
+    |> Ecto.assoc(:views)
+  end
+
+  defp view_changeset(%View{} = view, attrs) do
+    view
     |> cast(attrs, [:assoc_id, :user_id])
     |> validate_required([:assoc_id, :user_id])
   end

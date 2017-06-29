@@ -77,10 +77,4 @@ defmodule FirestormWeb.Feature.ThreadsTest do
       end
     {:ok, categories}
   end
-
-  defp log_in_as(session, user) do
-    session
-    |> visit("/")
-    |> Browser.set_cookie("current_user", user.id)
-  end
 end

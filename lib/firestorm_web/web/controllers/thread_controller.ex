@@ -49,6 +49,15 @@ defmodule FirestormWeb.Web.ThreadController do
         false
       end
 
+    # Record a view for each post in this thread
+    if current_user(conn) do
+      for post <- thread.posts do
+        conn
+        |> current_user()
+        |> Forums.view(post)
+      end
+    end
+
     render(conn, "show.html", thread: thread, category: category, first_post: first_post, posts: posts, watched: watched)
   end
 

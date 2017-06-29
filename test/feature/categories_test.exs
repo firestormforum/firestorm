@@ -35,11 +35,21 @@ defmodule FirestormWeb.Feature.CategoriesTest do
     {:ok, _post} = Forums.create_post(otp_is_cool, user, %{body: "Yup"})
 
     session
+    |> log_in_as(user)
     |> visit(category_path(Endpoint, :show, elixir.id))
     |> all(threads(1))
     |> List.first()
     |> assert_has(thread_title("OTP is cool"))
     |> assert_has(thread_posts_count(2, completely_read?: false))
+
+    session
+    |> log_in_as(user)
+    |> visit(category_thread_path(Endpoint, :show, elixir.id, otp_is_cool.id))
+    |> visit(category_path(Endpoint, :show, elixir.id))
+    |> all(threads(1))
+    |> List.first()
+    |> assert_has(thread_title("OTP is cool"))
+    |> assert_has(thread_posts_count(2, completely_read?: true))
   end
 
   def create_categories(titles) do
