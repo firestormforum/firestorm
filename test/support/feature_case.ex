@@ -1,6 +1,16 @@
 defmodule FirestormWeb.Web.FeatureCase do
   use ExUnit.CaseTemplate
 
+  defmodule Helpers do
+    use Wallaby.DSL
+
+    def log_in_as(session, user) do
+      session
+      |> visit("/")
+      |> Browser.set_cookie("current_user", user.id)
+    end
+  end
+
   using do
     quote do
       use Wallaby.DSL
@@ -11,6 +21,7 @@ defmodule FirestormWeb.Web.FeatureCase do
       import Ecto.Query
 
       import FirestormWeb.Web.Router.Helpers
+      import FirestormWeb.Web.FeatureCase.Helpers
 
       alias FirestormWeb.Forums.{
         User,
