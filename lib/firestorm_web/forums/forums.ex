@@ -507,6 +507,7 @@ defmodule FirestormWeb.Forums do
   def user_posts(user, %{page: page}) do
     Post
     |> where([p], p.user_id == ^user.id)
+    |> order_by([p], [desc: p.inserted_at])
     |> preload([p], [thread: [:category], user: []])
     |> Repo.paginate(page: page)
   end

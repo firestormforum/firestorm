@@ -44,7 +44,7 @@
 <ol class="user-posts post-list">
   <%= for post <- @posts_page do %>
     <li>
-      <%= FirestormWeb.Web.ThreadView.render("_post.html", conn: @conn, post: post, thread: post.thread, category: post.thread.category) %>
+      <%= render("_post.html", conn: @conn, post: post, thread: post.thread, category: post.thread.category) %>
     </li>
   <% end %>
 </ol>
