@@ -163,6 +163,35 @@ defmodule FirestormWeb.Forums do
   end
 
   @doc """
+  Takes a list of categories and returns them as well as a map of category ids to recent threads.
+  """
+  def get_recent_threads_for_categories(categories, user) do
+    threads =
+      Thread
+      |> join(:left_lateral, [t], p in fragment("SELECT thread_id, inserted_at FROM forums_posts WHERE forums_posts.thread_id = ? ORDER BY forums_posts.inserted_at DESC LIMIT 1", t.id))
+      |> order_by([t, p], [desc: p.inserted_at])
+      |> where([t, p], t.category_id in ^(Enum.map(categories, &(&1.id))))
+      |> limit(3)
+      |> select([t], t)
+      |> Repo.all()
+      |> Repo.preload(posts: from(p in Post, order_by: p.inserted_at, preload: :user))
+      |> decorate_threads(user)
+
+    initial_threads_map =
+      for category <- categories, into: %{} do
+        {category.id, []}
+      end
+
+    threads_map =
+      threads
+      |> Enum.reduce(initial_threads_map, fn(thread, acc) ->
+        Map.update(acc, thread.category_id, [thread], fn(cat_threads) -> cat_threads ++ [thread] end)
+      end)
+
+    {categories, threads_map}
+  end
+
+  @doc """
   Gets a single category.
 
   Raises `Ecto.NoResultsError` if the Category does not exist.
@@ -282,15 +311,14 @@ defmodule FirestormWeb.Forums do
 
   """
   def recent_threads(category, user \\ nil) do
-    thread_ids =
-      Thread
-      |> join(:left_lateral, [t], p in fragment("SELECT thread_id, inserted_at FROM forums_posts WHERE forums_posts.thread_id = ? ORDER BY forums_posts.inserted_at DESC LIMIT 1", t.id))
-      |> order_by([t, p], [desc: p.inserted_at])
-      |> where(category_id: ^category.id)
-      |> select([t], t)
-      |> Repo.all
-      |> Repo.preload(posts: from(p in Post, order_by: p.inserted_at, preload: :user))
-      |> decorate_threads(user)
+    Thread
+    |> join(:left_lateral, [t], p in fragment("SELECT thread_id, inserted_at FROM forums_posts WHERE forums_posts.thread_id = ? ORDER BY forums_posts.inserted_at DESC LIMIT 1", t.id))
+    |> order_by([t, p], [desc: p.inserted_at])
+    |> where(category_id: ^category.id)
+    |> select([t], t)
+    |> Repo.all
+    |> Repo.preload(posts: from(p in Post, order_by: p.inserted_at, preload: :user))
+    |> decorate_threads(user)
   end
 
   # Decorate a list of threads with:
@@ -523,13 +551,12 @@ defmodule FirestormWeb.Forums do
   # FIXME: Should track when users log in rather than proxying that by
   # pretending them making a view always happens when they're on the site.
   def user_last_seen(user) do
-    last_view =
-      "forums_posts_views"
-      |> where([v], v.user_id == ^user.id)
-      |> order_by([v], [desc: v.inserted_at])
-      |> select([v], v.inserted_at)
-      |> limit(1)
-      |> Repo.one
+    "forums_posts_views"
+    |> where([v], v.user_id == ^user.id)
+    |> order_by([v], [desc: v.inserted_at])
+    |> select([v], v.inserted_at)
+    |> limit(1)
+    |> Repo.one
   end
 
   @doc """
