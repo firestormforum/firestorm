@@ -1,4 +1,15 @@
-<span><%= link "New Category", to: category_path(@conn, :new) %></span>
+<div class="page-header">
+  <h2><%= link "Categories", to: category_path(@conn, :index) %></h2>
+  <div class="spacer"></div>
+  <ul class="actions">
+    <li>
+      <a class="pure-button button-primary" href="<%= category_path(@conn, :new) %>">
+        <i class="fa fa-plus"></i>
+        New Category
+      </a>
+    </li>
+  </ul>
+</div>
 
 <ol class="category-list">
   <%= for category <- @categories do %>
@@ -6,6 +17,11 @@
       <h2 class="title">
         <%= category_link(@conn, category) %>
       </h2>
+      <ul class="thread-list">
+        <%= for thread <- @threads[category.id] do %>
+          <%= render("_thread.html", category: category, thread: thread, conn: @conn) %>
+        <% end %>
+      </ul>
     </li>
   <% end %>
 </ol>

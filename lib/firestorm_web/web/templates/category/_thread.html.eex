@@ -1,0 +1,17 @@
+<li class="thread-list-item">
+  <div class="details">
+    <div class="summary">
+      <%= link @thread.title, to: category_thread_path(@conn, :show, @category, @thread), class: "title" %>
+      <%= link "@#{@thread.first_post.user.username}", to: user_path(@conn, :show, @thread.first_post.user), class: "username" %>
+    </div>
+    <div class="metadata">
+      <abbr class="time"><%= @thread.inserted_at %></abbr>
+    </div>
+  </div>
+  <div class="supplemental">
+    <div class="badge-block<%= if @thread.completely_read?, do: "", else: " -highlight" %>"><%= @thread.posts_count %></div>
+  </div>
+  <div class="preview">
+    <%= markdown(@thread.first_post.body) %>
+  </div>
+</li>

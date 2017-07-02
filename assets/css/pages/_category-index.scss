@@ -1,3 +1,11 @@
 .page-category-index {
   @include padded_page();
+  .page-header {
+    > h2 {
+      margin-bottom: $margin-large;
+    }
+  }
+  .thread-list {
+    margin-bottom: $margin-large;
+  }
 }

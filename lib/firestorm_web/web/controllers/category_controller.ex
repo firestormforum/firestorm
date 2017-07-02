@@ -4,8 +4,11 @@ defmodule FirestormWeb.Web.CategoryController do
   alias FirestormWeb.Forums
 
   def index(conn, _params) do
-    categories = Forums.list_categories()
-    render(conn, "index.html", categories: categories)
+    {categories, threads} =
+      Forums.list_categories()
+      |> Forums.get_recent_threads_for_categories(current_user(conn))
+
+    render(conn, "index.html", categories: categories, threads: threads)
   end
 
   def new(conn, _params) do
