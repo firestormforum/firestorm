@@ -30,6 +30,8 @@
   <body>
     <%= for {key, val} <- get_flash(@conn) do %>
       <p class="alert-box -<%= key %>" role="alert">
+        <%= val %>
+      </p>
     <% end %>
     <%= render @view_module, @view_template, assigns %>
     <%= {:safe, js_script_tag()} %>

@@ -164,11 +164,11 @@ defmodule FirestormWeb.ForumsTest do
     fixture(:post, thread5, user, %{body: "last post in thread3"})
     other_category = fixture(:category, %{title: "other category"})
     other_thread = fixture(:thread, other_category, user, %{title: "other thread", body: "other thread body"})
-    other_thread_post = fixture(:post, other_thread, user, %{body: "Other thread last post"})
+    _other_thread_post = fixture(:post, other_thread, user, %{body: "Other thread last post"})
 
     recent_threads =
       category
-      |> Forums.recent_threads
+      |> Forums.recent_threads()
 
     thread_ids =
       recent_threads
