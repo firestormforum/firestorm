@@ -24,7 +24,6 @@ defmodule FirestormWeb.Web.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_failure: fails}} = conn, _params) do
-    IO.inspect fails
     conn
     |> put_flash(:error, "Failed to authenticate.")
     |> redirect(to: "/")

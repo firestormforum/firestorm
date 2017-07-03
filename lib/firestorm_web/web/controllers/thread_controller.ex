@@ -37,10 +37,11 @@ defmodule FirestormWeb.Web.ThreadController do
 
   def show(conn, %{"id" => id}, category) do
     thread =
-      Forums.get_thread!(category, id)
+      category
+      |> Forums.get_thread!(id)
       |> Repo.preload(posts: [:user])
 
-    [ first_post | posts ] = thread.posts
+    [first_post | posts] = thread.posts
 
     watched =
       if current_user(conn) do
@@ -65,7 +66,8 @@ defmodule FirestormWeb.Web.ThreadController do
     thread =
       Forums.get_thread!(category, id)
 
-    current_user(conn)
+    conn
+    |> current_user()
     |> Forums.watch(thread)
 
     conn
@@ -76,7 +78,8 @@ defmodule FirestormWeb.Web.ThreadController do
     thread =
       Forums.get_thread!(category, id)
 
-    current_user(conn)
+    conn
+    |> current_user()
     |> Forums.unwatch(thread)
 
     conn

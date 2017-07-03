@@ -1,4 +1,8 @@
 defmodule FirestormWeb.Forums.Thread do
+  @moduledoc """
+  Schema for forum threads.
+  """
+
   use Ecto.Schema
 
   alias FirestormWeb.Forums.{Category, Post, Watch, User}

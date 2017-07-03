@@ -1,4 +1,9 @@
 defmodule FirestormWeb.Forums.Slugs.TitleSlug do
+  @moduledoc """
+  Module that makes it easy to create title slugs that autogenerate unique
+  titles.
+  """
+
   defmacro __using__(module) do
     quote do
       use EctoAutoslugField.Slug, from: :title, to: :slug

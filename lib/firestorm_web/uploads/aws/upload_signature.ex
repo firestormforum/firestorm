@@ -1,4 +1,8 @@
 defmodule FirestormWeb.Uploads.AWS.UploadSignature do
+  @moduledoc """
+  Generate an upload signature to allow the client to upload directly to S3.
+  """
+
   @service "s3"
   @aws_request "aws4_request"
 

@@ -6,6 +6,7 @@
 # - No existing ability to customize the classes that are produced for the `pre`
 #   tag, which is necessary to use http://prismjs.com/plugins/line-numbers/
 defmodule FirestormWeb.Markdown.HtmlRenderer do
+  # credo:disable-for-this-file
 
   alias  Earmark.Block
   alias  Earmark.Context
@@ -208,7 +209,8 @@ defmodule FirestormWeb.Markdown.HtmlRenderer do
   end
 
   defp add_tds(context, row, tag, aligns, lnb) do
-    Enum.reduce(1..length(row), {[], row}, add_td_fn(context, row, tag, aligns, lnb))
+    (1..length(row))
+    Enum.reduce({[], row}, add_td_fn(context, row, tag, aligns, lnb))
     |> elem(0)
     |> Enum.reverse
   end

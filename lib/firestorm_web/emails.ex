@@ -1,4 +1,8 @@
 defmodule FirestormWeb.Emails do
+  @moduledoc """
+  Module hosting outbound email templates.
+  """
+
   import Bamboo.Email
   import FirestormWeb.Web.Router.Helpers
   import Phoenix.HTML
@@ -36,7 +40,7 @@ defmodule FirestormWeb.Emails do
 
   defp html_body_for(%Thread{} = thread, %Post{} = post) do
     """
-    <p>The Firestorm thread #{link(thread.title, to: thread_url(thread)) |> safe_to_string} has received #{link("a reply", to: post_url(thread, post)) |> safe_to_string}:</p>
+    <p>The Firestorm thread #{thread.title |> link(to: thread_url(thread)) |> safe_to_string} has received #{"a reply" |> link(to: post_url(thread, post)) |> safe_to_string}:</p>
     <hr />
     #{Markdown.render(post.body)}
     """
