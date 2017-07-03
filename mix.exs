@@ -54,6 +54,7 @@ defmodule FirestormWeb.Mixfile do
 
       # TEST DEPENDENCIES
       {:wallaby, "~> 0.17.0", only: [:test]},
+      {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
 
       # OVERRIDES
       # We can remove this override once we're on exmoji > 0.2.2

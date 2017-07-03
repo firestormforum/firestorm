@@ -1,4 +1,6 @@
 defmodule FirestormWeb.Application do
+  @moduledoc false
+
   use Application
   import Supervisor.Spec
 

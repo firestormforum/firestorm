@@ -1,4 +1,8 @@
 defmodule FirestormWeb.Forums.Post do
+  @moduledoc """
+  Schema for forum posts.
+  """
+
   use Ecto.Schema
   alias FirestormWeb.Forums.{User, Thread, View}
 

@@ -42,8 +42,9 @@ defmodule FirestormWeb.Notifications do
          users <- thread.watchers |> Enum.uniq do
            # 2) Send each of them an email about it
            for user <- users do
-             Emails.thread_new_post_notification(user, post.thread, post)
-             |> Mailer.deliver_now
+             user
+             |> Emails.thread_new_post_notification(post.thread, post)
+             |> Mailer.deliver_now()
            end
     else
       _ ->

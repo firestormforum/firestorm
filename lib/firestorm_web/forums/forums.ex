@@ -395,7 +395,8 @@ defmodule FirestormWeb.Forums do
       |> Map.take([:title])
       |> Map.put(:category_id, category.id)
 
-    new_thread_changeset(%{thread: thread_attrs, post: post_attrs})
+    %{thread: thread_attrs, post: post_attrs}
+    |> new_thread_changeset()
     |> Repo.insert
   end
 
@@ -596,7 +597,7 @@ defmodule FirestormWeb.Forums do
       false
 
   """
-  def watched_by?(watchable, user = %User{}) do
+  def watched_by?(watchable, %User{} = user) do
     watch_count(watchable, user) > 0
   end
 
@@ -651,7 +652,7 @@ defmodule FirestormWeb.Forums do
       false
 
   """
-  def viewed_by?(viewable, user = %User{}) do
+  def viewed_by?(viewable, %User{} = user) do
     view_count(viewable, user) > 0
   end
 

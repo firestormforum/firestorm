@@ -1,4 +1,8 @@
 defmodule FirestormWeb.Web.Layout.PageTitle do
+  @moduledoc """
+  Determine titles for a given controller action.
+  """
+
   alias FirestormWeb.Web.{CategoryView, ThreadView, UserView}
   @app_name "Firestorm"
 
@@ -39,6 +43,10 @@ defmodule FirestormWeb.Web.Layout.PageTitle do
 end
 
 defmodule FirestormWeb.Web.LayoutView do
+  @moduledoc """
+  Helpers for use in layout templates
+  """
+
   use FirestormWeb.Web, :view
   alias FirestormWeb.Web.Layout.PageTitle
 
