@@ -2,6 +2,9 @@ defmodule FirestormWeb.Web.CategoryController do
   use FirestormWeb.Web, :controller
 
   alias FirestormWeb.Forums
+  alias FirestormWeb.Web.Plugs.RequireUser
+
+  plug RequireUser when action in [:new, :create]
 
   def index(conn, _params) do
     {categories, threads} =

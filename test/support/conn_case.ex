@@ -23,6 +23,12 @@ defmodule FirestormWeb.Web.ConnCase do
 
       # The default endpoint for testing
       @endpoint FirestormWeb.Web.Endpoint
+
+      def log_in_as(conn, user) do
+        conn =
+          build_conn()
+          |> Plug.Test.init_test_session(%{current_user: user.id})
+      end
     end
   end
 
