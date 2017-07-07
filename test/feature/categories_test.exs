@@ -3,17 +3,34 @@ defmodule FirestormWeb.Feature.CategoriesTest do
   alias FirestormWeb.Forums
   alias FirestormWeb.Web.Endpoint
 
-  test "creating a new category", %{session: session} do
-    import Page.Category.{New, Index}
-    alias Page.Category.Show
+  describe "creating a new category" do
+    test "as a visitor", %{session: session} do
+      import Page.Category.{New, Index}
+      import Page.Layout
+      alias Page.Category.Show
 
-    session
-    |> visit("/")
-    |> click(new_category_link())
-    |> fill_in(title_field(), with: "Erlang")
-    |> click(create_category_button())
-    |> assert_has(Show.category_title("Erlang"))
+      session
+      |> visit("/")
+      |> click(new_category_link())
+      |> assert_has(alert_box(:error, "You must be logged in to access this page."))
+    end
+
+    test "as a user", %{session: session} do
+      import Page.Category.{New, Index}
+      alias Page.Category.Show
+
+      {:ok, user} = Forums.create_user(%{username: "knewter", name: "Josh Adams", email: "josh@dailydrip.com"})
+
+      session
+      |> log_in_as(user)
+      |> visit("/")
+      |> click(new_category_link())
+      |> fill_in(title_field(), with: "Erlang")
+      |> click(create_category_button())
+      |> assert_has(Show.category_title("Erlang"))
+    end
   end
+
 
   test "categories are listed", %{session: session} do
     import Page.Category.Index
