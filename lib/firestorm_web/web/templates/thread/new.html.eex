@@ -9,6 +9,12 @@
   <% end %>
   <div class="action-bar">
     <div class="begin">
+      <div class="add-attachment">
+        <label class="pure-button button-primary -inverted attachment">
+          <input type="file" />
+          <i class="fa fa-paperclip"></i>
+        </label>
+      </div>
     </div>
     <div class="end">
       <%= link "Cancel", to: category_path(@conn, :show, @category), class: "pure-button button-primary -muted cancel" %>
