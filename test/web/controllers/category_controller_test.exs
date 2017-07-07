@@ -7,6 +7,12 @@ defmodule FirestormWeb.Web.CategoryControllerTest do
   @update_attrs %{title: "some updated title"}
   @invalid_attrs %{title: nil}
 
+  setup do
+    {:ok, user} = Forums.create_user(%{username: "knewter", email: "josh@dailydrip.com", name: "Josh Adams"})
+
+    {:ok, user: user, conn: Phoenix.ConnTest.build_conn()}
+  end
+
   def fixture(:category) do
     {:ok, category} = Forums.create_category(@create_attrs)
     category
@@ -27,13 +33,30 @@ defmodule FirestormWeb.Web.CategoryControllerTest do
     refute html_response(conn, 200) =~ thread1.title
   end
 
-  test "renders form for new categories", %{conn: conn} do
-    conn = get conn, category_path(conn, :new)
-    assert html_response(conn, 200) =~ "New Category"
+  describe "new category" do
+    test "renders form if logged in", %{conn: conn, user: user} do
+      conn =
+        conn
+        |> log_in_as(user)
+        |> get(category_path(conn, :new))
+
+      assert html_response(conn, 200) =~ "New Category"
+    end
+
+    test "redirects if guest", %{conn: conn} do
+      conn =
+        conn
+        |> get(category_path(conn, :new))
+
+      assert html_response(conn, 302)
+    end
   end
 
-  test "creates category and redirects to show when data is valid", %{conn: conn} do
-    conn = post conn, category_path(conn, :create), category: @create_attrs
+  test "creates category and redirects to show when data is valid", %{conn: conn, user: user} do
+    conn =
+      conn
+      |> log_in_as(user)
+      |> post(category_path(conn, :create), category: @create_attrs)
 
     assert %{id: id} = redirected_params(conn)
     assert redirected_to(conn) == category_path(conn, :show, id)
@@ -42,8 +65,12 @@ defmodule FirestormWeb.Web.CategoryControllerTest do
     assert html_response(conn, 200) =~ "some title"
   end
 
-  test "does not create category and renders errors when data is invalid", %{conn: conn} do
-    conn = post conn, category_path(conn, :create), category: @invalid_attrs
+  test "does not create category and renders errors when data is invalid", %{conn: conn, user: user} do
+    conn =
+      conn
+      |> log_in_as(user)
+      |> post(category_path(conn, :create), category: @invalid_attrs)
+
     assert html_response(conn, 200) =~ "Create a new category"
   end
 
