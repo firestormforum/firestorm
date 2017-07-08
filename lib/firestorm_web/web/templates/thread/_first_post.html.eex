@@ -1,4 +1,4 @@
-<div class="post-item first-post">
+<div class="post-item first-post" id="post-<%= @post.id %>">
   <div class="item-metadata">
     <div class="avatar">
       <img src="<%= avatar_url(@post.user) %>" class="user-avatar -borderless" />
@@ -16,11 +16,13 @@
     </div>
     <div class="spacer"></div>
     <ul class="actions">
-      <li class="reaction">
-        <a class="reaction-picker" href="#">
-          <i class="emoticon-faces"></i>
-        </a>
-      </li>
+      <!--
+        <li class="reaction">
+          <a class="reaction-picker" href="#">
+            <i class="emoticon-faces"></i>
+          </a>
+        </li>
+      -->
       <li class="watch">
         <%= if @watched do %>
           <a href="<%= category_thread_path(@conn, :unwatch, @category, @thread) %>">
@@ -32,11 +34,13 @@
           </a>
         <% end %>
       </li>
-      <li class="quote">
-        <a href="#">
-          <i class="fa fa-quote-right"></i>
-        </a>
-      </li>
+      <!--
+        <li class="quote">
+          <a href="#">
+            <i class="fa fa-quote-right"></i>
+          </a>
+        </li>
+      -->
       <li class="reply">
         <%= link to: category_thread_post_path(@conn, :new, @category, @thread) do %>
           <i class="fa fa-reply"></i>

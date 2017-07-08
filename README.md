@@ -44,6 +44,12 @@ Here are the planned features and their status:
 - [ ] Slack Integration
 - [ ] Plugin System
 
+## Quick Fixes
+
+- [ ] Fix timestamps, use moment.js and ISO format / time_abbr helper
+- [ ] Style pagination on user show
+- [ ] Add reactions / emoji picker
+- [ ] Add quote button
 ## Configuration
 
 ### S3

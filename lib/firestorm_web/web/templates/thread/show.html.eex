@@ -1,5 +1,17 @@
 <div class="thread-header">
   <h2><%= @thread.title %></h2>
+  <div class="item-metadata">
+    <%= link "@#{@first_post.user.username}", to: user_path(@conn, :show, @first_post.user), class: "username" %>
+    <%= @thread.inserted_at %>
+  </div>
+  <div class="item-metadata">
+    <ul class="category-pill">
+      <%= # FIXME: Hash the category for a color %>
+      <li class="category -color-1">
+        <%= link @category.title, to: category_path(@conn, :show, @category) %>
+      </li>
+    </ul>
+  </div>
 </div>
 
 <ol class="post-list">

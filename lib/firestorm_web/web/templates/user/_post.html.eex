@@ -13,9 +13,11 @@
   </div>
 
   <div class="post-item-actions">
-    <div class="reactions">
-      🦀
-    </div>
+    <!--
+      <div class="reactions">
+        🦀
+      </div>
+    -->
     <div class="spacer"></div>
     <ul class="actions">
       <li>
@@ -23,16 +25,18 @@
           <i class="fa fa-link"></i>
         </a>
       </li>
-      <li class="reaction">
-        <a class="reaction-picker" href="#">
-          <i class="emoticon-faces"></i>
-        </a>
-      </li>
-      <li class="quote">
-        <a href="#">
-          <i class="fa fa-quote-right"></i>
-        </a>
-      </li>
+      <!--
+        <li class="reaction">
+          <a class="reaction-picker" href="#">
+            <i class="emoticon-faces"></i>
+          </a>
+        </li>
+        <li class="quote">
+          <a href="#">
+            <i class="fa fa-quote-right"></i>
+          </a>
+        </li>
+      -->
       <li class="reply">
         <%= link to: category_thread_post_path(@conn, :new, @category, @thread) do %>
           <i class="fa fa-reply"></i>
