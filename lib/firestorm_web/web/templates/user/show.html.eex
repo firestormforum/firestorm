@@ -7,7 +7,7 @@
   </div>
   <hr />
   <div class="meta">
-    <!--
+    <!-- NOTE: We'll add this back when we support custom profile fields
       <ul>
         <li>
           <strong>Languages</strong>
@@ -19,7 +19,6 @@
         </li>
       </ul>
     -->
-
     <ul>
       <li>
         <strong>Joined</strong>
@@ -48,4 +47,5 @@
     </li>
   <% end %>
 </ol>
+
 <%= pagination_links @posts_page %>

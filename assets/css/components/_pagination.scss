@@ -1,0 +1,23 @@
+ul.pagination {
+  list-style-type: none;
+  margin-left: 0;
+  margin-top: $margin-xlarge;
+  text-align: center;
+  > li.page-item {
+    margin-left: $margin-medium;
+    display: inline-block;
+    &.active {
+      > a.page-link {
+        background: $punch;
+        color: $white;
+      }
+    }
+    > a.page-link {
+      @include underline-on-hover();
+      padding: $padding-medium $padding-large;
+      border: $border-width-small solid $punch;
+      border-radius: $border-radius;
+      color: $punch;
+    }
+  }
+}

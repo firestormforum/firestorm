@@ -47,11 +47,12 @@ Here are the planned features and their status:
 - [ ] Search
 - [ ] Slack Integration
 - [ ] Plugin System
+- [ ] Custom Profile Fields
 
 ## Quick Fixes
 
-- [ ] Fix timestamps, use moment.js and ISO format / time_abbr helper
-- [ ] Style pagination on user show
+- [x] Fix timestamps, use moment.js and ISO format / time_abbr helper
+- [x] Style pagination on user show
 - [ ] quote button
 - [ ] replying via email
 - [ ] navigation enhancements
