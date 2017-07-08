@@ -14,8 +14,7 @@ dogfooding" phase and you can view the first deployed version at
 This project was funded by [a
 Kickstarter](https://www.kickstarter.com/projects/1003377429/firestorm-an-open-source-forum-in-phoenix-from-eli).
 
-All of the patrons that made it possible are listed in [the PATRONS
-file](PATRONS.md).
+All of the patrons that made it possible are listed in [the PATRONS file](PATRONS.md).
 
 ## Features
 
@@ -26,7 +25,7 @@ Here are the planned features and their status:
 - [ ] Continuous Deployment
   - With releases, via [distillery](https://github.com/bitwalker/distillery)
   - For now, we've got Semaphore pushing to
-    <http://firestorm-dogfood.herokuapp.com> after each successful build of
+    <http://forum.firestormforum.org> after each successful build of
     master.
 - [x] OAuth
   - At present, we only support GitHub. We'll support a lot more services in the
@@ -39,6 +38,11 @@ Here are the planned features and their status:
   - [ ] Stickies
 - [x] Posts
 - [ ] Personal Messaging
+- [ ] Mentions
+- [ ] Documentation
+  - [ ] Example Project
+  - [ ] Quickstart / Setup Guide
+  - [ ] Docs for systems integrating with firestorm within the same BEAM vm
 - [ ] Tags
 - [ ] Search
 - [ ] Slack Integration
@@ -48,8 +52,20 @@ Here are the planned features and their status:
 
 - [ ] Fix timestamps, use moment.js and ISO format / time_abbr helper
 - [ ] Style pagination on user show
-- [ ] Add reactions / emoji picker
-- [ ] Add quote button
+- [ ] quote button
+- [ ] replying via email
+- [ ] navigation enhancements
+  - [ ] threads i'm participating in
+    - [ ] drill down by category (for category show sidebar)
+  - [ ] threads i'm watching
+    - [ ] drill down by category (for category show sidebar)
+  - [ ] recently viewed
+    - [ ] drill down by category (for category show sidebar)
+  - [ ] users
+  - [ ] your profile
+- [ ] reactions / emoji picker
+- [ ] tags
+
 ## Configuration
 
 ### S3
