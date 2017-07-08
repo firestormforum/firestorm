@@ -11,6 +11,7 @@ require("isomorphic-fetch");
 // == COMPONENTS ==
 import Posts from "./components/posts";
 import Attachments from "./components/attachments";
+import Times from "./components/times";
 // == END COMPONENTS ==
 
 // == USING COMPONENTS ==
@@ -22,4 +23,7 @@ Posts.preview();
 // Handle attachments for posts
 Attachments.mount();
 // ==== END POSTS ====
+//
+// Pretty up times
+Times.humanize();
 // == END USING COMPONENTS ==

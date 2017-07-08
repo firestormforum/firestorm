@@ -4,9 +4,9 @@
       <img src="<%= avatar_url(@post.user) %>" class="user-avatar -borderless" />
     </div>
     <%= link @thread.title, to: category_thread_path(@conn, :show, @category, @thread), class: "headline" %>
-    <abbr>
-      <%= link @post.inserted_at, to: "#{category_thread_path(@conn, :show, @category, @thread)}#post-#{@post.id}" %>
-    </abbr>
+    <a href='<%= "#{category_thread_path(@conn, :show, @category, @thread)}#post-#{@post.id}" %>'>
+      <%= time_abbr @post.inserted_at %>
+    </a>
   </div>
   <div class="body">
     <%= markdown(@post.body) %>

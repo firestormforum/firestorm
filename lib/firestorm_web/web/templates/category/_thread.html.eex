@@ -5,7 +5,7 @@
       <%= link "@#{@thread.first_post.user.username}", to: user_path(@conn, :show, @thread.first_post.user), class: "username" %>
     </div>
     <div class="metadata">
-      <abbr class="time"><%= @thread.inserted_at %></abbr>
+      <%= time_abbr @thread.inserted_at %>
     </div>
   </div>
   <div class="supplemental">

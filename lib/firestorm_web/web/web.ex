@@ -48,6 +48,7 @@ defmodule FirestormWeb.Web do
       import FirestormWeb.Web.Gettext
       import FirestormWeb.Web.Session
       import FirestormWeb.Web.ViewHelpers
+      import FirestormWeb.Web.TagHelpers
     end
   end
 

@@ -1,9 +1,14 @@
 .thread-header {
-  padding-bottom: 1rem;
-  border-bottom: 1px solid $botticcelli;
-  > h2 {
+  > .split > h2, > h2 {
     margin-bottom: 0;
     margin-top: 0;
     font-size: $font-size-large;
+  }
+  > .split {
+    display: flex;
+    flex-wrap: row nowrap;
+    h2 {
+      flex-grow: 1;
+    }
   }
 }
