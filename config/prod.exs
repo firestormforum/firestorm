@@ -15,7 +15,7 @@ use Mix.Config
 # which you typically run after static files are built.
 config :firestorm_web, FirestormWeb.Web.Endpoint,
   on_init: {FirestormWeb.Web.Endpoint, :load_from_system_env, []},
-  url: [scheme: "https", host: "firestorm-forum.herokuapp.com", port: 443],
+  url: [scheme: "https", host: "forum.firestormforum.org", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE")
