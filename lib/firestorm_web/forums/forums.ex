@@ -625,6 +625,32 @@ defmodule FirestormWeb.Forums do
     |> Ecto.assoc(:watches)
   end
 
+  def watched_threads(%User{} = user) do
+    "forums_threads_watches"
+    |> where([w], w.user_id == ^user.id)
+    |> select([w], w.assoc_id)
+    |> Repo.all()
+    |> get_decorated_threads(user)
+  end
+
+  def participating_threads(%User{} = user) do
+    Post
+    |> where([p], p.user_id == ^user.id)
+    |> select([p], p.thread_id)
+    |> Repo.all()
+    |> get_decorated_threads(user)
+  end
+
+  defp get_decorated_threads(thread_ids, user) do
+    Thread
+    |> join(:left_lateral, [t], p in fragment("SELECT thread_id, inserted_at FROM forums_posts WHERE forums_posts.thread_id = ? ORDER BY forums_posts.inserted_at DESC LIMIT 1", t.id))
+    |> where([t], t.id in ^thread_ids)
+    |> order_by([t, p], [desc: p.inserted_at])
+    |> preload([category: [], posts: [:user]])
+    |> Repo.all
+    |> decorate_threads(user)
+  end
+
   defp watch_changeset(%Watch{} = watch, attrs) do
     watch
     |> cast(attrs, [:assoc_id, :user_id])

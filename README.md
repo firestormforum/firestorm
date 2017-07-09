@@ -53,8 +53,6 @@ Here are the planned features and their status:
 
 - [x] Fix timestamps, use moment.js and ISO format / time_abbr helper
 - [x] Style pagination on user show
-- [ ] quote button
-- [ ] replying via email
 - [ ] navigation enhancements
   - [ ] threads i'm participating in
     - [ ] drill down by category (for category show sidebar)
@@ -64,6 +62,8 @@ Here are the planned features and their status:
     - [ ] drill down by category (for category show sidebar)
   - [ ] users
   - [ ] your profile
+- [ ] quote button
+- [ ] replying via email
 - [ ] reactions / emoji picker
 - [ ] tags
 

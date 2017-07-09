@@ -1,0 +1,7 @@
+<h2><%= link "Participating in", to: thread_path(@conn, :participating) %></h2>
+
+<ol class="thread-list">
+  <%= for thread <- @threads do %>
+    <%= CategoryView.render "_thread.html", conn: @conn, category: thread.category, thread: thread %>
+  <% end %>
+</ol>

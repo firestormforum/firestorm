@@ -5,7 +5,7 @@
     margin-bottom: 0;
     margin-top: 0;
     > a {
-      @include underline-on-hover();
+      @include transition-color($tundora, $punch);
     }
   }
   .spacer {

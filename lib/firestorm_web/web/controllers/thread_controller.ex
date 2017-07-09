@@ -7,14 +7,28 @@ defmodule FirestormWeb.Web.ThreadController do
   plug FirestormWeb.Web.Plugs.RequireUser when action in [:new, :create, :watch, :unwatch]
 
   def action(conn, _) do
-    category = Forums.get_category!(conn.params["category_id"])
-    args = [conn, conn.params, category]
-    apply(__MODULE__, action_name(conn), args)
+    if(conn.params["category_id"]) do
+      category = Forums.get_category!(conn.params["category_id"])
+      args = [conn, conn.params, category]
+      apply(__MODULE__, action_name(conn), args)
+    else
+      apply(__MODULE__, action_name(conn), [conn, conn.params])
+    end
   end
 
   def index(conn, _params, category) do
     threads = Forums.list_threads(category)
     render(conn, "index.html", threads: threads, category: category)
+  end
+
+  def watching(conn, _params) do
+    threads = Forums.watched_threads(current_user(conn))
+    render(conn, "watching.html", threads: threads)
+  end
+
+  def participating(conn, _params) do
+    threads = Forums.participating_threads(current_user(conn))
+    render(conn, "participating.html", threads: threads)
   end
 
   def new(conn, _params, category) do
