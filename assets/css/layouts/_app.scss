@@ -14,7 +14,8 @@
       flex-grow: 1;
     }
     > .layout-drawer-tablet {
-      width: 40rem;
+      width: 20rem;
+      flex-shrink: 0;
     }
   }
   // FIXME: This probably / maybe doesn't belong here?
