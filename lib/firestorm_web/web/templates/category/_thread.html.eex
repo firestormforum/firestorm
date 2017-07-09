@@ -12,6 +12,6 @@
     <div class="badge-block<%= if @thread.completely_read?, do: "", else: " -highlight" %>"><%= @thread.posts_count %></div>
   </div>
   <div class="preview">
-    <%= markdown(@thread.first_post.body) %>
+    <%= @thread.first_post.body |> String.slice((0..139)) %>
   </div>
 </li>
