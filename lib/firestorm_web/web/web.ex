@@ -37,7 +37,8 @@ defmodule FirestormWeb.Web do
         get_flash: 1,
         get_flash: 2,
         view_module: 1,
-        action_name: 1
+        action_name: 1,
+        current_path: 1
       ]
 
       # Use all HTML functionality (forms, tags, etc)

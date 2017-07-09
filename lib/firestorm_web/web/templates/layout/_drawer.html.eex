@@ -1,20 +1,20 @@
 <div class="navigation-drawer">
   <!-- <a href="<%= category_path(@conn, :index) %>" class="back-arrow"><i class="fa fa-arrow-left"></i></a> -->
   <ul>
+    <%= render "_navigation_item.html", conn: @conn, text: "Watching", url: thread_path(@conn, :watching) %>
+    <%= render "_navigation_item.html", conn: @conn, text: "Participating in", url: thread_path(@conn, :participating) %>
     <!-- <li class="-is-active"><%= link "How do I OTP?", to: category_path(@conn, :index) %></li> -->
-    <li class="x-has-notifications"><%= link "Watching", to: thread_path(@conn, :watching) %></li>
-    <li><%= link "Participating in", to: thread_path(@conn, :participating) %></li>
   </ul>
   <ul>
-    <li><%= link "Categories", to: category_path(@conn, :index) %></li>
+    <%= render "_navigation_item.html", conn: @conn, text: "Categories", url: category_path(@conn, :index) %>
     <!-- <li><%= link "Users", to: category_path(@conn, :index) %></li> -->
   </ul>
   <ul>
     <%= if current_user(@conn) do %>
-      <li><%= link "Your profile", to: user_path(@conn, :show, current_user(@conn)) %></li>
-      <li><%= link "Log out", to: auth_path(@conn, :delete) %></li>
+      <%= render "_navigation_item.html", conn: @conn, text: "Your profile", url: user_path(@conn, :show, current_user(@conn)) %>
+      <%= render "_navigation_item.html", conn: @conn, text: "Log out", url: auth_path(@conn, :delete) %>
     <% else %>
-      <li><%= link "Log in", to: auth_path(@conn, :login) %></li>
+      <%= render "_navigation_item.html", conn: @conn, text: "Log in", url: auth_path(@conn, :login) %>
     <% end %>
   </ul>
 </div>
