@@ -27,6 +27,12 @@ defmodule FirestormWeb.Forums do
     Repo.all(User)
   end
 
+  def paginate_users(page) do
+    User
+    |> order_by([p], [desc: p.inserted_at])
+    |> Repo.paginate(page: page)
+  end
+
   @doc """
   Gets a single user.
 

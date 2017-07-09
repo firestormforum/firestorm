@@ -3,9 +3,9 @@ defmodule FirestormWeb.Web.UserController do
 
   alias FirestormWeb.Forums
 
-  def index(conn, _params) do
-    users = Forums.list_users()
-    render(conn, "index.html", users: users)
+  def index(conn, params) do
+    users_page = Forums.paginate_users(params["page"])
+    render(conn, "index.html", users_page: users_page)
   end
 
   def new(conn, _params) do

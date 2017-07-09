@@ -53,10 +53,10 @@ Here are the planned features and their status:
 
 - [x] Fix timestamps, use moment.js and ISO format / time_abbr helper
 - [x] Style pagination on user show
-- [ ] navigation enhancements
-  - [ ] threads i'm participating in
+- [-] navigation enhancements
+  - [x] threads i'm participating in
     - [ ] drill down by category (for category show sidebar)
-  - [ ] threads i'm watching
+  - [x] threads i'm watching
     - [ ] drill down by category (for category show sidebar)
   - [ ] recently viewed
     - [ ] drill down by category (for category show sidebar)
