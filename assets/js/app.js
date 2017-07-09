@@ -12,6 +12,7 @@ require("isomorphic-fetch");
 import Posts from "./components/posts";
 import Attachments from "./components/attachments";
 import Times from "./components/times";
+import Analytics from "./components/analytics";
 // == END COMPONENTS ==
 
 // == USING COMPONENTS ==
@@ -22,6 +23,8 @@ Posts.decorate();
 Posts.preview();
 // Handle attachments for posts
 Attachments.mount();
+// Report to Segment
+Analytics.report();
 // ==== END POSTS ====
 //
 // Pretty up times
