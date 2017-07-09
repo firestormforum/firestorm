@@ -12,9 +12,10 @@
   </ul>
   <ul>
     <%= if current_user(@conn) do %>
-      <li><%= link "Log Out", to: auth_path(@conn, :delete) %></li>
+      <li><%= link "Your profile", to: user_path(@conn, :show, current_user(@conn)) %></li>
+      <li><%= link "Log out", to: auth_path(@conn, :delete) %></li>
     <% else %>
-      <li><%= link "Log In", to: auth_path(@conn, :login) %></li>
+      <li><%= link "Log in", to: auth_path(@conn, :login) %></li>
     <% end %>
   </ul>
 </div>
