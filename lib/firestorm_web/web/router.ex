@@ -30,6 +30,7 @@ defmodule FirestormWeb.Web.Router do
 
     get "/", CategoryController, :index
     get "/login", AuthController, :login
+    get "/watching", ThreadController, :watching, as: :watching
     resources "/users", UserController
     resources "/categories", CategoryController do
       get "/threads/:id/watch", ThreadController, :watch

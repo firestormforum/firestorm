@@ -1,9 +1,10 @@
 .navigation-drawer {
   position: relative;
+  padding-left: $padding-large;
   > a.back-arrow {
     position: absolute;
-    left: -1rem;
-    top: -.35rem;
+    left: 0rem;
+    top: -0.6rem;
     @media screen and (max-width: $lg){
       display: none;
     }
@@ -18,6 +19,17 @@
     > li {
       list-style-type: none;
       display: block;
+      &.-is-active {
+        a {
+          color: $punch;
+          font-weight: $font-weight-semibold;
+        }
+      }
+      &.-has-notifications {
+        a {
+          font-weight: $font-weight-semibold;
+        }
+      }
       a {
         padding: 0 $padding-large;
         margin: $margin-medium 0;
@@ -26,12 +38,6 @@
         color: $tundora;
         border-style: solid;
         border-color: transparent;
-        &.active {
-          border-width: 0 0 0 $border-width-medium;
-          border-color: $punch;
-          color: $punch;
-          font-weight: $font-weight-semibold;
-        }
       }
     }
   }
