@@ -1,0 +1,2 @@
+<% active_class = if (current_path(@conn) == @url), do: "-is-active", else: "" %>
+<li class="<%= active_class %> x-has-notifications"><%= link @text, to: @url %></li>

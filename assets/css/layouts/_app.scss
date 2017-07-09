@@ -13,6 +13,10 @@
     > .layout-content-main {
       flex-grow: 1;
     }
+    > .layout-drawer-tablet {
+      width: 20rem;
+      flex-shrink: 0;
+    }
   }
   // FIXME: This probably / maybe doesn't belong here?
   @media screen and (min-width: $lg){
