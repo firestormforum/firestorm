@@ -1,4 +1,4 @@
-<h2><%= link "Watching", to: thread_path(@conn, :watching) %></h2>
+<h2><%= link "Participating in", to: thread_path(@conn, :participating) %></h2>
 
 <ol class="thread-list">
   <%= for thread <- @threads do %>

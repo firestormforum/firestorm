@@ -26,6 +26,11 @@ defmodule FirestormWeb.Web.ThreadController do
     render(conn, "watching.html", threads: threads)
   end
 
+  def participating(conn, _params) do
+    threads = Forums.participating_threads(current_user(conn))
+    render(conn, "participating.html", threads: threads)
+  end
+
   def new(conn, _params, category) do
     changeset =
       %Thread{category_id: category.id}

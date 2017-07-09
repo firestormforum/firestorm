@@ -2,8 +2,8 @@
   <a href="<%= category_path(@conn, :index) %>" class="back-arrow"><i class="fa fa-arrow-left"></i></a>
   <ul>
     <li class="-is-active"><%= link "How do I OTP?", to: category_path(@conn, :index) %></li>
-    <li class="-has-notifications"><%= link "Watching", to: watching_path(@conn, :watching) %></li>
-    <li><%= link "Participating in", to: category_path(@conn, :index) %></li>
+    <li class="-has-notifications"><%= link "Watching", to: thread_path(@conn, :watching) %></li>
+    <li><%= link "Participating in", to: thread_path(@conn, :participating) %></li>
     <li><%= link "Recently viewed", to: category_path(@conn, :index) %></li>
   </ul>
   <ul>

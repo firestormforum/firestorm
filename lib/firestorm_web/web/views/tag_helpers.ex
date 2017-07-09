@@ -10,7 +10,6 @@ defmodule FirestormWeb.Web.TagHelpers do
   Generate an abbr to wrap an ISO time to be rendered nicely via JS in the frontend.
   """
   def time_abbr(time) do
-    IO.puts (inspect time)
     time_string =
       time
       |> Timex.format!("{ISO:Extended:Z}")
