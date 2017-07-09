@@ -1,10 +1,12 @@
 .navigation-drawer {
   position: relative;
   padding-left: $padding-large;
+  padding-right: $padding-xxlarge;
+  padding-top: $padding-medium;
   > a.back-arrow {
     position: absolute;
-    left: 0rem;
-    top: -0.6rem;
+    left: 0;
+    top: 0.5rem;
     @media screen and (max-width: $lg){
       display: none;
     }

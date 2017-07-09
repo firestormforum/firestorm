@@ -1,6 +1,6 @@
 <div class="thread-header">
   <div class="split">
-    <h2><%= @thread.title %></h2>
+    <h2><%= link @thread.title, to: category_thread_path(@conn, :show, @category, @thread) %></h2>
     <div class="item-metadata">
       <ul class="category-pill">
         <%= # FIXME: Hash the category for a color %>
