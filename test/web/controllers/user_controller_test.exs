@@ -37,10 +37,25 @@ defmodule FirestormWeb.Web.UserControllerTest do
     assert html_response(conn, 200) =~ "New User"
   end
 
-  test "renders form for editing chosen user", %{conn: conn} do
+  test "renders form for editing chosen user if current_user", %{conn: conn} do
     user = fixture(:user)
-    conn = get conn, user_path(conn, :edit, user)
+    {:ok, user2} = Forums.create_user(%{email: "user2@example.com", name: "Josh Adams", username: "user2"})
+
+    original_conn = conn
+
+    conn =
+      original_conn
+      |> log_in_as(user)
+      |> get user_path(conn, :edit, user)
+
     assert html_response(conn, 200) =~ "Edit User"
+
+    conn =
+      original_conn
+      |> log_in_as(user2)
+      |> get user_path(conn, :edit, user)
+
+    assert html_response(conn, 302)
   end
 
   test "updates chosen user and redirects when data is valid", %{conn: conn} do

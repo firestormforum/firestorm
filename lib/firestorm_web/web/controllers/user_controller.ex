@@ -33,21 +33,35 @@ defmodule FirestormWeb.Web.UserController do
   end
 
   def edit(conn, %{"id" => id}) do
-    user = Forums.get_user!(id)
-    changeset = Forums.change_user(user)
-    render(conn, "edit.html", user: user, changeset: changeset)
+    case Bodyguard.permit(Forums, :edit_user, current_user(conn), user: %{id: id}) do
+      :ok ->
+        user = Forums.get_user!(id)
+        changeset = Forums.change_user(user)
+        render(conn, "edit.html", user: user, changeset: changeset)
+      {:error, reason} ->
+        conn
+        |> put_flash(:error, reason)
+        |> redirect(to: "/")
+    end
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Forums.get_user!(id)
+    case Bodyguard.permit(Forums, :edit_user, current_user(conn), user: %{id: id}) do
+      :ok ->
+        user = Forums.get_user!(id)
 
-    case Forums.update_user(user, user_params) do
-      {:ok, user} ->
+        case Forums.update_user(user, user_params) do
+          {:ok, user} ->
+            conn
+            |> put_flash(:info, "User updated successfully.")
+            |> redirect(to: user_path(conn, :show, user))
+          {:error, %Ecto.Changeset{} = changeset} ->
+            render(conn, "edit.html", user: user, changeset: changeset)
+        end
+      {:error, reason} ->
         conn
-        |> put_flash(:info, "User updated successfully.")
-        |> redirect(to: user_path(conn, :show, user))
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        |> put_flash(:error, reason)
+        |> redirect(to: "/")
     end
   end
 
