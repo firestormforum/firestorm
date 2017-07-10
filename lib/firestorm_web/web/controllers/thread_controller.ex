@@ -4,7 +4,7 @@ defmodule FirestormWeb.Web.ThreadController do
   alias FirestormWeb.Repo
   alias FirestormWeb.Forums
   alias FirestormWeb.Forums.Thread
-  plug FirestormWeb.Web.Plugs.RequireUser when action in [:new, :create, :watch, :unwatch]
+  plug FirestormWeb.Web.Plugs.RequireUser when action in [:new, :create, :watch, :unwatch, :participating, :watching]
 
   def action(conn, _) do
     if(conn.params["category_id"]) do
