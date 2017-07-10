@@ -19,4 +19,8 @@
       <%= render "_navigation_item.html", conn: @conn, text: "Log in", url: auth_path(@conn, :login) %>
     <% end %>
   </ul>
+  <ul>
+    <%= render "_navigation_item.html", conn: @conn, text: "firestormforum.org", url: "http://www.firestormforum.org" %>
+    <%= render "_navigation_item.html", conn: @conn, text: "Patrons", url: "http://www.firestormforum.org#patrons" %>
+  </ul>
 </div>

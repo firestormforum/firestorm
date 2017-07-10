@@ -10,6 +10,9 @@
     flex-direction: row;
     align-items: center;
     > .summary {
+      > .category-pill {
+        display: inline-block;
+      }
       > .title {
         color: $tundora;
         @include underline-on-hover;

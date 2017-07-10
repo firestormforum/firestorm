@@ -40,4 +40,20 @@ defmodule FirestormWeb.Web.ViewHelpers do
   def short_date(date) do
     Timex.format!(date, "{Mshort} {D}, '{YY}")
   end
+
+  # Determine the hash of this category and produce a color class
+  def category_color(category) do
+    category
+    |> hashlist
+    |> Enum.sum
+    |> rem(360)
+  end
+
+  defp hash(category) do
+    :crypto.hash(:sha, category.slug)
+  end
+
+  defp hashlist(category) do
+    for <<num <- hash(category)>>, do: num
+  end
 end

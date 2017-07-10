@@ -21,7 +21,7 @@ $purple: #673AB7;
     @for $n from 0 through 359 {
       &.-color-#{$n} {
         a {
-          background-color: hsla($n, 100%, 50%, 1);
+          background-color: hsla($n, 100%, 40%, 1);
         }
       }
     }

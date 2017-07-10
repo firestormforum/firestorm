@@ -10,7 +10,7 @@ defmodule FirestormWeb.Feature.CategoriesTest do
       alias Page.Category.Show
 
       session
-      |> visit("/")
+      |> visit("/categories")
       |> click(new_category_link())
       |> assert_has(alert_box(:error, "You must be logged in to access this page."))
     end
@@ -23,7 +23,7 @@ defmodule FirestormWeb.Feature.CategoriesTest do
 
       session
       |> log_in_as(user)
-      |> visit("/")
+      |> visit("/categories")
       |> click(new_category_link())
       |> fill_in(title_field(), with: "Erlang")
       |> click(create_category_button())
@@ -37,7 +37,7 @@ defmodule FirestormWeb.Feature.CategoriesTest do
     {:ok, [_elixir, _elm]} = create_categories(["Elixir", "Elm"])
 
     session
-    |> visit("/")
+    |> visit("/categories")
     |> find(categories(2))
     |> List.first()
     |> assert_has(category_title("Elixir"))
