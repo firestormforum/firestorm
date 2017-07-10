@@ -1,10 +1,12 @@
 <div class="navigation-drawer">
   <!-- <a href="<%= category_path(@conn, :index) %>" class="back-arrow"><i class="fa fa-arrow-left"></i></a> -->
-  <ul>
-    <%= render "_navigation_item.html", conn: @conn, text: "Watching", url: thread_path(@conn, :watching) %>
-    <%= render "_navigation_item.html", conn: @conn, text: "Participating in", url: thread_path(@conn, :participating) %>
-    <!-- <li class="-is-active"><%= link "How do I OTP?", to: category_path(@conn, :index) %></li> -->
-  </ul>
+  <%= if current_user(@conn) do %>
+    <ul>
+      <%= render "_navigation_item.html", conn: @conn, text: "Watching", url: thread_path(@conn, :watching) %>
+      <%= render "_navigation_item.html", conn: @conn, text: "Participating in", url: thread_path(@conn, :participating) %>
+      <!-- <li class="-is-active"><%= link "How do I OTP?", to: category_path(@conn, :index) %></li> -->
+    </ul>
+  <% end %>
   <ul>
     <%= render "_navigation_item.html", conn: @conn, text: "Categories", url: category_path(@conn, :index) %>
     <%= render "_navigation_item.html", conn: @conn, text: "Users", url: user_path(@conn, :index) %>
