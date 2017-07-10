@@ -16,6 +16,23 @@ Kickstarter](https://www.kickstarter.com/projects/1003377429/firestorm-an-open-s
 
 All of the patrons that made it possible are listed in [the PATRONS file](PATRONS.md).
 
+## Development
+
+Here are some basic steps to get Firestorm running
+
+```shell
+git clone git@github.com:dailydrip/firestorm.git
+cd firestorm/
+# config postgres in config/database.yml
+# start postgres
+mix deps.get
+mix ecto.create
+mix ecto.migrate
+cd assets && npm install
+cd ../
+mix phx.server
+```
+
 ## Features
 
 Here are the planned features and their status:
