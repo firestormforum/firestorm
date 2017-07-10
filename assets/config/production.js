@@ -1,3 +1,3 @@
 module.exports = {
-  apiBaseUrl: "https://firestorm-forum.herokuapp.com/api/v1"
+  apiBaseUrl: "https://forum.firestormforum.org/api/v1"
 };
