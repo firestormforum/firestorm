@@ -713,10 +713,14 @@ defmodule FirestormWeb.Forums do
   end
 
   def authorize(:edit_user, current_user, %{user: user}) do
-    if "#{current_user.id}" == "#{user.id}" do
-      :ok
+    if current_user do
+      if "#{current_user.id}" == "#{user.id}" do
+        :ok
+      else
+        {:error, "You can only edit your own information."}
+      end
     else
-      {:error, "You can only edit your own information."}
+      {:error, "You must be logged in."}
     end
   end
 end
