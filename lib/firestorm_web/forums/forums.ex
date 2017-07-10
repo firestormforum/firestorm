@@ -632,6 +632,17 @@ defmodule FirestormWeb.Forums do
     |> Ecto.assoc(:watches)
   end
 
+  def home_threads(user_or_nil) do
+    Thread
+    |> join(:left_lateral, [t], p in fragment("SELECT thread_id, inserted_at FROM forums_posts WHERE forums_posts.thread_id = ? ORDER BY forums_posts.inserted_at DESC LIMIT 1", t.id))
+    |> order_by([t, p], [desc: p.inserted_at])
+    |> select([t], t)
+    |> Repo.all
+    |> Repo.preload(posts: from(p in Post, order_by: p.inserted_at, preload: :user))
+    |> Repo.preload(:category)
+    |> decorate_threads(user_or_nil)
+  end
+
   def watched_threads(%User{} = user) do
     "forums_threads_watches"
     |> where([w], w.user_id == ^user.id)

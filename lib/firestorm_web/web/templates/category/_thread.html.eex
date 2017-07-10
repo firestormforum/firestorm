@@ -1,6 +1,12 @@
 <li class="thread-list-item">
   <div class="details">
     <div class="summary">
+      <ul class="category-pill">
+        <%= # FIXME: Hash the category for a color %>
+        <li class="category -color-<%= category_color(@category) %>">
+          <%= link @category.title, to: category_path(@conn, :show, @category) %>
+        </li>
+      </ul>
       <%= link @thread.title, to: category_thread_path(@conn, :show, @category, @thread), class: "title" %>
       <%= link "@#{@thread.first_post.user.username}", to: user_path(@conn, :show, @thread.first_post.user), class: "username" %>
     </div>

@@ -21,6 +21,15 @@ defmodule FirestormWeb.Web.ThreadController do
     render(conn, "index.html", threads: threads, category: category)
   end
 
+  def recent(conn, _params) do
+    threads =
+      conn
+      |> current_user()
+      |> Forums.home_threads()
+
+    render(conn, "recent.html", threads: threads)
+  end
+
   def watching(conn, _params) do
     threads = Forums.watched_threads(current_user(conn))
     render(conn, "watching.html", threads: threads)
