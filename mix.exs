@@ -51,6 +51,7 @@ defmodule FirestormWeb.Mixfile do
       {:timex, "~> 3.1.15"},
       {:comeonin, "~> 3.0.2"},
       {:exgravatar, "~> 2.0.0"},
+      {:bodyguard, "~> 2.0.1"},
 
       # TEST DEPENDENCIES
       {:wallaby, "~> 0.17.0", only: [:test]},

@@ -1,4 +1,5 @@
 defmodule FirestormWeb.Forums do
+  @behaviour Bodyguard.Policy
   @moduledoc """
   The boundary for the Forums system.
   """
@@ -709,5 +710,17 @@ defmodule FirestormWeb.Forums do
     view
     |> cast(attrs, [:assoc_id, :user_id])
     |> validate_required([:assoc_id, :user_id])
+  end
+
+  def authorize(:edit_user, current_user, %{user: user}) do
+    if current_user do
+      if "#{current_user.id}" == "#{user.id}" do
+        :ok
+      else
+        {:error, "You can only edit your own information."}
+      end
+    else
+      {:error, "You must be logged in."}
+    end
   end
 end

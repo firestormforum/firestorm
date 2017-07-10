@@ -38,6 +38,13 @@
       <% end %>
     </ul>
   </div>
+  <%= if @user == current_user(@conn) do %>
+    <div class="edit">
+        <a href="<%= user_path(@conn, :edit, @user) %>">
+        <i class="fa fa-cog"></i>
+      </a>
+    </div>
+  <% end %>
 </div>
 
 <ol class="user-posts post-list">

@@ -1,4 +1,4 @@
-<%= form_for @changeset, @action, fn f -> %>
+<%= form_for @changeset, @action, [class: "user-editor"], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
@@ -6,24 +6,45 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :username, class: "control-label" %>
-    <%= text_input f, :username, class: "form-control" %>
-    <%= error_tag f, :username %>
+    <%= label f, :username, "Username/Name", class: "control-label" %>
+    <div class="form-control">
+      <%= text_input f, :username %>
+      <%= error_tag f, :username %>
+      <p>People can mention you as @username</p>
+    </div>
   </div>
+  <div class="form-group">
+    <div class="control-label"></div>
+    <div class="form-control">
+      <%= text_input f, :name, class: "form-control" %>
+      <%= error_tag f, :name %>
+      <p>Your full name (optional)</p>
+    </div>
+  </div>
+
 
   <div class="form-group">
     <%= label f, :email, class: "control-label" %>
-    <%= text_input f, :email, class: "form-control" %>
-    <%= error_tag f, :email %>
+    <div class="form-control">
+      <%= text_input f, :email %>
+      <%= error_tag f, :email %>
+      <p>Never shown to the public</p>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= label f, :name, class: "control-label" %>
-    <%= text_input f, :name, class: "form-control" %>
-    <%= error_tag f, :name %>
+    <div class="control-label">Avatar</div>
+    <div class="form-control -avatar">
+      <img src="<%= avatar_url(@user) %>" class="user-avatar" />
+      <p>Set at gravatar.com</p>
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+  <div class="action-bar">
+    <div class="end">
+      <%= submit class: "pure-button button-primary reply" do %>
+        Save
+      <% end %>
+    </div>
   </div>
 <% end %>

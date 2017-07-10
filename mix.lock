@@ -1,4 +1,5 @@
 %{"bamboo": {:git, "https://github.com/thoughtbot/bamboo.git", "d8451d6976b6438301571a37aefaafe31aee502e", []},
+  "bodyguard": {:hex, :bodyguard, "2.0.1", "c9f21629bdb4d6189cd731dc78b5972395a46931ab524a84944e316babd12318", [:mix], [{:plug, "~> 1.0", [hex: :plug, optional: false]}]},
   "bunt": {:hex, :bunt, "0.2.0", "951c6e801e8b1d2cbe58ebbd3e616a869061ddadcc4863d0a2182541acae9a38", [:mix], []},
   "certifi": {:hex, :certifi, "1.2.1", "c3904f192bd5284e5b13f20db3ceac9626e14eeacfbb492e19583cf0e37b22be", [:rebar3], []},
   "combine": {:hex, :combine, "0.9.6", "8d1034a127d4cbf6924c8a5010d3534d958085575fa4d9b878f200d79ac78335", [:mix], []},
