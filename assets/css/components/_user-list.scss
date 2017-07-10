@@ -1,0 +1,14 @@
+.user-list {
+  display: flex;
+  flex-flow: row wrap;
+  list-style-type: none;
+  > li {
+    text-align: center;
+    margin-right: $margin-xxlarge;
+    margin-bottom: $margin-xxlarge;
+    .avatar {
+      height: 5rem;
+      width: 5rem;
+    }
+  }
+}
