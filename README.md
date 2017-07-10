@@ -23,6 +23,14 @@ Here are some basic steps to get Firestorm running
 ```shell
 git clone git@github.com:dailydrip/firestorm.git
 cd firestorm/
+# Set the following environment variables
+# AWS_ACCESS_KEY_ID=TKTK
+# AWS_SECRET_ACCESS_KEY=TKTK
+# AWS_S3_BUCKET=TKTK
+# AWS_S3_REGION=TKTK
+# GITHUB_CLIENT_ID=TKTK
+# GITHUB_CLIENT_SECRET=TKTK
+# SENDGRID_API_KEY=TKTK
 # config postgres in config/database.yml
 # start postgres
 mix deps.get
