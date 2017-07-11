@@ -18,19 +18,10 @@ defmodule FirestormWeb.Web.CategoryControllerTest do
     category
   end
 
-  test "lists categories on index as well as each category's most recently-active three threads", %{conn: conn} do
+  test "lists categories on index", %{conn: conn} do
     {:ok, category} = Forums.create_category(@create_attrs)
-    {:ok, user} = Forums.create_user(%{username: "bob", email: "bob@bob.com", name: "Bob Bobvladbob"})
-    {:ok, thread1} = Forums.create_thread(category, user, %{title: "Thread 1", body: "Body 1"})
-    {:ok, thread2} = Forums.create_thread(category, user, %{title: "Thread 2", body: "Body 2"})
-    {:ok, thread3} = Forums.create_thread(category, user, %{title: "Thread 3", body: "Body 3"})
-    {:ok, thread4} = Forums.create_thread(category, user, %{title: "Thread 4", body: "Body 4"})
     conn = get conn, category_path(conn, :index)
     assert html_response(conn, 200) =~ category.title
-    assert html_response(conn, 200) =~ thread2.title
-    assert html_response(conn, 200) =~ thread3.title
-    assert html_response(conn, 200) =~ thread4.title
-    refute html_response(conn, 200) =~ thread1.title
   end
 
   describe "new category" do
