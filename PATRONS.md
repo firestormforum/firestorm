@@ -16,7 +16,7 @@ opted to not be listed.
 - Michael Klett | [ [GitHub](https://www.github.com/moklett) ] [ [Twitter](https://www.twitter.com/moklett) ]
 - Nick McGinness | [ [GitHub](https://www.github.com/NickMcG) ]
 - John Berryman | [ [GitHub](https://www.github.com/JnBrymn) ] [ [Twitter](https://www.twitter.com/JnBrymn) ] [ [Website](http://thoughtbox.solutions/blog/2016/11/26/consultants-and-cowboys-dont-need-unit-tests) ]
-- Sergey Yanovitsky
+- Sergey Yanovitsky | [ [GitHub](https://github.com/saaji) ] [ [Twitter](https://twitter.com/_saaji) ]
 - rich johnson | [ [GitHub](https://www.github.com/shaolingeek) ] [ [Twitter](https://www.twitter.com/shaolingeek) ] [ [Website](http://shaolingeek.io) ]
 - Ian Mackenzie | [ [GitHub](https://www.github.com/ianmackenzie) ]
 - Muhammad Syafiq Faiz | [ [GitHub](https://www.github.com/syafiqfaiz) ] [ [Website](http://syafiqfaiz.github.io) ]
