@@ -40,7 +40,7 @@ defmodule FirestormWeb.Web.UserController do
         render(conn, "edit.html", user: user, changeset: changeset)
       {:error, reason} ->
         conn
-        |> put_flash(:error, reason)
+        |> put_flash(:error, translate_policy_reason(reason))
         |> redirect(to: "/")
     end
   end
@@ -60,7 +60,7 @@ defmodule FirestormWeb.Web.UserController do
         end
       {:error, reason} ->
         conn
-        |> put_flash(:error, reason)
+        |> put_flash(:error, translate_policy_reason(reason))
         |> redirect(to: "/")
     end
   end

@@ -23,6 +23,7 @@ defmodule FirestormWeb.Web do
       import FirestormWeb.Web.Router.Helpers
       import FirestormWeb.Web.Gettext
       import FirestormWeb.Web.Session
+      import FirestormWeb.Web.Policy
     end
   end
 

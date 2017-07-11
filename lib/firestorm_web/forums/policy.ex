@@ -6,10 +6,10 @@ defmodule FirestormWeb.Forums.Policy do
       if "#{current_user.id}" == "#{user.id}" do
         :ok
       else
-        {:error, "You can only edit your own information."}
+        {:error, :unauthorized}
       end
     else
-      {:error, "You must be logged in."}
+      {:error, :unauthenticated}
     end
   end
 end
