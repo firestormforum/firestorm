@@ -7,11 +7,10 @@ defmodule FirestormWeb.Web.CategoryController do
   plug RequireUser when action in [:new, :create]
 
   def index(conn, _params) do
-    {categories, threads} =
+    categories =
       Forums.list_categories()
-      |> Forums.get_recent_threads_for_categories(current_user(conn))
 
-    render(conn, "index.html", categories: categories, threads: threads)
+    render(conn, "index.html", categories: categories)
   end
 
   def new(conn, _params) do

@@ -17,11 +17,6 @@
       <h2 class="title">
         <%= category_link(@conn, category) %>
       </h2>
-      <ul class="thread-list">
-        <%= for thread <- @threads[category.id] do %>
-          <%= render("_thread.html", category: category, thread: thread, conn: @conn) %>
-        <% end %>
-      </ul>
     </li>
   <% end %>
 </ol>
