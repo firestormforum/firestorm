@@ -3,8 +3,7 @@ defmodule FirestormWeb.Web.TagHelpers do
   View helpers for generating particular tags with some internal logic
   """
 
-  import FirestormWeb.Web.Router.Helpers
-  import Phoenix.HTML.{Link, Tag}
+  import Phoenix.HTML.{Tag}
 
   @doc """
   Generate an abbr to wrap an ISO time to be rendered nicely via JS in the frontend.

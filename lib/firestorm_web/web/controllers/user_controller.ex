@@ -33,6 +33,7 @@ defmodule FirestormWeb.Web.UserController do
   end
 
   def edit(conn, %{"id" => id}) do
+    {id, _} = Integer.parse(id)
     case Bodyguard.permit(Forums, :edit_user, current_user(conn), user: %{id: id}) do
       :ok ->
         user = Forums.get_user!(id)
@@ -46,6 +47,7 @@ defmodule FirestormWeb.Web.UserController do
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
+    {id, _} = Integer.parse(id)
     case Bodyguard.permit(Forums, :edit_user, current_user(conn), user: %{id: id}) do
       :ok ->
         user = Forums.get_user!(id)

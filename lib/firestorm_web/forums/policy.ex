@@ -1,15 +1,11 @@
 defmodule FirestormWeb.Forums.Policy do
   @behaviour Bodyguard.Policy
 
-  def authorize(:edit_user, current_user, %{user: user}) do
-    if current_user do
-      if "#{current_user.id}" == "#{user.id}" do
-        :ok
-      else
-        {:error, :unauthorized}
-      end
-    else
-      {:error, :unauthenticated}
-    end
+  def authorize(:edit_user, %{id: user_id}, %{user: %{id: user_id}}) do
+    :ok
   end
+
+  # Catch-all: deny everything else
+  def authorize(_, nil, _), do: {:error, :unauthenticated}
+  def authorize(_, _, _), do: {:error, :unauthorized}
 end
