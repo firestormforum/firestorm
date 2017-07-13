@@ -37,7 +37,7 @@ defmodule FirestormWeb.MarkdownTest do
     # NOTE: This was the source of a bug, discovered on 2017-07-13. Using the
     # source post itself to ensure this one never shows up again.
     source = "My side project is dwarlixir - a madman's attempt to build a Dwarf-Fortress-like game with (currently) a text-based interface in Elixir, with everything being a process. https://github.com/trevoke/dwarlixir\r\n\r\nProfessionally I'm working on https://exeq.com - Elixir back-end! :D"
-    assert Regex.match?(~r{<a href="https://github.com/trevoke/dwarlixir">}, Markdown.render(source))
+    assert Regex.match?(~r{ <a href="https://github.com/trevoke/dwarlixir">}, Markdown.render(source))
   end
 
   test "converts words like :poop: into their emoji unicode representation" do
