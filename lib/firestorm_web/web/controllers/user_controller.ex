@@ -8,22 +8,6 @@ defmodule FirestormWeb.Web.UserController do
     render(conn, "index.html", users_page: users_page)
   end
 
-  def new(conn, _params) do
-    changeset = Forums.change_user(%FirestormWeb.Forums.User{})
-    render(conn, "new.html", changeset: changeset)
-  end
-
-  def create(conn, %{"user" => user_params}) do
-    case Forums.create_user(user_params) do
-      {:ok, user} ->
-        conn
-        |> put_flash(:info, "User created successfully.")
-        |> redirect(to: user_path(conn, :show, user))
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
-  end
-
   def show(conn, %{"id" => id} = params) do
     user = Forums.get_user!(id)
     posts_page = Forums.user_posts(user, %{page: params["page"]})
@@ -34,45 +18,24 @@ defmodule FirestormWeb.Web.UserController do
 
   def edit(conn, %{"id" => id}) do
     {id, _} = Integer.parse(id)
-    case Bodyguard.permit(Forums, :edit_user, current_user(conn), user: %{id: id}) do
-      :ok ->
-        user = Forums.get_user!(id)
-        changeset = Forums.change_user(user)
-        render(conn, "edit.html", user: user, changeset: changeset)
-      {:error, reason} ->
-        conn
-        |> put_flash(:error, translate_policy_reason(reason))
-        |> redirect(to: "/")
+    with :ok <- Bodyguard.permit(Forums, :edit_user, current_user(conn), user: %{id: id}) do
+      user = Forums.get_user!(id)
+      changeset = Forums.change_user(user)
+      render(conn, "edit.html", user: user, changeset: changeset)
     end
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     {id, _} = Integer.parse(id)
-    case Bodyguard.permit(Forums, :edit_user, current_user(conn), user: %{id: id}) do
-      :ok ->
-        user = Forums.get_user!(id)
-
-        case Forums.update_user(user, user_params) do
-          {:ok, user} ->
-            conn
-            |> put_flash(:info, "User updated successfully.")
-            |> redirect(to: user_path(conn, :show, user))
-          {:error, %Ecto.Changeset{} = changeset} ->
-            render(conn, "edit.html", user: user, changeset: changeset)
-        end
-      {:error, reason} ->
-        conn
-        |> put_flash(:error, translate_policy_reason(reason))
-        |> redirect(to: "/")
-    end
-  end
-
-  def delete(conn, %{"id" => id}) do
     user = Forums.get_user!(id)
-    {:ok, _user} = Forums.delete_user(user)
-
-    conn
-    |> put_flash(:info, "User deleted successfully.")
-    |> redirect(to: user_path(conn, :index))
+    with :ok <- Bodyguard.permit(Forums, :edit_user, current_user(conn), user: %{id: id}),
+         {:ok, user} <- Forums.update_user(user, user_params) do
+           conn
+           |> put_flash(:info, "User updated successfully.")
+           |> redirect(to: user_path(conn, :show, user))
+         else
+           {:error, %Ecto.Changeset{} = changeset} ->
+             render(conn, "edit.html", user: user, changeset: changeset)
+    end
   end
 end
