@@ -6,7 +6,13 @@ defmodule FirestormWeb.Markdown do
 
   def render(body) do
     body
+    |> as_html!()
+  end
+
+  defp as_html!(body) do
+    body
     |> Earmark.as_html!(earmark_options())
+    |> HtmlSanitizeEx.markdown_html
   end
 
   def earmark_options() do
@@ -14,7 +20,9 @@ defmodule FirestormWeb.Markdown do
       # Prefix the `code` tag language class, as in `language-elixir`, for
       # proper support from http://prismjs.com/
       code_class_prefix: "language-",
-      renderer: FirestormWeb.Markdown.HtmlRenderer
+      renderer: FirestormWeb.Markdown.HtmlRenderer,
+      gfm: true,
+      breaks: true
     }
   end
 end

@@ -52,6 +52,7 @@ defmodule FirestormWeb.Mixfile do
       {:comeonin, "~> 3.0.2"},
       {:exgravatar, "~> 2.0.0"},
       {:bodyguard, "~> 2.0.1"},
+      {:html_sanitize_ex, "~> 1.2"},
 
       # TEST DEPENDENCIES
       {:wallaby, "~> 0.17.0", only: [:test]},

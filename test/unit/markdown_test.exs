@@ -22,7 +22,7 @@ defmodule FirestormWeb.MarkdownTest do
       """
       <p>Here’s some Elixir code:</p>
       <pre><code class=\"elixir language-elixir\">defmodule Foo do
-        def bar, do: &quot;baz&quot;
+        def bar, do: "baz"
       end</code></pre>
       """
 
@@ -34,8 +34,8 @@ defmodule FirestormWeb.MarkdownTest do
   end
 
   test "converts words like :poop: into their emoji unicode representation" do
-    poop = Exmoji.from_short_name("poop") |> Exmoji.EmojiChar.render
-    fire = Exmoji.from_short_name("fire") |> Exmoji.EmojiChar.render
+    poop = "poop" |> Exmoji.from_short_name() |> Exmoji.EmojiChar.render()
+    fire = "fire" |> Exmoji.from_short_name() |> Exmoji.EmojiChar.render()
     input = "This :poop::fire: is great!"
     output = "<p>This #{poop}#{fire} is great!</p>\n"
     assert output == Markdown.render(input)
