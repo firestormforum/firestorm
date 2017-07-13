@@ -9,6 +9,6 @@ defmodule FirestormWeb.Markdown.AutoLinker do
 
   def run(body) do
     @url_regex
-    |> Regex.replace(body, "<a href=\"\\0\">\\0</a>")
+    |> Regex.replace(body, "<a href=\"\\2\://\\3\\4\\5\">\\2://\\3\\4\\5</a>")
   end
 end
