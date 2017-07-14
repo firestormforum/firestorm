@@ -490,6 +490,8 @@ defmodule FirestormWeb.Forums do
 
   def login_or_register_from_identity(%{username: username, password: password}) do
     import Comeonin.Bcrypt, only: [checkpw: 2]
+    alias FirestormWeb.Web.Endpoint
+    require Endpoint
 
     case get_user_by_username(username) do
       nil ->
@@ -498,13 +500,15 @@ defmodule FirestormWeb.Forums do
       user ->
         # We'll check the password with checkpw against the user's stored
         # password hash
-        case checkpw(password, user.password_hash) do
-          true ->
-            # Everything checks out, success
-            {:ok, user}
-          _ ->
-            # User existed, we checked the password, but no dice
-            {:error, "No user found with that username or password"}
+        Endpoint.instrument :pryin, %{key: "Forums.login_or_register_from_identity#checkpw"}, fn ->
+          case checkpw(password, user.password_hash) do
+            true ->
+              # Everything checks out, success
+              {:ok, user}
+            _ ->
+              # User existed, we checked the password, but no dice
+              {:error, "No user found with that username or password"}
+          end
         end
     end
   end
