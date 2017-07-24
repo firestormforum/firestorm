@@ -15,7 +15,8 @@ config :firestorm_web, FirestormWeb.Web.Endpoint,
   secret_key_base: "Q1bBtoEs8F2+MsssVU8zHXvhJBVFDI/4EFEINldDXBlVsBkNr30gi4WIGNwds+YO",
   render_errors: [view: FirestormWeb.Web.ErrorView, accepts: ~w(html json)],
   pubsub: [name: FirestormWeb.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+           adapter: Phoenix.PubSub.PG2],
+  instrumenters: [PryIn.Instrumenter]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -49,6 +50,15 @@ config :firestorm_web, :aws,
 config :scrivener_html,
   routes_helper: FirestormWeb.Web.Router.Helpers,
   view_style: :bootstrap_v4
+
+config :pryin,
+  api_key: System.get_env("PRYIN_API_KEY"),
+  otp_app: :firestorm,
+  enabled: false,
+  env: :dev
+
+config :firestorm_web, FirestormWeb.Repo,
+  loggers: [PryIn.EctoLogger, Ecto.LogEntry]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

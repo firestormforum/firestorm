@@ -1,4 +1,6 @@
 defmodule FirestormWeb.Uploads.AWS.UploadSignature do
+  alias FirestormWeb.Web.Endpoint
+  require Endpoint
   @moduledoc """
   Generate an upload signature to allow the client to upload directly to S3.
   """
@@ -7,20 +9,22 @@ defmodule FirestormWeb.Uploads.AWS.UploadSignature do
   @aws_request "aws4_request"
 
   def signature(filename, mimetype) do
-    policy = policy(filename, mimetype)
+    Endpoint.instrument :pryin, %{key: "UploadSignature.signature"}, fn ->
+      policy = policy(filename, mimetype)
 
-    %{
-      key: filename,
-      date: get_date(),
-      content_type: mimetype,
-      acl: "public-read",
-      success_action_status: "201",
-      action: bucket_url(),
-      aws_access_key_id: aws_config()[:access_key_id],
-      policy: policy,
-      credential: credential(),
-      signature: sign(policy)
-    }
+      %{
+        key: filename,
+        date: get_date(),
+        content_type: mimetype,
+        acl: "public-read",
+        success_action_status: "201",
+        action: bucket_url(),
+        aws_access_key_id: aws_config()[:access_key_id],
+        policy: policy,
+        credential: credential(),
+        signature: sign(policy)
+      }
+    end
   end
 
   def get_date() do
