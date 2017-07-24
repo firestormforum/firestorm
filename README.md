@@ -85,10 +85,10 @@ Here are the planned features and their status:
     - [ ] drill down by category (for category show sidebar)
   - [ ] recently viewed
     - [ ] drill down by category (for category show sidebar)
-  - [ ] users
-  - [ ] your profile
+  - [x] users
+  - [x] your profile
 - [ ] quote button
-- [ ] replying via email
+- [x] replying via email
 - [ ] reactions / emoji picker
 - [ ] tags
 
