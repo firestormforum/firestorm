@@ -479,6 +479,14 @@ defmodule FirestormWeb.Forums do
     |> ThreadTitleSlug.unique_constraint
   end
 
+  def login_or_register_from_github(%{nickname: nickname, name: nil, email: _email} = user) do
+    login_or_register_from_github(%{user | name: nickname})
+  end
+
+  def login_or_register_from_github(%{nickname: nickname, name: _name, email: nil} = user) do
+    login_or_register_from_github(%{user | email: nickname <> "@users.noreply.github.com"})
+  end
+
   def login_or_register_from_github(%{nickname: nickname, name: name, email: email}) do
     case get_user_by_username(nickname) do
       nil ->

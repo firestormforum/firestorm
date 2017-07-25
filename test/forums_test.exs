@@ -232,15 +232,29 @@ defmodule FirestormWeb.ForumsTest do
     assert user == Forums.get_user_by_username(user.username)
   end
 
-  test "login_or_register_from_github/1 returns a user after creating one" do
-    auth_info = %{
-      name: "Josh Adams",
-      nickname: "knewter",
-      email: "josh@dailydrip.com"
-    }
-    result = Forums.login_or_register_from_github(auth_info)
-    assert {:ok, user} = result
-    assert user.email == "josh@dailydrip.com"
+  describe "login_or_register_from_github/1 returns a user after creating one" do
+    test "when the user has name and public email on GitHub" do
+      auth_info = %{
+        name: "Josh Adams",
+        nickname: "knewter",
+        email: "josh@dailydrip.com"
+      }
+      result = Forums.login_or_register_from_github(auth_info)
+      assert {:ok, user} = result
+      assert user.email == "josh@dailydrip.com"
+    end
+
+    test "when the user doesn't have name and public email on GitHub" do
+      auth_info = %{
+        name: nil,
+        nickname: "knewter",
+        email: nil,
+      }
+      result = Forums.login_or_register_from_github(auth_info)
+      assert {:ok, user} = result
+      assert user.name == "knewter"
+      assert user.email == "knewter@users.noreply.github.com"
+    end
   end
 
   test "login_or_register_from_github/1 returns a user if it already exists" do
