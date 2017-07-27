@@ -3,6 +3,13 @@ defmodule FirestormWeb.NotificationsTest do
   alias FirestormWeb.Forums
   use Bamboo.Test, shared: true
 
+  setup do
+    {:ok, _} =
+      FirestormWeb.Notifications.start_link()
+
+    :ok
+  end
+
   test "creating a post in a thread notifies everyone watching the thread" do
     # TODO: This isn't actually what we want to do, so fix this later.
     {:ok, user} = Forums.create_user(%{username: "knewter", email: "josh@dailydrip.com", name: "Josh Adams"})

@@ -6,19 +6,29 @@ defmodule FirestormWeb.Application do
   def start(_type, _args) do
     import Supervisor.Spec
 
-    # Define workers and child supervisors to be supervised
-    children = [
+    # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
+    # for other strategies and supported options
+    opts = [strategy: :one_for_one, name: FirestormWeb.Supervisor]
+    Supervisor.start_link(children(Mix.env), opts)
+  end
+
+  defp default_children() do
+    [
       # Start the Ecto repository
       supervisor(FirestormWeb.Repo, []),
       # Start the endpoint when the application starts
       supervisor(FirestormWeb.Web.Endpoint, []),
-      # Start the notifications server
-      worker(FirestormWeb.Notifications, [])
     ]
+  end
 
-    # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
-    # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: FirestormWeb.Supervisor]
-    Supervisor.start_link(children, opts)
+  defp children(:test) do
+    default_children()
+  end
+  defp children(_) do
+    default_children() ++
+      [
+        # Start the notifications server
+        worker(FirestormWeb.Notifications, [])
+      ]
   end
 end
