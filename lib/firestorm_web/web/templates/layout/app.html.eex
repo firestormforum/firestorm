@@ -38,7 +38,7 @@
         <span class="pure-toggle-icon"></span>
       </label>
       <div class="pure-drawer" data-position="right">
-        <%= render "_drawer.html", conn: @conn %>
+        <%= render "_drawer.html", conn: @conn, notifications: @notifications %>
       </div>
       <!--
         this is the container for pure-drawer that holds the main content
@@ -51,7 +51,7 @@
           <!-- Now our styles take over and we'll define the main content area -->
           <div class="layout-content">
             <div class="layout-drawer-tablet">
-              <%= render "_drawer.html", conn: @conn %>
+              <%= render "_drawer.html", conn: @conn, notifications: @notifications %>
             </div>
             <!-- We made it to the main content! -->
             <div class="layout-content-main">

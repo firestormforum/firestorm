@@ -9,6 +9,7 @@ defmodule FirestormWeb.Web.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug FirestormWeb.Web.Plugs.CurrentUser
+    plug FirestormWeb.Web.Plugs.Notifications
   end
 
   pipeline :api do
