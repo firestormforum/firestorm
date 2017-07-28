@@ -6,6 +6,7 @@ defmodule FirestormWeb.Notifications do
   """
 
   use GenServer
+  alias FirestormWeb.Forums
   alias FirestormWeb.Forums.Post
   alias FirestormWeb.{Repo, Emails, Mailer}
 
@@ -40,8 +41,13 @@ defmodule FirestormWeb.Notifications do
     with post when not is_nil(post) <- Repo.preload(post, [thread: [:watchers]]),
          thread when not is_nil(thread) <- post.thread,
          users <- thread.watchers |> Enum.uniq do
-           # 2) Send each of them an email about it
+           # 2) Send each of them an email about it and notify them via the
+           # internal notifications system.
            for user <- users do
+             # Send internal notification
+             {:ok, _} = Forums.notify(user, "There was a new post in a thread you are watching.")
+
+             # Send email
              user
              |> Emails.thread_new_post_notification(post.thread, post)
              |> Mailer.deliver_now()

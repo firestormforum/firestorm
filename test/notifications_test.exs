@@ -18,5 +18,6 @@ defmodule FirestormWeb.NotificationsTest do
     {:ok, yup} = Forums.create_post(otp_is_cool, bob, %{body: "yup"})
     assert_delivered_email FirestormWeb.Emails.thread_new_post_notification(user, otp_is_cool, yup)
     refute_delivered_email FirestormWeb.Emails.thread_new_post_notification(bob, otp_is_cool, yup)
+    assert 1 == Enum.count(Forums.notifications_for(user))
   end
 end

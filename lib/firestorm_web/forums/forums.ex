@@ -522,8 +522,6 @@ defmodule FirestormWeb.Forums do
 
     with changeset <- post_changeset(%Post{}, attrs),
          {:ok, post} <- Repo.insert(changeset),
-         # FIXME: Lol these need to be unified clearly.
-         :ok <- notify(user, "There was a new post in a thread you are watching."),
          :ok <- Notifications.post_created(post) do
          {:ok, post}
     end
