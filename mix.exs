@@ -54,6 +54,7 @@ defmodule FirestormWeb.Mixfile do
       {:bodyguard, "~> 2.0.1"},
       {:html_sanitize_ex, "~> 1.2"},
       {:pryin, "~> 1.0"},
+      {:oembed, "~> 0.1.1"},
 
       # TEST DEPENDENCIES
       {:wallaby, "~> 0.17.0", only: [:test]},

@@ -51,6 +51,7 @@ defmodule FirestormWeb.Web do
       import FirestormWeb.Web.Session
       import FirestormWeb.Web.ViewHelpers
       import FirestormWeb.Web.TagHelpers
+      import FirestormWeb.Web.OembedHelpers
       alias FirestormWeb.Web.{
         CategoryView
       }

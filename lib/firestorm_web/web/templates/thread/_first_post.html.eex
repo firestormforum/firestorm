@@ -2,6 +2,13 @@
   <div class="body">
     <%= markdown(@post.body) %>
   </div>
+
+  <%= for {url, oembed} <- @post.oembeds do %>
+    <div class="oembed-for" data-oembed-url="<%= url %>">
+      <%= render_oembed(oembed) %>
+    </div>
+  <% end %>
+
   <div class="post-item-actions">
     <div class="reply-count">
       <%= length(@thread.posts) - 1 %> replies
