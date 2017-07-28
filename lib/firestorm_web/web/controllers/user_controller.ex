@@ -11,6 +11,11 @@ defmodule FirestormWeb.Web.UserController do
   def show(conn, %{"id" => id} = params) do
     user = Forums.get_user!(id)
     posts_page = Forums.user_posts(user, %{page: params["page"]})
+    oembed_decorated_posts =
+      posts_page.entries
+      |> Enum.map(&Forums.decorate_post_oembeds/1)
+    posts_page = %{ posts_page | entries: oembed_decorated_posts }
+
     last_post = Forums.user_last_post(user)
     last_seen = Forums.user_last_seen(user)
     render(conn, "show.html", user: user, posts_page: posts_page, last_post: last_post, last_seen: last_seen)
