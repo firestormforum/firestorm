@@ -12,7 +12,8 @@ defmodule FirestormWeb.Forums do
     Thread,
     Post,
     Watch,
-    View
+    View,
+    Notification
   }
 
   @doc """
@@ -735,5 +736,30 @@ defmodule FirestormWeb.Forums do
     view
     |> cast(attrs, [:assoc_id, :user_id])
     |> validate_required([:assoc_id, :user_id])
+  end
+
+  def notifications_for(%User{} = user) do
+    Notification
+    |> where([n], n.user_id == ^user.id)
+    |> Repo.all()
+  end
+
+  defp notification_changeset(%Notification{} = notification, attrs) do
+    notification
+    |> cast(attrs, [:user_id, :body])
+    |> validate_required([:user_id, :body])
+  end
+
+  @doc """
+  Send a notification to a user:
+
+      iex> %User{} |> notify("Nice shoes")
+      {:ok, %Notification{}}
+
+  """
+  def notify(%User{} = user, body) do
+    %Notification{}
+    |> notification_changeset(%{body: body, user_id: user.id})
+    |> Repo.insert()
   end
 end

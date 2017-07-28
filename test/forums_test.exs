@@ -304,6 +304,21 @@ defmodule FirestormWeb.ForumsTest do
     end
   end
 
+  describe "notifications" do
+    setup [:create_user, :create_category, :create_thread]
+
+    test "getting a user's notifications when there aren't any", %{user: user} do
+      assert [] = Forums.notifications_for(user)
+    end
+
+    test "getting a user's notifications", %{user: user} do
+      body = "You are looking dapper today!"
+      {:ok, _} = Forums.notify(user, body)
+      [first_notification | _] = Forums.notifications_for(user)
+      assert body == first_notification.body
+    end
+  end
+
   def create_category(_) do
     category = fixture(:category, @create_category_attrs)
     {:ok, category: category}
