@@ -13,7 +13,8 @@ defmodule FirestormWeb.Forums do
     Post,
     Watch,
     View,
-    Notification
+    Notification,
+    OembedExtractor
   }
 
   @doc """
@@ -761,5 +762,13 @@ defmodule FirestormWeb.Forums do
     %Notification{}
     |> notification_changeset(%{body: body, user_id: user.id})
     |> Repo.insert()
+  end
+
+  def decorate_post_oembeds(%Post{} = post) do
+    oembeds =
+      post.body
+      |> OembedExtractor.get_embeds()
+
+    %Post{ post | oembeds: oembeds }
   end
 end

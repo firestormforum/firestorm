@@ -64,7 +64,11 @@ defmodule FirestormWeb.Web.ThreadController do
       |> Forums.get_thread!(id)
       |> Repo.preload(posts: [:user])
 
-    [first_post | posts] = thread.posts
+    all_posts =
+      thread.posts
+      |> Enum.map(&Forums.decorate_post_oembeds/1)
+
+    [first_post | posts] = all_posts
 
     watched =
       if current_user(conn) do

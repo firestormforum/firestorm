@@ -6,9 +6,16 @@
     <%= link "@#{@post.user.username}", to: user_path(@conn, :show, @post.user_id), class: "username" %>
     <%= time_abbr @post.inserted_at %>
   </div>
+
   <div class="body">
     <%= markdown(@post.body) %>
   </div>
+
+  <%= for {url, oembed} <- @post.oembeds do %>
+    <div class="oembed-for" data-oembed-url="<%= url %>">
+      <%= render_oembed(oembed) %>
+    </div>
+  <% end %>
 
   <div class="post-item-actions">
     <!--

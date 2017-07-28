@@ -13,6 +13,13 @@ defmodule Page.Thread.Show do
 
   def watch_link(), do: action_link("watch")
 
+  def oembed_for(url) do
+    # FIXME: It would be ideal to do this:
+    # css(".oembed-for[data-oembed-url='#{url}']")
+    # but it failed for dumb reasons so we're just doing this for now.
+    css(".oembed-for")
+  end
+
   defp action_link(name) do
     css("#{first_post_actions_selector()} > li.#{name} > a")
   end

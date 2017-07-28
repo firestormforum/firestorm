@@ -4,9 +4,12 @@ defmodule FirestormWeb.Forums.OembedExtractorTest do
   alias FirestormWeb.Forums.OembedExtractor
 
   test "returns a list of oembed data for a given block of text, by extracting links" do
+    url = "https://www.youtube.com/watch?v=H686MDn4Lo8"
+
     example_text = """
-    This is a cool video, check it out: https://www.youtube.com/watch?v=H686MDn4Lo8
+    This is a cool video, check it out: #{url}
     """
+
     empire_city_elixir_conf_vid =
       %OEmbed.Video{author_name: "Empire City Elixir Conference",
         author_url: "https://www.youtube.com/channel/UCIYiFWyuEytDzyju6uXW40Q",
@@ -18,6 +21,6 @@ defmodule FirestormWeb.Forums.OembedExtractorTest do
         thumbnail_width: 480, title: "Real World Elixir Deployment // Pete Gamache",
         type: "video", version: "1.0", width: 480}
 
-    assert [empire_city_elixir_conf_vid] == OembedExtractor.get_embeds(example_text)
+    assert [{url, empire_city_elixir_conf_vid}] == OembedExtractor.get_embeds(example_text)
   end
 end

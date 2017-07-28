@@ -4,12 +4,15 @@ defmodule FirestormWeb.Forums.OembedExtractor do
   def get_embeds(body) do
     body
     |> get_urls_from_string()
-    |> Task.async_stream(fn url -> OEmbed.for(url) end)
-    |> Enum.filter(fn
-       {:ok, data} -> true
-       _ -> false
-    end)
-    |> Enum.map(fn {:ok, {:ok, a}} -> a end)
+    |> Task.async_stream(fn url -> {url, OEmbed.for(url)} end)
+    |> Enum.filter(&successful_oembed?/1)
+    |> Enum.map(fn {:ok, {url, {:ok, a}}} -> {url, a} end)
+  end
+
+  defp successful_oembed?({:ok, {url, {:ok, _data}}}), do: true
+  defp successful_oembed?(x) do
+    IO.inspect x
+    false
   end
 
   @doc """

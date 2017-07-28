@@ -53,7 +53,6 @@ defmodule FirestormWeb.Feature.ThreadsTest do
        # user info into the thread header.
   end
 
-  @tag :pending
   test "watching a thread", %{session: session} do
     import Page.Thread.Show
 
@@ -69,6 +68,19 @@ defmodule FirestormWeb.Feature.ThreadsTest do
     |> assert_has(watched_icon())
     |> click(watch_link())
     |> refute_has(watched_icon())
+  end
+
+  test "thread posts have oembeds rendered", %{session: session} do
+    import Page.Thread.Show
+
+    {:ok, [elixir]} = create_categories(["Elixir"])
+    {:ok, user} = Forums.create_user(%{username: "knewter", email: "josh@dailydrip.com", name: "Josh Adams"})
+    {:ok, otp_is_cool} = Forums.create_thread(elixir, user, %{title: "Thread with oEmbed in the first post", body: "This is a cool video, check it out: https://www.youtube.com/watch?v=H686MDn4Lo8"})
+
+    session
+    |> log_in_as(user)
+    |> visit(category_thread_path(FirestormWeb.Web.Endpoint, :show, elixir, otp_is_cool))
+    |> assert_has(oembed_for("https://www.youtube.com/watch?v=H686MDn4Lo8"))
   end
 
   defp create_categories(titles) do
