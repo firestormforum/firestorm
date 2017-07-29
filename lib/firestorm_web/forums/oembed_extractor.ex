@@ -4,7 +4,7 @@ defmodule FirestormWeb.Forums.OembedExtractor do
   def get_embeds(body) do
     body
     |> get_urls_from_string()
-    |> Task.async_stream(fn url -> {url, OEmbed.for(url)} end)
+    |> Task.async_stream(fn url -> {url, FirestormWeb.OEmbed.for(url)} end)
     |> Enum.filter(&successful_oembed?/1)
     |> Enum.map(fn {:ok, {url, {:ok, a}}} -> {url, a} end)
   end

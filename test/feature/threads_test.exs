@@ -73,9 +73,13 @@ defmodule FirestormWeb.Feature.ThreadsTest do
   test "thread posts have oembeds rendered", %{session: session} do
     import Page.Thread.Show
 
+    url = "https://www.youtube.com/watch?v=H686MDn4Lo8"
     {:ok, [elixir]} = create_categories(["Elixir"])
     {:ok, user} = Forums.create_user(%{username: "knewter", email: "josh@dailydrip.com", name: "Josh Adams"})
-    {:ok, otp_is_cool} = Forums.create_thread(elixir, user, %{title: "Thread with oEmbed in the first post", body: "This is a cool video, check it out: https://www.youtube.com/watch?v=H686MDn4Lo8"})
+    {:ok, otp_is_cool} = Forums.create_thread(elixir, user, %{title: "Thread with oEmbed in the first post", body: "This is a cool video, check it out: #{url}"})
+
+    # Pre-populate the OEmbed cache to return an oembed for this URL:
+    LruCache.put(:oembed_cache, url, %OEmbed.Video{html: "lolno"})
 
     session
     |> log_in_as(user)
