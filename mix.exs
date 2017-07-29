@@ -55,6 +55,7 @@ defmodule FirestormWeb.Mixfile do
       {:html_sanitize_ex, "~> 1.2"},
       {:pryin, "~> 1.0"},
       {:oembed, "~> 0.1.1"},
+      {:lru_cache, "0.1.1"},
 
       # TEST DEPENDENCIES
       {:wallaby, "~> 0.17.0", only: [:test]},
