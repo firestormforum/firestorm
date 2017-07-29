@@ -21,6 +21,8 @@ defmodule FirestormWeb.Forums.OembedExtractorTest do
         thumbnail_width: 480, title: "Real World Elixir Deployment // Pete Gamache",
         type: "video", version: "1.0", width: 480}
 
+    LruCache.put(:oembed_cache, url, empire_city_elixir_conf_vid)
+
     assert [{url, empire_city_elixir_conf_vid}] == OembedExtractor.get_embeds(example_text)
   end
 end

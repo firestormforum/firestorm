@@ -18,7 +18,10 @@ defmodule FirestormWeb.Application do
       # Start the Ecto repository
       supervisor(FirestormWeb.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(FirestormWeb.Web.Endpoint, [])
+      supervisor(FirestormWeb.Web.Endpoint, []),
+      # Add an LRU Cache for storing OEmbed results for a given URL, storing at
+      # most 5000 results at a time in the cache.
+      worker(LruCache, [:oembed_cache, 5_000])
     ]
   end
   defp children(:test) do
