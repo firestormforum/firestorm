@@ -313,7 +313,7 @@ defmodule FirestormWeb.ForumsTest do
 
     test "getting a user's notifications", %{user: user} do
       body = "You are looking dapper today!"
-      {:ok, _} = Forums.notify(user, body)
+      {:ok, _} = Forums.notify(user, %{subject: "Some subject", body: body, url: "http://www.slashdot.org"})
       [first_notification | _] = Forums.notifications_for(user)
       assert body == first_notification.body
     end
