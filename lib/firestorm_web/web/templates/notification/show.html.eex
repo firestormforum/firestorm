@@ -1,0 +1,7 @@
+<div class="page-header">
+  <h2>Showing notification</h2>
+</div>
+
+<div class="notification-body">
+  <%= @notification.body %>
+</div>

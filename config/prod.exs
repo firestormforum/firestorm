@@ -18,7 +18,11 @@ config :firestorm_web, FirestormWeb.Web.Endpoint,
   url: [scheme: "https", host: "forum.firestormforum.org", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
-  secret_key_base: System.get_env("SECRET_KEY_BASE")
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
+  instrumenters: [PryIn.Instrumenter]
+
+# Should we send instrumentation to PryIn?
+config :firestorm_web, use_pryin: true
 
 # Do not print debug messages in production
 config :logger, level: :info

@@ -5,7 +5,7 @@
       <%= render "_navigation_item.html", conn: @conn, text: "Watching", url: thread_path(@conn, :watching) %>
       <%= render "_navigation_item.html", conn: @conn, text: "Participating in", url: thread_path(@conn, :participating) %>
       <!-- <li class="-is-active"><%= link "How do I OTP?", to: category_path(@conn, :index) %></li> -->
-      <%= render "_navigation_item.html", conn: @conn, text: "[#{Enum.count(@notifications)}] Notifications", url: "#" %>
+      <%= render "_navigation_item.html", conn: @conn, text: "[#{Enum.count(@notifications)}] Notifications", url: notification_path(@conn, :index) %>
     </ul>
   <% end %>
   <ul>
