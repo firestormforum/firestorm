@@ -747,8 +747,8 @@ defmodule FirestormWeb.Forums do
 
   defp notification_changeset(%Notification{} = notification, attrs) do
     notification
-    |> cast(attrs, [:user_id, :body])
-    |> validate_required([:user_id, :body])
+    |> cast(attrs, [:user_id, :body, :subject, :url])
+    |> validate_required([:user_id, :body, :subject, :url])
   end
 
   @doc """
@@ -758,9 +758,9 @@ defmodule FirestormWeb.Forums do
       {:ok, %Notification{}}
 
   """
-  def notify(%User{} = user, body) do
+  def notify(%User{} = user, %{subject: subject, body: body, url: url}) do
     %Notification{}
-    |> notification_changeset(%{body: body, user_id: user.id})
+    |> notification_changeset(%{body: body, subject: subject, url: url, user_id: user.id})
     |> Repo.insert()
   end
 
