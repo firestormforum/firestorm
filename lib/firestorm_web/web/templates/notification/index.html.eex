@@ -15,8 +15,8 @@
   <%= for notification <- @notifications do %>
     <li>
       <div class="notification-item">
-        <div class="body">
-          <%= link(notification.body, to: notification_path(@conn, :show, notification.id)) %>
+        <div class="subject">
+          <%= link(notification.subject, to: notification_path(@conn, :show, notification.id)) %>
         </div>
       </div>
     </li>

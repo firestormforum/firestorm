@@ -1,7 +1,11 @@
 <div class="page-header">
-  <h2>Showing notification</h2>
+  <h2><%= @notification.subject %></h2>
 </div>
 
-<div class="notification-body">
-  <%= @notification.body %>
+<div class="notification-item">
+  <div class="body">
+    <%= @notification.body %>
+  </div>
+
+  <%= link "Visit", to: @notification.url, class: "pure-button button-primary" %>
 </div>

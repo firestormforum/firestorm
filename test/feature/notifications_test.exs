@@ -45,5 +45,6 @@ defmodule FirestormWeb.Feature.NotificationsTest do
 
     session
     |> assert_has(notification_body())
+    |> assert_has(notification_view_button())
   end
 end

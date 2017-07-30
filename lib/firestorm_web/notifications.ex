@@ -7,8 +7,9 @@ defmodule FirestormWeb.Notifications do
 
   use GenServer
   alias FirestormWeb.Forums
-  alias FirestormWeb.Forums.Post
+  alias FirestormWeb.Forums.{Post, Notification}
   alias FirestormWeb.{Repo, Emails, Mailer}
+  alias FirestormWeb.Web.Endpoint
 
   ### Client API
   @doc """
@@ -45,7 +46,7 @@ defmodule FirestormWeb.Notifications do
            # internal notifications system.
            for user <- users do
              # Send internal notification
-             {:ok, _} = Forums.notify(user, "There was a new post in a thread you are watching.")
+             {:ok, _} = Forums.notify(user, Notification.thread_new_post_notification(post.thread, post))
 
              # Send email
              user
