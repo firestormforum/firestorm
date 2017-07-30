@@ -9,6 +9,9 @@ use Mix.Config
 config :firestorm_web,
   ecto_repos: [FirestormWeb.Repo]
 
+# Should we send instrumentation to PryIn?
+config :firestorm_web, use_pryin: false
+
 # Configures the endpoint
 config :firestorm_web, FirestormWeb.Web.Endpoint,
   url: [host: "localhost"],
@@ -16,7 +19,7 @@ config :firestorm_web, FirestormWeb.Web.Endpoint,
   render_errors: [view: FirestormWeb.Web.ErrorView, accepts: ~w(html json)],
   pubsub: [name: FirestormWeb.PubSub,
            adapter: Phoenix.PubSub.PG2],
-  instrumenters: [PryIn.Instrumenter]
+  instrumenters: []
 
 # Configures Elixir's Logger
 config :logger, :console,

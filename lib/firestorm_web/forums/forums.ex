@@ -764,6 +764,16 @@ defmodule FirestormWeb.Forums do
     |> Repo.insert()
   end
 
+  @doc """
+  Gets a notification by id.
+
+  Maybe returns a notification.
+  """
+  def get_notification(id) do
+    Notification
+    |> Repo.get(id)
+  end
+
   def decorate_post_oembeds(%Post{} = post) do
     oembeds =
       post.body

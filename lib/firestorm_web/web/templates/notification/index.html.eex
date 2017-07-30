@@ -1,0 +1,24 @@
+<div class="page-header">
+  <h2>Notifications</h2>
+  <div class="spacer"></div>
+  <ul class="actions">
+    <li>
+      <a class="pure-button button-primary" href="#">
+        <i class="fa fa-plus"></i>
+        Mark All Read
+      </a>
+    </li>
+  </ul>
+</div>
+
+<ol class="notification-list">
+  <%= for notification <- @notifications do %>
+    <li>
+      <div class="notification-item">
+        <div class="body">
+          <%= link(notification.body, to: notification_path(@conn, :show, notification.id)) %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ol>
