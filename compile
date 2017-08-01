@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ls -al
+ls -al ./node_modules
 NODE_ENV=production ./node_modules/.bin/webpack -p
 cd ..
 mix phx.digest
