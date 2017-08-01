@@ -1,6 +1,7 @@
 #!/bin/bash
 
-ls -al ./node_modules
+# NOTE: Do not set NODE_ENV=production on heroku itself or you won't have
+# webpack when the time comes...
 NODE_ENV=production ./node_modules/.bin/webpack -p
 cd ..
 mix phx.digest
