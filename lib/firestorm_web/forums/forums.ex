@@ -223,7 +223,7 @@ defmodule FirestormWeb.Forums do
 
   ## Examples
 
-      iex> create_category(%{field: value})
+      iex> create_category(%{title: "Elixir"})
       {:ok, %Category{}}
 
       iex> create_category(%{field: bad_value})
