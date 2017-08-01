@@ -384,6 +384,44 @@ defmodule FirestormWeb.Forums do
   end
 
   @doc """
+  Gets a thread by id
+
+  Raises `Ecto.NoResultsError` if the Thread does not exist.
+
+  ## Examples
+
+      iex> get_thread!(123)
+      %Thread{}
+
+      iex> get_thread!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_thread!(id) do
+    Thread
+    |> Repo.get!(id)
+  end
+
+  @doc """
+  Gets a post by id
+
+  Raises `Ecto.NoResultsError` if the Post does not exist.
+
+  ## Examples
+
+      iex> get_post!(123)
+      %Post{}
+
+      iex> get_post!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_post!(id) do
+    Post
+    |> Repo.get!(id)
+  end
+
+  @doc """
   Creates a thread.
 
   ## Examples
