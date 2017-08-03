@@ -1,6 +1,6 @@
 defmodule FirestormWeb.Web.StoreChannel do
   use FirestormWeb.Web, :channel
-  alias FirestormWeb.Store.ReplenishResponse
+  alias FirestormWeb.Store.{ReplenishResponse, ReplenishRequest}
   alias FirestormWeb.Web.Api.V1.FetchView
   alias FirestormWeb.Forums
 
@@ -17,6 +17,8 @@ defmodule FirestormWeb.Web.StoreChannel do
   end
 
   def handle_in("fetch", replenish_request, socket) do
+    replenish_request = Poison.decode!(Poison.encode!(replenish_request), as: %ReplenishRequest{})
+
     # TODO: Make this not awful
     categories =
       replenish_request.categories

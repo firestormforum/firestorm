@@ -1,7 +1,7 @@
 defmodule FirestormWeb.Store.ReplenishRequest do
   defstruct categories: [], threads: [], users: [], posts: []
 
-  @typep finder :: integer | string
+  @typep finder :: integer | String.t
 
   @type t :: %FirestormWeb.Store.ReplenishRequest{
     categories: list(finder),

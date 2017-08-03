@@ -14,7 +14,10 @@ defmodule FirestormWeb.Web.StoreChannelTest do
   end
 
   test "responds to an empty request", %{socket: socket} do
-    ref = push socket, "fetch", empty_replenish_request()
+    request =
+      empty_replenish_request()
+
+    ref = push socket, "fetch", request
     assert_response ref, %ReplenishResponse{}
   end
 
