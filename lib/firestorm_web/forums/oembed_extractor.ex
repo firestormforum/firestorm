@@ -11,7 +11,6 @@ defmodule FirestormWeb.Forums.OembedExtractor do
 
   defp successful_oembed?({:ok, {url, {:ok, _data}}}), do: true
   defp successful_oembed?(x) do
-    IO.inspect x
     false
   end
 

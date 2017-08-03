@@ -80,7 +80,7 @@ defmodule FirestormWeb.Web.LayoutView do
     if Mix.env == :prod do
       "<script src=\"/js/app.js\"></script>"
     else
-      "<script src=\"http://localhost:8080/js/app.js\"></script>"
+      "<script src=\"http://localhost:8081/js/app.js\"></script>"
     end
   end
 
@@ -88,7 +88,7 @@ defmodule FirestormWeb.Web.LayoutView do
     if Mix.env == :prod do
       "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/app.css\" />"
     else
-      "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://localhost:8080/css/app.css\" />"
+      "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://localhost:8081/css/app.css\" />"
     end
   end
 end

@@ -25,7 +25,7 @@
     -->
     <div class="spacer"></div>
     <ul class="actions">
-      <li>
+      <li class="link">
         <a href="<%= category_thread_path(@conn, :show, @category.id, @thread.id) %>#post-<%= @post.id %>">
           <i class="fa fa-link"></i>
         </a>
