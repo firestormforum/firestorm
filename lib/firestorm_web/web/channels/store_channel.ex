@@ -1,5 +1,6 @@
 defmodule FirestormWeb.Web.StoreChannel do
   use FirestormWeb.Web, :channel
+  use Appsignal.Instrumentation.Decorators
   alias FirestormWeb.Store.{ReplenishResponse, ReplenishRequest}
   alias FirestormWeb.Web.Api.V1.FetchView
   alias FirestormWeb.{Repo, Forums}
@@ -16,6 +17,7 @@ defmodule FirestormWeb.Web.StoreChannel do
     true
   end
 
+  @decorate channel_action()
   def handle_in("fetch_home_data", _, socket) do
     # TODO: Make this not awful
     categories =
@@ -40,6 +42,7 @@ defmodule FirestormWeb.Web.StoreChannel do
     {:reply, {:ok, FetchView.render("index.json", %ReplenishResponse{categories: categories, threads: threads, posts: posts, users: users})}, socket}
   end
 
+  @decorate channel_action()
   def handle_in("fetch", replenish_request, socket) do
     replenish_request = Poison.decode!(Poison.encode!(replenish_request), as: %ReplenishRequest{})
 
