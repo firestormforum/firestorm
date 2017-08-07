@@ -19,10 +19,16 @@ config :firestorm_web, FirestormWeb.Web.Endpoint,
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
-  instrumenters: [PryIn.Instrumenter]
+  instrumenters: [PryIn.Instrumenter, Appsignal.Phoenix.Instrumenter]
 
 # Should we send instrumentation to PryIn?
+# NOTE: We should really just use the existing pryin config instead of adding
+# this, but I'll deal with it later.
 config :firestorm_web, use_pryin: true
+
+config :phoenix, :template_engines,
+  eex: Appsignal.Phoenix.Template.EExEngine,
+  exs: Appsignal.Phoenix.Template.ExsEngine
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -31,7 +37,8 @@ config :firestorm_web, FirestormWeb.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-  ssl: true
+  ssl: true,
+  loggers: [Appsignal.Ecto, Ecto.LogEntry]
 
 config :pryin,
   enabled: true,
