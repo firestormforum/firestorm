@@ -44,6 +44,12 @@ config :pryin,
   enabled: true,
   env: :prod
 
+config :appsignal, :config,
+  name: System.get_env("APPSIGNAL_APP_NAME"),
+  env: System.get_env("APPSIGNAL_APP_ENV"),
+  push_api_key: System.get_env("APPSIGNAL_PUSH_API_KEY"),
+  active: true
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
