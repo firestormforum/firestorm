@@ -9,7 +9,7 @@ defmodule FirestormWeb.Web.Api.V1.PostView do
       body: body,
       body_html: Markdown.render(body),
       user_id: user_id,
-      oembeds: Enum.map(oembeds, &do_render_oembed/1),
+      oembeds: Enum.map(oembeds || [], &do_render_oembed/1),
       inserted_at: inserted_at,
       updated_at: updated_at,
       thread_id: thread_id
