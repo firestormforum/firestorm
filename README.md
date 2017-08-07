@@ -5,9 +5,9 @@
 [![Build Status](https://semaphoreci.com/api/v1/dailydrip/xx-firestorm/branches/master/badge.svg)](https://semaphoreci.com/dailydrip/xx-firestorm)
 [![Deps Status](https://beta.hexfaktor.org/badge/all/github/dailydrip/firestorm.svg)](https://beta.hexfaktor.org/github/dailydrip/firestorm)
 
-This is the Firestorm Forum project.  We've just reached the "initial
-dogfooding" phase and you can view the first deployed version at
-<http://firestorm-dogfood.herokuapp.com>.
+This is the Firestorm Forum project. It's presently at version 0.9, nearly ready
+for a 1.0 release. You can view the running forum at
+<http://forum.firestormforum.org>.
 
 ## Patrons
 
