@@ -426,11 +426,11 @@ defmodule FirestormWeb.Forums do
 
   ## Examples
 
-      iex> create_thread(category, user, %{field: value, body: "some body"})
-      {:ok, {%Thread{}, %Post{}}}
+      iex> create_thread(category, user, %{title: "OTP is cool", body: "don't you think?"})
+      {:ok, %Thread{}}
 
       iex> create_thread(category, user, %{field: bad_value})
-      {:error, :thread, %Ecto.Changeset{}}
+      {:error, %Ecto.Changeset{}}
 
   """
   def create_thread(category, user, attrs \\ %{}) do
@@ -561,6 +561,20 @@ defmodule FirestormWeb.Forums do
     end
   end
 
+  @doc """
+  Creates a post within a thread.
+
+  ## Examples
+
+      iex> create_post(thread, user, %{body: "don't you think?"})
+      {:ok, %Post{}}
+
+      iex> create_post(thread, user, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  # NOTE: This obviously doesn't need to use `with` if I'm not using the
+  # else...whatever
   def create_post(%Thread{} = thread, %User{} = user, attrs) do
     attrs =
       attrs
