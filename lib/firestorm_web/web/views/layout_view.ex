@@ -77,18 +77,12 @@ defmodule FirestormWeb.Web.LayoutView do
   end
 
   def js_script_tag do
-    if Mix.env == :prod do
-      "<script src=\"/js/app.js\"></script>"
-    else
-      "<script src=\"http://localhost:8081/js/app.js\"></script>"
-    end
+    "<script src=\"" <> Application.get_env(:firestorm_web, :js_path_prefix)
+      <> "/js/app.js\"></script>"
   end
 
   def css_link_tag do
-    if Mix.env == :prod do
-      "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/app.css\" />"
-    else
-      "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://localhost:8081/css/app.css\" />"
-    end
+    "<link rel=\"stylesheet\" type=\"text/css\" href=\""
+      <> Application.get_env(:firestorm_web, :css_path_prefix) <> "/css/app.css\" />"
   end
 end

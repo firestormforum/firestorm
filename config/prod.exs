@@ -26,6 +26,12 @@ config :firestorm_web, FirestormWeb.Web.Endpoint,
 # this, but I'll deal with it later.
 config :firestorm_web, use_pryin: true
 
+# Path prefix from which to serve web assets (i.e. webpack dev mode path)
+config :firestorm_web,
+  js_path_prefix: "",
+  css_path_prefix: "",
+  image_path_prefix: ""
+
 config :phoenix, :template_engines,
   eex: Appsignal.Phoenix.Template.EExEngine,
   exs: Appsignal.Phoenix.Template.ExsEngine
