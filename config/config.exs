@@ -12,6 +12,15 @@ config :firestorm_web,
 # Should we send instrumentation to PryIn?
 config :firestorm_web, use_pryin: false
 
+# Start notification server in app start
+config :firestorm_web, notifications_enabled: true
+
+# Path prefixes from which to serve web assets (i.e. webpack dev mode path)
+config :firestorm_web,
+  js_path_prefix: "http://localhost:8081",
+  css_path_prefix: "http://localhost:8081",
+  image_path_prefix: "http://localhost:8081/static"
+
 # Configures the endpoint
 config :firestorm_web, FirestormWeb.Web.Endpoint,
   url: [host: "localhost"],

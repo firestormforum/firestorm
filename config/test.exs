@@ -7,6 +7,9 @@ config :firestorm_web, FirestormWeb.Web.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
+# Start notification server in app start
+config :firestorm_web, notifications_enabled: false
+
 # Configure your database
 config :firestorm_web, FirestormWeb.Repo,
   adapter: Ecto.Adapters.Postgres,

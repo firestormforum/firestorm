@@ -7,11 +7,7 @@ defmodule FirestormWeb.Web.ViewHelpers do
   import Phoenix.HTML, only: [raw: 1]
 
   def image_path(path) do
-    if Mix.env == :prod do
-      "/images/#{path}"
-    else
-      "http://localhost:8081/static/images/#{path}"
-    end
+    Application.get_env(:firestorm_web, :image_path_prefix) <> "/images/#{path}"
   end
 
   defdelegate avatar_url(user, size \\ 256), to: User
