@@ -57,6 +57,7 @@ defmodule FirestormWeb.Mixfile do
       {:oembed, "~> 0.1.1"},
       {:lru_cache, "0.1.1"},
       {:appsignal, "~> 1.0"},
+      {:cors_plug, "~> 1.2"},
 
       # TEST DEPENDENCIES
       {:wallaby, "~> 0.17.0", only: [:test]},
