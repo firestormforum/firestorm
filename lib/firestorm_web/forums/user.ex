@@ -13,6 +13,7 @@ defmodule FirestormWeb.Forums.User do
     field :username, :string
     field :password_hash, :string
     field :password, :string, virtual: true
+    field :api_token, :string
 
     has_many :posts, Post
 

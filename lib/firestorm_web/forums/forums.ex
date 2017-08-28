@@ -135,8 +135,8 @@ defmodule FirestormWeb.Forums do
 
   defp user_changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:username, :email, :name])
-    |> validate_required([:username, :name])
+    |> cast(attrs, [:username, :email, :name, :api_token])
+    |> validate_required([:username, :name, :api_token])
     |> unique_constraint(:username)
   end
 
@@ -530,7 +530,7 @@ defmodule FirestormWeb.Forums do
   def login_or_register_from_github(%{nickname: nickname, name: name, email: email}) do
     case get_user_by_username(nickname) do
       nil ->
-        create_user(%{email: email, name: name, username: nickname})
+        create_user(%{email: email, name: name, username: nickname, api_token: generate_api_token()})
       user ->
         {:ok, user}
     end
@@ -544,7 +544,7 @@ defmodule FirestormWeb.Forums do
     case get_user_by_username(username) do
       nil ->
         # No user, let's register one!
-        register_user(%{username: username, name: username, password: password})
+        register_user(%{username: username, name: username, password: password, api_token: generate_api_token()})
       user ->
         # We'll check the password with checkpw against the user's stored
         # password hash
@@ -833,4 +833,6 @@ defmodule FirestormWeb.Forums do
 
     %Post{ post | oembeds: oembeds }
   end
+
+  defp generate_api_token(), do: UUID.uuid4()
 end

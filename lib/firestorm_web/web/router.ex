@@ -51,6 +51,7 @@ defmodule FirestormWeb.Web.Router do
 
     resources "/preview", PreviewController, only: [:create]
     resources "/upload_signature", UploadSignatureController, only: [:create]
+    post "/auth/identity", AuthController, :identity
   end
 
   # Inbound email routes
