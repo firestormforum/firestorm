@@ -80,6 +80,10 @@ defmodule FirestormWeb.Forums do
 
   """
   def create_user(attrs \\ %{}) do
+    attrs =
+      attrs
+      |> Map.put(:api_token, generate_api_token())
+
     %User{}
     |> user_changeset(attrs)
     |> Repo.insert()
