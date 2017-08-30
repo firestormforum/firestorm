@@ -4,7 +4,7 @@ defmodule FirestormWeb.Emails do
   """
 
   import Bamboo.Email
-  import FirestormWeb.Web.Router.Helpers
+  import FirestormWeb.Web.Router.Helpers, only: [category_thread_url: 4]
   import Phoenix.HTML
   import Phoenix.HTML.Link
   alias FirestormWeb.Web.Endpoint

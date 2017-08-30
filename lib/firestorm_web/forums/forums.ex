@@ -58,6 +58,11 @@ defmodule FirestormWeb.Forums do
   def get_user_by_username(username), do: Repo.get_by(User, %{username: username})
 
   @doc """
+  Gets a single user by api_token. Maybe.
+  """
+  def get_user_by_api_token(api_token), do: Repo.get_by(User, %{api_token: api_token})
+
+  @doc """
   Gets a single user by email address. Maybe.
   """
   def get_user_by_email(email), do: Repo.get_by(User, %{email: email})
@@ -75,6 +80,10 @@ defmodule FirestormWeb.Forums do
 
   """
   def create_user(attrs \\ %{}) do
+    attrs =
+      attrs
+      |> Map.put(:api_token, generate_api_token())
+
     %User{}
     |> user_changeset(attrs)
     |> Repo.insert()
