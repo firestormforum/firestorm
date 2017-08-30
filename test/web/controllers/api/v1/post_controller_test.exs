@@ -20,7 +20,7 @@ defmodule FirestormWeb.Web.Api.V1.PostControllerTest do
       |> put_req_header("authorization", "Bearer #{bob.api_token}")
       |> post("/api/v1/posts", post: post, thread_id: otp_is_cool.id)
 
-    response = json_response(conn, 201)["data"]
-    assert response["body"] == Markdown.render(post["body"])
+    response = json_response(conn, 201)
+    assert response["body_html"] == Markdown.render(post["body"])
   end
 end

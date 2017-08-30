@@ -11,13 +11,7 @@ defmodule FirestormWeb.Web.Api.V1.PostController do
          {:ok, post} <- Forums.create_post(thread, user, %{body: post_params["body"]}) do
       conn
       |> put_status(201)
-      |> json(%{
-           data: %{
-             body: Markdown.render(post.body),
-             id: post.id,
-             thread_id: thread_id
-           }
-         })
+      |> render("show.json", post)
     else
       x ->
         IO.inspect x
