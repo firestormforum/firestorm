@@ -14,6 +14,7 @@ defmodule FirestormWeb.Web.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug FirestormWeb.Web.Plugs.ApiCurrentUser
   end
 
   scope "/auth", FirestormWeb.Web do
@@ -51,6 +52,7 @@ defmodule FirestormWeb.Web.Router do
 
     resources "/preview", PreviewController, only: [:create]
     resources "/upload_signature", UploadSignatureController, only: [:create]
+    resources "/posts", PostController, only: [:create]
     post "/auth/identity", AuthController, :identity
   end
 
