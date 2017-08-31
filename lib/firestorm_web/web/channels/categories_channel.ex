@@ -20,7 +20,7 @@ defmodule FirestormWeb.Web.CategoriesChannel do
   end
 
   @decorate channel_action()
-  def handle_out("update", msg, socket) do
+  def handle_out("update", %ReplenishResponse{} = msg, socket) do
     push socket, "update", FetchView.render("index.json", msg)
     {:noreply, socket}
   end
