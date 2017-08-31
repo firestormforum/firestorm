@@ -4,7 +4,7 @@
   &.first-post {
     padding-top: 0;
   }
-  &:target {
+  &:target, &.-target {
     background-color: rgba($punch, 0.03);
   }
   > .body {

@@ -6,6 +6,8 @@ defmodule FirestormWeb.Forums do
   use Bodyguard.Policy, policy: FirestormWeb.Forums.Policy
   import Ecto.{Query, Changeset}, warn: false
   alias FirestormWeb.{Repo, Notifications}
+  alias FirestormWeb.Web.Endpoint
+  alias FirestormWeb.Store.ReplenishResponse
   alias FirestormWeb.Forums.{
     User,
     Category,
@@ -590,11 +592,23 @@ defmodule FirestormWeb.Forums do
       |> Map.put(:thread_id, thread.id)
       |> Map.put(:user_id, user.id)
 
-    with changeset <- post_changeset(%Post{}, attrs),
-         {:ok, post} <- Repo.insert(changeset),
-         :ok <- Notifications.post_created(post) do
-         {:ok, post}
-    end
+    changeset = post_changeset(%Post{}, attrs)
+    {:ok, post} = Repo.insert(changeset)
+    :ok = Notifications.post_created(post)
+
+    post =
+      Repo.preload(post, [:thread, :user])
+
+    payload =
+      %ReplenishResponse{
+        categories: [],
+        threads: [post.thread],
+        users: [post.user],
+        posts: [post]
+      }
+
+    :ok = Endpoint.broadcast!("threads:#{post.thread_id}", "update", payload)
+    {:ok, post}
   end
 
   @doc """

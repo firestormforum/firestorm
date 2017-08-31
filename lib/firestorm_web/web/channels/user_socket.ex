@@ -3,6 +3,10 @@ defmodule FirestormWeb.Web.UserSocket do
 
   ## Channels
   channel "store:*", FirestormWeb.Web.StoreChannel
+  channel "users:*", FirestormWeb.Web.UsersChannel
+  channel "posts:*", FirestormWeb.Web.PostsChannel
+  channel "threads:*", FirestormWeb.Web.ThreadsChannel
+  channel "categories:*", FirestormWeb.Web.CategoriesChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket,

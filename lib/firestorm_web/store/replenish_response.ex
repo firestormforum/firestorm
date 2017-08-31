@@ -9,4 +9,3 @@ defmodule FirestormWeb.Store.ReplenishResponse do
     posts: list(Post.t),
   }
 end
-
