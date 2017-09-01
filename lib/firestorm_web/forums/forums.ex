@@ -455,35 +455,39 @@ defmodule FirestormWeb.Forums do
       |> Map.take([:title])
       |> Map.put(:category_id, category.id)
 
-    {:ok, thread} =
+    thread_result =
       %{thread: thread_attrs, post: post_attrs}
       |> new_thread_changeset()
       |> Repo.insert
 
-    thread =
-      thread
-      |> Repo.preload([:category, posts: [:user]])
+    case thread_result do
+      {:ok, thread} ->
+        thread =
+          thread
+          |> Repo.preload([:category, posts: [:user]])
 
-    [thread] =
-      [thread]
-      |> decorate_threads(nil)
+        [thread] =
+          [thread]
+          |> decorate_threads(nil)
 
-    {posts, users} =
-      case thread.first_post do
-        nil -> {[], []}
-        post -> {[post], [post.user]}
-      end
+        {posts, users} =
+          case thread.first_post do
+            nil -> {[], []}
+            post -> {[post], [post.user]}
+          end
 
-    payload =
-      %ReplenishResponse{
-        categories: [thread.category],
-        threads: [thread],
-        users: users,
-        posts: posts
-      }
+        payload =
+          %ReplenishResponse{
+            categories: [thread.category],
+            threads: [thread],
+            users: users,
+            posts: posts
+          }
 
-    :ok = Endpoint.broadcast!("categories:#{thread.category_id}", "update", payload)
-    {:ok, thread}
+        :ok = Endpoint.broadcast!("categories:#{thread.category_id}", "update", payload)
+        {:ok, thread}
+      e -> e
+    end
   end
 
   defp new_thread_changeset(%{thread: thread_attrs, post: post_attrs}) do
