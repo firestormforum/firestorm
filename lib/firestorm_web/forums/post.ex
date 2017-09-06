@@ -4,6 +4,8 @@ defmodule FirestormWeb.Forums.Post do
   """
 
   use Ecto.Schema
+  import Ecto.Changeset, warn: false
+  import Ecto.Query
   alias FirestormWeb.Forums.{User, Thread, View}
 
   schema "forums_posts" do
@@ -15,5 +17,16 @@ defmodule FirestormWeb.Forums.Post do
     field :oembeds, :any, virtual: true
 
     timestamps()
+  end
+
+  def changeset(%__MODULE__{} = post, attrs \\ %{}) do
+    post
+    |> cast(attrs, [:body, :thread_id, :user_id])
+    |> validate_required([:body, :thread_id, :user_id])
+  end
+
+  def ordered(query) do
+    query
+    |> order_by([p], desc: p.inserted_at)
   end
 end

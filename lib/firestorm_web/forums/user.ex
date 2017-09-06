@@ -5,7 +5,8 @@ defmodule FirestormWeb.Forums.User do
 
   use Ecto.Schema
 
-  alias FirestormWeb.Forums.Post
+  import Ecto.Changeset, warn: false
+  alias FirestormWeb.Forums.{Post, RoleMembership, Role}
 
   schema "forums_users" do
     field :email, :string
@@ -16,8 +17,36 @@ defmodule FirestormWeb.Forums.User do
     field :api_token, :string
 
     has_many :posts, Post
+    has_many :role_memberships, RoleMembership
+    many_to_many :roles, Role, join_through: RoleMembership, on_replace: :delete
 
     timestamps()
+  end
+
+  def changeset(%__MODULE__{} = user, attrs \\ %{}) do
+    user
+    |> cast(attrs, [:username, :email, :name, :api_token])
+    |> validate_required([:username, :name, :api_token])
+    |> unique_constraint(:username)
+  end
+
+  def admin_changeset(%__MODULE__{} = user, attrs \\ %{}) do
+    user
+    |> changeset(attrs)
+    |> add_roles(attrs)
+  end
+
+  def add_roles(changeset, params) do
+    import Ecto.Query
+
+    if Enum.count(Map.get(params, :roles, [])) > 0 do
+      ids = params[:roles]
+      # FIXME: I don't love going out to the repo here
+      roles = FirestormWeb.Repo.all(from r in Role, where: r.id in ^ids)
+      put_assoc(changeset, :roles, roles)
+    else
+      changeset
+    end
   end
 
   def avatar_url(%__MODULE__{email: email, username: username}, size \\ 256) do

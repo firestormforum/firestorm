@@ -4,6 +4,7 @@ defmodule FirestormWeb.Forums.Thread do
   """
 
   use Ecto.Schema
+  import Ecto.Changeset, warn: false
 
   alias FirestormWeb.Forums.{Category, Post, Watch, User}
   alias FirestormWeb.Forums.Slugs.ThreadTitleSlug
@@ -20,5 +21,13 @@ defmodule FirestormWeb.Forums.Thread do
     many_to_many :watchers, User, join_through: "forums_threads_watches", join_keys: [assoc_id: :id, user_id: :id]
 
     timestamps()
+  end
+
+  def changeset(%__MODULE__{} = thread, attrs \\ %{}) do
+    thread
+    |> cast(attrs, [:title, :category_id])
+    |> validate_required([:title, :category_id])
+    |> ThreadTitleSlug.maybe_generate_slug
+    |> ThreadTitleSlug.unique_constraint
   end
 end

@@ -1,6 +1,7 @@
 defmodule FirestormWeb.Web.PostController do
   use FirestormWeb.Web, :controller
 
+  require FirestormWeb.Web.Router
   alias FirestormWeb.Forums
   alias FirestormWeb.Forums.Post
   plug FirestormWeb.Web.Plugs.RequireUser when action in [:new, :create]

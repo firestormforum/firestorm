@@ -58,6 +58,7 @@ defmodule FirestormWeb.Mixfile do
       {:lru_cache, "0.1.1"},
       {:appsignal, "~> 1.0"},
       {:cors_plug, "~> 1.2"},
+      {:ex_admin, github: "smpallen99/ex_admin"},
 
       # TEST DEPENDENCIES
       {:wallaby, "~> 0.17.0", only: [:test]},
