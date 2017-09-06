@@ -91,7 +91,7 @@ defmodule FirestormWeb.Forums do
     |> Repo.insert()
   end
 
-  def register_user(attrs \\ %{}) do
+  defp register_user(attrs \\ %{}) do
     %User{}
     |> user_registration_changeset(attrs)
     |> Repo.insert()

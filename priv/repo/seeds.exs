@@ -16,7 +16,7 @@ IO.puts "-- CREATING USERS --"
 
 IO.puts "---- Bob Vladbob ----"
 {:ok, bob} =
-  Forums.register_user(%{
+  Forums.create_user(%{
     username: "bob",
     email: "bob@example.com",
     name: "Bob Vladbob",
@@ -25,7 +25,7 @@ IO.puts "---- Bob Vladbob ----"
 
 IO.puts "---- Alice McStinkerton ----"
 {:ok, alice} =
-  Forums.register_user(%{
+  Forums.create_user(%{
     username: "alice",
     email: "alice@example.com",
     name: "Alice McStinkerton",
