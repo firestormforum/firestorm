@@ -16,7 +16,16 @@ defmodule FirestormWeb.Web.Session do
     end
   end
 
-  def logged_in?(conn), do: !!conn.assigns[:current_user]
+  def logged_in?(conn), do: !!current_user(conn)
+
+  def admin?(conn) do
+    case current_user(conn) do
+      nil ->
+        false
+      u ->
+        Forums.is_admin?(u)
+    end
+  end
 
   # NOTE: This exists primarily to aid in acceptance tests. We can trivially set
   # cookies in Wallaby, and this makes things easier in tests since logging in

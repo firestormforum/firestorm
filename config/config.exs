@@ -15,6 +15,21 @@ config :firestorm_web, use_pryin: false
 # Start notification server in app start
 config :firestorm_web, notifications_enabled: true
 
+config :ex_admin,
+  repo: FirestormWeb.Repo,
+  module: FirestormWeb.Web,
+  skin_color: :red,
+  modules: [
+    FirestormWeb.ExAdmin.Dashboard,
+    FirestormWeb.ExAdmin.Forums.Category,
+    FirestormWeb.ExAdmin.Forums.Thread,
+    FirestormWeb.ExAdmin.Forums.Post
+  ],
+  field_type_matching: %{
+    FirestormWeb.Forums.Slugs.CategoryTitleSlug.Type => :string,
+    FirestormWeb.Forums.Slugs.ThreadTitleSlug.Type => :string
+  }
+
 # Path prefixes from which to serve web assets (i.e. webpack dev mode path)
 config :firestorm_web,
   js_path_prefix: "http://localhost:8081",
@@ -75,3 +90,6 @@ config :firestorm_web, FirestormWeb.Repo,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+config :xain, :after_callback, {Phoenix.HTML, :raw}
+

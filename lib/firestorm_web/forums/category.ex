@@ -4,6 +4,7 @@ defmodule FirestormWeb.Forums.Category do
   """
 
   use Ecto.Schema
+  import Ecto.Changeset, warn: false
 
   alias FirestormWeb.Forums.Thread
   alias FirestormWeb.Forums.Slugs.CategoryTitleSlug
@@ -14,5 +15,13 @@ defmodule FirestormWeb.Forums.Category do
     has_many :threads, Thread
 
     timestamps()
+  end
+
+  def changeset(%__MODULE__{} = category, attrs \\ %{}) do
+    category
+    |> cast(attrs, [:title])
+    |> validate_required([:title])
+    |> CategoryTitleSlug.maybe_generate_slug
+    |> CategoryTitleSlug.unique_constraint
   end
 end

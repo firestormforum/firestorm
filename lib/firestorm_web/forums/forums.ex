@@ -87,7 +87,7 @@ defmodule FirestormWeb.Forums do
       |> Map.put(:api_token, generate_api_token())
 
     %User{}
-    |> user_changeset(attrs)
+    |> User.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -111,7 +111,7 @@ defmodule FirestormWeb.Forums do
   """
   def update_user(%User{} = user, attrs) do
     user
-    |> user_changeset(attrs)
+    |> User.changeset(attrs)
     |> Repo.update()
   end
 
@@ -141,19 +141,12 @@ defmodule FirestormWeb.Forums do
 
   """
   def change_user(%User{} = user) do
-    user_changeset(user, %{})
-  end
-
-  defp user_changeset(%User{} = user, attrs) do
-    user
-    |> cast(attrs, [:username, :email, :name, :api_token])
-    |> validate_required([:username, :name, :api_token])
-    |> unique_constraint(:username)
+    User.changeset(user, %{})
   end
 
   def user_registration_changeset(%User{} = user, attrs) do
     user
-    |> user_changeset(attrs)
+    |> User.changeset(attrs)
     |> cast(attrs, [:password])
     |> validate_length(:password, min: 6)
     |> put_password_hash()
@@ -243,7 +236,7 @@ defmodule FirestormWeb.Forums do
   """
   def create_category(attrs \\ %{}) do
     %Category{}
-    |> category_changeset(attrs)
+    |> Category.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -261,7 +254,7 @@ defmodule FirestormWeb.Forums do
   """
   def update_category(%Category{} = category, attrs) do
     category
-    |> category_changeset(attrs)
+    |> Category.changeset(attrs)
     |> Repo.update()
   end
 
@@ -291,16 +284,7 @@ defmodule FirestormWeb.Forums do
 
   """
   def change_category(%Category{} = category) do
-    category_changeset(category, %{})
-  end
-
-  defp category_changeset(%Category{} = category, attrs) do
-    alias FirestormWeb.Forums.Slugs.CategoryTitleSlug
-    category
-    |> cast(attrs, [:title])
-    |> validate_required([:title])
-    |> CategoryTitleSlug.maybe_generate_slug
-    |> CategoryTitleSlug.unique_constraint
+    Category.changeset(category, %{})
   end
 
   @doc """
@@ -497,7 +481,7 @@ defmodule FirestormWeb.Forums do
       |> validate_required([:body, :user_id])
 
     %Thread{}
-    |> thread_changeset(thread_attrs)
+    |> Thread.changeset(thread_attrs)
     |> put_assoc(:posts, [post_changeset])
   end
 
@@ -515,7 +499,7 @@ defmodule FirestormWeb.Forums do
   """
   def update_thread(%Thread{} = thread, attrs) do
     thread
-    |> thread_changeset(attrs)
+    |> Thread.changeset(attrs)
     |> Repo.update()
   end
 
@@ -547,17 +531,8 @@ defmodule FirestormWeb.Forums do
   def change_thread(%Thread{} = thread) do
     thread
     |> Repo.preload(:posts)
-    |> thread_changeset(%{})
+    |> Thread.changeset(%{})
     |> put_assoc(:posts, thread.posts)
-  end
-
-  defp thread_changeset(%Thread{} = thread, attrs) do
-    alias FirestormWeb.Forums.Slugs.ThreadTitleSlug
-    thread
-    |> cast(attrs, [:title, :category_id])
-    |> validate_required([:title, :category_id])
-    |> ThreadTitleSlug.maybe_generate_slug
-    |> ThreadTitleSlug.unique_constraint
   end
 
   def login_or_register_from_github(%{nickname: nickname, name: nil, email: _email} = user) do
@@ -622,7 +597,7 @@ defmodule FirestormWeb.Forums do
       |> Map.put(:thread_id, thread.id)
       |> Map.put(:user_id, user.id)
 
-    changeset = post_changeset(%Post{}, attrs)
+    changeset = Post.changeset(%Post{}, attrs)
     {:ok, post} = Repo.insert(changeset)
     :ok = Notifications.post_created(post)
 
@@ -652,13 +627,7 @@ defmodule FirestormWeb.Forums do
   """
   def change_post(%Post{} = post) do
     post
-    |> post_changeset(%{})
-  end
-
-  defp post_changeset(%Post{} = post, attrs) do
-    post
-    |> cast(attrs, [:body, :thread_id, :user_id])
-    |> validate_required([:body, :thread_id, :user_id])
+    |> Post.changeset(%{})
   end
 
   def user_posts(user, %{page: page}) do
@@ -888,4 +857,12 @@ defmodule FirestormWeb.Forums do
   end
 
   defp generate_api_token(), do: UUID.uuid4()
+
+  def is_admin?(%User{} = user) do
+    user
+    |> Repo.preload(:roles)
+    |> Enum.any?(fn(role) ->
+      role.name == "admin"
+    end)
+  end
 end

@@ -4,6 +4,7 @@ defmodule FirestormWeb.Forums.Notification do
   """
 
   use Ecto.Schema
+  require FirestormWeb.Web.Router
   import FirestormWeb.Web.Router.Helpers, only: [category_thread_url: 4]
   alias FirestormWeb.Web.Router.Helpers
   alias FirestormWeb.Forums.{User, Thread, Post}
