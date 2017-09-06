@@ -5,7 +5,6 @@ defmodule FirestormWeb.Web.Plugs.RequireAdmin do
 
   import Plug.Conn
   import Phoenix.Controller, only: [put_flash: 3, redirect: 2]
-  import FirestormWeb.Web.Router.Helpers
   import FirestormWeb.Web.Session, only: [admin?: 1]
 
   def init(options), do: options
@@ -15,8 +14,8 @@ defmodule FirestormWeb.Web.Plugs.RequireAdmin do
       conn
     else
       conn
-      |> put_flash(:error, "You must be an administrator in to access this page.")
-      |> redirect(to: category_path(conn, :index))
+      |> put_flash(:error, "You must be an administrator to access this page.")
+      |> redirect(to: "/")
       |> halt()
     end
   end

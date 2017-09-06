@@ -16,7 +16,9 @@ defmodule FirestormWeb.Forums do
     Watch,
     View,
     Notification,
-    OembedExtractor
+    OembedExtractor,
+    Role,
+    RoleMembership
   }
 
   @doc """
@@ -859,10 +861,25 @@ defmodule FirestormWeb.Forums do
   defp generate_api_token(), do: UUID.uuid4()
 
   def is_admin?(%User{} = user) do
-    user
-    |> Repo.preload(:roles)
+    user =
+      user
+      |> Repo.preload(:roles)
+
+    user.roles
     |> Enum.any?(fn(role) ->
       role.name == "admin"
     end)
+  end
+
+  def create_role(name) do
+    %Role{}
+    |> Role.changeset(%{name: name})
+    |> Repo.insert()
+  end
+
+  def add_role(%User{} = user, %Role{} = role) do
+    %RoleMembership{}
+    |> RoleMembership.changeset(%{user_id: user.id, role_id: role.id})
+    |> Repo.insert()
   end
 end

@@ -12,23 +12,31 @@
 alias FirestormWeb.Forums
 
 IO.puts "~~~~~ INITIALIZING FIRESTORM SEEDS ~~~~~"
+IO.puts "-- CREATING ROLES --"
+{:ok, admin_role} =
+  Forums.create_role("admin")
+
 IO.puts "-- CREATING USERS --"
+
+IO.puts "---- Admin von Hornclaw ----"
+{:ok, admin} =
+  Forums.login_or_register_from_identity(%{
+    username: "admin",
+    password: "password"
+  })
+{:ok, _} = Forums.add_role(admin, admin_role)
 
 IO.puts "---- Bob Vladbob ----"
 {:ok, bob} =
-  Forums.create_user(%{
+  Forums.login_or_register_from_identity(%{
     username: "bob",
-    email: "bob@example.com",
-    name: "Bob Vladbob",
     password: "password"
   })
 
 IO.puts "---- Alice McStinkerton ----"
 {:ok, alice} =
-  Forums.create_user(%{
+  Forums.login_or_register_from_identity(%{
     username: "alice",
-    email: "alice@example.com",
-    name: "Alice McStinkerton",
     password: "password"
   })
 

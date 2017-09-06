@@ -83,6 +83,20 @@ defmodule FirestormWeb.ForumsTest do
     assert %Ecto.Changeset{} = Forums.change_user(user)
   end
 
+  describe "is_admin?" do
+    test "returns true for users with an 'admin' role" do
+      {:ok, admin} = Forums.create_role("admin")
+      {:ok, user} = Forums.create_user(@create_user_attrs)
+      {:ok, _} = Forums.add_role(user, admin)
+      assert Forums.is_admin?(user)
+    end
+    test "returns false for users without an 'admin' role" do
+      {:ok, _admin} = Forums.create_role("admin")
+      {:ok, user} = Forums.create_user(@create_user_attrs)
+      refute Forums.is_admin?(user)
+    end
+  end
+
   test "list_categories/1 returns all categories" do
     category = fixture(:category, @create_category_attrs)
     assert Forums.list_categories() == [category]
