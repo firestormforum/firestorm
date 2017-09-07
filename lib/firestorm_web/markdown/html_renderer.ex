@@ -104,9 +104,13 @@ defmodule FirestormWeb.Markdown.HtmlRenderer do
   # Code #
   ########
 
+  defp pre_classes() do
+    "line-numbers"
+  end
+
   defp render_block(%Block.Code{lnb: lnb, language: language, attrs: attrs} = block, %Context{options: options}) do
     class = if language, do: ~s{ class="#{code_classes( language, options.code_class_prefix)}"}, else: ""
-    tag = ~s[<pre><code#{class}>]
+    tag = ~s[<pre class="#{pre_classes()}"><code#{class}>]
     lines = options.render_code.(block)
     html = ~s[#{tag}#{lines}</code></pre>\n]
     add_attrs!(html, attrs, [], lnb)
