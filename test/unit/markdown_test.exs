@@ -20,9 +20,9 @@ defmodule FirestormWeb.MarkdownTest do
 
     expected =
       """
-      <p>Here’s some Elixir code:</p>
-      <pre><code class=\"elixir language-elixir\">defmodule Foo do
-        def bar, do: "baz"
+      <p>Here&#39;s some Elixir code:</p>
+      <pre class="line-numbers"><code class=\"elixir language-elixir\">defmodule Foo do
+        def bar, do: &quot;baz&quot;
       end</code></pre>
       """
 

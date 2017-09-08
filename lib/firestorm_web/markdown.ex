@@ -21,7 +21,8 @@ defmodule FirestormWeb.Markdown do
       code_class_prefix: "language-",
       renderer: FirestormWeb.Markdown.HtmlRenderer,
       gfm: true,
-      breaks: true
+      breaks: true,
+      smartypants: false
     }
   end
 end
