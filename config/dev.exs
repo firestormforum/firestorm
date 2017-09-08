@@ -67,3 +67,6 @@ config :firestorm_web, FirestormWeb.Repo,
   database: "firestorm_web_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :firestorm_web, FirestormWeb.Mailer,
+  adapter: Bamboo.LocalAdapter
