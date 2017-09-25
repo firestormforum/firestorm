@@ -9,6 +9,7 @@ defmodule FirestormWeb.Forums.Notification do
   alias FirestormWeb.Web.Router.Helpers
   alias FirestormWeb.Forums.{User, Thread, Post}
   alias FirestormWeb.Web.Endpoint
+  import Ecto.Changeset
 
   schema "forums_notifications" do
     field :body, :string
@@ -33,5 +34,11 @@ defmodule FirestormWeb.Forums.Notification do
 
   defp thread_url(thread) do
     category_thread_url(Endpoint, :show, thread.category_id, thread.id)
+  end
+
+  def changeset(%__MODULE__{} = notification, attrs) do
+    notification
+    |> cast(attrs, [:user_id, :body, :subject, :url])
+    |> validate_required([:user_id, :body, :subject, :url])
   end
 end

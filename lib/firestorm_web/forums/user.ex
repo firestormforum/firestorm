@@ -36,6 +36,14 @@ defmodule FirestormWeb.Forums.User do
     |> add_roles(attrs)
   end
 
+  def registration_changeset(%__MODULE__{} = user, attrs) do
+    user
+    |> changeset(attrs)
+    |> cast(attrs, [:password])
+    |> validate_length(:password, min: 6)
+    |> put_password_hash()
+  end
+
   def add_roles(changeset, params) do
     import Ecto.Query
 
@@ -65,4 +73,15 @@ defmodule FirestormWeb.Forums.User do
   defp adorable_url(username, size) do
     "https://api.adorable.io/avatars/#{size}/#{username}@adorable.png"
   end
+
+  defp put_password_hash(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
+        changeset
+        |> put_change(:password_hash, Comeonin.Bcrypt.hashpwsalt(pass))
+      _ ->
+        changeset
+    end
+  end
+
 end
