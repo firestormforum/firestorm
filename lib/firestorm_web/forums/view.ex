@@ -5,6 +5,7 @@ defmodule FirestormWeb.Forums.View do
   """
 
   use Ecto.Schema
+  import Ecto.Changeset
 
   schema "abstract table: views" do
     # This will be used by associations on each "concrete" table
@@ -13,5 +14,10 @@ defmodule FirestormWeb.Forums.View do
 
     timestamps()
   end
-end
 
+  def changeset(%__MODULE__{} = view, attrs) do
+    view
+    |> cast(attrs, [:assoc_id, :user_id])
+    |> validate_required([:assoc_id, :user_id])
+  end
+end

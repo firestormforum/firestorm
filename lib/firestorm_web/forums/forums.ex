@@ -95,7 +95,7 @@ defmodule FirestormWeb.Forums do
 
   defp register_user(attrs \\ %{}) do
     %User{}
-    |> user_registration_changeset(attrs)
+    |> User.registration_changeset(attrs)
     |> Repo.insert()
   end
 
@@ -144,24 +144,6 @@ defmodule FirestormWeb.Forums do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
-  end
-
-  def user_registration_changeset(%User{} = user, attrs) do
-    user
-    |> User.changeset(attrs)
-    |> cast(attrs, [:password])
-    |> validate_length(:password, min: 6)
-    |> put_password_hash()
-  end
-
-  defp put_password_hash(changeset) do
-    case changeset do
-      %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
-        changeset
-        |> put_change(:password_hash, Comeonin.Bcrypt.hashpwsalt(pass))
-      _ ->
-        changeset
-    end
   end
 
   @doc """
@@ -443,7 +425,7 @@ defmodule FirestormWeb.Forums do
 
     thread_result =
       %{thread: thread_attrs, post: post_attrs}
-      |> new_thread_changeset()
+      |> Thread.new_changeset()
       |> Repo.insert
 
     case thread_result do
@@ -474,17 +456,6 @@ defmodule FirestormWeb.Forums do
         {:ok, thread}
       e -> e
     end
-  end
-
-  defp new_thread_changeset(%{thread: thread_attrs, post: post_attrs}) do
-    post_changeset =
-      %Post{}
-      |> cast(post_attrs, [:body, :user_id])
-      |> validate_required([:body, :user_id])
-
-    %Thread{}
-    |> Thread.changeset(thread_attrs)
-    |> put_assoc(:posts, [post_changeset])
   end
 
   @doc """
@@ -669,7 +640,7 @@ defmodule FirestormWeb.Forums do
   def watch(%User{} = user, %Thread{} = thread) do
     thread
     |> Ecto.build_assoc(:watches, %{user_id: user.id})
-    |> watch_changeset(%{})
+    |> Watch.changeset(%{})
     |> Repo.insert()
   end
 
@@ -761,12 +732,6 @@ defmodule FirestormWeb.Forums do
     |> decorate_threads(user)
   end
 
-  defp watch_changeset(%Watch{} = watch, attrs) do
-    watch
-    |> cast(attrs, [:assoc_id, :user_id])
-    |> validate_required([:assoc_id, :user_id])
-  end
-
   @doc """
   Indicate a user viewed a post:
 
@@ -777,7 +742,7 @@ defmodule FirestormWeb.Forums do
   def view(%User{} = user, %Post{} = post) do
     post
     |> Ecto.build_assoc(:views, %{user_id: user.id})
-    |> view_changeset(%{})
+    |> View.changeset(%{})
     |> Repo.insert()
   end
 
@@ -809,22 +774,10 @@ defmodule FirestormWeb.Forums do
     |> Ecto.assoc(:views)
   end
 
-  defp view_changeset(%View{} = view, attrs) do
-    view
-    |> cast(attrs, [:assoc_id, :user_id])
-    |> validate_required([:assoc_id, :user_id])
-  end
-
   def notifications_for(%User{} = user) do
     Notification
     |> where([n], n.user_id == ^user.id)
     |> Repo.all()
-  end
-
-  defp notification_changeset(%Notification{} = notification, attrs) do
-    notification
-    |> cast(attrs, [:user_id, :body, :subject, :url])
-    |> validate_required([:user_id, :body, :subject, :url])
   end
 
   @doc """
@@ -836,7 +789,7 @@ defmodule FirestormWeb.Forums do
   """
   def notify(%User{} = user, %{subject: subject, body: body, url: url}) do
     %Notification{}
-    |> notification_changeset(%{body: body, subject: subject, url: url, user_id: user.id})
+    |> Notification.changeset(%{body: body, subject: subject, url: url, user_id: user.id})
     |> Repo.insert()
   end
 
