@@ -19,7 +19,7 @@ defmodule FirestormWeb.Web.AuthController do
   alias Ueberauth.Strategy.Helpers
 
   def request(conn, %{"provider" => "identity"}) do
-    changeset = Forums.user_registration_changeset(%User{}, %{})
+    changeset = User.registration_changeset(%User{}, %{})
     render(conn, "request.html", callback_url: Helpers.callback_url(conn), changeset: changeset)
   end
 
@@ -56,7 +56,7 @@ defmodule FirestormWeb.Web.AuthController do
             |> render("request.html", callback_url: Helpers.callback_url(conn), changeset: changeset)
 
           {:error, reason} ->
-            changeset = Forums.user_registration_changeset(%User{}, %{})
+            changeset = User.registration_changeset(%User{}, %{})
 
             conn
             |> put_flash(:error, reason)
