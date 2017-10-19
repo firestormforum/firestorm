@@ -27,7 +27,7 @@
     <div class="spacer"></div>
     <ul class="actions">
       <li>
-        <a href="<%= category_thread_path(@conn, :show, @category.id, @thread.id) %>#post-<%= @post.id %>">
+        <a href="<%= category_thread_path(@conn, :show, @category.id, @thread.id) %>#post-<%= @post.id %>" aria-label="link to post <%= @post.id %>">
           <i class="fa fa-link"></i>
         </a>
       </li>
@@ -44,7 +44,7 @@
         </li>
       -->
       <li class="reply">
-        <%= link to: category_thread_post_path(@conn, :new, @category, @thread) do %>
+        <%= link to: category_thread_post_path(@conn, :new, @category, @thread), "aria-label": "reply" do %>
           <i class="fa fa-reply"></i>
         <% end %>
       </li>

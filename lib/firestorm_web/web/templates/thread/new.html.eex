@@ -11,7 +11,7 @@
     <div class="begin">
       <div class="add-attachment">
         <label class="pure-button button-primary -inverted attachment">
-          <input type="file" />
+          <input type="file" aria-label="add-attachment" />
           <i class="fa fa-paperclip"></i>
         </label>
       </div>
