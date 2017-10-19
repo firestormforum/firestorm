@@ -18,6 +18,18 @@ All of the patrons that made it possible are listed in [the PATRONS file](PATRON
 
 ## Development
 
+**Using Docker**
+1. Setup a complete docker and docker-compose installation
+2. Clone this repository
+3. Run `docker-compose up -d` to run the containers
+4. Create the database: `docker-compose run firestorm mix ecto.create`
+5. Run the migrations: `docker-compose run firestorm mix ecto.migrate`
+6. Visit `localhost:4000` to see firestorm running.
+
+You can also run `docker-compose logs -f firestorm` to see the server logs.
+
+**Without Docker/native setup**
+
 Here are some basic steps to get Firestorm running
 
 ```shell

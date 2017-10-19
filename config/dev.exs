@@ -4,8 +4,7 @@ use Mix.Config
 # debugging and code reloading.
 #
 # The watchers configuration can be used to run external
-# watchers to your application. For example, we use it
-# with webpack to recompile .js and .css sources.
+# watchers to your application. For example, we use it with webpack to recompile .js and .css sources.
 config :firestorm_web, FirestormWeb.Web.Endpoint,
   http: [port: 4000],
   debug_errors: true,
@@ -65,7 +64,7 @@ config :firestorm_web, FirestormWeb.Repo,
   username: "postgres",
   password: "postgres",
   database: "firestorm_web_dev",
-  hostname: "localhost",
+  hostname: System.get_env("POSTGRES_HOST") || "localhost",
   pool_size: 10
 
 config :firestorm_web, FirestormWeb.Mailer,
