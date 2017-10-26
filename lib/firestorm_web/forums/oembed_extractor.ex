@@ -9,10 +9,8 @@ defmodule FirestormWeb.Forums.OembedExtractor do
     |> Enum.map(fn {:ok, {url, {:ok, a}}} -> {url, a} end)
   end
 
-  defp successful_oembed?({:ok, {url, {:ok, _data}}}), do: true
-  defp successful_oembed?(x) do
-    false
-  end
+  defp successful_oembed?({:ok, {_url, {:ok, _data}}}), do: true
+  defp successful_oembed?(_), do: false
 
   @doc """
   Gathers anything in the string that looks like a link into a list of links.

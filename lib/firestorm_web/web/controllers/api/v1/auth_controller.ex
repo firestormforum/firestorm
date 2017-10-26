@@ -8,7 +8,7 @@ defmodule FirestormWeb.Web.Api.V1.AuthController do
         conn
         |> json(%{"data" => %{"api_token" => user.api_token}})
 
-      {:error, reason} ->
+      {:error, _reason} ->
         conn
         |> json(%{"error" => "Login failed"})
     end

@@ -1,9 +1,7 @@
 defmodule FirestormWeb.Web.UsersChannel do
   use FirestormWeb.Web, :channel
   use Appsignal.Instrumentation.Decorators
-  alias FirestormWeb.Store.{ReplenishResponse, ReplenishRequest}
   alias FirestormWeb.Web.Api.V1.FetchView
-  alias FirestormWeb.{Repo, Forums}
 
   intercept ["update"]
 

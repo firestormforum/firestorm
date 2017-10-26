@@ -4,7 +4,7 @@ defmodule FirestormWeb.Web.NotificationController do
 
   alias FirestormWeb.Forums
 
-  def index(conn, params) do
+  def index(conn, _params) do
     notifications = Forums.notifications_for(current_user(conn))
     render(conn, "index.html", notifications: notifications)
   end

@@ -1,9 +1,6 @@
 defmodule FirestormWeb.Web.Api.V1.PostController do
   use FirestormWeb.Web, :controller
-  alias FirestormWeb.{
-    Forums,
-    Markdown
-  }
+  alias FirestormWeb.Forums
 
   def create(conn, %{"post" => post_params, "thread_id" => thread_id}) do
     with thread when not is_nil(thread) <- Forums.get_thread(thread_id),

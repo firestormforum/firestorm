@@ -9,7 +9,6 @@ defmodule FirestormWeb.Notifications do
   alias FirestormWeb.Forums
   alias FirestormWeb.Forums.{Post, Notification}
   alias FirestormWeb.{Repo, Emails, Mailer}
-  alias FirestormWeb.Web.Endpoint
 
   ### Client API
   @doc """

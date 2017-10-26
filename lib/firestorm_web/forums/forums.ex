@@ -93,7 +93,7 @@ defmodule FirestormWeb.Forums do
     |> Repo.insert()
   end
 
-  defp register_user(attrs \\ %{}) do
+  defp register_user(attrs) do
     %User{}
     |> User.registration_changeset(attrs)
     |> Repo.insert()
@@ -836,3 +836,4 @@ defmodule FirestormWeb.Forums do
     |> Repo.insert()
   end
 end
+
