@@ -63,6 +63,7 @@ defmodule FirestormWeb.Mixfile do
       # TEST DEPENDENCIES
       {:wallaby, "~> 0.17.0", only: [:test]},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+      {:dogma, "~> 0.1", only: [:dev]},
 
       # DEV DEPENDENCIES
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},

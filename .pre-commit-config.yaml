@@ -1,0 +1,24 @@
+- repo: local
+  hooks:
+    - id: mix-compile
+      name: 'elixir: compiling'
+      entry: mix compile --warnings-as-errors
+      language: system
+      files: \.ex$
+      pass_filenames: false
+    - id: mix-test
+      name: 'elixir: running tests'
+      entry: mix test
+      language: system
+      files: \.exs?$
+    - id: mix-dogma
+      name: 'elixir: running dogma'
+      entry: mix test
+      language: system
+      files: \.exs?$
+- repo: git://github.com/pre-commit/pre-commit-hooks
+  sha: master
+  hooks:
+    - id: trailing-whitespace
+    - id: check-merge-conflict
+    - id: check-yaml
