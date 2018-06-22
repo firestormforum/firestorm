@@ -10,15 +10,21 @@ defmodule FirestormWeb.Forums.Thread do
   alias FirestormWeb.Forums.Slugs.ThreadTitleSlug
 
   schema "forums_threads" do
-    field :title, :string
-    field :slug, ThreadTitleSlug.Type
-    field :first_post, {:map, %Post{}}, virtual: true
-    field :posts_count, :integer, virtual: true
-    field :completely_read?, :boolean, virtual: true
-    belongs_to :category, Category
-    has_many :posts, Post
-    has_many :watches, {"forums_threads_watches", Watch}, foreign_key: :assoc_id
-    many_to_many :watchers, User, join_through: "forums_threads_watches", join_keys: [assoc_id: :id, user_id: :id]
+    field(:title, :string)
+    field(:slug, ThreadTitleSlug.Type)
+    field(:first_post, {:map, %Post{}}, virtual: true)
+    field(:posts_count, :integer, virtual: true)
+    field(:completely_read?, :boolean, virtual: true)
+    belongs_to(:category, Category)
+    has_many(:posts, Post)
+    has_many(:watches, {"forums_threads_watches", Watch}, foreign_key: :assoc_id)
+
+    many_to_many(
+      :watchers,
+      User,
+      join_through: "forums_threads_watches",
+      join_keys: [assoc_id: :id, user_id: :id]
+    )
 
     timestamps()
   end
@@ -27,8 +33,8 @@ defmodule FirestormWeb.Forums.Thread do
     thread
     |> cast(attrs, [:title, :category_id])
     |> validate_required([:title, :category_id])
-    |> ThreadTitleSlug.maybe_generate_slug
-    |> ThreadTitleSlug.unique_constraint
+    |> ThreadTitleSlug.maybe_generate_slug()
+    |> ThreadTitleSlug.unique_constraint()
   end
 
   def new_changeset(%{thread: thread_attrs, post: post_attrs}) do

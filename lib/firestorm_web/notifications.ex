@@ -38,24 +38,26 @@ defmodule FirestormWeb.Notifications do
 
   def handle_cast({:post_created, %Post{} = post}, :nostate) do
     # 1) Find all users that are watching this thread
-    with post when not is_nil(post) <- Repo.preload(post, [thread: [:watchers]]),
+    with post when not is_nil(post) <- Repo.preload(post, thread: [:watchers]),
          thread when not is_nil(thread) <- post.thread,
-         users <- thread.watchers |> Enum.uniq do
-           # 2) Send each of them an email about it and notify them via the
-           # internal notifications system.
-           for user <- users do
-             # Send internal notification
-             {:ok, _} = Forums.notify(user, Notification.thread_new_post_notification(post.thread, post))
+         users <- thread.watchers |> Enum.uniq() do
+      # 2) Send each of them an email about it and notify them via the
+      # internal notifications system.
+      for user <- users do
+        # Send internal notification
+        {:ok, _} =
+          Forums.notify(user, Notification.thread_new_post_notification(post.thread, post))
 
-             # Send email
-             user
-             |> Emails.thread_new_post_notification(post.thread, post)
-             |> Mailer.deliver_now()
-           end
+        # Send email
+        user
+        |> Emails.thread_new_post_notification(post.thread, post)
+        |> Mailer.deliver_now()
+      end
     else
       _ ->
         :ok
     end
+
     {:noreply, :nostate}
   end
 end

@@ -10,8 +10,11 @@ defmodule FirestormWeb.Application do
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: FirestormWeb.Supervisor]
+
     Supervisor.start_link(
-      children(Application.get_env(:firestorm_web, :notifications_enabled)), opts)
+      children(Application.get_env(:firestorm_web, :notifications_enabled)),
+      opts
+    )
   end
 
   defp default_children() do
@@ -25,14 +28,16 @@ defmodule FirestormWeb.Application do
       worker(LruCache, [:oembed_cache, 5_000])
     ]
   end
+
   defp children(false) do
     default_children()
   end
+
   defp children(_) do
     default_children() ++
-    [
-      # Start the notifications server
-      worker(FirestormWeb.Notifications, [])
-    ]
+      [
+        # Start the notifications server
+        worker(FirestormWeb.Notifications, [])
+      ]
   end
 end

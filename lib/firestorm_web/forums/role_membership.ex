@@ -8,8 +8,8 @@ defmodule FirestormWeb.Forums.RoleMembership do
   alias FirestormWeb.Forums.{Role, User}
 
   schema "forums_role_memberships" do
-    belongs_to :role, Role
-    belongs_to :user, User
+    belongs_to(:role, Role)
+    belongs_to(:user, User)
 
     timestamps()
   end

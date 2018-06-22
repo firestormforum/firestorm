@@ -14,6 +14,7 @@ defmodule FirestormWeb.Web.Plugs.Notifications do
       nil ->
         conn
         |> assign(:notifications, [])
+
       user ->
         conn
         |> assign(:notifications, Forums.notifications_for(user))

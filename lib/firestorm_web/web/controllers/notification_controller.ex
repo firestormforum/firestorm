@@ -1,6 +1,6 @@
 defmodule FirestormWeb.Web.NotificationController do
   use FirestormWeb.Web, :controller
-  plug FirestormWeb.Web.Plugs.RequireUser
+  plug(FirestormWeb.Web.Plugs.RequireUser)
 
   alias FirestormWeb.Forums
 

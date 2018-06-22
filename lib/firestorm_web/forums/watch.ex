@@ -8,8 +8,8 @@ defmodule FirestormWeb.Forums.Watch do
 
   schema "abstract table: watches" do
     # This will be used by associations on each "concrete" table
-    field :assoc_id, :integer
-    field :user_id, :integer
+    field(:assoc_id, :integer)
+    field(:user_id, :integer)
 
     timestamps()
   end

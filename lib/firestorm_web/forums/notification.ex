@@ -11,10 +11,10 @@ defmodule FirestormWeb.Forums.Notification do
   import Ecto.Changeset
 
   schema "forums_notifications" do
-    field :body, :string
-    field :subject, :string
-    field :url, :string
-    belongs_to :user, User
+    field(:body, :string)
+    field(:subject, :string)
+    field(:url, :string)
+    belongs_to(:user, User)
 
     timestamps()
   end

@@ -4,11 +4,10 @@ defmodule FirestormWeb.Web.CategoryController do
   alias FirestormWeb.Forums
   alias FirestormWeb.Web.Plugs.RequireUser
 
-  plug RequireUser when action in [:new, :create]
+  plug(RequireUser when action in [:new, :create])
 
   def index(conn, _params) do
-    categories =
-      Forums.list_categories()
+    categories = Forums.list_categories()
 
     render(conn, "index.html", categories: categories)
   end
@@ -24,6 +23,7 @@ defmodule FirestormWeb.Web.CategoryController do
         conn
         |> put_flash(:info, "Category created successfully.")
         |> redirect(to: category_path(conn, :show, category))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -32,7 +32,7 @@ defmodule FirestormWeb.Web.CategoryController do
   def show(conn, %{"id" => id}) do
     category =
       id
-      |> Forums.get_category!
+      |> Forums.get_category!()
 
     threads =
       category
@@ -55,6 +55,7 @@ defmodule FirestormWeb.Web.CategoryController do
         conn
         |> put_flash(:info, "Category updated successfully.")
         |> redirect(to: category_path(conn, :show, category))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", category: category, changeset: changeset)
     end

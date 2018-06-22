@@ -10,8 +10,10 @@ defmodule FirestormWeb.Web.Plugs.ApiCurrentUser do
 
   def call(conn, _opts) do
     case get_req_header(conn, "authorization") do
-      [] -> conn
-      [authorization|_] ->
+      [] ->
+        conn
+
+      [authorization | _] ->
         api_token =
           authorization
           |> String.replace("Bearer ", "")
@@ -19,6 +21,7 @@ defmodule FirestormWeb.Web.Plugs.ApiCurrentUser do
         case Forums.get_user_by_api_token(api_token) do
           nil ->
             conn
+
           user ->
             conn
             |> assign(:current_user, user)

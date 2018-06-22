@@ -17,6 +17,7 @@ defmodule FirestormWeb.Forums.Slugs.TitleSlug do
 
       def get_unused_slug(base_slug, number) do
         slug = get_slug(base_slug, number)
+
         if slug_used?(slug) do
           get_unused_slug(base_slug, number + 1)
         else
@@ -27,10 +28,11 @@ defmodule FirestormWeb.Forums.Slugs.TitleSlug do
       def slug_used?(slug) do
         unquote(module)
         |> where(slug: ^slug)
-        |> Repo.one
+        |> Repo.one()
       end
 
       def get_slug(base_slug, 0), do: base_slug
+
       def get_slug(base_slug, number) do
         "#{base_slug}-#{number}"
       end

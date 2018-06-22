@@ -4,7 +4,11 @@ defmodule FirestormWeb.Web.ThreadController do
   alias FirestormWeb.Repo
   alias FirestormWeb.Forums
   alias FirestormWeb.Forums.Thread
-  plug FirestormWeb.Web.Plugs.RequireUser when action in [:new, :create, :watch, :unwatch, :participating, :watching]
+
+  plug(
+    FirestormWeb.Web.Plugs.RequireUser
+    when action in [:new, :create, :watch, :unwatch, :participating, :watching]
+  )
 
   def action(conn, _) do
     if(conn.params["category_id"]) do
@@ -43,16 +47,21 @@ defmodule FirestormWeb.Web.ThreadController do
   def new(conn, _params, category) do
     changeset =
       %Thread{category_id: category.id}
-      |> Forums.change_thread
+      |> Forums.change_thread()
+
     render(conn, "new.html", changeset: changeset, category: category)
   end
 
   def create(conn, %{"thread" => thread_params}, category) do
-    case Forums.create_thread(category, current_user(conn), %{title: thread_params["title"], body: thread_params["body"]}) do
+    case Forums.create_thread(category, current_user(conn), %{
+           title: thread_params["title"],
+           body: thread_params["body"]
+         }) do
       {:ok, thread} ->
         conn
         |> put_flash(:info, "Thread created successfully.")
         |> redirect(to: category_thread_path(conn, :show, category, thread))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset, category: category)
     end
@@ -86,12 +95,19 @@ defmodule FirestormWeb.Web.ThreadController do
       end
     end
 
-    render(conn, "show.html", thread: thread, category: category, first_post: first_post, posts: posts, watched: watched)
+    render(
+      conn,
+      "show.html",
+      thread: thread,
+      category: category,
+      first_post: first_post,
+      posts: posts,
+      watched: watched
+    )
   end
 
   def watch(conn, %{"id" => id}, category) do
-    thread =
-      Forums.get_thread!(category, id)
+    thread = Forums.get_thread!(category, id)
 
     conn
     |> current_user()
@@ -102,8 +118,7 @@ defmodule FirestormWeb.Web.ThreadController do
   end
 
   def unwatch(conn, %{"id" => id}, category) do
-    thread =
-      Forums.get_thread!(category, id)
+    thread = Forums.get_thread!(category, id)
 
     conn
     |> current_user()
@@ -127,6 +142,7 @@ defmodule FirestormWeb.Web.ThreadController do
         conn
         |> put_flash(:info, "Thread updated successfully.")
         |> redirect(to: category_thread_path(conn, :show, category, thread))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", thread: thread, changeset: changeset, category: category)
     end
