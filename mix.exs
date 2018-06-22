@@ -2,27 +2,28 @@ defmodule FirestormWeb.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :firestorm_web,
-     version: "0.9.1",
-     elixir: "~> 1.4",
-     elixirc_paths: elixirc_paths(Mix.env),
-     compilers: [:phoenix, :gettext] ++ Mix.compilers,
-     start_permanent: Mix.env == :prod,
-     aliases: aliases(),
-     deps: deps()]
+    [
+      app: :firestorm_web,
+      version: "0.9.1",
+      elixir: "~> 1.6",
+      elixirc_paths: elixirc_paths(Mix.env()),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      start_permanent: Mix.env() == :prod,
+      aliases: aliases(),
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application.
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {FirestormWeb.Application, []},
-     extra_applications: [:logger, :runtime_tools]]
+    [mod: {FirestormWeb.Application, []}, extra_applications: [:logger, :runtime_tools]]
   end
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
   #
@@ -56,7 +57,6 @@ defmodule FirestormWeb.Mixfile do
       {:pryin, "~> 1.0"},
       {:oembed, "~> 0.1.1"},
       {:lru_cache, "0.1.1"},
-      {:appsignal, "~> 1.0"},
       {:cors_plug, "~> 1.2"},
       {:ex_admin, github: "smpallen99/ex_admin"},
 
@@ -70,7 +70,7 @@ defmodule FirestormWeb.Mixfile do
 
       # OVERRIDES
       # We can remove this override once we're on exmoji > 0.2.2
-      {:poison, "~> 3.0", override: true},
+      {:poison, "~> 3.0", override: true}
     ]
   end
 
@@ -81,8 +81,10 @@ defmodule FirestormWeb.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"],
-     "test": ["ecto.drop", "ecto.create --quiet", "ecto.migrate", "test"]]
+    [
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      test: ["ecto.drop", "ecto.create --quiet", "ecto.migrate", "test"]
+    ]
   end
 end
