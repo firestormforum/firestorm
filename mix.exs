@@ -47,7 +47,7 @@ defmodule FirestormWeb.Mixfile do
       {:scrivener_ecto, "~> 1.2.2"},
       {:scrivener_html, "~> 1.7"},
       {:bamboo, github: "thoughtbot/bamboo"},
-      {:ecto_autoslug_field, "~> 0.3.0"},
+      {:ecto_autoslug_field, "~> 0.5"},
       {:uuid, "~> 1.1"},
       {:timex, "~> 3.1.15"},
       {:comeonin, "~> 3.0.2"},

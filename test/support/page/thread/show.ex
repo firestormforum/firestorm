@@ -7,13 +7,14 @@ defmodule Page.Thread.Show do
 
   def post_item(body), do: css(".post-item", text: body)
 
-  def post_username(username, count \\ 1), do: css(".post-item > .item-metadata > .username", text: username, count: count)
+  def post_username(username, count \\ 1),
+    do: css(".post-item > .item-metadata > .username", text: username, count: count)
 
   def watched_icon(), do: css(".fa-eye.-highlight")
 
   def watch_link(), do: action_link("watch")
 
-  def oembed_for(url) do
+  def oembed_for(_url) do
     # FIXME: It would be ideal to do this:
     # css(".oembed-for[data-oembed-url='#{url}']")
     # but it failed for dumb reasons so we're just doing this for now.

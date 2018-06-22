@@ -17,12 +17,12 @@ config :firestorm_web, FirestormWeb.Repo,
   password: System.get_env("POSTGRES_PASSWORD") || "postgres",
   database: "firestorm_web_test",
   hostname: System.get_env("POSTGRES_HOST") || "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+  pool: Ecto.Adapters.SQL.Sandbox,
+  ownership_timeout: 30_000
 
 config :firestorm_web, sql_sandbox: true
 
-config :firestorm_web, FirestormWeb.Mailer,
-  adapter: Bamboo.TestAdapter
+config :firestorm_web, FirestormWeb.Mailer, adapter: Bamboo.TestAdapter
 
 config :bamboo, :refute_timeout, 10
 
