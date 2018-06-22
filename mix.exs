@@ -30,12 +30,12 @@ defmodule FirestormWeb.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.3.0-rc", override: true},
+      {:phoenix, "~> 1.3.3", override: true},
       {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, "~> 3.2"},
-      {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 2.6"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_ecto, "~> 3.3"},
+      {:postgrex, ">= 0.3.5"},
+      {:phoenix_html, "~> 2.11"},
+      {:phoenix_live_reload, "~> 1.1.5", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:ueberauth, "0.4.0"},
@@ -52,13 +52,14 @@ defmodule FirestormWeb.Mixfile do
       {:timex, "~> 3.1.15"},
       {:comeonin, "~> 3.0.2"},
       {:exgravatar, "~> 2.0.0"},
-      {:bodyguard, "~> 2.0.1"},
+      {:bodyguard, "~> 2.2"},
       {:html_sanitize_ex, "~> 1.2"},
       {:pryin, "~> 1.0"},
       {:oembed, "~> 0.1.1"},
       {:lru_cache, "0.1.1"},
-      {:cors_plug, "~> 1.2"},
+      {:cors_plug, "~> 1.5"},
       {:ex_admin, github: "smpallen99/ex_admin"},
+      {:httpoison, "~> 1.2.0", override: true},
 
       # TEST DEPENDENCIES
       {:wallaby, "~> 0.17.0", only: [:test]},
