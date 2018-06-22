@@ -51,6 +51,7 @@ defmodule FirestormWeb.Mixfile do
       {:uuid, "~> 1.1"},
       {:timex, "~> 3.3"},
       {:comeonin, "~> 4.1"},
+      {:bcrypt_elixir, "~> 1.0"},
       {:exgravatar, "~> 2.0.0"},
       {:bodyguard, "~> 2.2"},
       {:html_sanitize_ex, "~> 1.2"},
