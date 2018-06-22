@@ -1,9 +1,9 @@
 defmodule FirestormWeb.Web.UsersChannel do
   use FirestormWeb.Web, :channel
-  use Appsignal.Instrumentation.Decorators
+  # use Appsignal.Instrumentation.Decorators
   alias FirestormWeb.Web.Api.V1.FetchView
 
-  intercept ["update"]
+  intercept(["update"])
 
   def join("users:" <> _id, payload, socket) do
     if authorized?(payload) do
@@ -17,9 +17,9 @@ defmodule FirestormWeb.Web.UsersChannel do
     true
   end
 
-  @decorate channel_action()
+  # @decorate channel_action()
   def handle_out("update", msg, socket) do
-    push socket, "update", FetchView.render("index.json", msg)
+    push(socket, "update", FetchView.render("index.json", msg))
     {:noreply, socket}
   end
 end

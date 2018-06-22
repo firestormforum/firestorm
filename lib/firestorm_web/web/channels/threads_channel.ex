@@ -1,10 +1,10 @@
 defmodule FirestormWeb.Web.ThreadsChannel do
   use FirestormWeb.Web, :channel
-  use Appsignal.Instrumentation.Decorators
+  # use Appsignal.Instrumentation.Decorators
   alias FirestormWeb.Store.ReplenishResponse
   alias FirestormWeb.Web.Api.V1.FetchView
 
-  intercept ["update"]
+  intercept(["update"])
 
   def join("threads:" <> _id, payload, socket) do
     if authorized?(payload) do
@@ -18,9 +18,9 @@ defmodule FirestormWeb.Web.ThreadsChannel do
     true
   end
 
-  @decorate channel_action()
+  # @decorate channel_action()
   def handle_out("update", %ReplenishResponse{} = msg, socket) do
-    push socket, "update", FetchView.render("index.json", msg)
+    push(socket, "update", FetchView.render("index.json", msg))
     {:noreply, socket}
   end
 end

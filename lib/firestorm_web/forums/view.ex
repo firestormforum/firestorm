@@ -9,8 +9,8 @@ defmodule FirestormWeb.Forums.View do
 
   schema "abstract table: views" do
     # This will be used by associations on each "concrete" table
-    field :assoc_id, :integer
-    field :user_id, :integer
+    field(:assoc_id, :integer)
+    field(:user_id, :integer)
 
     timestamps()
   end

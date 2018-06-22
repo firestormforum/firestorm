@@ -33,7 +33,11 @@ defmodule FirestormWeb.Web.AuthController do
     case auth.provider do
       :github ->
         with %{name: name, nickname: nickname, email: email} <- auth.info do
-          case Forums.login_or_register_from_github(%{name: name, nickname: nickname, email: email}) do
+          case Forums.login_or_register_from_github(%{
+                 name: name,
+                 nickname: nickname,
+                 email: email
+               }) do
             {:ok, user} ->
               conn
               |> ok_login(user)
@@ -44,8 +48,12 @@ defmodule FirestormWeb.Web.AuthController do
               |> redirect(to: "/")
           end
         end
+
       :identity ->
-        case Forums.login_or_register_from_identity(%{username: params["user"]["username"], password: params["user"]["password"]}) do
+        case Forums.login_or_register_from_identity(%{
+               username: params["user"]["username"],
+               password: params["user"]["password"]
+             }) do
           {:ok, user} ->
             conn
             |> ok_login(user)
@@ -53,14 +61,22 @@ defmodule FirestormWeb.Web.AuthController do
           {:error, %Ecto.Changeset{} = changeset} ->
             conn
             |> put_flash(:error, "Login unsuccessful")
-            |> render("request.html", callback_url: Helpers.callback_url(conn), changeset: changeset)
+            |> render(
+              "request.html",
+              callback_url: Helpers.callback_url(conn),
+              changeset: changeset
+            )
 
           {:error, reason} ->
             changeset = User.registration_changeset(%User{}, %{})
 
             conn
             |> put_flash(:error, reason)
-            |> render("request.html", callback_url: Helpers.callback_url(conn), changeset: changeset)
+            |> render(
+              "request.html",
+              callback_url: Helpers.callback_url(conn),
+              changeset: changeset
+            )
         end
     end
   end

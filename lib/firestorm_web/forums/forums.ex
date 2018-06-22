@@ -3,11 +3,12 @@ defmodule FirestormWeb.Forums do
   The boundary for the Forums system.
   """
 
-  use Bodyguard.Policy, policy: FirestormWeb.Forums.Policy
+  defdelegate authorize(action, user, params), to: FirestormWeb.Forums.Policy
   import Ecto.{Query, Changeset}, warn: false
   alias FirestormWeb.{Repo, Notifications}
   alias FirestormWeb.Web.Endpoint
   alias FirestormWeb.Store.ReplenishResponse
+
   alias FirestormWeb.Forums.{
     User,
     Category,
@@ -36,7 +37,7 @@ defmodule FirestormWeb.Forums do
 
   def paginate_users(page) do
     User
-    |> order_by([p], [desc: p.inserted_at])
+    |> order_by([p], desc: p.inserted_at)
     |> Repo.paginate(page: page)
   end
 
@@ -157,7 +158,7 @@ defmodule FirestormWeb.Forums do
   """
   def list_categories do
     Category
-    |> order_by([asc: :slug])
+    |> order_by(asc: :slug)
     |> Repo.all()
   end
 
@@ -167,9 +168,16 @@ defmodule FirestormWeb.Forums do
   def get_recent_threads_for_categories(categories, user) do
     threads =
       Thread
-      |> join(:left_lateral, [t], p in fragment("SELECT thread_id, inserted_at FROM forums_posts WHERE forums_posts.thread_id = ? ORDER BY forums_posts.inserted_at DESC LIMIT 1", t.id))
-      |> order_by([t, p], [desc: p.inserted_at])
-      |> where([t, p], t.category_id in ^(Enum.map(categories, &(&1.id))))
+      |> join(
+        :left_lateral,
+        [t],
+        p in fragment(
+          "SELECT thread_id, inserted_at FROM forums_posts WHERE forums_posts.thread_id = ? ORDER BY forums_posts.inserted_at DESC LIMIT 1",
+          t.id
+        )
+      )
+      |> order_by([t, p], desc: p.inserted_at)
+      |> where([t, p], t.category_id in ^Enum.map(categories, & &1.id))
       |> limit(3)
       |> select([t], t)
       |> Repo.all()
@@ -183,8 +191,10 @@ defmodule FirestormWeb.Forums do
 
     threads_map =
       threads
-      |> Enum.reduce(initial_threads_map, fn(thread, acc) ->
-        Map.update(acc, thread.category_id, [thread], fn(cat_threads) -> cat_threads ++ [thread] end)
+      |> Enum.reduce(initial_threads_map, fn thread, acc ->
+        Map.update(acc, thread.category_id, [thread], fn cat_threads ->
+          cat_threads ++ [thread]
+        end)
       end)
 
     {categories, threads_map}
@@ -285,7 +295,7 @@ defmodule FirestormWeb.Forums do
     Thread
     |> where([t], t.category_id == ^category.id)
     |> preload(posts: :user)
-    |> Repo.all
+    |> Repo.all()
     |> decorate_threads(user)
   end
 
@@ -302,11 +312,18 @@ defmodule FirestormWeb.Forums do
   """
   def recent_threads(category, user \\ nil) do
     Thread
-    |> join(:left_lateral, [t], p in fragment("SELECT thread_id, inserted_at FROM forums_posts WHERE forums_posts.thread_id = ? ORDER BY forums_posts.inserted_at DESC LIMIT 1", t.id))
-    |> order_by([t, p], [desc: p.inserted_at])
+    |> join(
+      :left_lateral,
+      [t],
+      p in fragment(
+        "SELECT thread_id, inserted_at FROM forums_posts WHERE forums_posts.thread_id = ? ORDER BY forums_posts.inserted_at DESC LIMIT 1",
+        t.id
+      )
+    )
+    |> order_by([t, p], desc: p.inserted_at)
     |> where(category_id: ^category.id)
     |> select([t], t)
-    |> Repo.all
+    |> Repo.all()
     |> Repo.preload(posts: from(p in Post, order_by: p.inserted_at, preload: :user))
     |> decorate_threads(user)
   end
@@ -317,18 +334,25 @@ defmodule FirestormWeb.Forums do
   # - completely_read?
   defp decorate_threads(threads, user) do
     threads
-    |> Enum.map(fn(thread) ->
+    |> Enum.map(fn thread ->
       first_post = Enum.at(thread.posts, 0)
       posts_count = length(thread.posts)
+
       completely_read? =
         if user do
           # FIXME: This is insanely inefficient, lol?
           thread.posts
-          |> Enum.all?(fn(post) -> post |> viewed_by?(user) end)
+          |> Enum.all?(fn post -> post |> viewed_by?(user) end)
         else
           false
         end
-      %Thread{thread | first_post: first_post, posts_count: posts_count, completely_read?: completely_read?}
+
+      %Thread{
+        thread
+        | first_post: first_post,
+          posts_count: posts_count,
+          completely_read?: completely_read?
+      }
     end)
   end
 
@@ -426,7 +450,7 @@ defmodule FirestormWeb.Forums do
     thread_result =
       %{thread: thread_attrs, post: post_attrs}
       |> Thread.new_changeset()
-      |> Repo.insert
+      |> Repo.insert()
 
     case thread_result do
       {:ok, thread} ->
@@ -444,17 +468,18 @@ defmodule FirestormWeb.Forums do
             post -> {[post], [post.user]}
           end
 
-        payload =
-          %ReplenishResponse{
-            categories: [thread.category],
-            threads: [thread],
-            users: users,
-            posts: posts
-          }
+        payload = %ReplenishResponse{
+          categories: [thread.category],
+          threads: [thread],
+          users: users,
+          posts: posts
+        }
 
         :ok = Endpoint.broadcast!("categories:#{thread.category_id}", "update", payload)
         {:ok, thread}
-      e -> e
+
+      e ->
+        e
     end
   end
 
@@ -519,7 +544,13 @@ defmodule FirestormWeb.Forums do
   def login_or_register_from_github(%{nickname: nickname, name: name, email: email}) do
     case get_user_by_username(nickname) do
       nil ->
-        create_user(%{email: email, name: name, username: nickname, api_token: generate_api_token()})
+        create_user(%{
+          email: email,
+          name: name,
+          username: nickname,
+          api_token: generate_api_token()
+        })
+
       user ->
         {:ok, user}
     end
@@ -533,20 +564,31 @@ defmodule FirestormWeb.Forums do
     case get_user_by_username(username) do
       nil ->
         # No user, let's register one!
-        register_user(%{username: username, name: username, password: password, api_token: generate_api_token()})
+        register_user(%{
+          username: username,
+          name: username,
+          password: password,
+          api_token: generate_api_token()
+        })
+
       user ->
         # We'll check the password with checkpw against the user's stored
         # password hash
-        Endpoint.instrument :pryin, %{key: "Forums.login_or_register_from_identity#checkpw"}, fn ->
-          case checkpw(password, user.password_hash) do
-            true ->
-              # Everything checks out, success
-              {:ok, user}
-            _ ->
-              # User existed, we checked the password, but no dice
-              {:error, "No user found with that username or password"}
+        Endpoint.instrument(
+          :pryin,
+          %{key: "Forums.login_or_register_from_identity#checkpw"},
+          fn ->
+            case checkpw(password, user.password_hash) do
+              true ->
+                # Everything checks out, success
+                {:ok, user}
+
+              _ ->
+                # User existed, we checked the password, but no dice
+                {:error, "No user found with that username or password"}
+            end
           end
-        end
+        )
     end
   end
 
@@ -574,16 +616,14 @@ defmodule FirestormWeb.Forums do
     {:ok, post} = Repo.insert(changeset)
     :ok = Notifications.post_created(post)
 
-    post =
-      Repo.preload(post, [:thread, :user])
+    post = Repo.preload(post, [:thread, :user])
 
-    payload =
-      %ReplenishResponse{
-        categories: [],
-        threads: [post.thread],
-        users: [post.user],
-        posts: [post]
-      }
+    payload = %ReplenishResponse{
+      categories: [],
+      threads: [post.thread],
+      users: [post.user],
+      posts: [post]
+    }
 
     :ok = Endpoint.broadcast!("threads:#{post.thread_id}", "update", payload)
     {:ok, post}
@@ -606,17 +646,17 @@ defmodule FirestormWeb.Forums do
   def user_posts(user, %{page: page}) do
     Post
     |> where([p], p.user_id == ^user.id)
-    |> order_by([p], [desc: p.inserted_at])
-    |> preload([p], [thread: [:category], user: []])
+    |> order_by([p], desc: p.inserted_at)
+    |> preload([p], thread: [:category], user: [])
     |> Repo.paginate(page: page)
   end
 
   def user_last_post(user) do
     Post
     |> where([p], p.user_id == ^user.id)
-    |> order_by([p], [desc: p.inserted_at])
+    |> order_by([p], desc: p.inserted_at)
     |> limit(1)
-    |> Repo.one
+    |> Repo.one()
   end
 
   # FIXME: Should track when users log in rather than proxying that by
@@ -624,10 +664,10 @@ defmodule FirestormWeb.Forums do
   def user_last_seen(user) do
     "forums_posts_views"
     |> where([v], v.user_id == ^user.id)
-    |> order_by([v], [desc: v.inserted_at])
+    |> order_by([v], desc: v.inserted_at)
     |> select([v], v.inserted_at)
     |> limit(1)
-    |> Repo.one
+    |> Repo.one()
   end
 
   @doc """
@@ -675,7 +715,7 @@ defmodule FirestormWeb.Forums do
     watchable
     |> watches()
     |> select([f], f.user_id)
-    |> Repo.all
+    |> Repo.all()
   end
 
   def watch_count(watchable) do
@@ -683,6 +723,7 @@ defmodule FirestormWeb.Forums do
     |> watches()
     |> Repo.aggregate(:count, :id)
   end
+
   defp watch_count(watchable, user = %User{}) do
     watchable
     |> watches()
@@ -697,10 +738,17 @@ defmodule FirestormWeb.Forums do
 
   def home_threads(user_or_nil) do
     Thread
-    |> join(:left_lateral, [t], p in fragment("SELECT thread_id, inserted_at FROM forums_posts WHERE forums_posts.thread_id = ? ORDER BY forums_posts.inserted_at DESC LIMIT 1", t.id))
-    |> order_by([t, p], [desc: p.inserted_at])
+    |> join(
+      :left_lateral,
+      [t],
+      p in fragment(
+        "SELECT thread_id, inserted_at FROM forums_posts WHERE forums_posts.thread_id = ? ORDER BY forums_posts.inserted_at DESC LIMIT 1",
+        t.id
+      )
+    )
+    |> order_by([t, p], desc: p.inserted_at)
     |> select([t], t)
-    |> Repo.all
+    |> Repo.all()
     |> Repo.preload(posts: from(p in Post, order_by: p.inserted_at, preload: :user))
     |> Repo.preload(:category)
     |> decorate_threads(user_or_nil)
@@ -724,11 +772,18 @@ defmodule FirestormWeb.Forums do
 
   defp get_decorated_threads(thread_ids, user) do
     Thread
-    |> join(:left_lateral, [t], p in fragment("SELECT thread_id, inserted_at FROM forums_posts WHERE forums_posts.thread_id = ? ORDER BY forums_posts.inserted_at DESC LIMIT 1", t.id))
+    |> join(
+      :left_lateral,
+      [t],
+      p in fragment(
+        "SELECT thread_id, inserted_at FROM forums_posts WHERE forums_posts.thread_id = ? ORDER BY forums_posts.inserted_at DESC LIMIT 1",
+        t.id
+      )
+    )
     |> where([t], t.id in ^thread_ids)
-    |> order_by([t, p], [desc: p.inserted_at])
-    |> preload([category: [], posts: [:user]])
-    |> Repo.all
+    |> order_by([t, p], desc: p.inserted_at)
+    |> preload(category: [], posts: [:user])
+    |> Repo.all()
     |> decorate_threads(user)
   end
 
@@ -762,6 +817,7 @@ defmodule FirestormWeb.Forums do
     |> views()
     |> Repo.aggregate(:count, :id)
   end
+
   defp view_count(viewable, user = %User{}) do
     viewable
     |> views()
@@ -808,7 +864,7 @@ defmodule FirestormWeb.Forums do
       post.body
       |> OembedExtractor.get_embeds()
 
-    %Post{ post | oembeds: oembeds }
+    %Post{post | oembeds: oembeds}
   end
 
   defp generate_api_token(), do: UUID.uuid4()
@@ -819,7 +875,7 @@ defmodule FirestormWeb.Forums do
       |> Repo.preload(:roles)
 
     user.roles
-    |> Enum.any?(fn(role) ->
+    |> Enum.any?(fn role ->
       role.name == "admin"
     end)
   end
@@ -836,4 +892,3 @@ defmodule FirestormWeb.Forums do
     |> Repo.insert()
   end
 end
-

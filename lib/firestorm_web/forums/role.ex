@@ -8,9 +8,9 @@ defmodule FirestormWeb.Forums.Role do
   alias FirestormWeb.Forums.{User, RoleMembership}
 
   schema "forums_roles" do
-    field :name, :string
-    has_many :role_memberships, RoleMembership
-    many_to_many :users, User, join_through: RoleMembership
+    field(:name, :string)
+    has_many(:role_memberships, RoleMembership)
+    many_to_many(:users, User, join_through: RoleMembership)
 
     timestamps()
   end

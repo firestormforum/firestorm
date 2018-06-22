@@ -25,13 +25,13 @@ defmodule FirestormWeb.Web.ChannelCase do
     end
   end
 
-
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(FirestormWeb.Repo)
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(FirestormWeb.Repo, {:shared, self()})
     end
+
     :ok
   end
-
 end

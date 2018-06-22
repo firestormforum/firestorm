@@ -2,16 +2,14 @@ defmodule FirestormWeb.Web.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "store:*", FirestormWeb.Web.StoreChannel
-  channel "users:*", FirestormWeb.Web.UsersChannel
-  channel "posts:*", FirestormWeb.Web.PostsChannel
-  channel "threads:*", FirestormWeb.Web.ThreadsChannel
-  channel "categories:*", FirestormWeb.Web.CategoriesChannel
+  channel("store:*", FirestormWeb.Web.StoreChannel)
+  channel("users:*", FirestormWeb.Web.UsersChannel)
+  channel("posts:*", FirestormWeb.Web.PostsChannel)
+  channel("threads:*", FirestormWeb.Web.ThreadsChannel)
+  channel("categories:*", FirestormWeb.Web.CategoriesChannel)
 
   ## Transports
-  transport :websocket, Phoenix.Transports.WebSocket,
-    timeout: 45_000,
-    check_origin: false
+  transport(:websocket, Phoenix.Transports.WebSocket, timeout: 45_000, check_origin: false)
   # transport :longpoll, Phoenix.Transports.LongPoll
 
   # Socket params are passed from the client and can

@@ -14,7 +14,7 @@ defmodule FirestormWeb.Web.ViewHelpers do
 
   def markdown(body) do
     body
-    |> Markdown.render
+    |> Markdown.render()
     |> raw
   end
 
@@ -26,7 +26,7 @@ defmodule FirestormWeb.Web.ViewHelpers do
   def category_color(category) do
     category
     |> hashlist
-    |> Enum.sum
+    |> Enum.sum()
     |> rem(360)
   end
 

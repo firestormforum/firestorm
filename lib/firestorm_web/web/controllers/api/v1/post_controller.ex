@@ -11,7 +11,7 @@ defmodule FirestormWeb.Web.Api.V1.PostController do
       |> render("show.json", post)
     else
       x ->
-        IO.inspect x
+        IO.inspect(x)
 
         conn
         |> put_status(:unprocessable_entity)

@@ -9,16 +9,16 @@ defmodule FirestormWeb.Forums.User do
   alias FirestormWeb.Forums.{Post, RoleMembership, Role}
 
   schema "forums_users" do
-    field :email, :string
-    field :name, :string
-    field :username, :string
-    field :password_hash, :string
-    field :password, :string, virtual: true
-    field :api_token, :string
+    field(:email, :string)
+    field(:name, :string)
+    field(:username, :string)
+    field(:password_hash, :string)
+    field(:password, :string, virtual: true)
+    field(:api_token, :string)
 
-    has_many :posts, Post
-    has_many :role_memberships, RoleMembership
-    many_to_many :roles, Role, join_through: RoleMembership, on_replace: :delete
+    has_many(:posts, Post)
+    has_many(:role_memberships, RoleMembership)
+    many_to_many(:roles, Role, join_through: RoleMembership, on_replace: :delete)
 
     timestamps()
   end
@@ -50,7 +50,7 @@ defmodule FirestormWeb.Forums.User do
     if Enum.count(Map.get(params, :roles, [])) > 0 do
       ids = params[:roles]
       # FIXME: I don't love going out to the repo here
-      roles = FirestormWeb.Repo.all(from r in Role, where: r.id in ^ids)
+      roles = FirestormWeb.Repo.all(from(r in Role, where: r.id in ^ids))
       put_assoc(changeset, :roles, roles)
     else
       changeset
@@ -79,9 +79,9 @@ defmodule FirestormWeb.Forums.User do
       %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
         changeset
         |> put_change(:password_hash, Comeonin.Bcrypt.hashpwsalt(pass))
+
       _ ->
         changeset
     end
   end
-
 end

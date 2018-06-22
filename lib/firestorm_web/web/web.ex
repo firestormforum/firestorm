@@ -29,18 +29,20 @@ defmodule FirestormWeb.Web do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/firestorm_web/web/templates",
-                        namespace: FirestormWeb.Web
+      use Phoenix.View,
+        root: "lib/firestorm_web/web/templates",
+        namespace: FirestormWeb.Web
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [
-        get_csrf_token: 0,
-        get_flash: 1,
-        get_flash: 2,
-        view_module: 1,
-        action_name: 1,
-        current_path: 1
-      ]
+      import Phoenix.Controller,
+        only: [
+          get_csrf_token: 0,
+          get_flash: 1,
+          get_flash: 2,
+          view_module: 1,
+          action_name: 1,
+          current_path: 1
+        ]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
@@ -52,6 +54,7 @@ defmodule FirestormWeb.Web do
       import FirestormWeb.Web.ViewHelpers
       import FirestormWeb.Web.TagHelpers
       import FirestormWeb.Web.OembedHelpers
+
       alias FirestormWeb.Web.{
         CategoryView
       }

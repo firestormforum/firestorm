@@ -15,27 +15,35 @@ defmodule FirestormWeb.Web.Layout.PageTitle do
   defp get({CategoryView, :index, _}) do
     "Categories"
   end
+
   defp get({CategoryView, :show, %{category: category}}) do
     category.title
   end
+
   defp get({CategoryView, :new, _}) do
     "New Category"
   end
+
   defp get({CategoryView, :edit, %{category: category}}) do
     "Edit #{category.title}"
   end
+
   defp get({ThreadView, :show, %{thread: thread, category: category}}) do
     "#{thread.title} - #{category.title}"
   end
+
   defp get({ThreadView, :new, %{category: category}}) do
     "New Thread - #{category.title}"
   end
+
   defp get({ThreadView, :edit, %{thread: thread}}) do
     "Edit #{thread.title}"
   end
+
   defp get({UserView, :show, %{user: user}}) do
     "#{user.username} - Users"
   end
+
   defp get(_), do: nil
 
   defp add_app_name(nil), do: @app_name
@@ -61,7 +69,8 @@ defmodule FirestormWeb.Web.LayoutView do
       "page",
       controller_simple_name(conn),
       action_name(conn)
-    ] |> Enum.join("-")
+    ]
+    |> Enum.join("-")
   end
 
   defp controller_simple_name(conn) do
@@ -77,12 +86,12 @@ defmodule FirestormWeb.Web.LayoutView do
   end
 
   def js_script_tag do
-    "<script src=\"" <> Application.get_env(:firestorm_web, :js_path_prefix)
-      <> "/js/app.js\"></script>"
+    "<script src=\"" <>
+      Application.get_env(:firestorm_web, :js_path_prefix) <> "/js/app.js\"></script>"
   end
 
   def css_link_tag do
-    "<link rel=\"stylesheet\" type=\"text/css\" href=\""
-      <> Application.get_env(:firestorm_web, :css_path_prefix) <> "/css/app.css\" />"
+    "<link rel=\"stylesheet\" type=\"text/css\" href=\"" <>
+      Application.get_env(:firestorm_web, :css_path_prefix) <> "/css/app.css\" />"
   end
 end

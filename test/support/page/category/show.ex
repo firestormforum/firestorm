@@ -5,6 +5,7 @@ defmodule Page.Category.Show do
   def new_thread_link(), do: link("New Thread")
   def threads(count), do: css("ol.thread-list li.thread-list-item", count: count)
   def thread_title(title), do: css("a.title", text: title)
+
   def thread_posts_count(count, opts \\ []) do
     opts
     |> Keyword.get(:completely_read?)

@@ -6,6 +6,7 @@ defmodule FirestormWeb.Web.Session do
   alias FirestormWeb.Forums
 
   def current_user(%{assigns: %{current_user: u}}), do: u
+
   def current_user(conn) do
     case get_current_user(conn) do
       nil ->
@@ -22,6 +23,7 @@ defmodule FirestormWeb.Web.Session do
     case current_user(conn) do
       nil ->
         false
+
       u ->
         Forums.is_admin?(u)
     end
