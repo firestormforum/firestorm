@@ -1,5 +1,4 @@
 %{
-  "appsignal": {:hex, :appsignal, "1.3.0", "a95d2622f35eb7ea6c6efaef7ba42be73d0b05c9892b2d633a4c40494586bbf2", [:make, :mix], [{:decorator, "~> 1.0", [hex: :decorator, optional: false]}, {:httpoison, "~> 0.11", [hex: :httpoison, optional: false]}, {:phoenix, ">= 1.2.0", [hex: :phoenix, optional: true]}, {:plug, ">= 1.1.0", [hex: :plug, optional: true]}, {:poison, ">= 1.3.0", [hex: :poison, optional: false]}]},
   "bamboo": {:git, "https://github.com/thoughtbot/bamboo.git", "6f10c5887a58ec7c3ace8b1fa8fa6fb3d9bf5c1a", []},
   "bcrypt_elixir": {:hex, :bcrypt_elixir, "1.0.7", "e79d84b666bfad0e461ed217860e1c7de6bc4a1ae919cdb39d473ca784817653", [:make, :mix], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm"},
   "bodyguard": {:hex, :bodyguard, "2.2.2", "d5d1ea325b395ed8edcdcedb8632290e92fe9061ee1fe2de86aa00ca918ab96b", [:mix], [{:plug, "~> 1.0", [hex: :plug, repo: "hexpm", optional: false]}], "hexpm"},
