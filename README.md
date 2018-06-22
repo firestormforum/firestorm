@@ -1,11 +1,12 @@
 ![Firestorm](./assets/static/images/firestorm-logo.png)
+
 ### An open-source forum engine, with an Elixir+Phoenix backend and an Elm frontend.
+
 #### A community-funded project from [DailyDrip](https://www.dailydrip.com).
 
-[![Build Status](https://semaphoreci.com/api/v1/dailydrip/xx-firestorm/branches/master/badge.svg)](https://semaphoreci.com/dailydrip/xx-firestorm)
-[![Deps Status](https://beta.hexfaktor.org/badge/all/github/dailydrip/firestorm.svg)](https://beta.hexfaktor.org/github/dailydrip/firestorm)
+[![Build Status](https://semaphoreci.com/api/v1/dailydrip/firestorm/branches/master/badge.svg)](https://semaphoreci.com/dailydrip/firestorm)
 
-This is the Firestorm Forum project. It's presently at version 0.9, nearly ready
+This is the Firestorm Forum project. It's presently at version 0.10, nearly ready
 for a 1.0 release. You can view the running forum at
 <http://forum.firestormforum.org>.
 
@@ -19,12 +20,13 @@ All of the patrons that made it possible are listed in [the PATRONS file](PATRON
 ## Development
 
 **Using Docker**
-1. Setup a complete docker and docker-compose installation
-2. Clone this repository
-3. Run `docker-compose up -d` to run the containers
-4. Create the database: `docker-compose run firestorm mix ecto.create`
-5. Run the migrations: `docker-compose run firestorm mix ecto.migrate`
-6. Visit `localhost:4000` to see firestorm running.
+
+1.  Setup a complete docker and docker-compose installation
+2.  Clone this repository
+3.  Run `docker-compose up -d` to run the containers
+4.  Create the database: `docker-compose run firestorm mix ecto.create`
+5.  Run the migrations: `docker-compose run firestorm mix ecto.migrate`
+6.  Visit `localhost:4000` to see firestorm running.
 
 You can also run `docker-compose logs -f firestorm` to see the server logs.
 
@@ -57,52 +59,52 @@ mix phx.server
 
 Here are the planned features and their status:
 
-- [x] [Continuous Integration](https://semaphoreci.com/dailydrip/firestorm)
-  - We're using Semaphore CI for this
-- [ ] Continuous Deployment
-  - With releases, via [distillery](https://github.com/bitwalker/distillery)
-  - For now, we've got Semaphore pushing to
+* [x] [Continuous Integration](https://semaphoreci.com/dailydrip/firestorm)
+  * We're using Semaphore CI for this
+* [ ] Continuous Deployment
+  * With releases, via [distillery](https://github.com/bitwalker/distillery)
+  * For now, we've got Semaphore pushing to
     <http://forum.firestormforum.org> after each successful build of
     master.
-- [x] OAuth
-  - At present, we only support GitHub. We'll support a lot more services in the
+* [x] OAuth
+  * At present, we only support GitHub. We'll support a lot more services in the
     future, but until we're happy with the state of the rest of the dogfooding
     session we'll stick with GitHub.
-- [ ] Email (first class!)
-  - The goal here is to be a fantastic replacement for Google Groups
-- [x] Forums
-- [x] Topics
-  - [ ] Stickies
-- [x] Posts
-- [ ] Personal Messaging
-- [ ] Mentions
-- [ ] Documentation
-  - [ ] Example Project
-  - [ ] Quickstart / Setup Guide
-  - [ ] Docs for systems integrating with firestorm within the same BEAM vm
-- [ ] Tags
-- [ ] Search
-- [ ] Slack Integration
-- [ ] Plugin System
-- [ ] Custom Profile Fields
+* [ ] Email (first class!)
+  * The goal here is to be a fantastic replacement for Google Groups
+* [x] Forums
+* [x] Topics
+  * [ ] Stickies
+* [x] Posts
+* [ ] Personal Messaging
+* [ ] Mentions
+* [ ] Documentation
+  * [ ] Example Project
+  * [ ] Quickstart / Setup Guide
+  * [ ] Docs for systems integrating with firestorm within the same BEAM vm
+* [ ] Tags
+* [ ] Search
+* [ ] Slack Integration
+* [ ] Plugin System
+* [ ] Custom Profile Fields
 
 ## Quick Fixes
 
-- [x] Fix timestamps, use moment.js and ISO format / time_abbr helper
-- [x] Style pagination on user show
-- [-] navigation enhancements
-  - [x] threads i'm participating in
-    - [ ] drill down by category (for category show sidebar)
-  - [x] threads i'm watching
-    - [ ] drill down by category (for category show sidebar)
-  - [ ] recently viewed
-    - [ ] drill down by category (for category show sidebar)
-  - [x] users
-  - [x] your profile
-- [ ] quote button
-- [x] replying via email
-- [ ] reactions / emoji picker
-- [ ] tags
+* [x] Fix timestamps, use moment.js and ISO format / time_abbr helper
+* [x] Style pagination on user show
+* [-] navigation enhancements
+  * [x] threads i'm participating in
+    * [ ] drill down by category (for category show sidebar)
+  * [x] threads i'm watching
+    * [ ] drill down by category (for category show sidebar)
+  * [ ] recently viewed
+    * [ ] drill down by category (for category show sidebar)
+  * [x] users
+  * [x] your profile
+* [ ] quote button
+* [x] replying via email
+* [ ] reactions / emoji picker
+* [ ] tags
 
 ## Configuration
 
