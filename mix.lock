@@ -1,6 +1,6 @@
 %{
   "bamboo": {:git, "https://github.com/thoughtbot/bamboo.git", "6f10c5887a58ec7c3ace8b1fa8fa6fb3d9bf5c1a", []},
-  "bcrypt_elixir": {:hex, :bcrypt_elixir, "1.0.7", "e79d84b666bfad0e461ed217860e1c7de6bc4a1ae919cdb39d473ca784817653", [:make, :mix], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm"},
+  "bcrypt_elixir": {:hex, :bcrypt_elixir, "1.0.8", "940ce8156519574142a3c6e925e7a0eea7367c55b2817b3bd18806b0bbd4254e", [:make, :mix], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm"},
   "bodyguard": {:hex, :bodyguard, "2.2.2", "d5d1ea325b395ed8edcdcedb8632290e92fe9061ee1fe2de86aa00ca918ab96b", [:mix], [{:plug, "~> 1.0", [hex: :plug, repo: "hexpm", optional: false]}], "hexpm"},
   "bunt": {:hex, :bunt, "0.2.0", "951c6e801e8b1d2cbe58ebbd3e616a869061ddadcc4863d0a2182541acae9a38", [:mix], [], "hexpm"},
   "certifi": {:hex, :certifi, "2.3.1", "d0f424232390bf47d82da8478022301c561cf6445b5b5fb6a84d49a9e76d2639", [:rebar3], [{:parse_trans, "3.2.0", [hex: :parse_trans, repo: "hexpm", optional: false]}], "hexpm"},
