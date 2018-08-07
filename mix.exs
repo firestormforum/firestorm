@@ -72,7 +72,7 @@ defmodule FirestormWeb.Mixfile do
 
       # OVERRIDES
       # We can remove this override once we're on exmoji > 0.2.2
-      {:poison, "~> 3.0", override: true}
+      {:poison, "~> 4.0", override: true}
     ]
   end
 
