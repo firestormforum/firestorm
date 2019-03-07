@@ -1,5 +1,5 @@
 %{
-  "bamboo": {:git, "https://github.com/thoughtbot/bamboo.git", "b0c66e5880ec970f5d46757a64bbebb14962659f", []},
+  "bamboo": {:git, "https://github.com/thoughtbot/bamboo.git", "70e7434af4f9eaac66f84fb9f98a8b9b996aab65", []},
   "bcrypt_elixir": {:hex, :bcrypt_elixir, "1.0.9", "cdd8de5c7d69cd7fad2816f4f6379686710f3944dfbde447828860c825e3479d", [:make, :mix], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm"},
   "bodyguard": {:hex, :bodyguard, "2.2.2", "d5d1ea325b395ed8edcdcedb8632290e92fe9061ee1fe2de86aa00ca918ab96b", [:mix], [{:plug, "~> 1.0", [hex: :plug, repo: "hexpm", optional: false]}], "hexpm"},
   "bunt": {:hex, :bunt, "0.2.0", "951c6e801e8b1d2cbe58ebbd3e616a869061ddadcc4863d0a2182541acae9a38", [:mix], [], "hexpm"},
