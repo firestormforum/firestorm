@@ -42,7 +42,7 @@ defmodule FirestormWeb.Mixfile do
       {:ueberauth_github, "~> 0.7"},
       {:ueberauth_identity, "~> 0.2.3"},
       {:oauth2, "0.9.2"},
-      {:earmark, "~> 1.2.2"},
+      {:earmark, "~> 1.3.2"},
       {:exmoji, "~> 0.2.2"},
       {:scrivener_ecto, "~> 1.3"},
       {:scrivener_html, "~> 1.7"},
