@@ -35,7 +35,7 @@ defmodule FirestormWeb.Mixfile do
       {:phoenix_ecto, "~> 3.3"},
       {:postgrex, ">= 0.3.5"},
       {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_reload, "~> 1.1.5", only: :dev},
+      {:phoenix_live_reload, "~> 1.2.1", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:ueberauth, "~> 0.5"},
