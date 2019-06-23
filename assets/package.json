@@ -39,7 +39,7 @@
     "uglify-js-brunch": "2.1.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.5.0",
-    "webpack-dev-server": "^2.4.5",
+    "webpack-dev-server": "^3.1.11",
     "write-file-webpack-plugin": "^4.0.2"
   }
 }
