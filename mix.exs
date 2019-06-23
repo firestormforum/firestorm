@@ -41,7 +41,7 @@ defmodule FirestormWeb.Mixfile do
       {:ueberauth, "~> 0.5"},
       {:ueberauth_github, "~> 0.7"},
       {:ueberauth_identity, "~> 0.2.3"},
-      {:oauth2, "0.9.2"},
+      {:oauth2, "0.9.4"},
       {:earmark, "~> 1.3.2"},
       {:exmoji, "~> 0.2.2"},
       {:scrivener_ecto, "~> 1.3"},
