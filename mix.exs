@@ -5,7 +5,7 @@ defmodule FirestormWeb.Mixfile do
     [
       app: :firestorm_web,
       version: "0.10.0",
-      elixir: "~> 1.6",
+      elixir: "~> 1.7.3",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
