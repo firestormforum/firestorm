@@ -30,7 +30,7 @@ defmodule FirestormWeb.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.3.3", override: true},
+      {:phoenix, "~> 1.4.8", override: true},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.3"},
       {:postgrex, ">= 0.3.5"},
