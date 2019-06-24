@@ -5,7 +5,7 @@ defmodule FirestormWeb.Mixfile do
     [
       app: :firestorm_web,
       version: "0.10.0",
-      elixir: "~> 1.6",
+      elixir: "~> 1.7.3",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -41,8 +41,8 @@ defmodule FirestormWeb.Mixfile do
       {:ueberauth, "~> 0.5"},
       {:ueberauth_github, "~> 0.7"},
       {:ueberauth_identity, "~> 0.2.3"},
-      {:oauth2, "0.9.2"},
-      {:earmark, "~> 1.2.2"},
+      {:oauth2, "0.9.4"},
+      {:earmark, "~> 1.3.2"},
       {:exmoji, "~> 0.2.2"},
       {:scrivener_ecto, "~> 1.3"},
       {:scrivener_html, "~> 1.7"},
@@ -60,7 +60,7 @@ defmodule FirestormWeb.Mixfile do
       {:lru_cache, "~> 0.1.3"},
       {:cors_plug, "~> 1.5"},
       {:ex_admin, github: "smpallen99/ex_admin"},
-      {:httpoison, "~> 1.2.0", override: true},
+      {:httpoison, "~> 1.5.1", override: true},
 
       # TEST DEPENDENCIES
       {:wallaby, "~> 0.20", only: [:test]},
