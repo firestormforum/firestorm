@@ -1,5 +1,0 @@
-<ol class="thread-list">
-  <%= for thread <- @threads do %>
-    <%= CategoryView.render "_thread.html", conn: @conn, category: thread.category, thread: thread %>
-  <% end %>
-</ol>

@@ -1,8 +1,0 @@
-.post-editor {
-  display: flex;
-  flex-direction: column;
-  > textarea {
-    @include text-field();
-    overflow: auto;
-  }
-}

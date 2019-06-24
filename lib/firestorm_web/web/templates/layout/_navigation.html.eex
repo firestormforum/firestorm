@@ -1,5 +1,0 @@
-<div class="pure-menu pure-menu-horizontal navigation-menu">
-  <a class="pure-menu-heading pure-menu-link.navigation-logo-link" href="/">
-    <%= render "_logo.html", conn: @conn %>
-  </a>
-</div>
