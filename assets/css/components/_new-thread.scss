@@ -1,7 +1,0 @@
-.new-thread {
-  display: flex;
-  flex-direction: column;
-  > input, > textarea {
-    @include text-field();
-  }
-}

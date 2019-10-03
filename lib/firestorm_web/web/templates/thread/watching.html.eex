@@ -1,9 +1,0 @@
-<div class="page-header">
-  <h2><%= link "Watching", to: thread_path(@conn, :watching) %></h2>
-</div>
-
-<ol class="thread-list">
-  <%= for thread <- @threads do %>
-    <%= CategoryView.render "_thread.html", conn: @conn, category: thread.category, thread: thread %>
-  <% end %>
-</ol>
