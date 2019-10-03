@@ -50,7 +50,7 @@ defmodule FirestormWeb.Mixfile do
       {:ecto_autoslug_field, "~> 0.5"},
       {:uuid, "~> 1.1"},
       {:timex, "~> 3.3"},
-      {:comeonin, "~> 4.1"},
+      {:comeonin, "~> 5.1"},
       {:bcrypt_elixir, "~> 1.0"},
       {:exgravatar, "~> 2.0.0"},
       {:bodyguard, "~> 2.2"},
