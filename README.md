@@ -12,6 +12,10 @@ for a 1.0 release. You can view the running forum at
 
 ## Clients
 
+### Elm
+
+https://github.com/dailydrip/firestorm_elm
+
 ### Vue
 
 https://github.com/dailydrip/firestorm_vue
