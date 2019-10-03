@@ -58,7 +58,7 @@ defmodule FirestormWeb.Mixfile do
       {:pryin, "~> 1.0"},
       {:oembed, "~> 0.2"},
       {:lru_cache, "~> 0.1.3"},
-      {:cors_plug, "~> 1.5"},
+      {:cors_plug, "~> 2.0"},
       {:ex_admin, github: "smpallen99/ex_admin"},
       {:httpoison, "~> 1.5.1", override: true},
 
