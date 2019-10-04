@@ -40,7 +40,7 @@ defmodule FirestormWeb.Mixfile do
       {:cowboy, "~> 1.0"},
       {:ueberauth, "~> 0.5"},
       {:ueberauth_github, "~> 0.7"},
-      {:ueberauth_identity, "~> 0.2.3"},
+      {:ueberauth_identity, "~> 0.3.0"},
       {:oauth2, "0.9.4"},
       {:earmark, "~> 1.3.2"},
       {:exmoji, "~> 0.2.2"},
