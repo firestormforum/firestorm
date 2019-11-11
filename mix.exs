@@ -60,7 +60,7 @@ defmodule FirestormWeb.Mixfile do
       {:lru_cache, "~> 0.1.3"},
       {:cors_plug, "~> 1.5"},
       {:ex_admin, github: "smpallen99/ex_admin"},
-      {:httpoison, "~> 1.5.1", override: true},
+      {:httpoison, "~> 1.6.2", override: true},
 
       # TEST DEPENDENCIES
       {:wallaby, "~> 0.20", only: [:test]},
